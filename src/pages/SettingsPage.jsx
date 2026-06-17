@@ -2,13 +2,15 @@ import { useState } from 'react'
 import { useRecords } from '../hooks/useRecords.jsx'
 import { useTheme } from '../hooks/useTheme.jsx'
 import { useToast } from '../hooks/useToast.jsx'
-import { saveRecords, getRecords } from '../utils/storage.js'
+import { saveRecords, getRecords, getAuthor, saveAuthor } from '../utils/storage.js'
+import Disclaimer from '../components/Disclaimer.jsx'
 
 export default function SettingsPage() {
   const { records, remove } = useRecords()
   const { theme, toggle, isDark } = useTheme()
   const { toast } = useToast()
   const [confirmClear, setConfirmClear] = useState(false)
+  const [authorName, setAuthorName] = useState(getAuthor)
 
   const handleClearAll = () => {
     records.forEach(r => remove(r.id))
@@ -63,6 +65,28 @@ export default function SettingsPage() {
       </div>
 
       <div className="settings-content">
+
+        {/* Author */}
+        <p className="settings-group-title">작성자</p>
+        <div className="settings-group">
+          <div className="settings-item" style={{ cursor: 'default', flexDirection: 'column', alignItems: 'flex-start', gap: 8 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+              <div className="settings-item-icon icon-purple"><PersonIcon /></div>
+              <div className="settings-item-content">
+                <div className="settings-item-title">작성자 이름</div>
+                <div className="settings-item-subtitle">기록 작성 시 자동 입력됩니다</div>
+              </div>
+            </div>
+            <input
+              className="form-input"
+              style={{ marginLeft: 50 }}
+              placeholder="이름 입력"
+              value={authorName}
+              onChange={e => setAuthorName(e.target.value)}
+              onBlur={() => saveAuthor(authorName)}
+            />
+          </div>
+        </div>
 
         {/* Display */}
         <p className="settings-group-title">화면</p>
@@ -137,6 +161,7 @@ export default function SettingsPage() {
         </div>
 
         <p className="app-version">용인중공업 • 2025</p>
+        <Disclaimer />
       </div>
 
       {/* Confirm delete all */}
@@ -169,6 +194,7 @@ const ico = (d, extra='') => (
   </svg>
 )
 
+function PersonIcon()   { return ico("M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z") }
 function MoonIcon()     { return ico("M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z") }
 function DownloadIcon() { return ico("M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4") }
 function UploadIcon()   { return ico("M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12") }

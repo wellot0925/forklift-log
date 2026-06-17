@@ -81,7 +81,12 @@ export default function RecordCard({ record, onDelete }) {
             <ForkliftSmall />
             {record.model}
           </span>
-          <span className="record-date">{dateStr}</span>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 2 }}>
+            {record.author && (
+              <span style={{ fontSize: 11, color: 'var(--primary)', fontWeight: 600 }}>{record.author}</span>
+            )}
+            <span className="record-date">{dateStr}</span>
+          </div>
         </div>
 
         <div className="record-symptoms">{record.symptoms}</div>

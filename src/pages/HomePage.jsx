@@ -6,6 +6,7 @@ import { useViewedModels } from '../hooks/useViewedModels.jsx'
 import RecordCard from '../components/RecordCard.jsx'
 import EmptyState from '../components/EmptyState.jsx'
 import Spinner from '../components/Spinner.jsx'
+import Disclaimer from '../components/Disclaimer.jsx'
 
 const PULL_THRESHOLD = 64
 
@@ -250,6 +251,7 @@ export default function HomePage() {
             <div style={{ height: 8 }} />
           </>
         )}
+        <Disclaimer />
       </div>
     </div>
   )

@@ -4,6 +4,7 @@ import { useRecords } from '../hooks/useRecords.jsx'
 import { useToast } from '../hooks/useToast.jsx'
 import Header from '../components/Header.jsx'
 import Spinner from '../components/Spinner.jsx'
+import Disclaimer from '../components/Disclaimer.jsx'
 
 export default function DetailPage() {
   const { id } = useParams()
@@ -61,6 +62,9 @@ export default function DetailPage() {
         <div className="detail-model-row">
           <span className="detail-model-name">{record.model}</span>
           <div className="detail-meta">
+            {record.author && (
+              <span style={{ fontWeight: 700, color: 'var(--primary)' }}>{record.author}</span>
+            )}
             <span>{dateStr} {timeStr}</span>
             {changedStr && <span style={{ color: 'var(--text-placeholder)' }}>{changedStr}</span>}
           </div>
@@ -104,7 +108,8 @@ export default function DetailPage() {
           </button>
         </div>
 
-        <div style={{ height: 32 }} />
+        <div style={{ height: 16 }} />
+        <Disclaimer />
       </div>
 
       {/* Photo lightbox */}

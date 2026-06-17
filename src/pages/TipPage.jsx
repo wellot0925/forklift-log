@@ -3,6 +3,7 @@ import { useTips } from '../hooks/useTips.jsx'
 import { useToast } from '../hooks/useToast.jsx'
 import { compressImage } from '../utils/storage.js'
 import Spinner from '../components/Spinner.jsx'
+import Disclaimer from '../components/Disclaimer.jsx'
 
 const MAX_PHOTOS = 4
 
@@ -109,7 +110,7 @@ export default function TipPage() {
             )}
           </div>
         ) : (
-          <div style={{ paddingBottom: 16 }}>
+          <div style={{ paddingBottom: 8 }}>
             {filtered.map(tip => (
               <div key={tip.id} className="tip-card">
                 <div className="tip-card-header">
@@ -133,6 +134,7 @@ export default function TipPage() {
             ))}
           </div>
         )}
+        <Disclaimer />
       </div>
 
       {/* Write modal */}

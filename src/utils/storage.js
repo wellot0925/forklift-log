@@ -1,6 +1,8 @@
-const KEY        = 'flift_records_v1'
-const TIPS_KEY   = 'flift_tips_v1'
-const VIEWED_KEY = 'flift_viewed_models_v1'
+const KEY             = 'flift_records_v1'
+const TIPS_KEY        = 'flift_tips_v1'
+const VIEWED_KEY      = 'flift_viewed_models_v1'
+const AUTHOR_KEY      = 'flift_author_v1'
+const CUSTOM_MDL_KEY  = 'flift_custom_models_v1'
 
 /* ─── Records ─── */
 export function getRecords() {
@@ -78,6 +80,24 @@ export function addViewedModel(model) {
   const list = getViewedModels().filter(m => m !== model)
   list.unshift(model)
   localStorage.setItem(VIEWED_KEY, JSON.stringify(list.slice(0, MAX_VIEWED)))
+}
+
+/* ─── Author ─── */
+export function getAuthor() { return localStorage.getItem(AUTHOR_KEY) ?? '' }
+export function saveAuthor(name) { localStorage.setItem(AUTHOR_KEY, name.trim()) }
+
+/* ─── Custom models ─── */
+export function getCustomModels() {
+  try { return JSON.parse(localStorage.getItem(CUSTOM_MDL_KEY) ?? '[]') } catch { return [] }
+}
+export function addCustomModel(model) {
+  const list = getCustomModels()
+  if (list.some(m => m.model === model)) return
+  const categoryId = model.toUpperCase().startsWith('B') ? 'electric'
+    : model.toUpperCase().startsWith('G') ? 'lpg'
+    : 'diesel'
+  list.unshift({ model, categoryId })
+  localStorage.setItem(CUSTOM_MDL_KEY, JSON.stringify(list))
 }
 
 /* ─── Image compression ─── */

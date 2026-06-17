@@ -1,11 +1,12 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useRecords } from '../hooks/useRecords.jsx'
 import { useToast } from '../hooks/useToast.jsx'
-import { compressImage } from '../utils/storage.js'
+import { compressImage, getAuthor, saveAuthor, getCustomModels, addCustomModel } from '../utils/storage.js'
 import { MODEL_CATEGORIES } from '../data/models.js'
 import Header from '../components/Header.jsx'
 import Spinner from '../components/Spinner.jsx'
+import Disclaimer from '../components/Disclaimer.jsx'
 
 const MAX_PHOTOS = 4
 
@@ -19,11 +20,13 @@ export default function WritePage() {
   const [form, setForm] = useState({
     model: '', symptoms: '', cause: '', solution: '',
     photos: [], unresolved: false,
+    author: getAuthor(),
   })
   const [saving, setSaving] = useState(false)
   const [errors, setErrors] = useState({})
   const [modelOpen, setModelOpen] = useState(false)
   const [modelSearch, setModelSearch] = useState('')
+  const [customModels, setCustomModels] = useState(getCustomModels)
   const formRef = useRef(null)
 
   useEffect(() => {
@@ -33,6 +36,7 @@ export default function WritePage() {
         model: r.model, symptoms: r.symptoms,
         cause: r.cause ?? '', solution: r.solution,
         photos: r.photos ?? [], unresolved: r.unresolved ?? false,
+        author: r.author ?? getAuthor(),
       })
     }
   }, [isEdit, id, records])
@@ -58,6 +62,7 @@ export default function WritePage() {
       return
     }
     setSaving(true)
+    if (form.author.trim()) saveAuthor(form.author)
     await new Promise(r => setTimeout(r, 400))
     try {
       if (isEdit) {
@@ -90,18 +95,48 @@ export default function WritePage() {
 
   const removePhoto = idx => setForm(f => ({ ...f, photos: f.photos.filter((_, i) => i !== idx) }))
 
-  /* model search filter */
-  const filteredCategories = MODEL_CATEGORIES.map(cat => ({
+  /* merge custom models into categories */
+  const mergedCategories = useMemo(() => {
+    const result = MODEL_CATEGORIES.map(cat => ({ ...cat, models: [...cat.models] }))
+    customModels.forEach(({ model, categoryId }) => {
+      const cat = result.find(c => c.id === categoryId)
+      if (cat && !cat.models.includes(model)) cat.models.unshift(model)
+    })
+    return result
+  }, [customModels])
+
+  const filteredCategories = mergedCategories.map(cat => ({
     ...cat,
     models: modelSearch.trim()
       ? cat.models.filter(m => m.toLowerCase().includes(modelSearch.toLowerCase()))
       : cat.models,
   })).filter(cat => cat.models.length > 0)
 
+  const allFilteredModels = filteredCategories.flatMap(c => c.models)
+  const exactMatch = allFilteredModels.some(
+    m => m.toLowerCase() === modelSearch.trim().toLowerCase()
+  )
+  const canDirectAdd = modelSearch.trim() && !exactMatch
+
   const pickModel = model => {
     set('model', model)
     setModelOpen(false)
     setModelSearch('')
+  }
+
+  const handleDirectAdd = () => {
+    const m = modelSearch.trim()
+    if (!m) return
+    addCustomModel(m)
+    setCustomModels(getCustomModels())
+    pickModel(m)
+  }
+
+  const handleModelSearchKeyDown = e => {
+    if (e.key === 'Enter') {
+      if (canDirectAdd) { handleDirectAdd() }
+      else if (allFilteredModels.length === 1) { pickModel(allFilteredModels[0]) }
+    }
   }
 
   return (
@@ -114,6 +149,19 @@ export default function WritePage() {
 
       <div className="write-scroll" ref={formRef}>
         <form id="write-form" onSubmit={handleSubmit} noValidate>
+
+          {/* Author */}
+          <div className="form-section">
+            <label className="form-label" htmlFor="f-author">작성자</label>
+            <input
+              id="f-author"
+              className="form-input"
+              type="text"
+              placeholder="이름 입력"
+              value={form.author}
+              onChange={e => set('author', e.target.value)}
+            />
+          </div>
 
           {/* Model picker trigger */}
           <div className="form-section">
@@ -228,6 +276,7 @@ export default function WritePage() {
           </div>
 
           <div style={{ height: 12 }} />
+          <Disclaimer />
         </form>
       </div>
 
@@ -255,12 +304,19 @@ export default function WritePage() {
               <input
                 className="home-search-input"
                 type="search"
-                placeholder="모델명 검색..."
+                placeholder="검색 또는 직접 입력 후 엔터"
                 value={modelSearch}
                 onChange={e => setModelSearch(e.target.value)}
+                onKeyDown={handleModelSearchKeyDown}
                 autoFocus
               />
             </div>
+            {canDirectAdd && (
+              <button className="direct-add-btn" onClick={handleDirectAdd}>
+                <PlusSmIcon />
+                &ldquo;{modelSearch.trim()}&rdquo; 직접 추가
+              </button>
+            )}
             <div className="model-modal-body">
               {filteredCategories.map(cat => (
                 <div key={cat.id}>
@@ -294,6 +350,11 @@ export default function WritePage() {
   )
 }
 
+function PlusSmIcon() {
+  return <svg fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" width={14} height={14}>
+    <path strokeLinecap="round" d="M12 5v14M5 12h14"/>
+  </svg>
+}
 function ChevronIcon() {
   return <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" width={18} height={18}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M9 18l6-6-6-6"/>

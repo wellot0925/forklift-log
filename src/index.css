@@ -1386,6 +1386,41 @@ img { max-width: 100%; display: block; }
 }
 
 /* =============================================
+   DISCLAIMER FOOTER
+   ============================================= */
+.disclaimer-footer {
+  text-align: center;
+  padding: 18px 20px 24px;
+  border-top: 1px solid var(--divider);
+  margin-top: 12px;
+}
+.disclaimer-footer p {
+  font-size: 10px;
+  color: var(--text-placeholder);
+  line-height: 1.7;
+  letter-spacing: -0.1px;
+}
+
+/* =============================================
+   DIRECT ADD BUTTON (model picker)
+   ============================================= */
+.direct-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 4px 16px 0;
+  padding: 10px 14px;
+  border-radius: var(--r-md);
+  background: var(--primary-dim);
+  color: var(--primary);
+  font-size: 13px;
+  font-weight: 600;
+  width: calc(100% - 32px);
+  transition: background var(--t-fast);
+}
+.direct-add-btn:active { background: rgba(255,107,0,0.2); }
+
+/* =============================================
    MISC UTILITIES
    ============================================= */
 .page-pad { padding: 16px; }
