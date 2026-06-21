@@ -112,16 +112,16 @@ export default function TipWritePage() {
                 </div>
               ))}
               {form.photos.length < MAX_PHOTOS && (<>
-                <label className="photo-add-label" htmlFor="tpw-camera">
-                  <CameraIcon /><span>카메라</span>
-                  <input id="tpw-camera" type="file" accept="image/*" capture="environment"
-                    onChange={handlePhotoAdd} style={{ display: 'none' }} />
-                </label>
                 <label className="photo-add-label" htmlFor="tpw-gallery">
                   <GalleryIcon /><span>갤러리</span>
                   <input id="tpw-gallery" type="file"
                     accept="image/jpeg,image/png,image/gif,image/webp,image/heic,image/heif"
                     multiple onChange={handlePhotoAdd} style={{ display: 'none' }} />
+                </label>
+                <label className="photo-add-label" htmlFor="tpw-camera">
+                  <CameraIcon /><span>카메라</span>
+                  <input id="tpw-camera" type="file" accept="image/*" capture="environment"
+                    onChange={handlePhotoAdd} style={{ display: 'none' }} />
                 </label>
               </>)}
             </div>

@@ -260,19 +260,19 @@ export default function WritePage() {
                 </div>
               ))}
               {form.photos.length < MAX_PHOTOS && (<>
-                <label className="photo-add-label" htmlFor="photo-camera">
-                  <CameraIcon />
-                  <span>카메라</span>
-                  <input id="photo-camera" type="file"
-                    accept="image/*" capture="environment"
-                    onChange={handlePhotoAdd} style={{ display: 'none' }} />
-                </label>
                 <label className="photo-add-label" htmlFor="photo-gallery">
                   <GalleryIcon />
                   <span>갤러리</span>
                   <input id="photo-gallery" type="file"
                     accept="image/jpeg,image/png,image/gif,image/webp,image/heic,image/heif"
                     multiple onChange={handlePhotoAdd} style={{ display: 'none' }} />
+                </label>
+                <label className="photo-add-label" htmlFor="photo-camera">
+                  <CameraIcon />
+                  <span>카메라</span>
+                  <input id="photo-camera" type="file"
+                    accept="image/*" capture="environment"
+                    onChange={handlePhotoAdd} style={{ display: 'none' }} />
                 </label>
               </>)}
             </div>
