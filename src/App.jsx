@@ -4,6 +4,7 @@ import { ThemeProvider } from './hooks/useTheme.jsx'
 import { RecordsProvider } from './hooks/useRecords.jsx'
 import { TipsProvider } from './hooks/useTips.jsx'
 import { ToastProvider } from './hooks/useToast.jsx'
+import { LightboxProvider } from './hooks/useLightbox.jsx'
 import TabBar from './components/TabBar.jsx'
 import HomePage from './pages/HomePage.jsx'
 import WritePage from './pages/WritePage.jsx'
@@ -19,7 +20,7 @@ function ScrollToTop() {
 
 function AppRoutes() {
   const location = useLocation()
-  const isSubPage = /^\/(detail|write)\/.+/.test(location.pathname)
+  const isSubPage = /^\/(detail\/|write)/.test(location.pathname)
 
   return (
     <div className="app-wrapper">
@@ -45,9 +46,11 @@ export default function App() {
       <RecordsProvider>
         <TipsProvider>
           <ToastProvider>
-            <BrowserRouter>
-              <AppRoutes />
-            </BrowserRouter>
+            <LightboxProvider>
+              <BrowserRouter>
+                <AppRoutes />
+              </BrowserRouter>
+            </LightboxProvider>
           </ToastProvider>
         </TipsProvider>
       </RecordsProvider>

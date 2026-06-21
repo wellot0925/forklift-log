@@ -2,85 +2,47 @@ import { useState } from 'react'
 import { useRecords } from '../hooks/useRecords.jsx'
 import { useTheme } from '../hooks/useTheme.jsx'
 import { useToast } from '../hooks/useToast.jsx'
-import { saveRecords, getRecords, getAuthor, saveAuthor } from '../utils/storage.js'
+import { getAuthor, saveAuthor } from '../utils/storage.js'
+import { printAllRecords } from '../utils/pdf.js'
 import Disclaimer from '../components/Disclaimer.jsx'
+import Spinner from '../components/Spinner.jsx'
 
 export default function SettingsPage() {
-  const { records, remove } = useRecords()
-  const { theme, toggle, isDark } = useTheme()
+  const { records } = useRecords()
+  const { toggle, isDark } = useTheme()
   const { toast } = useToast()
-  const [confirmClear, setConfirmClear] = useState(false)
   const [authorName, setAuthorName] = useState(getAuthor)
+  const [printing, setPrinting] = useState(false)
 
-  const handleClearAll = () => {
-    records.forEach(r => remove(r.id))
-    setConfirmClear(false)
-    toast('모든 기록이 삭제되었습니다.', 'info')
-  }
-
-  const handleExport = () => {
-    try {
-      const data = JSON.stringify(records, null, 2)
-      const blob = new Blob([data], { type: 'application/json' })
-      const url = URL.createObjectURL(blob)
-      const a = Object.assign(document.createElement('a'), {
-        href: url,
-        download: `forklift-log-${new Date().toISOString().slice(0,10)}.json`,
-      })
-      a.click()
-      URL.revokeObjectURL(url)
-      toast(`${records.length}건 내보내기 완료`, 'success')
-    } catch {
-      toast('내보내기에 실패했습니다.', 'error')
-    }
-  }
-
-  const handleImport = e => {
-    const file = e.target.files?.[0]
-    if (!file) return
-    const reader = new FileReader()
-    reader.onload = evt => {
-      try {
-        const data = JSON.parse(evt.target.result)
-        if (!Array.isArray(data)) throw new Error()
-        // import via storage directly so we avoid duplicates
-        const existing = getRecords()
-          const existingIds = new Set(existing.map(r => r.id))
-          const newItems = data.filter(r => !existingIds.has(r.id))
-          saveRecords([...newItems, ...existing])
-          window.location.reload()
-      } catch {
-        toast('파일 형식이 올바르지 않습니다.', 'error')
-      }
-    }
-    reader.readAsText(file)
-    e.target.value = ''
+  const handlePrintAll = () => {
+    if (!records.length) { toast('저장된 기록이 없습니다.', 'info'); return }
+    setPrinting(true)
+    try { printAllRecords(records) } finally { setTimeout(() => setPrinting(false), 1000) }
   }
 
   return (
     <div className="settings-page page-main">
-      {/* Simple header (no back btn — main tab) */}
       <div className="home-header" style={{ paddingBottom: 4 }}>
         <h1 className="home-title">설정</h1>
       </div>
 
       <div className="settings-content">
 
-        {/* Author */}
-        <p className="settings-group-title">작성자</p>
+        {/* 닉네임 */}
+        <p className="settings-group-title">닉네임</p>
         <div className="settings-group">
           <div className="settings-item" style={{ cursor: 'default', flexDirection: 'column', alignItems: 'flex-start', gap: 8 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
               <div className="settings-item-icon icon-purple"><PersonIcon /></div>
               <div className="settings-item-content">
-                <div className="settings-item-title">작성자 이름</div>
+                <div className="settings-item-title">닉네임</div>
                 <div className="settings-item-subtitle">기록 작성 시 자동 입력됩니다</div>
               </div>
             </div>
             <input
               className="form-input"
               style={{ marginLeft: 50 }}
-              placeholder="이름 입력"
+              placeholder="이름 또는 닉네임 입력"
               value={authorName}
               onChange={e => setAuthorName(e.target.value)}
               onBlur={() => saveAuthor(authorName)}
@@ -88,7 +50,7 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        {/* Display */}
+        {/* 화면 */}
         <p className="settings-group-title">화면</p>
         <div className="settings-group">
           <div className="settings-item" onClick={toggle}>
@@ -105,57 +67,39 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        {/* Data */}
-        <p className="settings-group-title">데이터</p>
+        {/* 백업 */}
+        <p className="settings-group-title">백업</p>
         <div className="settings-group">
-          <div className="settings-item" onClick={handleExport}>
-            <div className="settings-item-icon icon-blue"><DownloadIcon /></div>
+          <div className="settings-item" onClick={handlePrintAll} style={{ opacity: printing ? 0.6 : 1 }}>
+            <div className="settings-item-icon icon-orange"><PrintIcon /></div>
             <div className="settings-item-content">
-              <div className="settings-item-title">데이터 내보내기</div>
-              <div className="settings-item-subtitle">JSON 파일로 저장 ({records.length}건)</div>
+              <div className="settings-item-title">전체 백업 다운로드</div>
+              <div className="settings-item-subtitle">작업일지 전체를 PDF로 저장 ({records.length}건)</div>
             </div>
-            <div className="settings-item-right"><ChevronIcon /></div>
-          </div>
-
-          <label className="settings-item" htmlFor="import-file" style={{ cursor: 'pointer' }}>
-            <div className="settings-item-icon icon-green"><UploadIcon /></div>
-            <div className="settings-item-content">
-              <div className="settings-item-title">데이터 가져오기</div>
-              <div className="settings-item-subtitle">JSON 파일에서 불러오기</div>
+            <div className="settings-item-right">
+              {printing ? <Spinner size="sm" /> : <ChevronIcon />}
             </div>
-            <div className="settings-item-right"><ChevronIcon /></div>
-            <input id="import-file" type="file" accept=".json" onChange={handleImport}
-              style={{ display: 'none' }} />
-          </label>
-
-          <div className="settings-item" onClick={() => setConfirmClear(true)}>
-            <div className="settings-item-icon icon-red"><TrashIcon /></div>
-            <div className="settings-item-content">
-              <div className="settings-item-title" style={{ color: 'var(--danger)' }}>전체 기록 삭제</div>
-              <div className="settings-item-subtitle">모든 정비 기록을 삭제합니다</div>
-            </div>
-            <div className="settings-item-right"><ChevronIcon /></div>
           </div>
         </div>
 
-        {/* Info */}
+        {/* 앱 정보 */}
         <p className="settings-group-title">앱 정보</p>
         <div className="settings-group">
           <div className="settings-item" style={{ cursor: 'default' }}>
             <div className="settings-item-icon icon-orange"><InfoIcon /></div>
             <div className="settings-item-content">
-              <div className="settings-item-title">지게차 작업일지</div>
+              <div className="settings-item-title">나만의 정비수첩</div>
               <div className="settings-item-subtitle">두산 지게차 정비 기록 관리</div>
             </div>
             <div className="settings-item-right">
-              <span style={{ fontSize: 13, color: 'var(--text-secondary)' }}>v1.0.0</span>
+              <span style={{ fontSize: 13, color: 'var(--text-secondary)' }}>v2.0.0</span>
             </div>
           </div>
           <div className="settings-item" style={{ cursor: 'default' }}>
-            <div className="settings-item-icon icon-gray"><StorageIcon /></div>
+            <div className="settings-item-icon icon-gray"><CloudIcon /></div>
             <div className="settings-item-content">
               <div className="settings-item-title">저장 방식</div>
-              <div className="settings-item-subtitle">로컬 저장소 (오프라인 지원)</div>
+              <div className="settings-item-subtitle">Firebase 실시간 동기화 (다기기 지원)</div>
             </div>
           </div>
         </div>
@@ -164,31 +108,12 @@ export default function SettingsPage() {
         <Disclaimer />
       </div>
 
-      {/* Confirm delete all */}
-      {confirmClear && (
-        <div className="confirm-overlay" onClick={() => setConfirmClear(false)}>
-          <div className="confirm-sheet" onClick={e => e.stopPropagation()}>
-            <p className="confirm-title">전체 삭제</p>
-            <p className="confirm-subtitle">
-              {records.length}건의 기록을 모두 삭제합니다.<br/>
-              이 작업은 되돌릴 수 없습니다.
-            </p>
-            <div className="confirm-actions">
-              <button className="btn btn-secondary" onClick={() => setConfirmClear(false)}>취소</button>
-              <button className="btn btn-danger" onClick={handleClearAll}>
-                <TrashSmIcon /> 전체 삭제
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
 
 const ico = (d, extra='') => (
-  <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"
-    width={18} height={18} color="white">
+  <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" width={18} height={18} color="white">
     <path strokeLinecap="round" strokeLinejoin="round" d={d} />
     {extra && <path strokeLinecap="round" strokeLinejoin="round" d={extra} />}
   </svg>
@@ -196,16 +121,22 @@ const ico = (d, extra='') => (
 
 function PersonIcon()   { return ico("M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z") }
 function MoonIcon()     { return ico("M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z") }
-function DownloadIcon() { return ico("M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4") }
-function UploadIcon()   { return ico("M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12") }
-function TrashIcon()    { return ico("M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16") }
-function TrashSmIcon()  {
-  return <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" width={18} height={18}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+function PrintIcon() {
+  return <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" width={18} height={18} color="white">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
   </svg>
 }
-function InfoIcon()     { return <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" width={18} height={18} color="white"><circle cx="12" cy="12" r="10"/><path strokeLinecap="round" d="M12 16v-4m0-4h.01"/></svg> }
-function StorageIcon()  { return ico("M5 12H3a9 9 0 0018 0h-2M5 12a7 7 0 0014 0M5 12a7 7 0 0114 0") }
+function InfoIcon() {
+  return <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" width={18} height={18} color="white">
+    <circle cx="12" cy="12" r="10"/>
+    <path strokeLinecap="round" d="M12 16v-4m0-4h.01"/>
+  </svg>
+}
+function CloudIcon() {
+  return <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" width={18} height={18} color="white">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+  </svg>
+}
 function ChevronIcon()  {
   return <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" width={16} height={16}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M9 18l6-6-6-6"/>

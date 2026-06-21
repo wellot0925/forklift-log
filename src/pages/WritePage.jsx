@@ -8,7 +8,7 @@ import Header from '../components/Header.jsx'
 import Spinner from '../components/Spinner.jsx'
 import Disclaimer from '../components/Disclaimer.jsx'
 
-const MAX_PHOTOS = 4
+const MAX_PHOTOS = 5
 
 export default function WritePage() {
   const { id } = useParams()
@@ -36,7 +36,7 @@ export default function WritePage() {
         model: r.model, symptoms: r.symptoms,
         cause: r.cause ?? '', solution: r.solution,
         photos: r.photos ?? [], unresolved: r.unresolved ?? false,
-        author: r.author ?? getAuthor(),
+        author: getAuthor(), // 수정자는 현재 기기 닉네임
       })
     }
   }, [isEdit, id, records])
@@ -63,19 +63,18 @@ export default function WritePage() {
     }
     setSaving(true)
     if (form.author.trim()) saveAuthor(form.author)
-    await new Promise(r => setTimeout(r, 400))
     try {
       if (isEdit) {
-        update(id, form)
+        await update(id, form)
         toast('기록이 수정되었습니다.', 'success')
         nav(`/detail/${id}`, { replace: true })
       } else {
-        const r = add(form)
+        const r = await add(form)
         toast('기록이 저장되었습니다! 🔧', 'success')
         nav(`/detail/${r.id}`, { replace: true })
       }
     } catch {
-      toast('저장에 실패했습니다.', 'error')
+      toast('저장에 실패했습니다. 네트워크를 확인해주세요.', 'error')
       setSaving(false)
     }
   }
@@ -95,7 +94,7 @@ export default function WritePage() {
 
   const removePhoto = idx => setForm(f => ({ ...f, photos: f.photos.filter((_, i) => i !== idx) }))
 
-  /* merge custom models into categories */
+  /* 커스텀 모델 포함 카테고리 병합 */
   const mergedCategories = useMemo(() => {
     const result = MODEL_CATEGORIES.map(cat => ({ ...cat, models: [...cat.models] }))
     customModels.forEach(({ model, categoryId }) => {
@@ -113,16 +112,10 @@ export default function WritePage() {
   })).filter(cat => cat.models.length > 0)
 
   const allFilteredModels = filteredCategories.flatMap(c => c.models)
-  const exactMatch = allFilteredModels.some(
-    m => m.toLowerCase() === modelSearch.trim().toLowerCase()
-  )
+  const exactMatch = allFilteredModels.some(m => m.toLowerCase() === modelSearch.trim().toLowerCase())
   const canDirectAdd = modelSearch.trim() && !exactMatch
 
-  const pickModel = model => {
-    set('model', model)
-    setModelOpen(false)
-    setModelSearch('')
-  }
+  const pickModel = model => { set('model', model); setModelOpen(false); setModelSearch('') }
 
   const handleDirectAdd = () => {
     const m = modelSearch.trim()
@@ -134,8 +127,8 @@ export default function WritePage() {
 
   const handleModelSearchKeyDown = e => {
     if (e.key === 'Enter') {
-      if (canDirectAdd) { handleDirectAdd() }
-      else if (allFilteredModels.length === 1) { pickModel(allFilteredModels[0]) }
+      if (canDirectAdd) handleDirectAdd()
+      else if (allFilteredModels.length === 1) pickModel(allFilteredModels[0])
     }
   }
 
@@ -150,20 +143,22 @@ export default function WritePage() {
       <div className="write-scroll" ref={formRef}>
         <form id="write-form" onSubmit={handleSubmit} noValidate>
 
-          {/* Author */}
+          {/* 닉네임 */}
           <div className="form-section">
-            <label className="form-label" htmlFor="f-author">작성자</label>
+            <label className="form-label" htmlFor="f-author">
+              닉네임
+            </label>
             <input
               id="f-author"
               className="form-input"
               type="text"
-              placeholder="이름 입력"
+              placeholder="이름 또는 닉네임 입력"
               value={form.author}
               onChange={e => set('author', e.target.value)}
             />
           </div>
 
-          {/* Model picker trigger */}
+          {/* 모델명 선택 */}
           <div className="form-section">
             <label className="form-label form-required">모델명</label>
             <button
@@ -181,7 +176,7 @@ export default function WritePage() {
             {errors.model && <p className="field-error">{errors.model}</p>}
           </div>
 
-          {/* Symptoms */}
+          {/* 증상 */}
           <div className="form-section">
             <label className="form-label form-required" htmlFor="f-symptoms">증상</label>
             <textarea
@@ -196,7 +191,7 @@ export default function WritePage() {
             {errors.symptoms && <p className="field-error">{errors.symptoms}</p>}
           </div>
 
-          {/* Cause */}
+          {/* 원인 */}
           <div className="form-section">
             <label className="form-label" htmlFor="f-cause">원인</label>
             <textarea
@@ -209,7 +204,7 @@ export default function WritePage() {
             />
           </div>
 
-          {/* Solution */}
+          {/* 해결방법 */}
           <div className="form-section">
             <label className="form-label form-required" htmlFor="f-solution">해결방법</label>
             <textarea
@@ -226,7 +221,7 @@ export default function WritePage() {
             {errors.solution && <p className="field-error">{errors.solution}</p>}
           </div>
 
-          {/* Unresolved checkbox */}
+          {/* 미해결 체크박스 */}
           <div className="form-section">
             <label className="unresolved-row">
               <div className={`unresolved-check${form.unresolved ? ' checked' : ''}`}>
@@ -249,7 +244,7 @@ export default function WritePage() {
             </label>
           </div>
 
-          {/* Photos */}
+          {/* 사진 (최대 5장) */}
           <div className="form-section">
             <label className="form-label">
               사진
@@ -264,14 +259,22 @@ export default function WritePage() {
                   <button type="button" className="photo-remove" onClick={() => removePhoto(i)}>✕</button>
                 </div>
               ))}
-              {form.photos.length < MAX_PHOTOS && (
-                <label className="photo-add-label" htmlFor="photo-input">
+              {form.photos.length < MAX_PHOTOS && (<>
+                <label className="photo-add-label" htmlFor="photo-camera">
                   <CameraIcon />
-                  <span>추가</span>
-                  <input id="photo-input" type="file" accept="image/*" multiple
+                  <span>카메라</span>
+                  <input id="photo-camera" type="file"
+                    accept="image/*" capture="environment"
                     onChange={handlePhotoAdd} style={{ display: 'none' }} />
                 </label>
-              )}
+                <label className="photo-add-label" htmlFor="photo-gallery">
+                  <GalleryIcon />
+                  <span>갤러리</span>
+                  <input id="photo-gallery" type="file"
+                    accept="image/jpeg,image/png,image/gif,image/webp,image/heic,image/heif"
+                    multiple onChange={handlePhotoAdd} style={{ display: 'none' }} />
+                </label>
+              </>)}
             </div>
           </div>
 
@@ -281,15 +284,15 @@ export default function WritePage() {
       </div>
 
       <div className="write-footer">
-        <button type="submit" form="write-form" className="btn btn-primary" disabled={saving}>
+        <button type="submit" form="write-form" className="btn-cta" disabled={saving}>
           {saving
-            ? <><Spinner size="sm" white /> &nbsp;저장 중...</>
-            : isEdit ? '수정 저장하기' : '저장하기'
+            ? <><Spinner size="sm" white />{form.photos.some(p => p.startsWith('data:')) ? '사진 업로드 중...' : '저장 중...'}</>
+            : isEdit ? '✓  수정 완료' : '✓  작성완료'
           }
         </button>
       </div>
 
-      {/* Model picker modal */}
+      {/* 모델 선택 모달 */}
       {modelOpen && (
         <div className="modal-overlay" onClick={() => { setModelOpen(false); setModelSearch('') }}>
           <div className="model-modal" onClick={e => e.stopPropagation()}>
@@ -369,6 +372,13 @@ function CameraIcon() {
   return <svg fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24" width={24} height={24}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
     <circle cx="12" cy="13" r="3"/>
+  </svg>
+}
+function GalleryIcon() {
+  return <svg fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24" width={24} height={24}>
+    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <circle cx="8.5" cy="8.5" r="1.5"/>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M21 15l-5-5L5 21"/>
   </svg>
 }
 function SearchIcon() {

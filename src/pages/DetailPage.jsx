@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useRecords } from '../hooks/useRecords.jsx'
-import { useToast } from '../hooks/useToast.jsx'
+import { useLightbox } from '../hooks/useLightbox.jsx'
+import { printRecord } from '../utils/pdf.js'
 import Header from '../components/Header.jsx'
 import Spinner from '../components/Spinner.jsx'
 import Disclaimer from '../components/Disclaimer.jsx'
@@ -9,11 +10,10 @@ import Disclaimer from '../components/Disclaimer.jsx'
 export default function DetailPage() {
   const { id } = useParams()
   const nav = useNavigate()
-  const { records, remove, loading } = useRecords()
-  const { toast } = useToast()
+  const { records, loading } = useRecords()
+  const { open: openLightbox } = useLightbox()
 
-  const [lightbox, setLightbox] = useState(null) // photo index
-  const [confirmDelete, setConfirmDelete] = useState(false)
+  const [printing, setPrinting] = useState(false)
 
   const record = records.find(r => r.id === id)
 
@@ -34,14 +34,13 @@ export default function DetailPage() {
 
   const created = new Date(record.createdAt)
   const updated = new Date(record.updatedAt)
-  const dateStr  = fmt(created)
-  const timeStr  = fmtTime(created)
-  const changedStr = record.updatedAt !== record.createdAt ? `수정 ${fmt(updated)}` : null
+  const dateStr    = fmt(created)
+  const timeStr    = fmtTime(created)
+  const hasEdited  = Boolean(record.modifiedBy)
 
-  const handleDelete = () => {
-    remove(id)
-    toast('기록이 삭제되었습니다.', 'info')
-    nav('/', { replace: true })
+  const handlePrint = () => {
+    setPrinting(true)
+    try { printRecord(record) } finally { setTimeout(() => setPrinting(false), 1000) }
   }
 
   return (
@@ -50,39 +49,46 @@ export default function DetailPage() {
         title="상세 보기"
         showBack
         showHome
-        actions={[{
-          label: '수정',
-          icon: <EditIcon />,
-          onClick: () => nav(`/write/${id}`)
-        }]}
+        actions={[
+          { label: 'PDF', icon: <PrintIcon />, onClick: handlePrint },
+          { label: '수정', icon: <EditIcon />, onClick: () => nav(`/write/${id}`) },
+        ]}
       />
 
       <div className="detail-content">
-        {/* Model & date */}
+        {/* 모델명 + 작성자/수정자 */}
         <div className="detail-model-row">
           <span className="detail-model-name">{record.model}</span>
           <div className="detail-meta">
+            {/* 최초 작성자: 이름만 표시 */}
             {record.author && (
               <span style={{ fontWeight: 700, color: 'var(--primary)' }}>{record.author}</span>
             )}
-            <span>{dateStr} {timeStr}</span>
-            {changedStr && <span style={{ color: 'var(--text-placeholder)' }}>{changedStr}</span>}
+            {/* 수정자: 이름 + 수정 날짜 */}
+            {hasEdited && (
+              <span style={{ color: 'var(--text-placeholder)', fontSize: 11 }}>
+                수정:&nbsp;
+                {record.modifiedBy && (
+                  <span style={{ fontWeight: 700, color: 'var(--text-secondary)' }}>{record.modifiedBy} </span>
+                )}
+                {fmt(updated)}
+              </span>
+            )}
           </div>
         </div>
 
-        {/* Symptoms */}
+        {/* 증상 */}
         <Section icon={<AlertIcon />} label="증상" text={record.symptoms} />
 
-        {/* Cause */}
+        {/* 원인 */}
         {record.cause && <Section icon={<SearchIcon />} label="원인" text={record.cause} />}
 
-        {/* Solution */}
+        {/* 해결방법 */}
         {record.solution && (
-          <Section icon={<CheckIcon />} label="해결방법" text={record.solution}
-            highlight />
+          <Section icon={<CheckIcon />} label="해결방법" text={record.solution} highlight />
         )}
 
-        {/* Photos */}
+        {/* 사진 */}
         {record.photos?.length > 0 && (
           <div className="detail-photos">
             <div className="detail-section-label">
@@ -90,7 +96,7 @@ export default function DetailPage() {
             </div>
             <div className="photo-grid">
               {record.photos.map((src, i) => (
-                <div key={i} className="photo-grid-item" onClick={() => setLightbox(i)}>
+                <div key={i} className="photo-grid-item" onClick={() => openLightbox(record.photos, i)}>
                   <img src={src} alt={`사진 ${i+1}`} />
                 </div>
               ))}
@@ -98,13 +104,13 @@ export default function DetailPage() {
           </div>
         )}
 
-        {/* Actions */}
+        {/* 버튼 */}
         <div className="detail-actions">
+          <button className="btn btn-outline" onClick={handlePrint} disabled={printing}>
+            {printing ? <Spinner size="sm" /> : <PrintIcon />} PDF 저장
+          </button>
           <button className="btn btn-secondary" onClick={() => nav(`/write/${id}`)}>
             <EditIcon /> 수정하기
-          </button>
-          <button className="btn btn-danger" onClick={() => setConfirmDelete(true)}>
-            <TrashIcon /> 삭제
           </button>
         </div>
 
@@ -112,55 +118,7 @@ export default function DetailPage() {
         <Disclaimer />
       </div>
 
-      {/* Photo lightbox */}
-      {lightbox !== null && (
-        <div className="lightbox" onClick={() => setLightbox(null)}>
-          <img
-            src={record.photos[lightbox]}
-            alt="확대 보기"
-            onClick={e => e.stopPropagation()}
-          />
-          <button className="lightbox-close" onClick={() => setLightbox(null)}>
-            <CloseIcon />
-          </button>
-          {/* prev / next */}
-          {record.photos.length > 1 && (
-            <div style={{
-              position: 'absolute', bottom: 30, left: '50%', transform: 'translateX(-50%)',
-              display: 'flex', gap: 16,
-            }}>
-              {record.photos.map((_, i) => (
-                <div key={i} onClick={e => { e.stopPropagation(); setLightbox(i) }} style={{
-                  width: 8, height: 8, borderRadius: '50%',
-                  background: i === lightbox ? 'white' : 'rgba(255,255,255,0.4)',
-                  cursor: 'pointer',
-                }} />
-              ))}
-            </div>
-          )}
-        </div>
-      )}
 
-      {/* Delete confirm sheet */}
-      {confirmDelete && (
-        <div className="confirm-overlay" onClick={() => setConfirmDelete(false)}>
-          <div className="confirm-sheet" onClick={e => e.stopPropagation()}>
-            <p className="confirm-title">기록 삭제</p>
-            <p className="confirm-subtitle">
-              <strong>{record.model}</strong> 기록을 삭제하시겠어요?<br/>
-              삭제한 기록은 복구할 수 없습니다.
-            </p>
-            <div className="confirm-actions">
-              <button className="btn btn-secondary" onClick={() => setConfirmDelete(false)}>
-                취소
-              </button>
-              <button className="btn btn-danger" onClick={handleDelete}>
-                <TrashIcon /> 삭제
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
@@ -201,6 +159,11 @@ function CameraIcon() {
 function EditIcon() {
   return <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" width={18} height={18}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+  </svg>
+}
+function PrintIcon() {
+  return <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" width={18} height={18}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
   </svg>
 }
 function TrashIcon() {
