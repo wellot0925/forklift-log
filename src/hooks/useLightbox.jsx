@@ -109,10 +109,34 @@ function ZoomableImage({ src }) {
 
 export function LightboxProvider({ children }) {
   const [state, setState] = useState(null) // { photos: [], idx: number }
+  const pushedState = useRef(false)
 
-  const open   = useCallback((photos, idx) => setState({ photos, idx }), [])
-  const close  = useCallback(() => setState(null), [])
+  const open = useCallback((photos, idx) => {
+    setState({ photos, idx })
+    history.pushState({ lightbox: true }, '')
+    pushedState.current = true
+  }, [])
+
+  const close = useCallback(() => {
+    setState(null)
+    if (pushedState.current) {
+      pushedState.current = false
+      history.back()
+    }
+  }, [])
+
   const setIdx = useCallback(idx => setState(s => s ? { ...s, idx } : null), [])
+
+  useEffect(() => {
+    const onPop = () => {
+      if (pushedState.current) {
+        pushedState.current = false
+        setState(null)
+      }
+    }
+    window.addEventListener('popstate', onPop)
+    return () => window.removeEventListener('popstate', onPop)
+  }, [])
 
   return (
     <Ctx.Provider value={{ open, close }}>
