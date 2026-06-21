@@ -1,16 +1,13 @@
 import { useState, useCallback, useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useTips } from '../hooks/useTips.jsx'
-import { useLightbox } from '../hooks/useLightbox.jsx'
-import { printTip } from '../utils/pdf.js'
 import { getSearchHistory, addSearchHistory, removeSearchHistory } from '../utils/storage.js'
+import TipListCard from '../components/TipListCard.jsx'
 import Spinner from '../components/Spinner.jsx'
 import Disclaimer from '../components/Disclaimer.jsx'
-import Highlight from '../utils/highlight.jsx'
 
 export default function TipPage() {
   const { tips, loading } = useTips()
-  const { open: openLightbox } = useLightbox()
   const nav = useNavigate()
 
   const [searchParams, setSearchParams] = useSearchParams()
@@ -40,16 +37,6 @@ export default function TipPage() {
       t.content?.toLowerCase().includes(q)
     )
   }, [query, tips])
-
-  const handlePrint = (tip, e) => {
-    e.stopPropagation()
-    printTip(tip)
-  }
-
-  const fmt = iso => {
-    const d = new Date(iso)
-    return `${d.getFullYear()}.${pad(d.getMonth()+1)}.${pad(d.getDate())}`
-  }
 
   return (
     <div className="page-main" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -128,35 +115,7 @@ export default function TipPage() {
         ) : (
           <div style={{ paddingBottom: 8 }}>
             {filtered.map(tip => (
-              <div key={tip.id} className="tip-card" style={{ cursor: 'pointer' }} onClick={() => nav(`/tip/${tip.id}`)}>
-                <div className="tip-card-header">
-                  <span className="tip-date">{fmt(tip.createdAt)}</span>
-                  <div style={{ display: 'flex', gap: 4 }}>
-                    <button className="tip-pdf-btn" onClick={e => handlePrint(tip, e)} title="PDF 저장">
-                      <PrintIcon />
-                    </button>
-                  </div>
-                </div>
-                {tip.title && (
-                  <div className="tip-title">
-                    <Highlight text={tip.title} query={query} />
-                  </div>
-                )}
-                {tip.content && (
-                  <div className="tip-content">
-                    <Highlight text={tip.content} query={query} />
-                  </div>
-                )}
-                {tip.photos?.length > 0 && (
-                  <div className="photo-grid" style={{ marginTop: 10 }}>
-                    {tip.photos.map((src, i) => (
-                      <div key={i} className="photo-grid-item" onClick={e => { e.stopPropagation(); openLightbox(tip.photos, i) }}>
-                        <img src={src} alt={`사진 ${i+1}`} />
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
+              <TipListCard key={tip.id} tip={tip} query={query} />
             ))}
           </div>
         )}
@@ -165,8 +124,6 @@ export default function TipPage() {
     </div>
   )
 }
-
-const pad = n => String(n).padStart(2, '0')
 
 function PlusIcon() {
   return <svg fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" width={20} height={20}>
@@ -186,11 +143,6 @@ function ClockIcon() {
 function XIcon() {
   return <svg fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" width={12} height={12}>
     <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12"/>
-  </svg>
-}
-function PrintIcon() {
-  return <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" width={16} height={16}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
   </svg>
 }
 function LightBulbIcon() {
