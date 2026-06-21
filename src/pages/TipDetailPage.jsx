@@ -4,6 +4,7 @@ import { useTips } from '../hooks/useTips.jsx'
 import { useToast } from '../hooks/useToast.jsx'
 import { useLightbox } from '../hooks/useLightbox.jsx'
 import { printTip } from '../utils/pdf.js'
+import { getAdminPassword } from '../utils/storage.js'
 import Header from '../components/Header.jsx'
 import Spinner from '../components/Spinner.jsx'
 import Disclaimer from '../components/Disclaimer.jsx'
@@ -16,7 +17,9 @@ export default function TipDetailPage() {
   const { open: openLightbox } = useLightbox()
 
   const [printing, setPrinting] = useState(false)
-  const [confirmDelete, setConfirmDelete] = useState(false)
+  const [deleteOpen, setDeleteOpen] = useState(false)
+  const [delPw, setDelPw] = useState('')
+  const [delPwError, setDelPwError] = useState(false)
 
   const tip = tips.find(t => t.id === id)
 
@@ -39,6 +42,10 @@ export default function TipDetailPage() {
   }
 
   const handleDelete = () => {
+    if (delPw !== getAdminPassword()) {
+      setDelPwError(true)
+      return
+    }
     remove(id)
     nav('/tips', { replace: true })
     toast('팁이 삭제되었습니다.', 'info')
@@ -113,21 +120,33 @@ export default function TipDetailPage() {
 
         {/* 삭제 */}
         <div style={{ padding: '8px 0 0' }}>
-          {!confirmDelete ? (
+          {!deleteOpen ? (
             <button
-              onClick={() => setConfirmDelete(true)}
+              onClick={() => setDeleteOpen(true)}
               style={{ width: '100%', padding: '12px', borderRadius: 12, border: '1px solid var(--danger)', background: 'transparent', color: 'var(--danger)', fontSize: 14, fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}
             >
               <TrashIcon /> 팁 삭제
             </button>
           ) : (
             <div style={{ background: 'var(--danger-dim)', borderRadius: 12, padding: '14px 16px' }}>
-              <p style={{ margin: '0 0 12px', fontSize: 14, color: 'var(--danger)', fontWeight: 600, textAlign: 'center' }}>
-                정말 삭제할까요? 되돌릴 수 없습니다.
+              <p style={{ margin: '0 0 10px', fontSize: 13, color: 'var(--danger)', fontWeight: 600, textAlign: 'center' }}>
+                관리자 비밀번호를 입력하세요
               </p>
-              <div style={{ display: 'flex', gap: 8 }}>
+              <input
+                type="password"
+                placeholder="비밀번호"
+                value={delPw}
+                autoFocus
+                onChange={e => { setDelPw(e.target.value); setDelPwError(false) }}
+                onKeyDown={e => e.key === 'Enter' && handleDelete()}
+                style={{ width: '100%', padding: '10px 12px', borderRadius: 10, border: `1px solid ${delPwError ? 'var(--danger)' : 'var(--border)'}`, background: 'var(--surface)', color: 'var(--text-primary)', fontSize: 14, boxSizing: 'border-box', outline: 'none' }}
+              />
+              {delPwError && (
+                <p style={{ margin: '6px 0 0', fontSize: 12, color: 'var(--danger)', textAlign: 'center' }}>비밀번호가 틀렸습니다.</p>
+              )}
+              <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
                 <button
-                  onClick={() => setConfirmDelete(false)}
+                  onClick={() => { setDeleteOpen(false); setDelPw(''); setDelPwError(false) }}
                   style={{ flex: 1, padding: '10px', borderRadius: 10, border: '1px solid var(--border)', background: 'var(--surface)', color: 'var(--text-primary)', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}
                 >
                   취소
