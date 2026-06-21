@@ -112,7 +112,7 @@ export default function HomePage() {
   }, [tips])
 
   const unresolved = useMemo(() =>
-    records.filter(r => r.unresolved || (!r.cause && !r.solution)),
+    records.filter(r => r.unresolved === true),
     [records]
   )
 
