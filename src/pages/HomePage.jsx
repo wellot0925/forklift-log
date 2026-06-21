@@ -132,7 +132,7 @@ export default function HomePage() {
           </div>
         </div>
         <button
-          style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--primary-dim)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--primary-dim)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', zIndex: addMenuOpen ? 1000 : undefined }}
           onClick={() => setAddMenuOpen(v => !v)} aria-label="기록 추가"
         >
           <PlusIcon />

@@ -1,37 +1,92 @@
+import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
+const menuBtnStyle = {
+  display: 'flex', alignItems: 'center', gap: 10,
+  width: '100%', padding: '15px 18px',
+  background: 'none', border: 'none',
+  borderBottom: '1px solid var(--divider)',
+  cursor: 'pointer', fontSize: 15,
+  color: 'var(--text-primary)', fontWeight: 600, textAlign: 'left',
+}
+
 const TABS = [
-  { path: '/',        label: '홈',    icon: <HomeIcon /> },
-  { path: '/write',   label: '기록',  icon: <WriteIcon />, fab: true },
-  { path: '/tips',    label: '정비팁', icon: <TipIcon /> },
-  { path: '/settings',label: '설정',  icon: <SettingsIcon /> },
+  { path: '/',         label: '홈',    icon: <HomeIcon /> },
+  { path: '/write',    label: '기록',  icon: <WriteIcon />, fab: true },
+  { path: '/tips',     label: '정비팁', icon: <TipIcon /> },
+  { path: '/settings', label: '설정',  icon: <SettingsIcon /> },
 ]
 
 export default function TabBar() {
   const nav = useNavigate()
   const { pathname } = useLocation()
+  const [menuOpen, setMenuOpen] = useState(false)
 
   return (
-    <nav className="tab-bar">
-      {TABS.map(tab => {
-        const active = tab.path === '/' ? pathname === '/' : pathname.startsWith(tab.path)
+    <>
+      {menuOpen && (
+        <>
+          <div
+            style={{ position: 'fixed', inset: 0, zIndex: 998 }}
+            onClick={() => setMenuOpen(false)}
+          />
+          <div style={{
+            position: 'fixed', bottom: 76, left: '50%', transform: 'translateX(-50%)',
+            zIndex: 999, background: 'var(--surface)', borderRadius: 16,
+            boxShadow: '0 8px 32px rgba(0,0,0,0.22)',
+            overflow: 'hidden', minWidth: 200,
+          }}>
+            <button
+              style={menuBtnStyle}
+              onClick={() => { setMenuOpen(false); nav('/write') }}
+            >
+              <span>🔧</span> 작업일지 작성
+            </button>
+            <button
+              style={{ ...menuBtnStyle, borderBottom: 'none' }}
+              onClick={() => { setMenuOpen(false); nav('/tip/write') }}
+            >
+              <span>💡</span> 정비팁 작성
+            </button>
+          </div>
+        </>
+      )}
 
-        if (tab.fab) {
+      <nav className="tab-bar">
+        {TABS.map(tab => {
+          const active = tab.path === '/' ? pathname === '/' : pathname.startsWith(tab.path)
+
+          if (tab.fab) {
+            return (
+              <button
+                key={tab.path}
+                className="tab-item"
+                style={{ position: 'relative', zIndex: menuOpen ? 1000 : undefined }}
+                onClick={() => setMenuOpen(v => !v)}
+                aria-label={tab.label}
+              >
+                <span className="tab-write-btn">{tab.icon}</span>
+                <span className="tab-label" style={{ color: active ? 'var(--primary)' : undefined }}>
+                  {tab.label}
+                </span>
+              </button>
+            )
+          }
+
           return (
-            <button key={tab.path} className="tab-item" onClick={() => nav(tab.path)} aria-label={tab.label}>
-              <span className="tab-write-btn">{tab.icon}</span>
-              <span className="tab-label" style={{ color: active ? 'var(--primary)' : undefined }}>{tab.label}</span>
+            <button
+              key={tab.path}
+              className={`tab-item${active ? ' active' : ''}`}
+              onClick={() => { setMenuOpen(false); nav(tab.path) }}
+              aria-label={tab.label}
+            >
+              <span className="tab-icon">{tab.icon}</span>
+              <span className="tab-label">{tab.label}</span>
             </button>
           )
-        }
-        return (
-          <button key={tab.path} className={`tab-item${active ? ' active' : ''}`} onClick={() => nav(tab.path)} aria-label={tab.label}>
-            <span className="tab-icon">{tab.icon}</span>
-            <span className="tab-label">{tab.label}</span>
-          </button>
-        )
-      })}
-    </nav>
+        })}
+      </nav>
+    </>
   )
 }
 
