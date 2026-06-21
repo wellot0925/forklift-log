@@ -136,6 +136,7 @@ img { max-width: 100%; display: block; }
 }
 
 .main-content.with-tabbar {
+  height: 100dvh;
   padding-bottom: calc(var(--tab-h) + var(--safe-b));
 }
 

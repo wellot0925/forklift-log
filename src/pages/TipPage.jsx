@@ -33,7 +33,7 @@ export default function TipPage() {
   }
 
   return (
-    <div className="page-main" style={{ display: 'flex', flexDirection: 'column', minHeight: '100%' }}>
+    <div className="page-main" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       {/* 헤더 */}
       <div className="home-header">
         <div>

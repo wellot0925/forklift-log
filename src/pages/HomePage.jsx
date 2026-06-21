@@ -20,7 +20,6 @@ export default function HomePage() {
   const { viewed, track } = useViewedModels()
 
   const [query, setQuery] = useState('')
-  const [addMenuOpen, setAddMenuOpen] = useState(false)
 
   /* pull-to-refresh */
   const scrollRef = useRef(null)
@@ -83,7 +82,7 @@ export default function HomePage() {
     '라디에이터', '워터펌프', '냉매', '스캔',
   ]
 
-  const top5Keywords = useMemo(() => {
+  const top3Keywords = useMemo(() => {
     return KEYWORDS.map(kw => {
       const kwLower = kw.toLowerCase()
       let count = 0
@@ -99,9 +98,15 @@ export default function HomePage() {
     })
       .filter(k => k.count > 0)
       .sort((a, b) => b.count - a.count)
-      .slice(0, 5)
+      .slice(0, 3)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [records, tips])
+
+  const tipIndexRef = useRef(Math.floor(Math.random() * 10000))
+  const todayTip = useMemo(() =>
+    tips.length > 0 ? tips[tipIndexRef.current % tips.length] : null,
+    [tips]
+  )
 
   const unresolved = useMemo(() =>
     records.filter(r => r.unresolved || (!r.cause && !r.solution)),
@@ -120,40 +125,44 @@ export default function HomePage() {
   }
 
   return (
-    <div className="page-main" style={{ display: 'flex', flexDirection: 'column', minHeight: '100%' }}>
-      {/* Header */}
-      <div className="home-header">
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <img src="/bobcat-icon.png.webp" alt="Bobcat 아이콘"
-            style={{ height: 44, width: 'auto', objectFit: 'contain', flexShrink: 0 }} />
-          <div>
-            <h1 className="home-title">나만의 정비수첩</h1>
-            <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 2 }}>용인중공업</p>
+    <div className="page-main" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+      {/* Sticky Header + Search */}
+      <div style={{ position: 'sticky', top: 0, zIndex: 100, background: 'var(--bg)' }}>
+        <div className="home-header">
+          <div
+            style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}
+            onClick={() => { setQuery(''); scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }) }}
+          >
+            <img src="/bobcat-icon.png.webp" alt="Bobcat 아이콘"
+              style={{ height: 44, width: 'auto', objectFit: 'contain', flexShrink: 0 }} />
+            <div>
+              <h1 className="home-title">나만의 정비수첩</h1>
+              <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 2 }}>용인중공업</p>
+            </div>
           </div>
+          <button
+            style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--primary-dim)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            onClick={() => nav('/settings')} aria-label="설정"
+          >
+            <GearIcon />
+          </button>
         </div>
-        <button
-          style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--primary-dim)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', zIndex: addMenuOpen ? 1000 : undefined }}
-          onClick={() => setAddMenuOpen(v => !v)} aria-label="기록 추가"
-        >
-          <PlusIcon />
-        </button>
-      </div>
 
-      {/* Search bar */}
-      <div style={{ padding: '0 16px 12px' }}>
-        <div className="home-search-bar">
-          <SearchIcon />
-          <input
-            className="home-search-input"
-            type="search" inputMode="search"
-            placeholder="작업일지, 정비팁 통합 검색..."
-            value={query} onChange={e => setQuery(e.target.value)}
-          />
-          {query && (
-            <button className="search-clear" onClick={() => setQuery('')} aria-label="지우기">
-              <XIcon />
-            </button>
-          )}
+        <div style={{ padding: '0 16px 12px' }}>
+          <div className="home-search-bar">
+            <SearchIcon />
+            <input
+              className="home-search-input"
+              type="search" inputMode="search"
+              placeholder="작업일지, 정비팁 통합 검색..."
+              value={query} onChange={e => setQuery(e.target.value)}
+            />
+            {query && (
+              <button className="search-clear" onClick={() => setQuery('')} aria-label="지우기">
+                <XIcon />
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
@@ -219,7 +228,7 @@ export default function HomePage() {
             {/* 최근 작업 */}
             {merged.length > 0 && (
               <Section title="최근 작업">
-                {merged.slice(0, 3).map(item => (
+                {merged.slice(0, 4).map(item => (
                   <div key={item.id}
                     className="dashboard-unresolved-item"
                     style={{ cursor: 'pointer' }}
@@ -248,6 +257,45 @@ export default function HomePage() {
               </Section>
             )}
 
+            {/* 최근 본 모델 */}
+            {viewed.length > 0 && (
+              <Section title="최근 본 모델">
+                <div className="model-suggestions" style={{ flexWrap: 'wrap' }}>
+                  {viewed.map(m => (
+                    <button key={m} className="model-tag" onClick={() => setQuery(m)}>
+                      {m}
+                    </button>
+                  ))}
+                </div>
+              </Section>
+            )}
+
+            {/* 오늘의 추천팁 */}
+            {todayTip && (
+              <Section title="오늘의 추천팁">
+                <div
+                  className="dashboard-unresolved-item"
+                  style={{ cursor: 'pointer', flexDirection: 'column', alignItems: 'flex-start', gap: 6, padding: '12px 14px' }}
+                  onClick={() => nav(`/tip/${todayTip.id}`)}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, width: '100%' }}>
+                    <span style={{ fontSize: 15 }}>💡</span>
+                    <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      {todayTip.title}
+                    </span>
+                    <span style={{ fontSize: 11, color: 'var(--text-secondary)', flexShrink: 0 }}>
+                      {fmt(todayTip.createdAt)}
+                    </span>
+                  </div>
+                  {todayTip.content && (
+                    <p style={{ fontSize: 12, color: 'var(--text-secondary)', margin: 0, paddingLeft: 23, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
+                      {todayTip.content}
+                    </p>
+                  )}
+                </div>
+              </Section>
+            )}
+
             {/* 미해결 항목 */}
             {unresolved.length > 0 && (
               <Section title={`미해결 항목 ${unresolved.length}건`} titleColor="var(--danger)">
@@ -267,10 +315,10 @@ export default function HomePage() {
               </Section>
             )}
 
-            {/* 자주 언급되는 키워드 TOP5 */}
-            {top5Keywords.length > 0 && (
-              <Section title="자주 언급되는 키워드 TOP5">
-                {top5Keywords.map(({ keyword, count }, i) => (
+            {/* 자주 언급되는 키워드 TOP3 */}
+            {top3Keywords.length > 0 && (
+              <Section title="자주 언급되는 키워드 TOP3">
+                {top3Keywords.map(({ keyword, count }, i) => (
                   <div key={i} className="dashboard-top-item"
                     style={{ cursor: 'pointer' }}
                     onClick={() => setQuery(keyword)}
@@ -280,19 +328,6 @@ export default function HomePage() {
                     <span className="top-count">{count}건</span>
                   </div>
                 ))}
-              </Section>
-            )}
-
-            {/* 최근 본 모델 */}
-            {viewed.length > 0 && (
-              <Section title="최근 본 모델">
-                <div className="model-suggestions" style={{ flexWrap: 'wrap' }}>
-                  {viewed.map(m => (
-                    <button key={m} className="model-tag" onClick={() => setQuery(m)}>
-                      {m}
-                    </button>
-                  ))}
-                </div>
               </Section>
             )}
 
@@ -314,34 +349,6 @@ export default function HomePage() {
         <Disclaimer />
       </div>
 
-      {/* + 버튼 팝업 메뉴 */}
-      {addMenuOpen && (
-        <>
-          <div
-            style={{ position: 'fixed', inset: 0, zIndex: 998 }}
-            onClick={() => setAddMenuOpen(false)}
-          />
-          <div style={{
-            position: 'fixed', top: 56, right: 12, zIndex: 999,
-            background: 'var(--surface)', borderRadius: 16,
-            boxShadow: '0 8px 32px rgba(0,0,0,0.22)',
-            overflow: 'hidden', minWidth: 190,
-          }}>
-            <button
-              style={{ display: 'flex', alignItems: 'center', gap: 10, width: '100%', padding: '15px 18px', background: 'none', border: 'none', borderBottom: '1px solid var(--divider)', cursor: 'pointer', fontSize: 15, color: 'var(--text-primary)', fontWeight: 600, textAlign: 'left' }}
-              onClick={() => { setAddMenuOpen(false); nav('/write') }}
-            >
-              <span>🔧</span> 작업일지 작성
-            </button>
-            <button
-              style={{ display: 'flex', alignItems: 'center', gap: 10, width: '100%', padding: '15px 18px', background: 'none', border: 'none', cursor: 'pointer', fontSize: 15, color: 'var(--text-primary)', fontWeight: 600, textAlign: 'left' }}
-              onClick={() => { setAddMenuOpen(false); nav('/tip/write') }}
-            >
-              <span>💡</span> 정비팁 작성
-            </button>
-          </div>
-        </>
-      )}
     </div>
   )
 }
@@ -357,9 +364,10 @@ function Section({ title, titleColor, children }) {
 
 const pad = n => String(n).padStart(2, '0')
 
-function PlusIcon() {
-  return <svg fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" width={20} height={20}>
-    <path strokeLinecap="round" d="M12 5v14M5 12h14"/>
+function GearIcon() {
+  return <svg fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24" width={20} height={20}>
+    <circle cx="12" cy="12" r="3"/>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
   </svg>
 }
 function SearchIcon() {
