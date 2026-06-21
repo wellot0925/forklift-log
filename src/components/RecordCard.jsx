@@ -1,10 +1,11 @@
 import { useState, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Highlight from '../utils/highlight.jsx'
 
 const REVEAL_X  = -82   // px to show delete button
 const DELETE_X  = -160  // px to trigger auto-delete
 
-export default function RecordCard({ record, onDelete, showTypeTag }) {
+export default function RecordCard({ record, onDelete, showTypeTag, query = '' }) {
   const nav = useNavigate()
   const [offsetX, setOffsetX] = useState(0)
   const [deleting, setDeleting] = useState(false)
@@ -92,10 +93,14 @@ export default function RecordCard({ record, onDelete, showTypeTag }) {
           </div>
         </div>
 
-        <div className="record-symptoms">{record.symptoms}</div>
+        <div className="record-symptoms">
+          <Highlight text={record.symptoms} query={query} />
+        </div>
 
         {record.solution && (
-          <div className="record-solution-preview">✓ {record.solution}</div>
+          <div className="record-solution-preview">
+            ✓ <Highlight text={record.solution} query={query} />
+          </div>
         )}
 
         {(record.photos?.length > 0) && (

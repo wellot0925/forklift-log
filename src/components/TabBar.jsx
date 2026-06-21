@@ -11,7 +11,7 @@ const menuBtnStyle = {
 }
 
 const TABS = [
-  { path: '/',     label: '작업일지', icon: <WorkLogIcon /> },
+  { path: '/records', label: '작업일지', icon: <WorkLogIcon /> },
   { path: null,    label: '추가',     icon: <PlusIcon />,   fab: true },
   { path: '/tips', label: '정비팁',   icon: <TipIcon /> },
 ]
@@ -53,9 +53,7 @@ export default function TabBar() {
 
       <nav className="tab-bar">
         {TABS.map((tab, i) => {
-          const active = tab.path === '/'
-            ? pathname === '/'
-            : tab.path ? pathname.startsWith(tab.path) : false
+          const active = tab.path ? pathname === tab.path || pathname.startsWith(tab.path + '/') : false
 
           if (tab.fab) {
             return (

@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
+import Highlight from '../utils/highlight.jsx'
 
-export default function TipListCard({ tip }) {
+export default function TipListCard({ tip, query = '' }) {
   const nav = useNavigate()
   const date = new Date(tip.createdAt)
   const dateStr = `${date.getFullYear()}.${pad(date.getMonth()+1)}.${pad(date.getDate())}`
@@ -23,10 +24,14 @@ export default function TipListCard({ tip }) {
             <span className="record-date">{dateStr}</span>
           </div>
         </div>
-        {tip.title && <div className="record-symptoms">{tip.title}</div>}
+        {tip.title && (
+          <div className="record-symptoms">
+            <Highlight text={tip.title} query={query} />
+          </div>
+        )}
         {preview && (
           <div className="record-solution-preview">
-            {preview}{tip.content?.length > 100 ? '…' : ''}
+            <Highlight text={preview} query={query} />{tip.content?.length > 100 ? '…' : ''}
           </div>
         )}
         <div className="record-card-footer" style={{ justifyContent: 'flex-end' }}>

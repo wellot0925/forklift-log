@@ -7,6 +7,7 @@ import { ToastProvider } from './hooks/useToast.jsx'
 import { LightboxProvider } from './hooks/useLightbox.jsx'
 import TabBar from './components/TabBar.jsx'
 import HomePage from './pages/HomePage.jsx'
+import RecordsPage from './pages/RecordsPage.jsx'
 import WritePage from './pages/WritePage.jsx'
 import DetailPage from './pages/DetailPage.jsx'
 import TipPage from './pages/TipPage.jsx'
@@ -30,6 +31,7 @@ function AppRoutes() {
       <main className={`main-content${isSubPage ? '' : ' with-tabbar'}`}>
         <Routes location={location} key={location.pathname}>
           <Route path="/"           element={<HomePage />} />
+          <Route path="/records"    element={<RecordsPage />} />
           <Route path="/write"      element={<WritePage />} />
           <Route path="/write/:id"  element={<WritePage />} />
           <Route path="/detail/:id" element={<DetailPage />} />

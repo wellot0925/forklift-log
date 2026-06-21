@@ -643,10 +643,10 @@ img { max-width: 100%; display: block; }
 }
 
 .highlight {
-  background: rgba(255, 107, 0, 0.18);
-  color: var(--primary);
+  background: rgba(250, 204, 21, 0.5);
+  color: inherit;
   border-radius: 3px;
-  padding: 0 1px;
+  padding: 0 2px;
 }
 
 /* =============================================

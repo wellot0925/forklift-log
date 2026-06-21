@@ -193,9 +193,9 @@ export default function HomePage() {
                     {filtered.map(item =>
                       item._type === 'record'
                         ? <div key={item.id} onClick={() => track(item.model)} style={{ display: 'contents' }}>
-                            <RecordCard record={item} onDelete={handleDelete} showTypeTag />
+                            <RecordCard record={item} onDelete={handleDelete} showTypeTag query={query} />
                           </div>
-                        : <TipListCard key={item.id} tip={item} />
+                        : <TipListCard key={item.id} tip={item} query={query} />
                     )}
                   </div>
                 </>

@@ -5,6 +5,7 @@ import { useLightbox } from '../hooks/useLightbox.jsx'
 import { printTip } from '../utils/pdf.js'
 import Spinner from '../components/Spinner.jsx'
 import Disclaimer from '../components/Disclaimer.jsx'
+import Highlight from '../utils/highlight.jsx'
 
 export default function TipPage() {
   const { tips, loading } = useTips()
@@ -92,8 +93,16 @@ export default function TipPage() {
                     </button>
                   </div>
                 </div>
-                {tip.title && <div className="tip-title">{tip.title}</div>}
-                {tip.content && <div className="tip-content">{tip.content}</div>}
+                {tip.title && (
+                  <div className="tip-title">
+                    <Highlight text={tip.title} query={query} />
+                  </div>
+                )}
+                {tip.content && (
+                  <div className="tip-content">
+                    <Highlight text={tip.content} query={query} />
+                  </div>
+                )}
                 {tip.photos?.length > 0 && (
                   <div className="photo-grid" style={{ marginTop: 10 }}>
                     {tip.photos.map((src, i) => (
