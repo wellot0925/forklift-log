@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 const REVEAL_X  = -82   // px to show delete button
 const DELETE_X  = -160  // px to trigger auto-delete
 
-export default function RecordCard({ record, onDelete }) {
+export default function RecordCard({ record, onDelete, showTypeTag }) {
   const nav = useNavigate()
   const [offsetX, setOffsetX] = useState(0)
   const [deleting, setDeleting] = useState(false)
@@ -77,10 +77,13 @@ export default function RecordCard({ record, onDelete }) {
         onClick={onCardClick}
       >
         <div className="record-card-header">
-          <span className="model-badge">
-            <ForkliftSmall />
-            {record.model}
-          </span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            {showTypeTag && <span style={{ fontSize: 15, lineHeight: 1 }}>🔧</span>}
+            <span className="model-badge">
+              <ForkliftSmall />
+              {record.model}
+            </span>
+          </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 2 }}>
             {record.author && (
               <span style={{ fontSize: 11, color: 'var(--primary)', fontWeight: 600 }}>{record.author}</span>

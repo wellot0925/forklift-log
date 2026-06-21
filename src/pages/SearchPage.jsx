@@ -1,27 +1,44 @@
 import { useState, useMemo, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useRecords } from '../hooks/useRecords.jsx'
+import { useTips } from '../hooks/useTips.jsx'
 import { useToast } from '../hooks/useToast.jsx'
 import RecordCard from '../components/RecordCard.jsx'
+import TipListCard from '../components/TipListCard.jsx'
 import EmptyState from '../components/EmptyState.jsx'
 import Spinner from '../components/Spinner.jsx'
 
 export default function SearchPage() {
   const [query, setQuery] = useState('')
-  const { records, loading, remove, models } = useRecords()
+  const { records, loading: recordsLoading, remove, models } = useRecords()
+  const { tips, loading: tipsLoading } = useTips()
   const { toast } = useToast()
   const inputRef = useRef(null)
+  const nav = useNavigate()
+
+  const loading = recordsLoading || tipsLoading
 
   const results = useMemo(() => {
     if (!query.trim()) return []
     const q = query.toLowerCase()
-    return records.filter(r =>
-      r.model?.toLowerCase().includes(q) ||
-      r.symptoms?.toLowerCase().includes(q) ||
-      r.cause?.toLowerCase().includes(q) ||
-      r.solution?.toLowerCase().includes(q)
+    const matchedRecords = records
+      .filter(r =>
+        r.model?.toLowerCase().includes(q) ||
+        r.symptoms?.toLowerCase().includes(q) ||
+        r.cause?.toLowerCase().includes(q) ||
+        r.solution?.toLowerCase().includes(q)
+      )
+      .map(r => ({ ...r, _type: 'record' }))
+    const matchedTips = tips
+      .filter(t =>
+        t.title?.toLowerCase().includes(q) ||
+        t.content?.toLowerCase().includes(q)
+      )
+      .map(t => ({ ...t, _type: 'tip' }))
+    return [...matchedRecords, ...matchedTips].sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
     )
-  }, [query, records])
+  }, [query, records, tips])
 
   const handleDelete = id => {
     remove(id)
@@ -44,7 +61,7 @@ export default function SearchPage() {
             className="search-input"
             type="search"
             inputMode="search"
-            placeholder="모델명, 증상, 원인 검색..."
+            placeholder="작업일지, 정비팁 통합 검색..."
             value={query}
             onChange={e => setQuery(e.target.value)}
             autoFocus
@@ -78,8 +95,8 @@ export default function SearchPage() {
         ) : !query ? (
           <div className="empty-state" style={{ paddingTop: 40 }}>
             <SearchBigIcon />
-            <p className="empty-title" style={{ marginTop: 16 }}>기록 검색</p>
-            <p className="empty-subtitle">모델명이나 증상을 입력하면<br/>관련 정비 기록을 찾아드려요.</p>
+            <p className="empty-title" style={{ marginTop: 16 }}>통합 검색</p>
+            <p className="empty-subtitle">모델명, 증상, 정비팁 내용을<br/>모두 검색할 수 있어요.</p>
           </div>
         ) : results.length === 0 ? (
           <EmptyState type="search" />
@@ -87,9 +104,11 @@ export default function SearchPage() {
           <>
             <p className="search-meta">{results.length}건의 결과</p>
             <div style={{ paddingBottom: 16 }}>
-              {results.map(r => (
-                <RecordCard key={r.id} record={r} onDelete={handleDelete} />
-              ))}
+              {results.map(item =>
+                item._type === 'record'
+                  ? <RecordCard key={item.id} record={item} onDelete={handleDelete} showTypeTag />
+                  : <TipListCard key={item.id} tip={item} />
+              )}
             </div>
           </>
         )}

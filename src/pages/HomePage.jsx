@@ -1,9 +1,11 @@
 import { useRef, useState, useCallback, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useRecords } from '../hooks/useRecords.jsx'
+import { useTips } from '../hooks/useTips.jsx'
 import { useToast } from '../hooks/useToast.jsx'
 import { useViewedModels } from '../hooks/useViewedModels.jsx'
 import RecordCard from '../components/RecordCard.jsx'
+import TipListCard from '../components/TipListCard.jsx'
 import EmptyState from '../components/EmptyState.jsx'
 import Spinner from '../components/Spinner.jsx'
 import Disclaimer from '../components/Disclaimer.jsx'
@@ -12,7 +14,8 @@ const PULL_THRESHOLD = 64
 
 export default function HomePage() {
   const nav = useNavigate()
-  const { records, loading, remove, refresh } = useRecords()
+  const { records, loading: recordsLoading, remove, refresh } = useRecords()
+  const { tips, loading: tipsLoading } = useTips()
   const { toast } = useToast()
   const { viewed, track } = useViewedModels()
 
@@ -43,33 +46,46 @@ export default function HomePage() {
     remove(id); toast('기록이 삭제되었습니다.', 'info')
   }, [remove, toast])
 
+  const loading = recordsLoading || tipsLoading
+
+  /* ── Merged & sorted data ── */
+  const merged = useMemo(() => {
+    const all = [
+      ...records.map(r => ({ ...r, _type: 'record' })),
+      ...tips.map(t => ({ ...t, _type: 'tip' })),
+    ]
+    return all.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+  }, [records, tips])
+
   /* ── Derived data ── */
   const isSearching = query.trim().length > 0
 
   const filtered = useMemo(() => {
-    if (!isSearching) return records
+    if (!isSearching) return merged
     const q = query.toLowerCase()
-    return records.filter(r =>
-      r.model?.toLowerCase().includes(q) ||
-      r.symptoms?.toLowerCase().includes(q) ||
-      r.cause?.toLowerCase().includes(q) ||
-      r.solution?.toLowerCase().includes(q)
+    return merged.filter(item =>
+      item._type === 'record'
+        ? (item.model?.toLowerCase().includes(q) ||
+           item.symptoms?.toLowerCase().includes(q) ||
+           item.cause?.toLowerCase().includes(q) ||
+           item.solution?.toLowerCase().includes(q))
+        : (item.title?.toLowerCase().includes(q) ||
+           item.content?.toLowerCase().includes(q))
     )
-  }, [query, records, isSearching])
-
-  const lastRecord = records[0] ?? null
+  }, [query, merged, isSearching])
 
   const top3Symptoms = useMemo(() => {
     const freq = {}
     records.forEach(r => {
       if (!r.symptoms) return
       const key = r.symptoms.slice(0, 30).trim()
-      freq[key] = (freq[key] ?? 0) + 1
+      if (!freq[key]) freq[key] = { count: 0, id: r.id, model: r.model }
+      freq[key].count++
     })
     return Object.entries(freq)
-      .sort((a, b) => b[1] - a[1])
+      .sort((a, b) => b[1].count - a[1].count)
       .slice(0, 3)
-      .map(([text, count]) => ({ text, count }))
+      .map(([text, { count, id, model }]) => ({ text, count, id, model }))
   }, [records])
 
   const unresolved = useMemo(() =>
@@ -83,13 +99,22 @@ export default function HomePage() {
     return `${d.getFullYear()}.${pad(d.getMonth()+1)}.${pad(d.getDate())}`
   }
 
+  const navToItem = item => {
+    if (item._type === 'record') { track(item.model); nav(`/detail/${item.id}`) }
+    else nav('/tips')
+  }
+
   return (
     <div className="page-main" style={{ display: 'flex', flexDirection: 'column', minHeight: '100%' }}>
       {/* Header */}
       <div className="home-header">
-        <div>
-          <h1 className="home-title">나만의 정비지침서</h1>
-          <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 2 }}>두산 지게차 정비 기록</p>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <img src="/bobcat-icon.png.webp" alt="Bobcat 아이콘"
+            style={{ height: 44, width: 'auto', objectFit: 'contain', flexShrink: 0 }} />
+          <div>
+            <h1 className="home-title">나만의 정비수첩</h1>
+            <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 2 }}>용인중공업</p>
+          </div>
         </div>
         <button
           style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--primary-dim)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
@@ -106,7 +131,7 @@ export default function HomePage() {
           <input
             className="home-search-input"
             type="search" inputMode="search"
-            placeholder="모델명, 증상, 원인, 해결방법 검색..."
+            placeholder="작업일지, 정비팁 통합 검색..."
             value={query} onChange={e => setQuery(e.target.value)}
           />
           {query && (
@@ -141,13 +166,19 @@ export default function HomePage() {
               ? <>
                   <p className="search-meta">{filtered.length}건의 결과</p>
                   <div className="records-list">
-                    {filtered.map(r => <RecordCard key={r.id} record={r} onDelete={handleDelete} />)}
+                    {filtered.map(item =>
+                      item._type === 'record'
+                        ? <div key={item.id} onClick={() => track(item.model)} style={{ display: 'contents' }}>
+                            <RecordCard record={item} onDelete={handleDelete} showTypeTag />
+                          </div>
+                        : <TipListCard key={item.id} tip={item} />
+                    )}
                   </div>
                 </>
               : <EmptyState type="search" />
             }
           </>
-        ) : records.length === 0 ? (
+        ) : merged.length === 0 ? (
           <EmptyState type="home" />
         ) : (
           /* ─── Dashboard ─── */
@@ -155,7 +186,7 @@ export default function HomePage() {
             {/* Stats */}
             <div className="stats-strip">
               <div className="stat-card">
-                <div className="stat-value">{records.length}</div>
+                <div className="stat-value">{records.length + tips.length}</div>
                 <div className="stat-label">전체 기록</div>
               </div>
               <div className="stat-card">
@@ -171,23 +202,34 @@ export default function HomePage() {
             </div>
 
             {/* 최근 작업 */}
-            {lastRecord && (
+            {merged.length > 0 && (
               <Section title="최근 작업">
-                <div
-                  className="dashboard-recent"
-                  onClick={() => { track(lastRecord.model); nav(`/detail/${lastRecord.id}`) }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <div className="model-badge"><ForkliftIcon />{lastRecord.model}</div>
-                    <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>{fmt(lastRecord.createdAt)}</span>
+                {merged.slice(0, 3).map(item => (
+                  <div key={item.id}
+                    className="dashboard-unresolved-item"
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => navToItem(item)}
+                  >
+                    <span style={{ fontSize: 15, lineHeight: 1, flexShrink: 0 }}>
+                      {item._type === 'record' ? '🔧' : '💡'}
+                    </span>
+                    {item._type === 'record' ? (
+                      <span className="model-badge" style={{ flexShrink: 0 }}>
+                        <ForkliftIcon />{item.model}
+                      </span>
+                    ) : (
+                      <span className="model-badge" style={{ background: 'rgba(234,179,8,0.15)', color: '#92400e', flexShrink: 0 }}>
+                        정비팁
+                      </span>
+                    )}
+                    <span style={{ fontSize: 13, color: 'var(--text-primary)', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      {item._type === 'record' ? item.symptoms : item.title}
+                    </span>
+                    <span style={{ fontSize: 11, color: 'var(--text-secondary)', flexShrink: 0, marginLeft: 4 }}>
+                      {fmt(item.createdAt)}
+                    </span>
                   </div>
-                  <div style={{ fontSize: 14, color: 'var(--text-primary)', marginTop: 8, lineHeight: 1.4 }}>
-                    {lastRecord.symptoms}
-                  </div>
-                  <div style={{ fontSize: 12, color: 'var(--text-secondary)', marginTop: 4 }}>
-                    탭하여 상세 보기 →
-                  </div>
-                </div>
+                ))}
               </Section>
             )}
 
@@ -213,8 +255,11 @@ export default function HomePage() {
             {/* 자주 고장나는 증상 TOP3 */}
             {top3Symptoms.length > 0 && (
               <Section title="자주 고장나는 증상 TOP3">
-                {top3Symptoms.map(({ text, count }, i) => (
-                  <div key={i} className="dashboard-top-item">
+                {top3Symptoms.map(({ text, count, id, model }, i) => (
+                  <div key={i} className="dashboard-top-item"
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => { track(model); nav(`/detail/${id}`) }}
+                  >
                     <span className="top-rank">{i + 1}</span>
                     <span className="top-symptom">{text}</span>
                     <span className="top-count">{count}건</span>
@@ -228,9 +273,7 @@ export default function HomePage() {
               <Section title="최근 본 모델">
                 <div className="model-suggestions" style={{ flexWrap: 'wrap' }}>
                   {viewed.map(m => (
-                    <button key={m} className="model-tag"
-                      onClick={() => setQuery(m)}
-                    >
+                    <button key={m} className="model-tag" onClick={() => setQuery(m)}>
                       {m}
                     </button>
                   ))}
@@ -238,14 +281,16 @@ export default function HomePage() {
               </Section>
             )}
 
-            {/* 전체 기록 목록 */}
+            {/* 전체 기록 */}
             <Section title="전체 기록">
               <div style={{ margin: '0 -16px' }}>
-                {records.map(r => (
-                  <div key={r.id} onClick={() => track(r.model)} style={{ display: 'contents' }}>
-                    <RecordCard record={r} onDelete={handleDelete} />
-                  </div>
-                ))}
+                {merged.map(item =>
+                  item._type === 'record'
+                    ? <div key={item.id} onClick={() => track(item.model)} style={{ display: 'contents' }}>
+                        <RecordCard record={item} onDelete={handleDelete} showTypeTag />
+                      </div>
+                    : <TipListCard key={item.id} tip={item} />
+                )}
               </div>
             </Section>
             <div style={{ height: 8 }} />
