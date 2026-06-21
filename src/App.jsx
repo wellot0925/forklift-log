@@ -10,6 +10,8 @@ import HomePage from './pages/HomePage.jsx'
 import WritePage from './pages/WritePage.jsx'
 import DetailPage from './pages/DetailPage.jsx'
 import TipPage from './pages/TipPage.jsx'
+import TipDetailPage from './pages/TipDetailPage.jsx'
+import TipWritePage from './pages/TipWritePage.jsx'
 import SettingsPage from './pages/SettingsPage.jsx'
 
 function ScrollToTop() {
@@ -20,7 +22,7 @@ function ScrollToTop() {
 
 function AppRoutes() {
   const location = useLocation()
-  const isSubPage = /^\/(detail\/|write)/.test(location.pathname)
+  const isSubPage = /^\/(detail\/|write|tip\/)/.test(location.pathname)
 
   return (
     <div className="app-wrapper">
@@ -31,7 +33,10 @@ function AppRoutes() {
           <Route path="/write"      element={<WritePage />} />
           <Route path="/write/:id"  element={<WritePage />} />
           <Route path="/detail/:id" element={<DetailPage />} />
-          <Route path="/tips"       element={<TipPage />} />
+          <Route path="/tips"         element={<TipPage />} />
+          <Route path="/tip/write"  element={<TipWritePage />} />
+          <Route path="/tip/write/:id" element={<TipWritePage />} />
+          <Route path="/tip/:id"    element={<TipDetailPage />} />
           <Route path="/settings"   element={<SettingsPage />} />
         </Routes>
       </main>

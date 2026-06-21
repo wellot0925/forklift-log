@@ -20,6 +20,7 @@ export default function HomePage() {
   const { viewed, track } = useViewedModels()
 
   const [query, setQuery] = useState('')
+  const [addMenuOpen, setAddMenuOpen] = useState(false)
 
   /* pull-to-refresh */
   const scrollRef = useRef(null)
@@ -115,7 +116,7 @@ export default function HomePage() {
 
   const navToItem = item => {
     if (item._type === 'record') { track(item.model); nav(`/detail/${item.id}`) }
-    else nav('/tips')
+    else nav(`/tip/${item.id}`)
   }
 
   return (
@@ -132,7 +133,7 @@ export default function HomePage() {
         </div>
         <button
           style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--primary-dim)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-          onClick={() => nav('/write')} aria-label="새 기록 작성"
+          onClick={() => setAddMenuOpen(v => !v)} aria-label="기록 추가"
         >
           <PlusIcon />
         </button>
@@ -312,6 +313,35 @@ export default function HomePage() {
         )}
         <Disclaimer />
       </div>
+
+      {/* + 버튼 팝업 메뉴 */}
+      {addMenuOpen && (
+        <>
+          <div
+            style={{ position: 'fixed', inset: 0, zIndex: 998 }}
+            onClick={() => setAddMenuOpen(false)}
+          />
+          <div style={{
+            position: 'fixed', top: 56, right: 12, zIndex: 999,
+            background: 'var(--surface)', borderRadius: 16,
+            boxShadow: '0 8px 32px rgba(0,0,0,0.22)',
+            overflow: 'hidden', minWidth: 190,
+          }}>
+            <button
+              style={{ display: 'flex', alignItems: 'center', gap: 10, width: '100%', padding: '15px 18px', background: 'none', border: 'none', borderBottom: '1px solid var(--divider)', cursor: 'pointer', fontSize: 15, color: 'var(--text-primary)', fontWeight: 600, textAlign: 'left' }}
+              onClick={() => { setAddMenuOpen(false); nav('/write') }}
+            >
+              <span>🔧</span> 작업일지 작성
+            </button>
+            <button
+              style={{ display: 'flex', alignItems: 'center', gap: 10, width: '100%', padding: '15px 18px', background: 'none', border: 'none', cursor: 'pointer', fontSize: 15, color: 'var(--text-primary)', fontWeight: 600, textAlign: 'left' }}
+              onClick={() => { setAddMenuOpen(false); nav('/tip/write') }}
+            >
+              <span>💡</span> 정비팁 작성
+            </button>
+          </div>
+        </>
+      )}
     </div>
   )
 }

@@ -7,7 +7,7 @@ export default function TipListCard({ tip }) {
   const preview = tip.content?.slice(0, 100) ?? ''
 
   return (
-    <div className="record-card-wrapper" onClick={() => nav('/tips')} style={{ cursor: 'pointer' }}>
+    <div className="record-card-wrapper" onClick={() => nav(`/tip/${tip.id}`)} style={{ cursor: 'pointer' }}>
       <div className="record-card">
         <div className="record-card-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>

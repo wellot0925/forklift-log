@@ -1,23 +1,17 @@
 import { useState, useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useTips } from '../hooks/useTips.jsx'
-import { useToast } from '../hooks/useToast.jsx'
 import { useLightbox } from '../hooks/useLightbox.jsx'
-import { compressImage } from '../utils/storage.js'
 import { printTip } from '../utils/pdf.js'
 import Spinner from '../components/Spinner.jsx'
 import Disclaimer from '../components/Disclaimer.jsx'
 
-const MAX_PHOTOS = 5
-
 export default function TipPage() {
-  const { tips, loading, add } = useTips()
-  const { toast } = useToast()
+  const { tips, loading } = useTips()
   const { open: openLightbox } = useLightbox()
+  const nav = useNavigate()
 
   const [query, setQuery] = useState('')
-  const [writeOpen, setWriteOpen] = useState(false)
-  const [form, setForm] = useState({ title: '', content: '', photos: [] })
-  const [saving, setSaving] = useState(false)
 
   const filtered = useMemo(() => {
     if (!query.trim()) return tips
@@ -27,34 +21,6 @@ export default function TipPage() {
       t.content?.toLowerCase().includes(q)
     )
   }, [query, tips])
-
-  const handleSave = async () => {
-    if (!form.title.trim() && !form.content.trim()) {
-      toast('제목이나 내용을 입력해주세요.', 'error'); return
-    }
-    setSaving(true)
-    try {
-      await add(form)
-      toast('팁이 저장되었습니다!', 'success')
-      setForm({ title: '', content: '', photos: [] })
-      setWriteOpen(false)
-    } catch {
-      toast('저장에 실패했습니다.', 'error')
-    } finally {
-      setSaving(false)
-    }
-  }
-
-  const handlePhotoAdd = async e => {
-    const files = Array.from(e.target.files ?? [])
-    if (!files.length) return
-    const toAdd = files.slice(0, MAX_PHOTOS - form.photos.length)
-    try {
-      const compressed = await Promise.all(toAdd.map(f => compressImage(f)))
-      setForm(f => ({ ...f, photos: [...f.photos, ...compressed] }))
-    } catch { toast('사진 추가에 실패했습니다.', 'error') }
-    e.target.value = ''
-  }
 
   const handlePrint = (tip, e) => {
     e.stopPropagation()
@@ -76,7 +42,7 @@ export default function TipPage() {
         </div>
         <button
           style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--primary-dim)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-          onClick={() => setWriteOpen(true)} aria-label="팁 추가"
+          onClick={() => nav('/tip/write')} aria-label="팁 작성"
         >
           <PlusIcon />
         </button>
@@ -109,7 +75,7 @@ export default function TipPage() {
               {query ? '다른 키워드로 검색해보세요.' : '유용한 정비 노하우를\n기록해두세요!'}
             </p>
             {!query && (
-              <button className="empty-cta" onClick={() => setWriteOpen(true)}>
+              <button className="empty-cta" onClick={() => nav('/tip/write')}>
                 <PlusIcon /> 첫 팁 작성하기
               </button>
             )}
@@ -117,7 +83,7 @@ export default function TipPage() {
         ) : (
           <div style={{ paddingBottom: 8 }}>
             {filtered.map(tip => (
-              <div key={tip.id} className="tip-card">
+              <div key={tip.id} className="tip-card" style={{ cursor: 'pointer' }} onClick={() => nav(`/tip/${tip.id}`)}>
                 <div className="tip-card-header">
                   <span className="tip-date">{fmt(tip.createdAt)}</span>
                   <div style={{ display: 'flex', gap: 4 }}>
@@ -131,7 +97,7 @@ export default function TipPage() {
                 {tip.photos?.length > 0 && (
                   <div className="photo-grid" style={{ marginTop: 10 }}>
                     {tip.photos.map((src, i) => (
-                      <div key={i} className="photo-grid-item" onClick={() => openLightbox(tip.photos, i)}>
+                      <div key={i} className="photo-grid-item" onClick={e => { e.stopPropagation(); openLightbox(tip.photos, i) }}>
                         <img src={src} alt={`사진 ${i+1}`} />
                       </div>
                     ))}
@@ -143,65 +109,6 @@ export default function TipPage() {
         )}
         <Disclaimer />
       </div>
-
-      {/* 작성 모달 */}
-      {writeOpen && (
-        <div className="modal-overlay" onClick={() => setWriteOpen(false)}>
-          <div className="tip-write-modal" onClick={e => e.stopPropagation()}>
-            <div className="model-modal-header">
-              <span className="model-modal-title">팁 작성</span>
-              <button className="header-btn" onClick={() => setWriteOpen(false)}><CloseIcon /></button>
-            </div>
-            <div style={{ padding: '0 16px', overflowY: 'auto', flex: 1 }}>
-              <input
-                className="form-input" style={{ marginBottom: 10 }}
-                placeholder="제목 (선택)"
-                value={form.title}
-                onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
-              />
-              <textarea
-                className="form-textarea"
-                placeholder="정비 노하우, 주의사항, 팁을 자유롭게 기록하세요..."
-                rows={5}
-                value={form.content}
-                onChange={e => setForm(f => ({ ...f, content: e.target.value }))}
-              />
-              {/* 사진 (최대 5장) */}
-              <div style={{ marginTop: 12 }}>
-                <div className="photo-row">
-                  {form.photos.map((src, i) => (
-                    <div key={i} className="photo-thumb-wrap">
-                      <img src={src} alt="" className="photo-thumb" />
-                      <button type="button" className="photo-remove"
-                        onClick={() => setForm(f => ({ ...f, photos: f.photos.filter((_, j) => j !== i) }))}>✕</button>
-                    </div>
-                  ))}
-                  {form.photos.length < MAX_PHOTOS && (<>
-                    <label className="photo-add-label" htmlFor="tip-photo-camera">
-                      <CameraIcon /><span>카메라</span>
-                      <input id="tip-photo-camera" type="file"
-                        accept="image/*" capture="environment"
-                        onChange={handlePhotoAdd} style={{ display: 'none' }} />
-                    </label>
-                    <label className="photo-add-label" htmlFor="tip-photo-gallery">
-                      <GalleryIcon /><span>갤러리</span>
-                      <input id="tip-photo-gallery" type="file"
-                        accept="image/jpeg,image/png,image/gif,image/webp,image/heic,image/heif"
-                        multiple onChange={handlePhotoAdd} style={{ display: 'none' }} />
-                    </label>
-                  </>)}
-                </div>
-              </div>
-            </div>
-            <div style={{ padding: '14px 16px', paddingBottom: 'calc(14px + env(safe-area-inset-bottom, 0px))', borderTop: '1px solid var(--divider)' }}>
-              <button className="btn-cta" onClick={handleSave} disabled={saving}>
-                {saving ? <><Spinner size="sm" white />저장 중...</> : '✓  작성완료'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
     </div>
   )
 }
@@ -223,32 +130,9 @@ function XIcon() {
     <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12"/>
   </svg>
 }
-function CloseIcon() {
-  return <svg fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" width={20} height={20} color="white">
-    <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12"/>
-  </svg>
-}
-function TrashIcon() {
-  return <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" width={16} height={16}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-  </svg>
-}
 function PrintIcon() {
   return <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" width={16} height={16}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
-  </svg>
-}
-function CameraIcon() {
-  return <svg fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24" width={24} height={24}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
-    <circle cx="12" cy="13" r="3"/>
-  </svg>
-}
-function GalleryIcon() {
-  return <svg fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24" width={24} height={24}>
-    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <circle cx="8.5" cy="8.5" r="1.5"/>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M21 15l-5-5L5 21"/>
   </svg>
 }
 function LightBulbIcon() {
