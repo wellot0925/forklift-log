@@ -103,10 +103,13 @@ export default function HomePage() {
   }, [records, tips])
 
   const tipIndexRef = useRef(Math.floor(Math.random() * 10000))
-  const todayTip = useMemo(() =>
-    tips.length > 0 ? tips[tipIndexRef.current % tips.length] : null,
-    [tips]
-  )
+  const todayTips = useMemo(() => {
+    if (tips.length === 0) return []
+    if (tips.length === 1) return [tips[0]]
+    const i1 = tipIndexRef.current % tips.length
+    const i2 = (tipIndexRef.current + 1) % tips.length
+    return [tips[i1], tips[i2]]
+  }, [tips])
 
   const unresolved = useMemo(() =>
     records.filter(r => r.unresolved || (!r.cause && !r.solution)),
@@ -271,28 +274,30 @@ export default function HomePage() {
             )}
 
             {/* 오늘의 추천팁 */}
-            {todayTip && (
+            {todayTips.length > 0 && (
               <Section title="오늘의 추천팁">
-                <div
-                  className="dashboard-unresolved-item"
-                  style={{ cursor: 'pointer', flexDirection: 'column', alignItems: 'flex-start', gap: 6, padding: '12px 14px' }}
-                  onClick={() => nav(`/tip/${todayTip.id}`)}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, width: '100%' }}>
-                    <span style={{ fontSize: 15 }}>💡</span>
-                    <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                      {todayTip.title}
-                    </span>
-                    <span style={{ fontSize: 11, color: 'var(--text-secondary)', flexShrink: 0 }}>
-                      {fmt(todayTip.createdAt)}
-                    </span>
+                {todayTips.map(tip => (
+                  <div key={tip.id}
+                    className="dashboard-unresolved-item"
+                    style={{ cursor: 'pointer', flexDirection: 'column', alignItems: 'flex-start', gap: 6, padding: '12px 14px' }}
+                    onClick={() => nav(`/tip/${tip.id}`)}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, width: '100%' }}>
+                      <span style={{ fontSize: 15 }}>💡</span>
+                      <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                        {tip.title}
+                      </span>
+                      <span style={{ fontSize: 11, color: 'var(--text-secondary)', flexShrink: 0 }}>
+                        {fmt(tip.createdAt)}
+                      </span>
+                    </div>
+                    {tip.content && (
+                      <p style={{ fontSize: 12, color: 'var(--text-secondary)', margin: 0, paddingLeft: 23, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
+                        {tip.content}
+                      </p>
+                    )}
                   </div>
-                  {todayTip.content && (
-                    <p style={{ fontSize: 12, color: 'var(--text-secondary)', margin: 0, paddingLeft: 23, overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
-                      {todayTip.content}
-                    </p>
-                  )}
-                </div>
+                ))}
               </Section>
             )}
 

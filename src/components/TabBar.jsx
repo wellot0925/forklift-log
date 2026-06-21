@@ -11,9 +11,10 @@ const menuBtnStyle = {
 }
 
 const TABS = [
+  { path: '/',        label: '홈',      icon: <HomeIcon /> },
   { path: '/records', label: '작업일지', icon: <WorkLogIcon /> },
-  { path: null,    label: '추가',     icon: <PlusIcon />,   fab: true },
-  { path: '/tips', label: '정비팁',   icon: <TipIcon /> },
+  { path: null,       label: '추가',    icon: <PlusIcon />, fab: true },
+  { path: '/tips',    label: '정비팁',  icon: <TipIcon /> },
 ]
 
 export default function TabBar() {
@@ -53,7 +54,9 @@ export default function TabBar() {
 
       <nav className="tab-bar">
         {TABS.map((tab, i) => {
-          const active = tab.path ? pathname === tab.path || pathname.startsWith(tab.path + '/') : false
+          const active = tab.path === '/'
+            ? pathname === '/'
+            : tab.path ? pathname === tab.path || pathname.startsWith(tab.path + '/') : false
 
           if (tab.fab) {
             return (
@@ -87,6 +90,12 @@ export default function TabBar() {
   )
 }
 
+function HomeIcon() {
+  return <svg fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M9 22V12h6v10"/>
+  </svg>
+}
 function WorkLogIcon() {
   return <svg fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
