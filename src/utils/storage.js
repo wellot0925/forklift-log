@@ -32,6 +32,25 @@ export function addCustomModel(model) {
   localStorage.setItem(CUSTOM_MDL_KEY, JSON.stringify(list))
 }
 
+/* ─── 검색 히스토리 (페이지별 로컬 전용) ─── */
+const MAX_HISTORY = 8
+const histKey = ctx => `flift_search_hist_${ctx}_v1`
+
+export function getSearchHistory(ctx) {
+  try { return JSON.parse(localStorage.getItem(histKey(ctx)) ?? '[]') } catch { return [] }
+}
+export function addSearchHistory(ctx, query) {
+  const q = query.trim()
+  if (q.length < 2) return
+  const list = getSearchHistory(ctx).filter(h => h !== q)
+  list.unshift(q)
+  localStorage.setItem(histKey(ctx), JSON.stringify(list.slice(0, MAX_HISTORY)))
+}
+export function removeSearchHistory(ctx, query) {
+  const list = getSearchHistory(ctx).filter(h => h !== query)
+  localStorage.setItem(histKey(ctx), JSON.stringify(list))
+}
+
 /* ─── 이미지 압축 (1장 최대 2MB) ─── */
 export function compressImage(file, maxPx = 1200) {
   return new Promise((resolve, reject) => {

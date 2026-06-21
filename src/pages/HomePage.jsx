@@ -1,9 +1,10 @@
 import { useRef, useState, useCallback, useMemo } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useRecords } from '../hooks/useRecords.jsx'
 import { useTips } from '../hooks/useTips.jsx'
 import { useToast } from '../hooks/useToast.jsx'
 import { useViewedModels } from '../hooks/useViewedModels.jsx'
+import { getSearchHistory, addSearchHistory, removeSearchHistory } from '../utils/storage.js'
 import RecordCard from '../components/RecordCard.jsx'
 import TipListCard from '../components/TipListCard.jsx'
 import EmptyState from '../components/EmptyState.jsx'
@@ -19,7 +20,24 @@ export default function HomePage() {
   const { toast } = useToast()
   const { viewed, track } = useViewedModels()
 
-  const [query, setQuery] = useState('')
+  const [searchParams, setSearchParams] = useSearchParams()
+  const query = searchParams.get('q') ?? ''
+  const setQuery = useCallback(v => setSearchParams(v ? { q: v } : {}, { replace: true }), [setSearchParams])
+
+  const [searchFocused, setSearchFocused] = useState(false)
+  const [searchHistory, setSearchHistory] = useState(() => getSearchHistory('home'))
+
+  const saveAndRefreshHistory = useCallback(q => {
+    if (q.trim().length >= 2) {
+      addSearchHistory('home', q.trim())
+      setSearchHistory(getSearchHistory('home'))
+    }
+  }, [])
+
+  const removeHistoryItem = useCallback(h => {
+    removeSearchHistory('home', h)
+    setSearchHistory(getSearchHistory('home'))
+  }, [])
 
   /* pull-to-refresh */
   const scrollRef = useRef(null)
@@ -145,14 +163,18 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div style={{ padding: '0 16px 12px' }}>
+        <div style={{ padding: '0 16px 12px', position: 'relative' }}>
           <div className="home-search-bar">
             <SearchIcon />
             <input
               className="home-search-input"
               type="search" inputMode="search"
               placeholder="작업일지, 정비팁 통합 검색..."
-              value={query} onChange={e => setQuery(e.target.value)}
+              value={query}
+              onChange={e => setQuery(e.target.value)}
+              onFocus={() => setSearchFocused(true)}
+              onBlur={() => setTimeout(() => setSearchFocused(false), 150)}
+              onKeyDown={e => { if (e.key === 'Enter') saveAndRefreshHistory(query) }}
             />
             {query && (
               <button className="search-clear" onClick={() => setQuery('')} aria-label="지우기">
@@ -160,6 +182,28 @@ export default function HomePage() {
               </button>
             )}
           </div>
+          {searchFocused && !query && searchHistory.length > 0 && (
+            <div style={{
+              position: 'absolute', left: 16, right: 16, top: '100%', zIndex: 200,
+              background: 'var(--surface)', border: '1px solid var(--divider)',
+              borderRadius: 12, boxShadow: '0 8px 24px rgba(0,0,0,0.12)', overflow: 'hidden'
+            }}>
+              {searchHistory.map((h, i) => (
+                <div
+                  key={i}
+                  style={{ display: 'flex', alignItems: 'center', padding: '10px 14px', borderBottom: i < searchHistory.length - 1 ? '1px solid var(--divider)' : 'none', cursor: 'pointer' }}
+                  onMouseDown={e => { e.preventDefault(); setQuery(h); setSearchFocused(false) }}
+                >
+                  <ClockIcon />
+                  <span style={{ flex: 1, marginLeft: 8, fontSize: 14, color: 'var(--text-primary)' }}>{h}</span>
+                  <button
+                    onMouseDown={e => { e.preventDefault(); e.stopPropagation(); removeHistoryItem(h) }}
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)', padding: '2px 6px', fontSize: 18, lineHeight: 1 }}
+                  >×</button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -385,6 +429,11 @@ function GearIcon() {
 function SearchIcon() {
   return <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" width={17} height={17}>
     <circle cx="11" cy="11" r="8"/><path strokeLinecap="round" d="M21 21l-4.35-4.35"/>
+  </svg>
+}
+function ClockIcon() {
+  return <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" width={14} height={14} style={{ flexShrink: 0, color: 'var(--text-secondary)' }}>
+    <circle cx="12" cy="12" r="10"/><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2"/>
   </svg>
 }
 function XIcon() {

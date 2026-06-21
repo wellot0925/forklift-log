@@ -26,7 +26,7 @@ export default function TipDetailPage() {
 
   if (loading) return (
     <div className="detail-page page-sub">
-      <Header title="정비팁 상세" showBack showHome />
+      <Header title="정비팁 상세" showBack />
       <div className="page-loader"><Spinner size="lg" /></div>
     </div>
   )
@@ -49,15 +49,7 @@ export default function TipDetailPage() {
 
   return (
     <div className="detail-page page-sub">
-      <Header
-        title="정비팁 상세"
-        showBack
-        showHome
-        actions={[
-          { label: 'PDF', icon: <PrintIcon />, onClick: handlePrint },
-          { label: '수정', icon: <EditIcon />, onClick: () => nav(`/tip/write/${id}`) },
-        ]}
-      />
+      <Header title="정비팁 상세" showBack />
 
       <div className="detail-content">
         {/* 날짜 + 작성자 */}

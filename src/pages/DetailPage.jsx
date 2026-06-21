@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useRecords } from '../hooks/useRecords.jsx'
+import { useToast } from '../hooks/useToast.jsx'
 import { useLightbox } from '../hooks/useLightbox.jsx'
 import { printRecord } from '../utils/pdf.js'
 import Header from '../components/Header.jsx'
@@ -10,10 +11,12 @@ import Disclaimer from '../components/Disclaimer.jsx'
 export default function DetailPage() {
   const { id } = useParams()
   const nav = useNavigate()
-  const { records, loading } = useRecords()
+  const { records, loading, remove } = useRecords()
+  const { toast } = useToast()
   const { open: openLightbox } = useLightbox()
 
   const [printing, setPrinting] = useState(false)
+  const [confirmDelete, setConfirmDelete] = useState(false)
 
   const record = records.find(r => r.id === id)
 
@@ -21,10 +24,16 @@ export default function DetailPage() {
     if (!loading && !record) nav('/', { replace: true })
   }, [loading, record, nav])
 
+  const handleDelete = () => {
+    remove(id)
+    nav('/', { replace: true })
+    toast('기록이 삭제되었습니다.', 'info')
+  }
+
   if (loading) {
     return (
       <div className="detail-page page-sub">
-        <Header title="상세 보기" showBack showHome />
+        <Header title="상세 보기" showBack />
         <div className="page-loader"><Spinner size="lg" /></div>
       </div>
     )
@@ -45,15 +54,7 @@ export default function DetailPage() {
 
   return (
     <div className="detail-page page-sub">
-      <Header
-        title="상세 보기"
-        showBack
-        showHome
-        actions={[
-          { label: 'PDF', icon: <PrintIcon />, onClick: handlePrint },
-          { label: '수정', icon: <EditIcon />, onClick: () => nav(`/write/${id}`) },
-        ]}
-      />
+      <Header title="상세 보기" showBack />
 
       <div className="detail-content">
         {/* 모델명 + 작성자/수정자 */}
@@ -114,11 +115,41 @@ export default function DetailPage() {
           </button>
         </div>
 
-        <div style={{ height: 16 }} />
+        {/* 삭제 */}
+        <div style={{ padding: '8px 0 0' }}>
+          {!confirmDelete ? (
+            <button
+              onClick={() => setConfirmDelete(true)}
+              style={{ width: '100%', padding: '12px', borderRadius: 12, border: '1px solid var(--danger)', background: 'transparent', color: 'var(--danger)', fontSize: 14, fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}
+            >
+              <TrashIcon /> 기록 삭제
+            </button>
+          ) : (
+            <div style={{ background: 'var(--danger-dim)', borderRadius: 12, padding: '14px 16px' }}>
+              <p style={{ margin: '0 0 12px', fontSize: 14, color: 'var(--danger)', fontWeight: 600, textAlign: 'center' }}>
+                정말 삭제할까요? 되돌릴 수 없습니다.
+              </p>
+              <div style={{ display: 'flex', gap: 8 }}>
+                <button
+                  onClick={() => setConfirmDelete(false)}
+                  style={{ flex: 1, padding: '10px', borderRadius: 10, border: '1px solid var(--border)', background: 'var(--surface)', color: 'var(--text-primary)', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}
+                >
+                  취소
+                </button>
+                <button
+                  onClick={handleDelete}
+                  style={{ flex: 1, padding: '10px', borderRadius: 10, border: 'none', background: 'var(--danger)', color: '#fff', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}
+                >
+                  삭제
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div style={{ height: 24 }} />
         <Disclaimer />
       </div>
-
-
     </div>
   )
 }

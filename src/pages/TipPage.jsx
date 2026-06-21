@@ -1,8 +1,9 @@
-import { useState, useMemo } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useCallback, useMemo } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useTips } from '../hooks/useTips.jsx'
 import { useLightbox } from '../hooks/useLightbox.jsx'
 import { printTip } from '../utils/pdf.js'
+import { getSearchHistory, addSearchHistory, removeSearchHistory } from '../utils/storage.js'
 import Spinner from '../components/Spinner.jsx'
 import Disclaimer from '../components/Disclaimer.jsx'
 import Highlight from '../utils/highlight.jsx'
@@ -12,7 +13,24 @@ export default function TipPage() {
   const { open: openLightbox } = useLightbox()
   const nav = useNavigate()
 
-  const [query, setQuery] = useState('')
+  const [searchParams, setSearchParams] = useSearchParams()
+  const query = searchParams.get('q') ?? ''
+  const setQuery = useCallback(v => setSearchParams(v ? { q: v } : {}, { replace: true }), [setSearchParams])
+
+  const [searchFocused, setSearchFocused] = useState(false)
+  const [searchHistory, setSearchHistory] = useState(() => getSearchHistory('tips'))
+
+  const saveAndRefreshHistory = useCallback(q => {
+    if (q.trim().length >= 2) {
+      addSearchHistory('tips', q.trim())
+      setSearchHistory(getSearchHistory('tips'))
+    }
+  }, [])
+
+  const removeHistoryItem = useCallback(h => {
+    removeSearchHistory('tips', h)
+    setSearchHistory(getSearchHistory('tips'))
+  }, [])
 
   const filtered = useMemo(() => {
     if (!query.trim()) return tips
@@ -50,16 +68,42 @@ export default function TipPage() {
       </div>
 
       {/* 검색 */}
-      <div style={{ padding: '0 16px 12px' }}>
+      <div style={{ padding: '0 16px 12px', position: 'relative' }}>
         <div className="home-search-bar">
           <SearchIcon />
           <input
             className="home-search-input"
             type="search" placeholder="팁 검색..."
-            value={query} onChange={e => setQuery(e.target.value)}
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            onFocus={() => setSearchFocused(true)}
+            onBlur={() => setTimeout(() => setSearchFocused(false), 150)}
+            onKeyDown={e => { if (e.key === 'Enter') saveAndRefreshHistory(query) }}
           />
           {query && <button className="search-clear" onClick={() => setQuery('')}><XIcon /></button>}
         </div>
+        {searchFocused && !query && searchHistory.length > 0 && (
+          <div style={{
+            position: 'absolute', left: 16, right: 16, top: '100%', zIndex: 200,
+            background: 'var(--surface)', border: '1px solid var(--divider)',
+            borderRadius: 12, boxShadow: '0 8px 24px rgba(0,0,0,0.12)', overflow: 'hidden'
+          }}>
+            {searchHistory.map((h, i) => (
+              <div
+                key={i}
+                style={{ display: 'flex', alignItems: 'center', padding: '10px 14px', borderBottom: i < searchHistory.length - 1 ? '1px solid var(--divider)' : 'none', cursor: 'pointer' }}
+                onMouseDown={e => { e.preventDefault(); setQuery(h); setSearchFocused(false) }}
+              >
+                <ClockIcon />
+                <span style={{ flex: 1, marginLeft: 8, fontSize: 14, color: 'var(--text-primary)' }}>{h}</span>
+                <button
+                  onMouseDown={e => { e.preventDefault(); e.stopPropagation(); removeHistoryItem(h) }}
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)', padding: '2px 6px', fontSize: 18, lineHeight: 1 }}
+                >×</button>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* 목록 */}
@@ -132,6 +176,11 @@ function PlusIcon() {
 function SearchIcon() {
   return <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" width={17} height={17}>
     <circle cx="11" cy="11" r="8"/><path strokeLinecap="round" d="M21 21l-4.35-4.35"/>
+  </svg>
+}
+function ClockIcon() {
+  return <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" width={14} height={14} style={{ flexShrink: 0, color: 'var(--text-secondary)' }}>
+    <circle cx="12" cy="12" r="10"/><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2"/>
   </svg>
 }
 function XIcon() {
