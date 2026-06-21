@@ -655,7 +655,7 @@ img { max-width: 100%; display: block; }
 .write-page {
   display: flex;
   flex-direction: column;
-  height: 100dvh;
+  height: calc(100dvh - var(--tab-h) - var(--safe-b));
   overflow: hidden;
 }
 
@@ -783,7 +783,6 @@ img { max-width: 100%; display: block; }
 
 .write-footer {
   padding: 14px 16px;
-  padding-bottom: calc(14px + var(--safe-b));
   background: var(--bg);
   border-top: 1px solid var(--divider);
 }

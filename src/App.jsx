@@ -23,12 +23,11 @@ function ScrollToTop() {
 
 function AppRoutes() {
   const location = useLocation()
-  const isSubPage = /^\/(detail\/|write|tip\/)/.test(location.pathname)
 
   return (
     <div className="app-wrapper">
       <ScrollToTop />
-      <main className={`main-content${isSubPage ? '' : ' with-tabbar'}`}>
+      <main className="main-content with-tabbar">
         <Routes location={location} key={location.pathname}>
           <Route path="/"           element={<HomePage />} />
           <Route path="/records"    element={<RecordsPage />} />
@@ -42,7 +41,7 @@ function AppRoutes() {
           <Route path="/settings"   element={<SettingsPage />} />
         </Routes>
       </main>
-      {!isSubPage && <TabBar />}
+      <TabBar />
     </div>
   )
 }
