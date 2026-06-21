@@ -66,7 +66,7 @@ export default function TipWritePage() {
 
   return (
     <div className="write-page page-sub">
-      <Header title={isEdit ? '정비팁 수정' : '정비팁 작성'} showBack={isEdit} showHome={isEdit} />
+      <Header title={isEdit ? '정비팁 수정' : '정비팁 작성'} showBack={isEdit} showHome />
 
       <div className="write-scroll">
         <form id="tip-write-form" onSubmit={handleSubmit} noValidate>
