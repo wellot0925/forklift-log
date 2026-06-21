@@ -74,19 +74,33 @@ export default function HomePage() {
     )
   }, [query, merged, isSearching])
 
-  const top3Symptoms = useMemo(() => {
-    const freq = {}
-    records.forEach(r => {
-      if (!r.symptoms) return
-      const key = r.symptoms.slice(0, 30).trim()
-      if (!freq[key]) freq[key] = { count: 0, id: r.id, model: r.model }
-      freq[key].count++
+  const KEYWORDS = [
+    '유압', '브레이크', '배터리', 'DPF', '엑슬',
+    '인젝터', '베어링', '실린더', '마스트', '냉각수',
+    '충전기', '미션', '타이어', '에어컨', '씰',
+    '호스', '오일', '부싱', '리튬', '킹핀',
+    '라디에이터', '워터펌프', '냉매', '스캔',
+  ]
+
+  const top5Keywords = useMemo(() => {
+    return KEYWORDS.map(kw => {
+      const kwLower = kw.toLowerCase()
+      let count = 0
+      records.forEach(r => {
+        const text = `${r.symptoms ?? ''} ${r.cause ?? ''} ${r.solution ?? ''}`.toLowerCase()
+        if (text.includes(kwLower)) count++
+      })
+      tips.forEach(t => {
+        const text = `${t.title ?? ''} ${t.content ?? ''}`.toLowerCase()
+        if (text.includes(kwLower)) count++
+      })
+      return { keyword: kw, count }
     })
-    return Object.entries(freq)
-      .sort((a, b) => b[1].count - a[1].count)
-      .slice(0, 3)
-      .map(([text, { count, id, model }]) => ({ text, count, id, model }))
-  }, [records])
+      .filter(k => k.count > 0)
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 5)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [records, tips])
 
   const unresolved = useMemo(() =>
     records.filter(r => r.unresolved || (!r.cause && !r.solution)),
@@ -252,16 +266,16 @@ export default function HomePage() {
               </Section>
             )}
 
-            {/* 자주 고장나는 증상 TOP3 */}
-            {top3Symptoms.length > 0 && (
-              <Section title="자주 고장나는 증상 TOP3">
-                {top3Symptoms.map(({ text, count, id, model }, i) => (
+            {/* 자주 언급되는 키워드 TOP5 */}
+            {top5Keywords.length > 0 && (
+              <Section title="자주 언급되는 키워드 TOP5">
+                {top5Keywords.map(({ keyword, count }, i) => (
                   <div key={i} className="dashboard-top-item"
                     style={{ cursor: 'pointer' }}
-                    onClick={() => { track(model); nav(`/detail/${id}`) }}
+                    onClick={() => setQuery(keyword)}
                   >
                     <span className="top-rank">{i + 1}</span>
-                    <span className="top-symptom">{text}</span>
+                    <span className="top-symptom">{keyword}</span>
                     <span className="top-count">{count}건</span>
                   </div>
                 ))}
