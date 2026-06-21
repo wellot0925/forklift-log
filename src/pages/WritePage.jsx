@@ -137,7 +137,7 @@ export default function WritePage() {
       <Header
         title={isEdit ? '기록 수정' : '새 작업 기록'}
         showBack={isEdit}
-        showHome
+        showHome={isEdit}
       />
 
       <div className="write-scroll" ref={formRef}>
