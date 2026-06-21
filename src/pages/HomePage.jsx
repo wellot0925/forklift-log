@@ -143,12 +143,6 @@ export default function HomePage() {
               <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 2 }}>용인중공업</p>
             </div>
           </div>
-          <button
-            style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--primary-dim)', color: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-            onClick={() => nav('/settings')} aria-label="설정"
-          >
-            <GearIcon />
-          </button>
         </div>
 
         <div style={{ padding: '0 16px 12px' }}>
@@ -231,7 +225,7 @@ export default function HomePage() {
             {/* 최근 작업 */}
             {merged.length > 0 && (
               <Section title="최근 작업">
-                {merged.slice(0, 4).map(item => (
+                {merged.slice(0, 2).map(item => (
                   <div key={item.id}
                     className="dashboard-unresolved-item"
                     style={{ cursor: 'pointer' }}
@@ -337,9 +331,19 @@ export default function HomePage() {
             )}
 
             {/* 전체 기록 */}
-            <Section title="전체 기록">
+            <Section
+              title="전체 기록"
+              action={
+                <button
+                  onClick={() => nav('/records')}
+                  style={{ fontSize: 12, color: 'var(--primary)', fontWeight: 700, padding: '2px 0' }}
+                >
+                  전체보기
+                </button>
+              }
+            >
               <div style={{ margin: '0 -16px' }}>
-                {merged.map(item =>
+                {merged.slice(0, 4).map(item =>
                   item._type === 'record'
                     ? <div key={item.id} onClick={() => track(item.model)} style={{ display: 'contents' }}>
                         <RecordCard record={item} onDelete={handleDelete} showTypeTag />
@@ -358,10 +362,13 @@ export default function HomePage() {
   )
 }
 
-function Section({ title, titleColor, children }) {
+function Section({ title, titleColor, action, children }) {
   return (
     <div style={{ padding: '0 16px', marginBottom: 20 }}>
-      <p className="section-home-title" style={titleColor ? { color: titleColor } : undefined}>{title}</p>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+        <p className="section-home-title" style={{ marginBottom: 0, ...(titleColor ? { color: titleColor } : {}) }}>{title}</p>
+        {action}
+      </div>
       {children}
     </div>
   )

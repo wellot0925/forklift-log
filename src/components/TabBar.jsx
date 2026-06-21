@@ -11,10 +11,11 @@ const menuBtnStyle = {
 }
 
 const TABS = [
-  { path: '/',        label: '홈',      icon: <HomeIcon /> },
-  { path: '/records', label: '작업일지', icon: <WorkLogIcon /> },
-  { path: null,       label: '추가',    icon: <PlusIcon />, fab: true },
-  { path: '/tips',    label: '정비팁',  icon: <TipIcon /> },
+  { path: '/',         label: '홈',      icon: <HomeIcon /> },
+  { path: '/records',  label: '작업일지', icon: <WorkLogIcon /> },
+  { path: null,        label: '추가',    icon: <PlusIcon />, fab: true },
+  { path: '/tips',     label: '정비팁',  icon: <TipIcon /> },
+  { path: '/settings', label: '설정',   icon: <SettingsIcon /> },
 ]
 
 export default function TabBar() {
@@ -67,7 +68,7 @@ export default function TabBar() {
                 onClick={() => setMenuOpen(v => !v)}
                 aria-label="추가"
               >
-                <span className="tab-write-btn">{tab.icon}</span>
+                <span className="tab-write-btn" style={{ width: 60, height: 60, marginTop: -14 }}>{tab.icon}</span>
                 <span className="tab-label">추가</span>
               </button>
             )
@@ -109,5 +110,11 @@ function PlusIcon() {
 function TipIcon() {
   return <svg fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+  </svg>
+}
+function SettingsIcon() {
+  return <svg fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="3"/>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
   </svg>
 }
