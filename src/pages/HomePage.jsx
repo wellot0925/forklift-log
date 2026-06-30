@@ -15,10 +15,10 @@ import bulletins from '../data/bulletin.json'
 const BULLETIN_LINK = 'https://service.doosan-iv.com:9443/bcs/bulletin/detailView.do?board_no='
 
 const SHORTCUTS = [
-  { label: '기술회보',   action: 'nav:/bulletins' },
-  { label: '정비지침서', action: 'nav:/drive?title=정비지침서&id=1FYNl0ecmjRISZVuP2nBLrjoQDmUoBy7E' },
-  { label: '챕터별정리', sublabel: '지침서', action: 'nav:/drive?title=챕터별정리&id=1tuU5bm7_yiwL9G7-zKpA6KxUZoOL8Yfb' },
-  { label: '부품목록',   action: 'nav:/drive?title=부품목록&id=14in1UfkFOWpauZ4HgrJO0Jwf-jyvOAin' },
+  { label: '기술회보',   nav: '/bulletins' },
+  { label: '정비지침서', drive: { id: '1FYNl0ecmjRISZVuP2nBLrjoQDmUoBy7E', title: '정비지침서' } },
+  { label: '챕터별정리', sublabel: '지침서', drive: { id: '1tuU5bm7_yiwL9G7-zKpA6KxUZoOL8Yfb', title: '챕터별정리' } },
+  { label: '부품목록',   drive: { id: '14in1UfkFOWpauZ4HgrJO0Jwf-jyvOAin', title: '부품목록' } },
 ]
 
 const PULL_THRESHOLD = 64
@@ -29,6 +29,8 @@ export default function HomePage() {
   const { tips, loading: tipsLoading } = useTips()
   const { toast } = useToast()
   const { viewed, track } = useViewedModels()
+
+  const [driveModal, setDriveModal] = useState(null) // { id, title } | null
 
   const [searchParams, setSearchParams] = useSearchParams()
   const query = searchParams.get('q') ?? ''
@@ -298,7 +300,7 @@ export default function HomePage() {
           /* ─── Dashboard ─── */
           <>
             {/* 단축 버튼 */}
-            <ShortcutGrid nav={nav} />
+            <ShortcutGrid nav={nav} onDrive={setDriveModal} />
 
             {merged.length === 0 ? <EmptyState type="home" /> : <>
 
@@ -439,27 +441,62 @@ export default function HomePage() {
         <Disclaimer />
       </div>
 
+      {/* 구글 드라이브 모달 */}
+      {driveModal && (
+        <div style={{
+          position: 'fixed', inset: 0, zIndex: 500,
+          display: 'flex', flexDirection: 'column',
+          background: 'var(--bg)',
+        }}>
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: 4,
+            height: 56, padding: '0 8px', flexShrink: 0,
+            borderBottom: '1px solid var(--divider)',
+            background: 'var(--bg-card)',
+          }}>
+            <button
+              onClick={() => setDriveModal(null)}
+              style={{
+                display: 'flex', alignItems: 'center', gap: 4,
+                height: 44, padding: '0 10px', border: 'none',
+                background: 'none', cursor: 'pointer',
+                color: 'var(--primary)', fontWeight: 700, fontSize: 15,
+              }}
+            >
+              <ChevronLeftIcon /> 닫기
+            </button>
+            <span style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-primary)' }}>
+              {driveModal.title}
+            </span>
+          </div>
+          <iframe
+            src={`https://drive.google.com/embeddedfolderview?id=${driveModal.id}#list`}
+            title={driveModal.title}
+            style={{ flex: 1, border: 'none', width: '100%', display: 'block' }}
+          />
+        </div>
+      )}
     </div>
   )
 }
 
-function ShortcutGrid({ nav }) {
-  const handle = action => {
-    if (!action) return
-    nav(action.slice(4))
+function ShortcutGrid({ nav, onDrive }) {
+  const handle = s => {
+    if (s.nav) nav(s.nav)
+    else if (s.drive) onDrive(s.drive)
   }
   return (
     <div style={{ padding: '8px 16px 16px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
       {SHORTCUTS.map(s => (
         <button
           key={s.label}
-          onClick={() => handle(s.action)}
-          disabled={!s.action}
+          onClick={() => handle(s)}
+          disabled={!s.nav && !s.drive}
           style={{
             padding: '16px 12px', background: 'var(--bg-card)',
             border: '1px solid var(--border)', borderRadius: 14,
             textAlign: 'center', cursor: s.action ? 'pointer' : 'default',
-            opacity: s.action ? 1 : 0.45,
+            opacity: (s.nav || s.drive) ? 1 : 0.45,
           }}
         >
           <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-primary)', display: 'block' }}>
@@ -468,7 +505,7 @@ function ShortcutGrid({ nav }) {
           {s.sublabel && (
             <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-secondary)', marginTop: 2, display: 'block' }}>{s.sublabel}</span>
           )}
-          {!s.action && (
+          {!s.nav && !s.drive && (
             <span style={{ fontSize: 10, color: 'var(--text-secondary)', marginTop: 3, display: 'block' }}>준비중</span>
           )}
         </button>
@@ -510,6 +547,11 @@ function ClockIcon() {
 function XIcon() {
   return <svg fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" width={12} height={12}>
     <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12"/>
+  </svg>
+}
+function ChevronLeftIcon() {
+  return <svg fill="none" stroke="currentColor" strokeWidth={2.2} viewBox="0 0 24 24" width={20} height={20}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"/>
   </svg>
 }
 function ForkliftIcon() {

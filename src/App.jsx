@@ -15,7 +15,6 @@ import TipDetailPage from './pages/TipDetailPage.jsx'
 import TipWritePage from './pages/TipWritePage.jsx'
 import SettingsPage from './pages/SettingsPage.jsx'
 import BulletinPage from './pages/BulletinPage.jsx'
-import DrivePage from './pages/DrivePage.jsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -41,7 +40,6 @@ function AppRoutes() {
           <Route path="/tip/write/:id" element={<TipWritePage />} />
           <Route path="/tip/:id"    element={<TipDetailPage />} />
           <Route path="/bulletins"  element={<BulletinPage />} />
-          <Route path="/drive"      element={<DrivePage />} />
           <Route path="/settings"   element={<SettingsPage />} />
         </Routes>
       </main>
