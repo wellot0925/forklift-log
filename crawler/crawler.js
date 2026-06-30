@@ -1,11 +1,6 @@
 /**
  * 두산 서비스포털 기술회보 크롤러
- *
- * 사용법:
- *   1. .env.example 복사 → .env 후 아이디/비번 입력
- *   2. npm install
- *   3. npm run crawl          (정상 실행)
- *      npm run debug          (HTML 원문 저장 → html_debug.html 확인 후 셀렉터 조정)
+ * HTML 구조를 자동 감지해서 파싱합니다.
  */
 
 import axios from 'axios'
@@ -14,50 +9,43 @@ import { CookieJar } from 'tough-cookie'
 import * as cheerio from 'cheerio'
 import * as fs from 'fs'
 import * as path from 'path'
-import * as https from 'https'
 import { fileURLToPath } from 'url'
 import dotenv from 'dotenv'
 
 dotenv.config()
 
-// ─── 설정 ─────────────────────────────────────────────────────────────────────
+// 자체 서명 SSL 인증서 허용 (9443 포트)
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 
-const BASE_URL     = 'https://service.doosan-iv.com:9443'
-const LOGIN_URL    = `${BASE_URL}/bcs/userLogin.do`
-
-// 목록 URL은 실제 포털 Network 탭에서 확인 필요 (아래는 추정값)
-// 게시판 탭 클릭 시 요청되는 URL을 그대로 넣으세요
-const LIST_URL     = `${BASE_URL}/bcs/bulletin/bulletinList.do`
-
-const DEBUG        = process.argv.includes('--debug')
-const __dir        = path.dirname(fileURLToPath(import.meta.url))
+const BASE_URL      = 'https://service.doosan-iv.com:9443'
+const LOGIN_URL     = `${BASE_URL}/bcs/userLogin.do`
+const DEBUG         = process.argv.includes('--debug')
+const __dir         = path.dirname(fileURLToPath(import.meta.url))
 const BULLETIN_JSON = path.resolve(__dir, '../src/data/bulletin.json')
-const OUTPUT_JSON  = path.resolve(__dir, 'new_bulletins.json')
+const OUTPUT_JSON   = path.resolve(__dir, 'new_bulletins.json')
 
-// ─── HTTP 클라이언트 (쿠키 자동 관리, SSL 자체서명 허용) ──────────────────────
+// ─── HTTP 클라이언트 ──────────────────────────────────────────────────────────
 
 const jar    = new CookieJar()
 const client = wrapper(axios.create({
   jar,
   withCredentials: true,
-  httpsAgent: new https.Agent({ rejectUnauthorized: false }), // 9443 자체서명 인증서 대응
   headers: {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36',
-    'Accept-Language': 'ko-KR,ko;q=0.9',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/126 Safari/537.36',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language': 'ko-KR,ko;q=0.9,en;q=0.5',
   },
-  timeout: 15000,
+  timeout: 20000,
   maxRedirects: 10,
 }))
 
-// ─── 공인 IP 조회 (externalIP 파라미터용) ────────────────────────────────────
+// ─── 공인 IP 조회 ─────────────────────────────────────────────────────────────
 
 async function getPublicIP() {
   try {
     const res = await axios.get('https://api.ipify.org?format=json', { timeout: 5000 })
     return res.data.ip ?? ''
-  } catch {
-    return ''
-  }
+  } catch { return '' }
 }
 
 // ─── 로그인 ──────────────────────────────────────────────────────────────────
@@ -65,16 +53,14 @@ async function getPublicIP() {
 async function login() {
   const id = process.env.DOOSAN_ID
   const pw = process.env.DOOSAN_PW
-
-  if (!id || !pw) {
-    throw new Error('.env 파일에 DOOSAN_ID, DOOSAN_PW를 입력하세요.')
-  }
+  if (!id || !pw) throw new Error('.env 파일에 DOOSAN_ID, DOOSAN_PW를 입력하세요.')
 
   console.log('🔐 로그인 중...')
   const externalIP = await getPublicIP()
+  console.log(`   공인 IP: ${externalIP}`)
 
   const body = new URLSearchParams({
-    mobile_yn:  'N',
+    mobile_yn: 'N',
     returnUrl:  '',
     pm1:        '',
     externalIP,
@@ -82,187 +68,263 @@ async function login() {
     txtPwd:     pw,
   })
 
-  const res = await client.post(LOGIN_URL, body.toString(), {
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-  })
+  let res
+  try {
+    res = await client.post(LOGIN_URL, body.toString(), {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    })
+  } catch (e) {
+    throw new Error(`로그인 요청 실패: ${e.message}`)
+  }
 
-  // 로그인 실패 감지: 응답 HTML에 로그인 폼이 다시 나타나면 실패
-  const responseUrl = res.request?.res?.responseUrl ?? ''
-  const html = typeof res.data === 'string' ? res.data : ''
+  const html = typeof res.data === 'string' ? res.data : JSON.stringify(res.data)
+  const finalUrl = res.request?.res?.responseUrl ?? ''
 
+  if (DEBUG) {
+    fs.writeFileSync(path.join(__dir, 'login_result.html'), html, 'utf-8')
+    console.log('🐛 DEBUG: login_result.html 저장됨')
+    console.log('   최종 URL:', finalUrl)
+  }
+
+  // 로그인 실패 감지
   if (
-    html.includes('txtUserID') ||         // 로그인 폼 재노출
+    html.includes('txtUserID') ||
     html.includes('로그인 정보가 없습니다') ||
-    responseUrl.includes('userLogin')
+    html.includes('아이디 또는 비밀번호') ||
+    finalUrl.includes('userLogin')
   ) {
-    throw new Error('로그인 실패 — 아이디/비밀번호를 확인하세요.')
+    throw new Error('로그인 실패 — 아이디/비밀번호 또는 externalIP 확인 필요')
   }
 
   console.log('✅ 로그인 성공')
-  if (DEBUG) console.log('   응답 URL:', responseUrl)
+  return html  // 로그인 후 이동하는 메인 페이지 HTML
 }
 
-// ─── 목록 페이지 가져오기 ────────────────────────────────────────────────────
+// ─── 기술회보 목록 URL 자동 탐색 ─────────────────────────────────────────────
 
-async function fetchListPage(page = 1) {
-  const res = await client.get(LIST_URL, {
-    params: {
-      pageIndex:           page,
-      recordCountPerPage:  20,
-      searchCondition:     '',
-      searchKeyword:       '',
-    },
+// 포털 내 기술회보 링크 패턴으로 목록 URL 추정
+const LIST_URL_CANDIDATES = [
+  `${BASE_URL}/bcs/bulletin/bulletinList.do`,
+  `${BASE_URL}/bcs/bulletin/list.do`,
+  `${BASE_URL}/bcs/bulletin/selectBulletinList.do`,
+  `${BASE_URL}/bcs/board/bulletinList.do`,
+]
+
+async function findListUrl(mainHtml) {
+  // 메인 페이지에서 기술회보 메뉴 링크 추출 시도
+  const $ = cheerio.load(mainHtml)
+  const links = []
+  $('a[href]').each((_, el) => {
+    const href = $(el).attr('href') ?? ''
+    const text = $(el).text()
+    if (/bulletin|기술회보/i.test(href + text)) {
+      const full = href.startsWith('http') ? href : BASE_URL + (href.startsWith('/') ? '' : '/bcs/') + href
+      links.push(full)
+    }
   })
-
-  if (DEBUG && page === 1) {
-    fs.writeFileSync(path.join(__dir, 'html_debug.html'), res.data ?? '', 'utf-8')
-    console.log('🐛 DEBUG: html_debug.html 저장됨 — 셀렉터 확인 후 parseBulletins() 수정')
+  if (links.length > 0) {
+    console.log('   메인 페이지에서 기술회보 링크 발견:', links[0])
+    return links[0]
   }
 
-  return res.data
+  // 후보 URL 순차 시도
+  for (const url of LIST_URL_CANDIDATES) {
+    try {
+      const res = await client.get(url, { params: { pageIndex: 1 } })
+      const html = res.data ?? ''
+      if (typeof html === 'string' && html.length > 500 && !html.includes('userLogin')) {
+        console.log('   목록 URL 발견:', url)
+        return url
+      }
+    } catch { /* 계속 시도 */ }
+  }
+
+  return null
 }
 
-// ─── HTML 파싱 ───────────────────────────────────────────────────────────────
-//
-// ⚠️  아래 셀렉터는 추정값입니다.
-//     --debug 옵션으로 html_debug.html 을 먼저 저장한 뒤,
-//     실제 구조에 맞게 수정하세요.
-//
-//     일반적인 전자정부 프레임워크 게시판 구조:
-//     <table> → <tbody> → <tr>
-//       <td> 번호 </td>
-//       <td> <a href="?board_no=XXX">제목</a> </td>
-//       <td> 카테고리 </td>
-//       <td> 작성자 </td>
-//       <td> 날짜 </td>
-//     </tr>
+// ─── 자동 셀렉터 감지 + HTML 파싱 ────────────────────────────────────────────
 
-function parseBulletins(html) {
+function autoDetectAndParse(html) {
   const $ = cheerio.load(html)
-  const items = []
+  const results = []
 
-  // 셀렉터 1순위: 일반 테이블 구조
-  $('table tbody tr').each((_, tr) => {
-    const tds = $(tr).find('td')
-    if (tds.length < 3) return
+  // 전략 1: detailView.do?board_no= 링크가 있는 행 직접 탐색
+  $('a[href*="detailView"], a[href*="board_no"], a[onclick*="board_no"]').each((_, el) => {
+    const href    = $(el).attr('href') ?? ''
+    const onclick = $(el).attr('onclick') ?? ''
+    const src     = href + onclick
 
-    // board_no 추출 — 링크 href 또는 onclick 속성에서
-    let board_no = ''
-    const link = $(tds).find('a').first()
-    const href  = link.attr('href') ?? ''
-    const onclick = link.attr('onclick') ?? $(tds[1]).attr('onclick') ?? ''
+    const m = src.match(/board_no[=,\s'"]*(\d+)/)
+    if (!m) return
+    const board_no = Number(m[1])
+    if (board_no === 0) return
 
-    const matchHref    = href.match(/board_no=(\d+)/)
-    const matchOnclick = onclick.match(/(\d{5,})/)  // 5자리 이상 숫자
-    board_no = matchHref?.[1] ?? matchOnclick?.[1] ?? ''
+    // 이 링크의 부모 tr을 찾아서 셀 데이터 추출
+    const tr   = $(el).closest('tr')
+    const tds  = tr.find('td')
+    if (tds.length < 2) return
 
-    if (!board_no) return
+    const title = $(el).text().trim() || $(tds[1]).text().trim()
+    if (!title || title.length < 2) return
 
-    items.push({
-      board_no:  Number(board_no),
-      title:     link.text().trim() || $(tds[1]).text().trim(),
-      category:  $(tds[2]).text().trim(),
-      ref_no:    $(tds[3])?.text().trim() ?? '',
-      author:    $(tds[4])?.text().trim() ?? '',
-      date:      $(tds[5])?.text().trim() ?? '',
-      views:     Number($(tds[6])?.text().trim()) || 0,
+    results.push({
+      board_no,
+      title,
+      category: $(tds[0]).text().trim(),
+      ref_no:   '',
+      author:   $(tds[tds.length - 2])?.text().trim() ?? '',
+      date:     $(tds[tds.length - 1])?.text().trim() ?? '',
+      views:    0,
     })
   })
 
-  return items
+  if (results.length > 0) {
+    console.log(`   전략1 성공: ${results.length}건 파싱`)
+    return results
+  }
+
+  // 전략 2: 일반 테이블 행에서 숫자 board_no 추출 시도
+  $('table tr').each((_, tr) => {
+    const tds = $(tr).find('td')
+    if (tds.length < 4) return
+
+    // href 또는 onclick에서 숫자 ID 추출
+    let board_no = 0
+    $(tr).find('a').each((_, a) => {
+      const m = ($(a).attr('href') ?? '' + $(a).attr('onclick') ?? '').match(/(\d{4,})/)
+      if (m) board_no = Number(m[1])
+    })
+    if (board_no === 0) return
+
+    const title = $(tds[1])?.text().trim() || $(tds[0]).text().trim()
+    if (!title || /번호|제목|카테고리/.test(title)) return  // 헤더 행 스킵
+
+    results.push({
+      board_no,
+      title,
+      category: $(tds[0]).text().trim(),
+      ref_no:   '',
+      author:   $(tds[tds.length - 2])?.text().trim() ?? '',
+      date:     $(tds[tds.length - 1])?.text().trim() ?? '',
+      views:    0,
+    })
+  })
+
+  if (results.length > 0) {
+    console.log(`   전략2 성공: ${results.length}건 파싱`)
+  }
+
+  return results
 }
 
-// ─── 마지막 페이지 감지 ──────────────────────────────────────────────────────
-
+// 마지막 페이지 감지
 function isLastPage(html) {
   const $ = cheerio.load(html)
-  // 페이지네이션에 "다음" 버튼이 없으면 마지막 페이지
-  const nextBtn = $('a').filter((_, el) => /다음|next/i.test($(el).text()))
-  return nextBtn.length === 0
+  // 다음 페이지 버튼이 없거나 비활성화
+  const hasNext = $('a, button').filter((_, el) =>
+    /다음|next|>/i.test($(el).text()) && !$(el).hasClass('disabled')
+  ).length > 0
+  return !hasNext
 }
 
 // ─── 기존 데이터 로드 ────────────────────────────────────────────────────────
 
-function loadExistingData() {
+function loadExistingNos() {
   if (!fs.existsSync(BULLETIN_JSON)) return new Set()
   const data = JSON.parse(fs.readFileSync(BULLETIN_JSON, 'utf-8'))
   return new Set(data.map(b => Number(b.board_no)))
 }
 
-// ─── 메인 크롤링 로직 ────────────────────────────────────────────────────────
+// ─── 메인 ────────────────────────────────────────────────────────────────────
 
 async function crawl() {
-  // 환경 변수 확인
   if (!process.env.DOOSAN_ID) {
-    console.error('❌ .env 파일이 없습니다. .env.example을 복사해서 만드세요.')
+    console.error('❌ .env 파일을 확인하세요.')
     process.exit(1)
   }
 
-  await login()
+  const mainHtml  = await login()
+  const listUrl   = await findListUrl(mainHtml)
 
-  const existingNos = loadExistingData()
+  if (!listUrl) {
+    console.error('❌ 기술회보 목록 URL을 찾지 못했습니다.')
+    console.error('   로그인 후 기술회보 게시판 페이지를 Network 탭에서 직접 확인해주세요.')
+    process.exit(1)
+  }
+
+  const existingNos = loadExistingNos()
   console.log(`📚 기존 데이터: ${existingNos.size}건`)
 
   const newBulletins = []
   let page = 1
   let stop = false
 
-  while (!stop && page <= 50) {  // 최대 50페이지 안전장치
-    console.log(`📄 ${page}페이지 크롤링 중...`)
-    const html = await fetchListPage(page)
-    const items = parseBulletins(html)
+  while (!stop && page <= 30) {
+    console.log(`📄 ${page}페이지 크롤링 중... (URL: ${listUrl})`)
+
+    let html
+    try {
+      const res = await client.get(listUrl, {
+        params: { pageIndex: page, recordCountPerPage: 20, searchCondition: '', searchKeyword: '' },
+      })
+      html = res.data ?? ''
+    } catch (e) {
+      console.error(`   페이지 로드 실패: ${e.message}`)
+      break
+    }
+
+    if (DEBUG && page === 1) {
+      fs.writeFileSync(path.join(__dir, 'html_debug.html'), html, 'utf-8')
+      console.log('🐛 DEBUG: html_debug.html 저장됨')
+    }
+
+    if (typeof html !== 'string' || html.length < 100) {
+      console.log('   빈 응답 — 중단')
+      break
+    }
+
+    const items = autoDetectAndParse(html)
 
     if (items.length === 0) {
-      console.log('   → 파싱 결과 없음 (--debug 옵션으로 HTML 구조 확인 필요)')
+      console.log('   파싱 결과 없음 — 중단')
+      if (DEBUG) fs.writeFileSync(path.join(__dir, `page${page}.html`), html, 'utf-8')
       break
     }
 
     for (const item of items) {
       if (existingNos.has(item.board_no)) {
-        // 기존 데이터와 겹치는 순간 중단 (최신순 정렬 가정)
         stop = true
         break
       }
       newBulletins.push(item)
     }
 
-    if (isLastPage(html)) break
+    if (!stop && isLastPage(html)) break
     page++
 
-    // 서버 부하 방지: 요청 사이 0.5초 대기
-    await new Promise(r => setTimeout(r, 500))
+    await new Promise(r => setTimeout(r, 600))
   }
 
-  // ─── 결과 출력 ────────────────────────────────────────────────────────────
+  // ─── 결과 ────────────────────────────────────────────────────────────────
 
   console.log(`\n✨ 새 글: ${newBulletins.length}건`)
 
   if (newBulletins.length === 0) {
-    console.log('   새 기술회보가 없습니다.')
+    console.log('새 기술회보가 없습니다.')
     return
   }
 
-  // new_bulletins.json 저장 (확인용)
   fs.writeFileSync(OUTPUT_JSON, JSON.stringify(newBulletins, null, 2), 'utf-8')
-  console.log(`💾 ${OUTPUT_JSON} 저장 완료`)
+  console.log(`💾 new_bulletins.json 저장 완료`)
 
-  // bulletin.json 자동 업데이트 여부 선택 안내
-  console.log('\n─────────────────────────────────────────')
-  console.log('다음 중 원하는 방식을 선택하세요:')
-  console.log('  A) new_bulletins.json 확인 후 수동으로 bulletin.json에 붙여넣기')
-  console.log('  B) 아래 명령으로 bulletin.json 자동 병합:')
-  console.log('     node merge.js')
-  console.log('─────────────────────────────────────────')
-
-  // 간단 미리보기
-  console.log('\n새 글 미리보기 (최대 5건):')
-  newBulletins.slice(0, 5).forEach(b => {
-    console.log(`  [${b.board_no}] ${b.category} | ${b.title}`)
-  })
+  console.log('\n새 글 미리보기 (최대 10건):')
+  newBulletins.slice(0, 10).forEach(b =>
+    console.log(`  [${b.board_no}] ${b.category || '-'} | ${b.title}`)
+  )
 }
 
 crawl().catch(err => {
   console.error('❌ 오류:', err.message)
-  if (DEBUG) console.error(err)
+  if (DEBUG) console.error(err.stack)
   process.exit(1)
 })
