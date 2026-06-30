@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useCallback, useRef, useEffect } from 'react'
+import PhotoAnnotator from '../components/PhotoAnnotator.jsx'
 
 const Ctx = createContext(null)
 
@@ -108,17 +109,20 @@ function ZoomableImage({ src }) {
 }
 
 export function LightboxProvider({ children }) {
-  const [state, setState] = useState(null) // { photos: [], idx: number }
+  const [state, setState] = useState(null) // { photos: [], idx: number, opts: {} }
+  const [annotating, setAnnotating] = useState(false)
   const pushedState = useRef(false)
 
-  const open = useCallback((photos, idx) => {
-    setState({ photos, idx })
+  const open = useCallback((photos, idx, opts = {}) => {
+    setState({ photos, idx, opts })
+    setAnnotating(false)
     history.pushState({ lightbox: true }, '')
     pushedState.current = true
   }, [])
 
   const close = useCallback(() => {
     setState(null)
+    setAnnotating(false)
     if (pushedState.current) {
       pushedState.current = false
       history.back()
@@ -142,7 +146,7 @@ export function LightboxProvider({ children }) {
     <Ctx.Provider value={{ open, close }}>
       {children}
 
-      {state && (
+      {state && !annotating && (
         <div
           style={{
             position: 'fixed', inset: 0, zIndex: 99999,
@@ -175,6 +179,25 @@ export function LightboxProvider({ children }) {
             핀치 또는 더블탭으로 확대
           </div>
 
+          {/* 그리기 버튼 */}
+          {state.opts?.onSave && (
+            <button
+              onClick={e => { e.stopPropagation(); setAnnotating(true) }}
+              style={{
+                position: 'absolute',
+                bottom: state.photos.length > 1 ? 72 : 30,
+                left: '50%', transform: 'translateX(-50%)',
+                padding: '9px 22px', borderRadius: 22,
+                background: 'rgba(255,255,255,0.15)',
+                color: '#fff', fontSize: 14, fontWeight: 700,
+                border: '1.5px solid rgba(255,255,255,0.35)',
+                cursor: 'pointer', whiteSpace: 'nowrap',
+              }}
+            >
+              ✏️ 그리기
+            </button>
+          )}
+
           {/* 점 네비게이션 */}
           {state.photos.length > 1 && (
             <div style={{
@@ -195,6 +218,20 @@ export function LightboxProvider({ children }) {
             </div>
           )}
         </div>
+      )}
+
+      {state && annotating && (
+        <PhotoAnnotator
+          src={state.photos[state.idx]}
+          onClose={() => setAnnotating(false)}
+          onSave={async dataUrl => {
+            if (state.opts?.onSave) {
+              await state.opts.onSave(state.idx, dataUrl)
+            }
+            setAnnotating(false)
+            close()
+          }}
+        />
       )}
     </Ctx.Provider>
   )
