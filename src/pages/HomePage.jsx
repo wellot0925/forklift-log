@@ -10,6 +10,16 @@ import TipListCard from '../components/TipListCard.jsx'
 import EmptyState from '../components/EmptyState.jsx'
 import Spinner from '../components/Spinner.jsx'
 import Disclaimer from '../components/Disclaimer.jsx'
+import bulletins from '../data/bulletin.json'
+
+const BULLETIN_LINK = 'https://service.doosan-iv.com:9443/bcs/bulletin/detailView.do?board_no='
+
+const SHORTCUTS = [
+  { label: '기술회보',   action: 'nav:/bulletins' },
+  { label: '정비지침서', action: 'open:https://drive.google.com/drive/folders/1tuU5bm7_yiwL9G7-zKpA6KxUZoOL8Yfb?usp=drive_link' },
+  { label: '챕터별정리', action: null }, // TODO: 링크 추가 예정
+  { label: '부품목록',   action: 'open:https://drive.google.com/drive/folders/14in1UfkFOWpauZ4HgrJO0Jwf-jyvOAin?usp=drive_link' },
+]
 
 const PULL_THRESHOLD = 64
 
@@ -92,6 +102,16 @@ export default function HomePage() {
     )
   }, [query, merged, isSearching])
 
+  const filteredBulletins = useMemo(() => {
+    if (!isSearching) return []
+    const q = query.toLowerCase()
+    return bulletins.filter(b =>
+      b.title.toLowerCase().includes(q) ||
+      (b.ref_no && b.ref_no.toLowerCase().includes(q)) ||
+      b.category.toLowerCase().includes(q)
+    ).slice(0, 30)
+  }, [query, isSearching])
+
   const KEYWORDS = [
     '유압', '브레이크', '배터리', 'DPF', '엑슬',
     '인젝터', '베어링', '실린더', '마스트', '냉각수',
@@ -134,7 +154,6 @@ export default function HomePage() {
     [records]
   )
 
-  const uniqueModels = new Set(records.map(r => r.model)).size
   const fmt = iso => {
     const d = new Date(iso)
     return `${d.getFullYear()}.${pad(d.getMonth()+1)}.${pad(d.getDate())}`
@@ -169,7 +188,7 @@ export default function HomePage() {
             <input
               className="home-search-input"
               type="search" inputMode="search"
-              placeholder="작업일지, 정비팁 통합 검색..."
+              placeholder="작업일지, 정비팁, 기술회보 통합 검색..."
               value={query}
               onChange={e => setQuery(e.target.value)}
               onFocus={() => setSearchFocused(true)}
@@ -227,44 +246,61 @@ export default function HomePage() {
         ) : isSearching ? (
           /* ─── Search results ─── */
           <>
-            {filtered.length > 0
+            {filtered.length + filteredBulletins.length > 0
               ? <>
-                  <p className="search-meta">{filtered.length}건의 결과</p>
-                  <div className="records-list">
-                    {filtered.map(item =>
-                      item._type === 'record'
-                        ? <div key={item.id} onClick={() => track(item.model)} style={{ display: 'contents' }}>
-                            <RecordCard record={item} onDelete={handleDelete} showTypeTag query={query} />
+                  <p className="search-meta">{filtered.length + filteredBulletins.length}건의 결과</p>
+                  {filtered.length > 0 && (
+                    <div className="records-list">
+                      {filtered.map(item =>
+                        item._type === 'record'
+                          ? <div key={item.id} onClick={() => track(item.model)} style={{ display: 'contents' }}>
+                              <RecordCard record={item} onDelete={handleDelete} showTypeTag query={query} />
+                            </div>
+                          : <TipListCard key={item.id} tip={item} query={query} />
+                      )}
+                    </div>
+                  )}
+                  {filteredBulletins.length > 0 && (
+                    <div style={{ padding: '0 16px' }}>
+                      {filtered.length > 0 && (
+                        <p style={{ fontSize: 12, color: 'var(--text-secondary)', margin: '4px 0 8px', fontWeight: 600 }}>기술회보</p>
+                      )}
+                      {filteredBulletins.map(b => (
+                        <button
+                          key={b.board_no}
+                          onClick={() => window.open(BULLETIN_LINK + b.board_no, '_blank', 'noopener,noreferrer')}
+                          style={{
+                            display: 'block', width: '100%', textAlign: 'left',
+                            background: 'var(--bg-card)', border: '1px solid var(--border)',
+                            borderRadius: 12, padding: '10px 14px', marginBottom: 8, cursor: 'pointer',
+                          }}
+                        >
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                            <span style={{ fontSize: 11, fontWeight: 700, padding: '2px 7px', borderRadius: 6, background: 'rgba(59,130,246,0.12)', color: 'var(--primary)', whiteSpace: 'nowrap' }}>
+                              {b.category}
+                            </span>
+                            {b.ref_no && <span style={{ fontSize: 11, color: 'var(--text-secondary)', fontWeight: 600 }}>{b.ref_no}</span>}
                           </div>
-                        : <TipListCard key={item.id} tip={item} query={query} />
-                    )}
-                  </div>
+                          <p style={{ margin: '0 0 4px', fontSize: 14, fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.4 }}>{b.title}</p>
+                          <div style={{ display: 'flex', gap: 10, fontSize: 12, color: 'var(--text-secondary)' }}>
+                            <span>{b.author}</span>
+                            <span>{b.date.slice(0, 10)}</span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </>
               : <EmptyState type="search" />
             }
           </>
-        ) : merged.length === 0 ? (
-          <EmptyState type="home" />
         ) : (
           /* ─── Dashboard ─── */
           <>
-            {/* Stats */}
-            <div className="stats-strip">
-              <div className="stat-card">
-                <div className="stat-value">{records.length + tips.length}</div>
-                <div className="stat-label">전체 기록</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-value">{uniqueModels}</div>
-                <div className="stat-label">모델 수</div>
-              </div>
-              <div className="stat-card" style={unresolved.length > 0 ? { borderTop: '2px solid var(--danger)' } : undefined}>
-                <div className="stat-value" style={unresolved.length > 0 ? { color: 'var(--danger)' } : undefined}>
-                  {unresolved.length}
-                </div>
-                <div className="stat-label">미해결</div>
-              </div>
-            </div>
+            {/* 단축 버튼 */}
+            <ShortcutGrid nav={nav} />
+
+            {merged.length === 0 ? <EmptyState type="home" /> : <>
 
             {/* 최근 작업 */}
             {merged.length > 0 && (
@@ -397,11 +433,44 @@ export default function HomePage() {
               </div>
             </Section>
             <div style={{ height: 8 }} />
+            </>}
           </>
         )}
         <Disclaimer />
       </div>
 
+    </div>
+  )
+}
+
+function ShortcutGrid({ nav }) {
+  const handle = action => {
+    if (!action) return
+    if (action.startsWith('nav:')) nav(action.slice(4))
+    else window.open(action.slice(5), '_blank', 'noopener,noreferrer')
+  }
+  return (
+    <div style={{ padding: '8px 16px 16px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+      {SHORTCUTS.map(s => (
+        <button
+          key={s.label}
+          onClick={() => handle(s.action)}
+          disabled={!s.action}
+          style={{
+            padding: '16px 12px', background: 'var(--bg-card)',
+            border: '1px solid var(--border)', borderRadius: 14,
+            textAlign: 'center', cursor: s.action ? 'pointer' : 'default',
+            opacity: s.action ? 1 : 0.45,
+          }}
+        >
+          <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-primary)', display: 'block' }}>
+            {s.label}
+          </span>
+          {!s.action && (
+            <span style={{ fontSize: 10, color: 'var(--text-secondary)', marginTop: 3, display: 'block' }}>준비중</span>
+          )}
+        </button>
+      ))}
     </div>
   )
 }
