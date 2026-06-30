@@ -17,7 +17,7 @@ const BULLETIN_LINK = 'https://service.doosan-iv.com:9443/bcs/bulletin/detailVie
 const SHORTCUTS = [
   { label: '기술회보',   action: 'nav:/bulletins' },
   { label: '정비지침서', action: 'open:https://drive.google.com/drive/folders/1tuU5bm7_yiwL9G7-zKpA6KxUZoOL8Yfb?usp=drive_link' },
-  { label: '챕터별정리', action: null }, // TODO: 링크 추가 예정
+  { label: '지침서', sublabel: '챕터별정리', action: 'open:https://drive.google.com/drive/folders/1tuU5bm7_yiwL9G7-zKpA6KxUZoOL8Yfb?usp=drive_link' },
   { label: '부품목록',   action: 'open:https://drive.google.com/drive/folders/14in1UfkFOWpauZ4HgrJO0Jwf-jyvOAin?usp=drive_link' },
 ]
 
@@ -466,6 +466,9 @@ function ShortcutGrid({ nav }) {
           <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-primary)', display: 'block' }}>
             {s.label}
           </span>
+          {s.sublabel && (
+            <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-secondary)', marginTop: 2, display: 'block' }}>{s.sublabel}</span>
+          )}
           {!s.action && (
             <span style={{ fontSize: 10, color: 'var(--text-secondary)', marginTop: 3, display: 'block' }}>준비중</span>
           )}
