@@ -1,3 +1,8 @@
+﻿# UTF-8 콘솔 출력 설정
+[Console]::OutputEncoding = [System.Text.UTF8Encoding]::new($false)
+$OutputEncoding = [System.Text.UTF8Encoding]::new($false)
+chcp 65001 | Out-Null
+
 Set-Location $PSScriptRoot
 
 Write-Host ""
@@ -11,6 +16,7 @@ node crawler.js
 if ($LASTEXITCODE -ne 0) {
     Write-Host ""
     Write-Host "크롤링 실패. 위 오류를 확인하세요." -ForegroundColor Red
+    Write-Host "main_page.html 파일이 저장되었으면 브라우저로 열어서 기술회보 URL을 찾아주세요." -ForegroundColor Yellow
     Read-Host "엔터를 누르면 닫힙니다"
     exit 1
 }
