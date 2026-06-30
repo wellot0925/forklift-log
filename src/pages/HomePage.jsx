@@ -16,9 +16,9 @@ const BULLETIN_LINK = 'https://service.doosan-iv.com:9443/bcs/bulletin/detailVie
 
 const SHORTCUTS = [
   { label: '기술회보',   nav: '/bulletins' },
-  { label: '정비지침서', drive: { id: '1FYNl0ecmjRISZVuP2nBLrjoQDmUoBy7E', title: '정비지침서' } },
-  { label: '챕터별정리', sublabel: '지침서', drive: { id: '1tuU5bm7_yiwL9G7-zKpA6KxUZoOL8Yfb', title: '챕터별정리' } },
-  { label: '부품목록',   drive: { id: '14in1UfkFOWpauZ4HgrJO0Jwf-jyvOAin', title: '부품목록' } },
+  { label: '정비지침서', url: 'https://drive.google.com/drive/folders/1FYNl0ecmjRISZVuP2nBLrjoQDmUoBy7E?usp=drive_link' },
+  { label: '챕터별정리', sublabel: '지침서', url: 'https://drive.google.com/drive/folders/1tuU5bm7_yiwL9G7-zKpA6KxUZoOL8Yfb?usp=drive_link' },
+  { label: '부품목록',   url: 'https://drive.google.com/drive/folders/14in1UfkFOWpauZ4HgrJO0Jwf-jyvOAin?usp=drive_link' },
 ]
 
 const PULL_THRESHOLD = 64
@@ -29,8 +29,6 @@ export default function HomePage() {
   const { tips, loading: tipsLoading } = useTips()
   const { toast } = useToast()
   const { viewed, track } = useViewedModels()
-
-  const [driveModal, setDriveModal] = useState(null) // { id, title } | null
 
   const [searchParams, setSearchParams] = useSearchParams()
   const query = searchParams.get('q') ?? ''
@@ -300,7 +298,7 @@ export default function HomePage() {
           /* ─── Dashboard ─── */
           <>
             {/* 단축 버튼 */}
-            <ShortcutGrid nav={nav} onDrive={setDriveModal} />
+            <ShortcutGrid nav={nav} />
 
             {merged.length === 0 ? <EmptyState type="home" /> : <>
 
@@ -441,49 +439,14 @@ export default function HomePage() {
         <Disclaimer />
       </div>
 
-      {/* 구글 드라이브 모달 */}
-      {driveModal && (
-        <div style={{
-          position: 'fixed', inset: 0, zIndex: 500,
-          display: 'flex', flexDirection: 'column',
-          background: 'var(--bg)',
-        }}>
-          <div style={{
-            display: 'flex', alignItems: 'center', gap: 4,
-            height: 56, padding: '0 8px', flexShrink: 0,
-            borderBottom: '1px solid var(--divider)',
-            background: 'var(--bg-card)',
-          }}>
-            <button
-              onClick={() => setDriveModal(null)}
-              style={{
-                display: 'flex', alignItems: 'center', gap: 4,
-                height: 44, padding: '0 10px', border: 'none',
-                background: 'none', cursor: 'pointer',
-                color: 'var(--primary)', fontWeight: 700, fontSize: 15,
-              }}
-            >
-              <ChevronLeftIcon /> 닫기
-            </button>
-            <span style={{ fontSize: 16, fontWeight: 700, color: 'var(--text-primary)' }}>
-              {driveModal.title}
-            </span>
-          </div>
-          <iframe
-            src={`https://drive.google.com/embeddedfolderview?id=${driveModal.id}#list`}
-            title={driveModal.title}
-            style={{ flex: 1, border: 'none', width: '100%', display: 'block' }}
-          />
-        </div>
-      )}
     </div>
   )
 }
 
-function ShortcutGrid({ nav, onDrive }) {
+function ShortcutGrid({ nav }) {
   const handle = s => {
     if (s.nav) nav(s.nav)
-    else if (s.drive) onDrive(s.drive)
+    else if (s.url) window.open(s.url, '_blank', 'noopener,noreferrer')
   }
   return (
     <div style={{ padding: '8px 16px 16px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
@@ -491,12 +454,12 @@ function ShortcutGrid({ nav, onDrive }) {
         <button
           key={s.label}
           onClick={() => handle(s)}
-          disabled={!s.nav && !s.drive}
+          disabled={!s.nav && !s.url}
           style={{
             padding: '16px 12px', background: 'var(--bg-card)',
             border: '1px solid var(--border)', borderRadius: 14,
-            textAlign: 'center', cursor: s.action ? 'pointer' : 'default',
-            opacity: (s.nav || s.drive) ? 1 : 0.45,
+            textAlign: 'center', cursor: (s.nav || s.url) ? 'pointer' : 'default',
+            opacity: (s.nav || s.url) ? 1 : 0.45,
           }}
         >
           <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--text-primary)', display: 'block' }}>
@@ -505,7 +468,7 @@ function ShortcutGrid({ nav, onDrive }) {
           {s.sublabel && (
             <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-secondary)', marginTop: 2, display: 'block' }}>{s.sublabel}</span>
           )}
-          {!s.nav && !s.drive && (
+          {!s.nav && !s.url && (
             <span style={{ fontSize: 10, color: 'var(--text-secondary)', marginTop: 3, display: 'block' }}>준비중</span>
           )}
         </button>
