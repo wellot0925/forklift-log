@@ -214,9 +214,7 @@ export default function WritePage() {
               rows={3}
               value={form.solution}
               onChange={e => set('solution', e.target.value)}
-              disabled={form.unresolved}
               data-error={errors.solution || undefined}
-              style={form.unresolved ? { opacity: 0.4 } : undefined}
             />
             {errors.solution && <p className="field-error">{errors.solution}</p>}
           </div>
