@@ -12,7 +12,7 @@ import Disclaimer from '../components/Disclaimer.jsx'
 export default function DetailPage() {
   const { id } = useParams()
   const nav = useNavigate()
-  const { records, loading, remove, update } = useRecords()
+  const { records, loading, remove } = useRecords()
   const { toast } = useToast()
   const { open: openLightbox } = useLightbox()
 
@@ -104,13 +104,7 @@ export default function DetailPage() {
             </div>
             <div className="photo-grid">
               {record.photos.map((src, i) => (
-                <div key={i} className="photo-grid-item" onClick={() => openLightbox(record.photos, i, {
-                  onSave: async (photoIdx, dataUrl) => {
-                    const newPhotos = record.photos.map((p, pi) => pi === photoIdx ? dataUrl : p)
-                    await update(id, { ...record, photos: newPhotos })
-                    toast('사진이 저장되었습니다.', 'success')
-                  },
-                })}>
+                <div key={i} className="photo-grid-item" onClick={() => openLightbox(record.photos, i)}>
                   <img src={src} alt={`사진 ${i+1}`} />
                 </div>
               ))}

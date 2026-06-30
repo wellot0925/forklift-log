@@ -12,7 +12,7 @@ import Disclaimer from '../components/Disclaimer.jsx'
 export default function TipDetailPage() {
   const { id } = useParams()
   const nav = useNavigate()
-  const { tips, loading, remove, update } = useTips()
+  const { tips, loading, remove } = useTips()
   const { toast } = useToast()
   const { open: openLightbox } = useLightbox()
 
@@ -100,13 +100,7 @@ export default function TipDetailPage() {
             </div>
             <div className="photo-grid">
               {tip.photos.map((src, i) => (
-                <div key={i} className="photo-grid-item" onClick={() => openLightbox(tip.photos, i, {
-                  onSave: async (photoIdx, dataUrl) => {
-                    const newPhotos = tip.photos.map((p, pi) => pi === photoIdx ? dataUrl : p)
-                    await update(id, { title: tip.title, content: tip.content, photos: newPhotos })
-                    toast('사진이 저장되었습니다.', 'success')
-                  },
-                })}>
+                <div key={i} className="photo-grid-item" onClick={() => openLightbox(tip.photos, i)}>
                   <img src={src} alt={`사진 ${i+1}`} />
                 </div>
               ))}
