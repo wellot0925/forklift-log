@@ -16,9 +16,9 @@ const BULLETIN_LINK = 'https://service.doosan-iv.com:9443/bcs/bulletin/detailVie
 
 const SHORTCUTS = [
   { label: '기술회보',   action: 'nav:/bulletins' },
-  { label: '정비지침서', action: 'goto:https://drive.google.com/drive/folders/1FYNl0ecmjRISZVuP2nBLrjoQDmUoBy7E?usp=drive_link' },
-  { label: '챕터별정리', sublabel: '지침서', action: 'goto:https://drive.google.com/drive/folders/1tuU5bm7_yiwL9G7-zKpA6KxUZoOL8Yfb?usp=drive_link' },
-  { label: '부품목록',   action: 'goto:https://drive.google.com/drive/folders/14in1UfkFOWpauZ4HgrJO0Jwf-jyvOAin?usp=drive_link' },
+  { label: '정비지침서', action: 'nav:/drive?title=정비지침서&id=1FYNl0ecmjRISZVuP2nBLrjoQDmUoBy7E' },
+  { label: '챕터별정리', sublabel: '지침서', action: 'nav:/drive?title=챕터별정리&id=1tuU5bm7_yiwL9G7-zKpA6KxUZoOL8Yfb' },
+  { label: '부품목록',   action: 'nav:/drive?title=부품목록&id=14in1UfkFOWpauZ4HgrJO0Jwf-jyvOAin' },
 ]
 
 const PULL_THRESHOLD = 64
@@ -446,8 +446,7 @@ export default function HomePage() {
 function ShortcutGrid({ nav }) {
   const handle = action => {
     if (!action) return
-    if (action.startsWith('nav:')) nav(action.slice(4))
-    else window.location.href = action.slice(action.indexOf(':') + 1)
+    nav(action.slice(4))
   }
   return (
     <div style={{ padding: '8px 16px 16px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
