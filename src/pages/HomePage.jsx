@@ -276,7 +276,7 @@ export default function HomePage() {
                           }}
                         >
                           <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-                            <span style={{ fontSize: 11, fontWeight: 700, padding: '2px 7px', borderRadius: 6, background: 'rgba(34,197,94,0.13)', color: '#166534', whiteSpace: 'nowrap' }}>
+                            <span style={{ fontSize: 11, fontWeight: 700, padding: '2px 7px', borderRadius: 6, background: '#eab308', color: '#422006', whiteSpace: 'nowrap' }}>
                               {b.category}
                             </span>
                             {b.ref_no && <span style={{ fontSize: 11, color: 'var(--text-secondary)', fontWeight: 600 }}>{b.ref_no}</span>}

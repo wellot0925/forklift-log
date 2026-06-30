@@ -80,7 +80,7 @@ export default function RecordCard({ record, onDelete, showTypeTag, query = '' }
         <div className="record-card-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             {showTypeTag && <span style={{ fontSize: 15, lineHeight: 1 }}>🔧</span>}
-            <span className="model-badge" style={showTypeTag ? { background: 'rgba(59,130,246,0.13)', color: '#1d4ed8' } : undefined}>
+            <span className="model-badge" style={showTypeTag ? { background: '#2563eb', color: '#fff' } : undefined}>
               <ForkliftSmall />
               {record.model}
             </span>

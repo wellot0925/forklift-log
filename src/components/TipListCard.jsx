@@ -13,7 +13,7 @@ export default function TipListCard({ tip, query = '' }) {
         <div className="record-card-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <span style={{ fontSize: 15, lineHeight: 1 }}>💡</span>
-            <span className="model-badge" style={{ background: 'rgba(234,179,8,0.15)', color: '#92400e' }}>
+            <span className="model-badge" style={{ background: '#f97316', color: '#fff' }}>
               정비팁
             </span>
           </div>
