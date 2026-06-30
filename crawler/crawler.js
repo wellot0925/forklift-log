@@ -97,48 +97,39 @@ async function login() {
   }
 
   console.log('✅ 로그인 성공')
-  return html  // 로그인 후 이동하는 메인 페이지 HTML
 }
 
-// ─── 기술회보 목록 URL 자동 탐색 ─────────────────────────────────────────────
+// ─── 기술회보 목록 URL 탐색 (후보 직접 시도) ────────────────────────────────
 
-// 포털 내 기술회보 링크 패턴으로 목록 URL 추정
 const LIST_URL_CANDIDATES = [
   `${BASE_URL}/bcs/bulletin/bulletinList.do`,
   `${BASE_URL}/bcs/bulletin/list.do`,
   `${BASE_URL}/bcs/bulletin/selectBulletinList.do`,
+  `${BASE_URL}/bcs/bulletin/getBulletinList.do`,
   `${BASE_URL}/bcs/board/bulletinList.do`,
+  `${BASE_URL}/bcs/board/list.do`,
 ]
 
-async function findListUrl(mainHtml) {
-  // 메인 페이지에서 기술회보 메뉴 링크 추출 시도
-  const $ = cheerio.load(mainHtml)
-  const links = []
-  $('a[href]').each((_, el) => {
-    const href = $(el).attr('href') ?? ''
-    const text = $(el).text()
-    if (/bulletin|기술회보/i.test(href + text)) {
-      const full = href.startsWith('http') ? href : BASE_URL + (href.startsWith('/') ? '' : '/bcs/') + href
-      links.push(full)
-    }
-  })
-  if (links.length > 0) {
-    console.log('   메인 페이지에서 기술회보 링크 발견:', links[0])
-    return links[0]
-  }
-
-  // 후보 URL 순차 시도
+async function findListUrl() {
+  console.log('   목록 URL 탐색 중...')
   for (const url of LIST_URL_CANDIDATES) {
     try {
-      const res = await client.get(url, { params: { pageIndex: 1 } })
-      const html = res.data ?? ''
-      if (typeof html === 'string' && html.length > 500 && !html.includes('userLogin')) {
-        console.log('   목록 URL 발견:', url)
+      const res = await client.get(url, {
+        params: { pageIndex: 1, recordCountPerPage: 20 },
+      })
+      const html = typeof res.data === 'string' ? res.data : ''
+      // 유효한 목록 페이지: 로그인 폼 없고 board_no 또는 게시판 테이블 포함
+      if (
+        html.length > 500 &&
+        !html.includes('txtUserID') &&
+        !html.includes('userLogin') &&
+        (html.includes('board_no') || html.includes('detailView') || html.includes('<tbody'))
+      ) {
+        console.log('   목록 URL 확인:', url)
         return url
       }
-    } catch { /* 계속 시도 */ }
+    } catch { /* 다음 후보로 */ }
   }
-
   return null
 }
 
@@ -243,12 +234,24 @@ async function crawl() {
     process.exit(1)
   }
 
-  const mainHtml  = await login()
-  const listUrl   = await findListUrl(mainHtml)
+  await login()
+  const listUrl = await findListUrl()
 
   if (!listUrl) {
-    console.error('❌ 기술회보 목록 URL을 찾지 못했습니다.')
-    console.error('   로그인 후 기술회보 게시판 페이지를 Network 탭에서 직접 확인해주세요.')
+    // 후보 URL들 응답 내용을 디버그 파일로 저장
+    console.log('\n   후보 URL 응답 내용 저장 중...')
+    for (let i = 0; i < LIST_URL_CANDIDATES.length; i++) {
+      try {
+        const res = await client.get(LIST_URL_CANDIDATES[i])
+        fs.writeFileSync(path.join(__dir, `debug_candidate_${i}.html`), res.data ?? '', 'utf-8')
+        console.log(`   debug_candidate_${i}.html → ${LIST_URL_CANDIDATES[i]}`)
+      } catch (e) {
+        console.log(`   후보${i} 접근 불가: ${e.message}`)
+      }
+    }
+    console.error('\n❌ 기술회보 목록 URL을 찾지 못했습니다.')
+    console.error('   crawler 폴더의 debug_candidate_*.html 파일을 확인해서')
+    console.error('   실제 목록 URL을 알려주시면 즉시 수정합니다.')
     process.exit(1)
   }
 
