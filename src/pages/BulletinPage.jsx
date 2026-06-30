@@ -113,8 +113,8 @@ function BulletinItem({ item }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 5 }}>
         <span style={{
           fontSize: 11, fontWeight: 700, padding: '2px 7px',
-          borderRadius: 6, background: 'var(--primary-dim, rgba(59,130,246,0.12))',
-          color: 'var(--primary)', whiteSpace: 'nowrap',
+          borderRadius: 6, background: 'rgba(34,197,94,0.13)',
+          color: '#166534', whiteSpace: 'nowrap',
         }}>
           {item.category}
         </span>
