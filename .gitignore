@@ -4,3 +4,8 @@ dist
 .env.local
 
 .vercel
+
+# 크롤러
+crawler/.env
+crawler/new_bulletins.json
+crawler/html_debug.html

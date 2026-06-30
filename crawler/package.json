@@ -1,0 +1,16 @@
+{
+  "name": "doosan-bulletin-crawler",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "crawl": "node crawler.js",
+    "debug": "node crawler.js --debug"
+  },
+  "dependencies": {
+    "axios": "^1.7.0",
+    "axios-cookiejar-support": "^4.0.7",
+    "cheerio": "^1.0.0",
+    "dotenv": "^16.4.0",
+    "tough-cookie": "^4.1.4"
+  }
+}
