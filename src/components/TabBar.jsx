@@ -11,11 +11,12 @@ const menuBtnStyle = {
 }
 
 const TABS = [
-  { path: '/',         label: '홈',      icon: <HomeIcon /> },
-  { path: '/records',  label: '작업일지', icon: <WorkLogIcon /> },
-  { path: null,        label: '추가',    icon: <PlusIcon />, fab: true },
-  { path: '/tips',     label: '정비팁',  icon: <TipIcon /> },
-  { path: '/settings', label: '설정',   icon: <SettingsIcon /> },
+  { path: '/',           label: '홈',      icon: <HomeIcon /> },
+  { path: '/records',    label: '작업일지', icon: <WorkLogIcon /> },
+  { path: null,          label: '추가',    icon: <PlusIcon />, fab: true },
+  { path: '/tips',       label: '정비팁',  icon: <TipIcon /> },
+  { path: '/bulletins',  label: '기술회보', icon: <BulletinIcon /> },
+  { path: '/settings',   label: '설정',   icon: <SettingsIcon /> },
 ]
 
 export default function TabBar() {
@@ -110,6 +111,12 @@ function PlusIcon() {
 function TipIcon() {
   return <svg fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+  </svg>
+}
+function BulletinIcon() {
+  return <svg fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l6 6v8a2 2 0 01-2 2z"/>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M17 20v-6H7v6M7 4v4h7"/>
   </svg>
 }
 function SettingsIcon() {

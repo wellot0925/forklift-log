@@ -1,0 +1,8002 @@
+[
+  {
+    "board_no": "12930",
+    "no": 2240,
+    "category": "서비스정보",
+    "ref_no": "SV26-0003",
+    "title": "DBCY BNS EIKTO GEN#3 LFP 배터리 Sleep Mode 전환시간 설정 오류 개선 BMS 펌웨어 공유",
+    "author": "홍상현",
+    "date": "2026-04-16 11:36:02",
+    "views": "154"
+  },
+  {
+    "board_no": "12924",
+    "no": 2235,
+    "category": "일반",
+    "ref_no": "",
+    "title": "엔진 대형/초대형 지게차 유압 메인펌프 압력호스 누유건",
+    "author": "김정수",
+    "date": "2026-03-26 16:37:05",
+    "views": "159"
+  },
+  {
+    "board_no": "12923",
+    "no": 2234,
+    "category": "일반",
+    "ref_no": "",
+    "title": "엔진 7톤급(Functional Safety) 지게차 세륜기에서 타이어 세척 공회전 관련건",
+    "author": "김정수",
+    "date": "2026-03-26 16:20:49",
+    "views": "110"
+  },
+  {
+    "board_no": "12918",
+    "no": 2232,
+    "category": "일반",
+    "ref_no": "",
+    "title": "G2(D34) 엔진 고장진단장치를 통한  엔진 ECU 리셋 방법",
+    "author": "박관신",
+    "date": "2026-02-25 15:55:32",
+    "views": "234"
+  },
+  {
+    "board_no": "12917",
+    "no": 2231,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 펌웨어 배포 - BC32S-7_36V_48V",
+    "author": "임규현",
+    "date": "2026-02-24 10:34:33",
+    "views": "97"
+  },
+  {
+    "board_no": "12904",
+    "no": 2219,
+    "category": "일반",
+    "ref_no": "",
+    "title": "[MH] 전동  납산 배터리 관리 요령",
+    "author": "박관신",
+    "date": "2026-02-03 09:04:19",
+    "views": "159"
+  },
+  {
+    "board_no": "12897",
+    "no": 2216,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D20/33S(SE)-9 틸트실린더 전/후경 동작 시 호스 간섭 개선 내용입니다.",
+    "author": "김정수",
+    "date": "2026-01-16 11:55:10",
+    "views": "167"
+  },
+  {
+    "board_no": "12894",
+    "no": 2213,
+    "category": "기술정보",
+    "ref_no": "SV26-0002",
+    "title": "D25/45S-9 소형차량 VCU software release(V21.3/4.8)",
+    "author": "임규현",
+    "date": "2026-01-12 10:58:33",
+    "views": "232"
+  },
+  {
+    "board_no": "12890",
+    "no": 2211,
+    "category": "일반",
+    "ref_no": "SV26-0001",
+    "title": "동절기 저온 시 LFP 배터리 충전 속도 저하 관련 (저온 시 배터리 히팅 조건)",
+    "author": "홍상현",
+    "date": "2026-01-06 13:42:36",
+    "views": "150"
+  },
+  {
+    "board_no": "12889",
+    "no": 2210,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "[MH] BM테크 충전기 온도센서로 인한 충전불능 관련 조치 사항 공지",
+    "author": "노형민",
+    "date": "2026-01-02 10:50:37",
+    "views": "144"
+  },
+  {
+    "board_no": "12886",
+    "no": 2208,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[MH] BRS-9 EKITO배터리 전원 불량 및 부저 울림(Alarm RlyFault) 시 필드 조치사항 (방전 지연)",
+    "author": "노형민",
+    "date": "2025-12-16 09:47:36",
+    "views": "203"
+  },
+  {
+    "board_no": "12883",
+    "no": 2206,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[엔진식 지게차 CAN통신에러 외 다발성 에러 발생시 조치 우선순위] TMS점검 및 고객 임의설치 전기장치 제거",
+    "author": "백범선",
+    "date": "2025-12-15 16:08:25",
+    "views": "242"
+  },
+  {
+    "board_no": "12882",
+    "no": 2205,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "18톤급이상 지게차 냉각수 조기과열시 우선점검 포인트 가이드",
+    "author": "백범선",
+    "date": "2025-12-15 12:17:20",
+    "views": "148"
+  },
+  {
+    "board_no": "12881",
+    "no": 2204,
+    "category": "일반",
+    "ref_no": "",
+    "title": "엔진 7톤급 Low rpm 핸들 무거움 및 걸림현상건 관련 서비스 정보 공유건 입니다.",
+    "author": "김정수",
+    "date": "2025-12-12 11:52:32",
+    "views": "147"
+  },
+  {
+    "board_no": "12879",
+    "no": 2202,
+    "category": "개선정보",
+    "ref_no": "",
+    "title": "엔진식 7~8톤 머드가드 쳐짐 간섭 개선건",
+    "author": "박관신",
+    "date": "2025-12-11 23:11:16",
+    "views": "103"
+  },
+  {
+    "board_no": "12872",
+    "no": 2195,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "Noblelift LFP용 충전기 점검 자료",
+    "author": "박관신",
+    "date": "2025-12-03 16:09:45",
+    "views": "139"
+  },
+  {
+    "board_no": "12871",
+    "no": 2194,
+    "category": "개선정보",
+    "ref_no": "",
+    "title": "엔진식 사이드 미러 클램프 발청건 개선  ( 7~30톤 모델 캐빈 사이드 미러 클램프)",
+    "author": "박관신",
+    "date": "2025-12-03 09:16:40",
+    "views": "81"
+  },
+  {
+    "board_no": "12870",
+    "no": 2193,
+    "category": "일반",
+    "ref_no": "",
+    "title": "엔진 중/대형지게차 인칭센서 BKT 조립품(110414-09401) 관련 정보 공유 드립니다.",
+    "author": "김정수",
+    "date": "2025-12-02 15:29:50",
+    "views": "89"
+  },
+  {
+    "board_no": "12869",
+    "no": 2192,
+    "category": "서비스정보",
+    "ref_no": "SV25-0025",
+    "title": "Noblelift 전동차량 안전벨트 시퀀스 기능 OFF 방법 공유 (에러코드 6.7 관련)",
+    "author": "홍상현",
+    "date": "2025-12-02 14:01:12",
+    "views": "138"
+  },
+  {
+    "board_no": "12866",
+    "no": 2189,
+    "category": "서비스정보",
+    "ref_no": "SV25-0023",
+    "title": "Grammer Seat Rail 전/후진 작동 문제 관련 조치방법 공유",
+    "author": "정지민",
+    "date": "2025-11-11 17:24:09",
+    "views": "199"
+  },
+  {
+    "board_no": "12865",
+    "no": 2188,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "Noblelift  NS Functional safety (안전기능) 적용 차량 F-컨트롤러  고장 코드 목록",
+    "author": "박관신",
+    "date": "2025-11-11 17:05:49",
+    "views": "162"
+  },
+  {
+    "board_no": "12864",
+    "no": 2187,
+    "category": "일반",
+    "ref_no": "",
+    "title": "엔진/전동(인천산) 2톤급 조향 허브 베어링 고정 Lock Nut(A334884)+Lock Washer(A331885) 조립 순서건",
+    "author": "김정수",
+    "date": "2025-11-11 17:00:53",
+    "views": "109"
+  },
+  {
+    "board_no": "12859",
+    "no": 2182,
+    "category": "일반",
+    "ref_no": "",
+    "title": "엔진 중/대/초대형 지게차 케빈 틸팅(Cabin Tilting) 유압시스템 문제로 틸팅실린더 동작지연, 미 동작 및 자연침하 하자건",
+    "author": "김정수",
+    "date": "2025-11-05 14:56:32",
+    "views": "145"
+  },
+  {
+    "board_no": "12858",
+    "no": 2181,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 펌웨어 배포 - B20/35NS",
+    "author": "최우혁",
+    "date": "2025-11-05 10:48:05",
+    "views": "89"
+  },
+  {
+    "board_no": "12856",
+    "no": 2179,
+    "category": "일반",
+    "ref_no": "",
+    "title": "엔진3톤급 지게차 간헐적으로 악셀포지션 값 5%  이상 인식이 되면서 주차브레이크 미 해제건",
+    "author": "김정수",
+    "date": "2025-11-03 16:57:01",
+    "views": "114"
+  },
+  {
+    "board_no": "12855",
+    "no": 2178,
+    "category": "일반",
+    "ref_no": "",
+    "title": "'Stage-5 DM(N)02/03 E/G HLA(Hydraulic Lash Adjuster_자동 밸브간극 조절 장치) Sponge 현상 관련건",
+    "author": "김정수",
+    "date": "2025-10-29 14:07:49",
+    "views": "124"
+  },
+  {
+    "board_no": "12854",
+    "no": 2177,
+    "category": "서비스정보",
+    "ref_no": "SV25-0022",
+    "title": "LFP 배터리 충전기의 충전 시작 프로세스 공유",
+    "author": "홍상현",
+    "date": "2025-10-29 11:29:10",
+    "views": "137"
+  },
+  {
+    "board_no": "12849",
+    "no": 2173,
+    "category": "일반",
+    "ref_no": "",
+    "title": "4.5톤  인칭센서(301308-01351) 파손건 고정 볼트(스크류) 변경건",
+    "author": "김정수",
+    "date": "2025-10-13 15:05:21",
+    "views": "153"
+  },
+  {
+    "board_no": "12848",
+    "no": 2172,
+    "category": "일반",
+    "ref_no": "SV25-0021",
+    "title": "G2 엔진(DM02.03)의 Air Leakage 확인 방법 공유",
+    "author": "홍상현",
+    "date": "2025-10-10 10:03:20",
+    "views": "160"
+  },
+  {
+    "board_no": "12844",
+    "no": 2171,
+    "category": "서비스정보",
+    "ref_no": "SV25-0020",
+    "title": "엔진7톤급 FFT 2CYL 케리지+쉬브 간섭 관련 개선내용",
+    "author": "정지민",
+    "date": "2025-09-26 16:07:42",
+    "views": "129"
+  },
+  {
+    "board_no": "12836",
+    "no": 2169,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "G2, DL06/08 Stage5  엔진  고장코드 한글 설명 자료",
+    "author": "박관신",
+    "date": "2025-09-09 16:51:37",
+    "views": "241"
+  },
+  {
+    "board_no": "12830",
+    "no": 2166,
+    "category": "서비스정보",
+    "ref_no": "SV25-0019",
+    "title": "납배터리 점검표 공유",
+    "author": "정지민",
+    "date": "2025-08-20 15:58:45",
+    "views": "204"
+  },
+  {
+    "board_no": "12822",
+    "no": 2161,
+    "category": "개선정보",
+    "ref_no": "SV25-0018",
+    "title": "엔진 2톤급 동서컨트롤 F/R 및 COMBI레버 Stopper 개선내용 공유",
+    "author": "정지민",
+    "date": "2025-07-30 12:00:44",
+    "views": "250"
+  },
+  {
+    "board_no": "12821",
+    "no": 2160,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "엔진 4~7톤급 EGR 밸브 서비스 하위 부품",
+    "author": "박관신",
+    "date": "2025-07-29 08:42:42",
+    "views": "186"
+  },
+  {
+    "board_no": "12820",
+    "no": 2159,
+    "category": "개선정보",
+    "ref_no": "",
+    "title": "전동지게차  계기판 깜박이는 현상 개선  변경건",
+    "author": "박관신",
+    "date": "2025-07-22 16:51:41",
+    "views": "208"
+  },
+  {
+    "board_no": "12816",
+    "no": 2157,
+    "category": "일반",
+    "ref_no": "",
+    "title": "커티스 핸드툴 (CURTIS HHP 1313) 펌웨어 업데이트 방법",
+    "author": "최우혁",
+    "date": "2025-07-18 11:03:17",
+    "views": "197"
+  },
+  {
+    "board_no": "12815",
+    "no": 2156,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "7톤급 이상 전면 에어컨 에바 (HVAC)  서비스 하위 부품",
+    "author": "박관신",
+    "date": "2025-07-18 10:22:50",
+    "views": "227"
+  },
+  {
+    "board_no": "12814",
+    "no": 2155,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "ZF 트랜스미션 안전기능 (Functional Safety) 고장코드  설명 자료 (한글판)",
+    "author": "박관신",
+    "date": "2025-07-18 08:56:07",
+    "views": "225"
+  },
+  {
+    "board_no": "12811",
+    "no": 2152,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[MH] Warranty부문 지원 요청 및 CLAIM 필드 조치 및 점검사항",
+    "author": "Yukyung Kim",
+    "date": "2025-07-15 11:12:21",
+    "views": "181"
+  },
+  {
+    "board_no": "12809",
+    "no": 2150,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 펌웨어 배포 - B25S-7,B45X-7 Plus",
+    "author": "최우혁",
+    "date": "2025-07-14 15:03:52",
+    "views": "90"
+  },
+  {
+    "board_no": "12806",
+    "no": 2148,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[MH] 엔진 7톤급 차량 Air-con Compressor(콤프레셔) 부품하자 관련 냉동유 주입 요청사항 공유_7/16 재수정",
+    "author": "노형민",
+    "date": "2025-07-11 13:58:21",
+    "views": "226"
+  },
+  {
+    "board_no": "12805",
+    "no": 2147,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "'엔진4.5톤급 인칭센서(301308-01351) 파손건 하자 사례 공유건",
+    "author": "김정수",
+    "date": "2025-07-11 11:35:59",
+    "views": "161"
+  },
+  {
+    "board_no": "12804",
+    "no": 2146,
+    "category": "일반",
+    "ref_no": "",
+    "title": "[MH] BRS-9 모델 배터리 인출바 절손 현상 관련 필드대응 협조사항 공유",
+    "author": "노형민",
+    "date": "2025-07-10 09:51:25",
+    "views": "119"
+  },
+  {
+    "board_no": "12803",
+    "no": 2145,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "[MH] 엔진 7톤급 차량 필드 불량 시 CAN 저항 측정방법 및 케이스별 불량 점검",
+    "author": "노형민",
+    "date": "2025-07-08 17:02:46",
+    "views": "255"
+  },
+  {
+    "board_no": "12802",
+    "no": 2144,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 펌웨어 배포 - B20/35NS",
+    "author": "최우혁",
+    "date": "2025-07-07 10:23:43",
+    "views": "77"
+  },
+  {
+    "board_no": "12800",
+    "no": 2142,
+    "category": "일반",
+    "ref_no": "",
+    "title": "진단툴 및 소프트웨어 정보 (25.07.24)",
+    "author": "최우혁",
+    "date": "2025-07-07 10:12:32",
+    "views": "105"
+  },
+  {
+    "board_no": "12798",
+    "no": 2140,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[중소형 엔진식차량 엔진/미션/호스/하네스 보호] Hard한 작업조건 차량 밸리플레이트(Belly Plate) 추가장착 가이드",
+    "author": "백범선",
+    "date": "2025-07-02 08:57:39",
+    "views": "173"
+  },
+  {
+    "board_no": "12796",
+    "no": 2138,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "엔진7톤급 지게차 간헐적으로 안전모드 또는 림프 홈 모드 점등건",
+    "author": "김정수",
+    "date": "2025-06-27 13:34:59",
+    "views": "207"
+  },
+  {
+    "board_no": "12792",
+    "no": 2136,
+    "category": "서비스정보",
+    "ref_no": "SV25-0017",
+    "title": "EIKTO GEN#3 LFP 배터리 충전 후 배터리 꺼짐 개선 펌웨어 공유",
+    "author": "홍상현",
+    "date": "2025-06-23 10:16:06",
+    "views": "195"
+  },
+  {
+    "board_no": "12791",
+    "no": 2135,
+    "category": "서비스정보",
+    "ref_no": "SV25-0016",
+    "title": "7톤급 에어컨 LED 점등 점멸 현상 관련 정보 공유",
+    "author": "정지민",
+    "date": "2025-06-20 12:07:57",
+    "views": "157"
+  },
+  {
+    "board_no": "12787",
+    "no": 2131,
+    "category": "서비스정보",
+    "ref_no": "SV25-0015",
+    "title": "EIKTO GEN#3 LFP 배터리 펌웨어 업데이트 방법 공유",
+    "author": "홍상현",
+    "date": "2025-06-17 14:37:09",
+    "views": "125"
+  },
+  {
+    "board_no": "12782",
+    "no": 2127,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 펌웨어 배포 - B45X-7",
+    "author": "최우혁",
+    "date": "2025-05-28 11:01:48",
+    "views": "79"
+  },
+  {
+    "board_no": "12780",
+    "no": 2125,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "전동 차량 F-Controller 적용에 따른 Motor Encoder 품번 안내  (Fd 에러코드)",
+    "author": "노형민",
+    "date": "2025-05-27 10:33:01",
+    "views": "140"
+  },
+  {
+    "board_no": "12774",
+    "no": 2122,
+    "category": "기술정보",
+    "ref_no": "SV25-0014",
+    "title": "D25/45S-9 소형차량 VCU software release(V21.2) 회수 안내",
+    "author": "김진우",
+    "date": "2025-05-13 10:42:04",
+    "views": "232"
+  },
+  {
+    "board_no": "12768",
+    "no": 2116,
+    "category": "서비스정보",
+    "ref_no": "SV25-0013",
+    "title": "EIKTO, CosMX LFP 배터리용 SN충전기(380V, CZC7EI) 계기판 이용 방법 및 에러코드 설명서",
+    "author": "홍상현",
+    "date": "2025-05-02 08:57:49",
+    "views": "256"
+  },
+  {
+    "board_no": "12766",
+    "no": 2114,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "Noblelift 전동차량 F-Controller 적용 관련 Cutis Hand Tool 전용 점퍼하네스 품번 안내",
+    "author": "노형민",
+    "date": "2025-04-30 08:47:20",
+    "views": "146"
+  },
+  {
+    "board_no": "12763",
+    "no": 2112,
+    "category": "일반",
+    "ref_no": "",
+    "title": "엔진식 2톤 9시리즈 T/M 파킹 해제후에도 차량이 무겁게 움직이는 경우 점검 point",
+    "author": "백범선",
+    "date": "2025-04-24 10:40:52",
+    "views": "300"
+  },
+  {
+    "board_no": "12761",
+    "no": 2110,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "전동 전기종 (인천산) 및  엔진식 8톤 이하 차량 빽업알람 변경건",
+    "author": "박관신",
+    "date": "2025-04-17 17:22:07",
+    "views": "151"
+  },
+  {
+    "board_no": "12760",
+    "no": 2109,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "LPM 15N, LPM 20N  충전기  관련 정보",
+    "author": "박관신",
+    "date": "2025-04-17 15:23:37",
+    "views": "132"
+  },
+  {
+    "board_no": "12754",
+    "no": 2104,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "엔진식 4톤급 TCU 간헐적 30번 에러 발생건",
+    "author": "김정수",
+    "date": "2025-04-09 10:20:28",
+    "views": "283"
+  },
+  {
+    "board_no": "12751",
+    "no": 2102,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 펌웨어 배포 - B45X-7",
+    "author": "최우혁",
+    "date": "2025-04-08 14:02:50",
+    "views": "62"
+  },
+  {
+    "board_no": "12739",
+    "no": 2091,
+    "category": "서비스정보",
+    "ref_no": "SV25-0012",
+    "title": "EIKTO, CosMX LFP 배터리용 SN충전기(380V) 출력 전류 조정 방법",
+    "author": "홍상현",
+    "date": "2025-03-31 10:44:10",
+    "views": "208"
+  },
+  {
+    "board_no": "12735",
+    "no": 2089,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 펌웨어 배포 - BRJW,BTX-7, BS, BRS-9",
+    "author": "최우혁",
+    "date": "2025-03-26 11:29:15",
+    "views": "67"
+  },
+  {
+    "board_no": "12732",
+    "no": 2088,
+    "category": "서비스정보",
+    "ref_no": "SV25-0011",
+    "title": "전동 BNS 기종 거북이, E,H,S 모드 저장 안 될 경우 조치 방법",
+    "author": "홍상현",
+    "date": "2025-03-21 09:26:42",
+    "views": "173"
+  },
+  {
+    "board_no": "12730",
+    "no": 2086,
+    "category": "기술정보",
+    "ref_no": "SV25-0010",
+    "title": "D25/45S-9 소형차량 VCU software release(V21.2/4.8)",
+    "author": "김진우",
+    "date": "2025-03-19 10:51:28",
+    "views": "229"
+  },
+  {
+    "board_no": "12728",
+    "no": 2084,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 펌웨어 배포- BR14/16/20/25J(W)-9",
+    "author": "최우혁",
+    "date": "2025-03-17 17:53:49",
+    "views": "55"
+  },
+  {
+    "board_no": "12727",
+    "no": 2083,
+    "category": "서비스정보",
+    "ref_no": "SV25-0009",
+    "title": "전동기종 SE Controller, F-Controller 구별 방법 공유",
+    "author": "홍상현",
+    "date": "2025-03-12 14:47:38",
+    "views": "151"
+  },
+  {
+    "board_no": "12726",
+    "no": 2082,
+    "category": "일반",
+    "ref_no": "SV25-0009",
+    "title": "엔진식 4톤급 신진정밀 유압 컨트롤 밸브(MCV) 씰 키트 품번",
+    "author": "박관신",
+    "date": "2025-03-12 13:14:36",
+    "views": "147"
+  },
+  {
+    "board_no": "12724",
+    "no": 2080,
+    "category": "서비스정보",
+    "ref_no": "SV25-0008",
+    "title": "전동기종 F-Controller 주행, 펌프 교체(호환) 및 펌웨어 설치 관련 주의 사항 공유",
+    "author": "홍상현",
+    "date": "2025-03-11 16:59:12",
+    "views": "144"
+  },
+  {
+    "board_no": "12723",
+    "no": 2079,
+    "category": "서비스정보",
+    "ref_no": "SV25-0007",
+    "title": "CosMX 배터리 BMS 펌웨어 업데이트 방법 공유",
+    "author": "홍상현",
+    "date": "2025-03-04 16:20:42",
+    "views": "170"
+  },
+  {
+    "board_no": "12720",
+    "no": 2077,
+    "category": "서비스정보",
+    "ref_no": "SV25-0006",
+    "title": "BPR20_25N 에러코드 리스트 공유 건",
+    "author": "노형민",
+    "date": "2025-02-21 15:58:55",
+    "views": "141"
+  },
+  {
+    "board_no": "12707",
+    "no": 2076,
+    "category": "서비스정보",
+    "ref_no": "SV25-0005",
+    "title": "전동기종 F-Controller 에러코드 정보 및 LC 에러코드 사례 공유",
+    "author": "홍상현",
+    "date": "2025-02-14 11:36:07",
+    "views": "155"
+  },
+  {
+    "board_no": "12706",
+    "no": 2075,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 신규 소프트웨어 배포 (Ver. 2.5.2)",
+    "author": "최우혁",
+    "date": "2025-02-12 10:42:18",
+    "views": "108"
+  },
+  {
+    "board_no": "12700",
+    "no": 2071,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 펌웨어 배포- B20/25/30/35NS",
+    "author": "최우혁",
+    "date": "2025-01-20 15:51:54",
+    "views": "176"
+  },
+  {
+    "board_no": "12698",
+    "no": 2069,
+    "category": "기술정보",
+    "ref_no": "SV25-0004",
+    "title": "9시리즈 엔진 7톤급 12V 배터리와 이퀄라이저(Equalizer) 원리 공유",
+    "author": "홍상현",
+    "date": "2025-01-17 17:10:14",
+    "views": "198"
+  },
+  {
+    "board_no": "12697",
+    "no": 2068,
+    "category": "일반",
+    "ref_no": "SV25-0003",
+    "title": "엔진 7톤급 이상 냉간 시 ZF 미션 오일 온도에 따른 출력 제한 기능 공유",
+    "author": "홍상현",
+    "date": "2025-01-10 14:19:53",
+    "views": "178"
+  },
+  {
+    "board_no": "12696",
+    "no": 2067,
+    "category": "일반",
+    "ref_no": "SV25-0002",
+    "title": "VCU 교체 후 에러코드 관련 정보(523480 -> 기종선택 필요)",
+    "author": "정지민",
+    "date": "2025-01-09 16:57:03",
+    "views": "307"
+  },
+  {
+    "board_no": "12695",
+    "no": 2066,
+    "category": "서비스정보",
+    "ref_no": "SV25-0001",
+    "title": "계기판 팝업 에러 발생 시 에러 내용이 없을 때 조치 방법",
+    "author": "홍상현",
+    "date": "2025-01-08 08:54:52",
+    "views": "181"
+  },
+  {
+    "board_no": "12688",
+    "no": 2063,
+    "category": "개선정보",
+    "ref_no": "",
+    "title": "[Field 고객불만 대응 설계개선 가이드] 중대형 10톤급 차량 MUDGUARD(진흙받이) 처짐현상 개선부품 정보",
+    "author": "백범선",
+    "date": "2024-12-18 14:16:05",
+    "views": "158"
+  },
+  {
+    "board_no": "12687",
+    "no": 2062,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "엔진 4톤급 국산 MCV내 조향우선 밸브 스플 교환작업 방법.",
+    "author": "박관신",
+    "date": "2024-12-18 13:28:34",
+    "views": "219"
+  },
+  {
+    "board_no": "12686",
+    "no": 2061,
+    "category": "서비스정보",
+    "ref_no": "SV24-0024",
+    "title": "전동차량 DC컨버터(제조사 SEVCON) 커넥터 분리 위치 공유",
+    "author": "정지민",
+    "date": "2024-12-18 10:55:26",
+    "views": "161"
+  },
+  {
+    "board_no": "12685",
+    "no": 2060,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "Eneroc(펑청) LFP 배터리 충전시 충전기 모니터 고장 메시지 설명.",
+    "author": "박관신",
+    "date": "2024-12-16 08:46:01",
+    "views": "277"
+  },
+  {
+    "board_no": "12684",
+    "no": 2059,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "LPM20N 차량  고장 코드 설명",
+    "author": "박관신",
+    "date": "2024-12-12 13:23:31",
+    "views": "188"
+  },
+  {
+    "board_no": "12683",
+    "no": 2058,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "LPM15N 차량  고장 코드 설명",
+    "author": "박관신",
+    "date": "2024-12-12 13:22:27",
+    "views": "146"
+  },
+  {
+    "board_no": "12681",
+    "no": 2057,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[Field 고객불만 대응 응급조치 가이드] 3톤 9시리즈 마스트 자연침하 관련 고객불만",
+    "author": "백범선",
+    "date": "2024-12-10 13:43:03",
+    "views": "212"
+  },
+  {
+    "board_no": "12680",
+    "no": 2056,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "Eneroc(펑청) LFP 배터리 충전 또는 방전중 배터리 모니터 고장 메시지 설명.",
+    "author": "박관신",
+    "date": "2024-12-10 09:44:44",
+    "views": "131"
+  },
+  {
+    "board_no": "12679",
+    "no": 2055,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 펌웨어 배포- B20/25/30/35NS",
+    "author": "최우혁",
+    "date": "2024-12-05 17:35:55",
+    "views": "81"
+  },
+  {
+    "board_no": "12677",
+    "no": 2053,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Curits F-controller  호환성 정보 리스트 (24.12.05)",
+    "author": "최우혁",
+    "date": "2024-12-05 11:03:15",
+    "views": "186"
+  },
+  {
+    "board_no": "12675",
+    "no": 2051,
+    "category": "일반",
+    "ref_no": "",
+    "title": "EyePlus Windows 11 호환 버전 신규배포",
+    "author": "최우혁",
+    "date": "2024-12-04 11:09:39",
+    "views": "87"
+  },
+  {
+    "board_no": "12671",
+    "no": 2048,
+    "category": "서비스정보",
+    "ref_no": "SV24-0023",
+    "title": "CosMX 배터리의 SN 충전기 계기판 펌웨어 업데이트 방법",
+    "author": "홍상현",
+    "date": "2024-12-02 14:50:48",
+    "views": "120"
+  },
+  {
+    "board_no": "12668",
+    "no": 2047,
+    "category": "일반",
+    "ref_no": "SV24-0022",
+    "title": "동절기 리튬이온배터리, 충전기 취급 요령 및 두산지게차 배터리 사용 온도별 방전, 충전조건",
+    "author": "홍상현",
+    "date": "2024-11-26 09:40:27",
+    "views": "158"
+  },
+  {
+    "board_no": "12665",
+    "no": 2045,
+    "category": "일반",
+    "ref_no": "SV24-0021",
+    "title": "CosMX 배터리의 SN 충전기 충전 전류(A) 변경 방법",
+    "author": "홍상현",
+    "date": "2024-11-25 14:37:21",
+    "views": "169"
+  },
+  {
+    "board_no": "12664",
+    "no": 2044,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "전동 CosMX LFP 배터리 3상 220V 사양 충전기 설정값 변경 방법.",
+    "author": "박관신",
+    "date": "2024-11-22 15:50:39",
+    "views": "134"
+  },
+  {
+    "board_no": "12663",
+    "no": 2043,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "[Field 응급조치 가이드] 4톤 9시리즈 인칭앵글센서 301308-01351 노치부 파손관련",
+    "author": "백범선",
+    "date": "2024-11-20 17:36:30",
+    "views": "191"
+  },
+  {
+    "board_no": "12662",
+    "no": 2042,
+    "category": "기술정보",
+    "ref_no": "SV24-0020",
+    "title": "[D70S~DV250S-9] F/S VCU software V20.4 release",
+    "author": "김진우",
+    "date": "2024-11-19 14:55:45",
+    "views": "329"
+  },
+  {
+    "board_no": "12646",
+    "no": 2039,
+    "category": "일반",
+    "ref_no": "SV24-0019",
+    "title": "전동지게차 BS/BSE 기종 안전벨트 인터락 기능 추가 방법",
+    "author": "홍상현",
+    "date": "2024-11-06 14:27:05",
+    "views": "194"
+  },
+  {
+    "board_no": "12645",
+    "no": 2038,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 펌웨어 배포- BC32S-7 & B25SE-7",
+    "author": "최우혁",
+    "date": "2024-11-05 09:50:42",
+    "views": "75"
+  },
+  {
+    "board_no": "12642",
+    "no": 2035,
+    "category": "서비스정보",
+    "ref_no": "SV24-0018",
+    "title": "VCU 진단프로그램 업데이트 공지(V1.09)",
+    "author": "김진우",
+    "date": "2024-10-30 08:21:32",
+    "views": "324"
+  },
+  {
+    "board_no": "12636",
+    "no": 2030,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "엔진식 7톤급이상 계기판 (디스플레이 및 그래픽) 업데이트 방법",
+    "author": "박관신",
+    "date": "2024-10-22 15:36:35",
+    "views": "254"
+  },
+  {
+    "board_no": "12635",
+    "no": 2029,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 펌웨어 배포- B20/25NS, B30/35NS",
+    "author": "최우혁",
+    "date": "2024-10-15 11:23:14",
+    "views": "115"
+  },
+  {
+    "board_no": "12632",
+    "no": 2026,
+    "category": "서비스정보",
+    "ref_no": "SV24-0017",
+    "title": "VCU 진단프로그램 업데이트 공지(V1.08)",
+    "author": "김진우",
+    "date": "2024-10-04 11:22:56",
+    "views": "200"
+  },
+  {
+    "board_no": "12623",
+    "no": 2021,
+    "category": "서비스정보",
+    "ref_no": "SV24-0016",
+    "title": "주요 부품에 대한 claim 접수 시serial no 입력 관련 정보 공유(24.09.09 시스템반영)",
+    "author": "정지민",
+    "date": "2024-09-05 17:40:55",
+    "views": "130"
+  },
+  {
+    "board_no": "12591",
+    "no": 2015,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "전동 1톤급 NXE LFP 배터리 충전기 무반응 현상 점검 관련 서비스 정보.",
+    "author": "박관신",
+    "date": "2024-08-23 10:56:46",
+    "views": "217"
+  },
+  {
+    "board_no": "12589",
+    "no": 2013,
+    "category": "기술정보",
+    "ref_no": "SV24-0015",
+    "title": "D25/45S-9 소형차량 VCU software release (V21.1, V4.7) - F/S, STD",
+    "author": "김진우",
+    "date": "2024-08-22 11:55:44",
+    "views": "293"
+  },
+  {
+    "board_no": "12588",
+    "no": 2012,
+    "category": "일반",
+    "ref_no": "SV24-0014",
+    "title": "Eneroc LFP 배터리 셀과 모듈의 번호(순서)",
+    "author": "홍상현",
+    "date": "2024-08-19 17:24:58",
+    "views": "148"
+  },
+  {
+    "board_no": "12586",
+    "no": 2011,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "전동지게차 LFP배터리 MSDS(물질안전보건자료) 자료",
+    "author": "홍상현",
+    "date": "2024-08-19 12:08:58",
+    "views": "83"
+  },
+  {
+    "board_no": "12574",
+    "no": 2006,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "9시리즈 중대형 차량 시동키 off시 엔진 Stop 까지 지연 2~3초 관련, 초기점검 포인트",
+    "author": "백범선",
+    "date": "2024-07-24 15:29:43",
+    "views": "288"
+  },
+  {
+    "board_no": "12573",
+    "no": 2005,
+    "category": "개선정보",
+    "ref_no": "",
+    "title": "7~8톤급 스티어링 액슬 킹핀 하단 구리스 커버 틈새 구리스 누출건 개선.",
+    "author": "박관신",
+    "date": "2024-07-19 15:12:08",
+    "views": "175"
+  },
+  {
+    "board_no": "12572",
+    "no": 2004,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "썬라이트 배터리 자동보액장치(AFS) KIT 품번 및 유지관리 주의사항",
+    "author": "백범선",
+    "date": "2024-07-16 14:36:40",
+    "views": "198"
+  },
+  {
+    "board_no": "12571",
+    "no": 2003,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 펌웨어 배포- B20T(X)-7, B25X-7,B45X-7",
+    "author": "최우혁",
+    "date": "2024-07-12 10:56:24",
+    "views": "92"
+  },
+  {
+    "board_no": "12568",
+    "no": 2001,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "D50S~90S-9(EV포함) 9시리즈 7톤급 암전류 개선 하네스(310207-13605) 조치 방법",
+    "author": "홍상현",
+    "date": "2024-07-03 15:59:56",
+    "views": "288"
+  },
+  {
+    "board_no": "12567",
+    "no": 2000,
+    "category": "서비스정보",
+    "ref_no": "SV24-0012",
+    "title": "NXE 2톤 B25NS 펌웨어 업데이트 및 EFB, Shoe 브레이크 구분",
+    "author": "홍상현",
+    "date": "2024-07-02 09:20:21",
+    "views": "274"
+  },
+  {
+    "board_no": "12565",
+    "no": 1998,
+    "category": "개선정보",
+    "ref_no": "",
+    "title": "D20/33S-9 Ring Fan 변경 품번 안내",
+    "author": "노형민",
+    "date": "2024-06-20 09:48:30",
+    "views": "186"
+  },
+  {
+    "board_no": "12563",
+    "no": 1997,
+    "category": "일반",
+    "ref_no": "",
+    "title": "CosMX LFP 진단툴 프로그램",
+    "author": "최우혁",
+    "date": "2024-06-17 15:24:15",
+    "views": "197"
+  },
+  {
+    "board_no": "12561",
+    "no": 1995,
+    "category": "개선정보",
+    "ref_no": "",
+    "title": "[엔진 4톤급] 제동 시 이음 발생 관련 개선브레이크 디스크 교환 조치",
+    "author": "노형민",
+    "date": "2024-06-17 12:07:10",
+    "views": "218"
+  },
+  {
+    "board_no": "12560",
+    "no": 1994,
+    "category": "일반",
+    "ref_no": "",
+    "title": "EIKTO Gen#3 진단툴 프로그램  (B20/35NS)",
+    "author": "최우혁",
+    "date": "2024-06-15 18:29:30",
+    "views": "152"
+  },
+  {
+    "board_no": "12558",
+    "no": 1992,
+    "category": "서비스정보",
+    "ref_no": "SV24-0011",
+    "title": "VCU 진단프로그램 업데이트 공지(V1.07)",
+    "author": "김진우",
+    "date": "2024-06-07 11:12:51",
+    "views": "301"
+  },
+  {
+    "board_no": "12556",
+    "no": 1990,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 펌웨어 배포 (B20/35NS)",
+    "author": "최우혁",
+    "date": "2024-06-07 09:29:54",
+    "views": "118"
+  },
+  {
+    "board_no": "12550",
+    "no": 1988,
+    "category": "개선정보",
+    "ref_no": "SV24-0010",
+    "title": "2~4톤급 에어컨 컨트롤러 품번 변경 안내(BOA)",
+    "author": "정지민",
+    "date": "2024-05-24 14:42:16",
+    "views": "297"
+  },
+  {
+    "board_no": "12549",
+    "no": 1987,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 2.5.1 및 Firmware 배포 (BTX-7, B18/32S-7)",
+    "author": "최우혁",
+    "date": "2024-05-22 17:20:11",
+    "views": "135"
+  },
+  {
+    "board_no": "12547",
+    "no": 1985,
+    "category": "서비스정보",
+    "ref_no": "SV24-0009",
+    "title": "9시리즈 7톤 이상 지게차 에어컨 회로도 공유 및 센서 관련 내용 공유",
+    "author": "홍상현",
+    "date": "2024-05-13 13:56:50",
+    "views": "515"
+  },
+  {
+    "board_no": "12516",
+    "no": 1984,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "2~4톤급 연료 센더 가스켓 단품 품번  공지.",
+    "author": "박관신",
+    "date": "2024-04-19 10:29:30",
+    "views": "219"
+  },
+  {
+    "board_no": "12514",
+    "no": 1983,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 펌웨어 배포 (B20/25/30/35NS)",
+    "author": "최우혁",
+    "date": "2024-04-16 17:10:02",
+    "views": "103"
+  },
+  {
+    "board_no": "12510",
+    "no": 1979,
+    "category": "기술정보",
+    "ref_no": "SV24-0008",
+    "title": "D25,45S-9 VCU software release(V4.5) Display Software release_ Non-Functional Safety",
+    "author": "김진우",
+    "date": "2024-04-08 08:30:18",
+    "views": "382"
+  },
+  {
+    "board_no": "12503",
+    "no": 1973,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 펌웨어 배포 (BT/X-7 Plus, B25X-7 Plus)",
+    "author": "최우혁",
+    "date": "2024-04-02 10:56:46",
+    "views": "87"
+  },
+  {
+    "board_no": "12501",
+    "no": 1971,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "중대형 지게차  어라운드뷰 옵션 주요 품번 및 사용 설명서",
+    "author": "박관신",
+    "date": "2024-04-01 15:11:44",
+    "views": "164"
+  },
+  {
+    "board_no": "12500",
+    "no": 1970,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[Field 응급조치 가이드] 10톤급 이상 대형차량 제동이음 발생시 조치사항 (첨가제)",
+    "author": "백범선",
+    "date": "2024-03-28 13:38:19",
+    "views": "187"
+  },
+  {
+    "board_no": "12498",
+    "no": 1968,
+    "category": "기술정보",
+    "ref_no": "SV24-0007",
+    "title": "D25,45S-9 소형차량 VCU Functional safety software release(V21.0) & Display Firmware release(V28.0)",
+    "author": "김진우",
+    "date": "2024-03-27 14:34:52",
+    "views": "293"
+  },
+  {
+    "board_no": "12496",
+    "no": 1966,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "엔진식 2~4톤급 캐빈 도어 샤시 탈거 및 조립 방법",
+    "author": "박관신",
+    "date": "2024-03-21 14:31:17",
+    "views": "172"
+  },
+  {
+    "board_no": "12495",
+    "no": 1965,
+    "category": "서비스정보",
+    "ref_no": "SV24-0007",
+    "title": "Eneroc LFP Battery (리튬인산철배터리) 사양에 따른 BMS 품번 공유",
+    "author": "홍상현",
+    "date": "2024-03-12 09:26:44",
+    "views": "206"
+  },
+  {
+    "board_no": "12477",
+    "no": 1959,
+    "category": "기술정보",
+    "ref_no": "SV24-0006",
+    "title": "[D70S~DV250S-9] VCU/Display software release.",
+    "author": "김진우",
+    "date": "2024-02-27 11:06:25",
+    "views": "748"
+  },
+  {
+    "board_no": "12476",
+    "no": 1958,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "전동지게차 모터 온도센서 하자로 에러(77/78번:주행모터 및 79번:펌프모터) 관련 사례 공유건",
+    "author": "김정수",
+    "date": "2024-02-19 09:49:06",
+    "views": "191"
+  },
+  {
+    "board_no": "12475",
+    "no": 1957,
+    "category": "서비스정보",
+    "ref_no": "SV24-0005",
+    "title": "릴레이 12V, 24V 관련 설명",
+    "author": "홍상현",
+    "date": "2024-02-16 16:27:11",
+    "views": "262"
+  },
+  {
+    "board_no": "12474",
+    "no": 1956,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "STAGE-V 용 엔진 MAP 설치된  엔진 ECU  품번",
+    "author": "박관신",
+    "date": "2024-02-15 18:00:02",
+    "views": "208"
+  },
+  {
+    "board_no": "12473",
+    "no": 1955,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "'24년1월1일 계약 입력분 전 기종 무상부품 미 지급건 공지 드립니다.",
+    "author": "김정수",
+    "date": "2024-02-14 11:48:10",
+    "views": "62"
+  },
+  {
+    "board_no": "12472",
+    "no": 1954,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "대형(DL06엔진_D100/120/140/160/180S-9) 냉각수 과냉 문제건",
+    "author": "김정수",
+    "date": "2024-02-14 09:14:58",
+    "views": "103"
+  },
+  {
+    "board_no": "12471",
+    "no": 1953,
+    "category": "서비스정보",
+    "ref_no": "SV24-0004",
+    "title": "T-4 델파이 연료 시스템 연료필터 상부 히팅 점퍼하네스 품번 공유",
+    "author": "정지민",
+    "date": "2024-02-06 16:55:31",
+    "views": "201"
+  },
+  {
+    "board_no": "12470",
+    "no": 1952,
+    "category": "기술정보",
+    "ref_no": "SV24-0003",
+    "title": "[STD] D25SE-9 VCU software Release",
+    "author": "김진우",
+    "date": "2024-02-06 14:01:03",
+    "views": "263"
+  },
+  {
+    "board_no": "12449",
+    "no": 1951,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 펌웨어 배포 (BT/X-7 Plus, B45X-7 Plus)",
+    "author": "최우혁",
+    "date": "2024-01-26 16:18:06",
+    "views": "96"
+  },
+  {
+    "board_no": "12440",
+    "no": 1947,
+    "category": "기술정보",
+    "ref_no": "SV24-0002",
+    "title": "[STD, FS] D25/45S-9 소형차량 VCU software release(V4.3, V20.7)",
+    "author": "김진우",
+    "date": "2024-01-10 15:43:35",
+    "views": "343"
+  },
+  {
+    "board_no": "12439",
+    "no": 1946,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "B20/35NS  저속구간 내리막 구간  제동 시 밀림 현상 조치 방법",
+    "author": "박관신",
+    "date": "2024-01-09 17:28:27",
+    "views": "291"
+  },
+  {
+    "board_no": "12438",
+    "no": 1945,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "국내 생산 전동 차량 LFP(인산철)  배터리 및 충전기 품번  사양 (DIN 타입 컨넥터)",
+    "author": "박관신",
+    "date": "2024-01-04 16:39:41",
+    "views": "199"
+  },
+  {
+    "board_no": "12437",
+    "no": 1944,
+    "category": "서비스정보",
+    "ref_no": "SV24-0001",
+    "title": "Grammar Seat 등받이 아래 부분 앞/뒤 조절 기능 공유",
+    "author": "홍상현",
+    "date": "2024-01-04 16:07:25",
+    "views": "122"
+  },
+  {
+    "board_no": "12435",
+    "no": 1942,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "4.5Ton 9시리즈 T/M 30 error 관련 Field 조치 우선순위",
+    "author": "백범선",
+    "date": "2024-01-02 13:33:14",
+    "views": "375"
+  },
+  {
+    "board_no": "12434",
+    "no": 1941,
+    "category": "일반",
+    "ref_no": "SV23-0037",
+    "title": "차세대 7톤급  Alternator L단자 소손 관련 다이오드 용량 변겅 서비스 품번 공유",
+    "author": "정지민",
+    "date": "2023-12-22 16:28:19",
+    "views": "681"
+  },
+  {
+    "board_no": "12432",
+    "no": 1940,
+    "category": "일반",
+    "ref_no": "SV23-0036",
+    "title": "2톤급 대성산업 MCV내 Unloading valve assy 품번 정보",
+    "author": "정지민",
+    "date": "2023-12-21 09:49:46",
+    "views": "196"
+  },
+  {
+    "board_no": "12431",
+    "no": 1939,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[Field 응급조치 가이드] B20/25/30NS 리튬충전기 충전불능 관련 (스틱형 다이오드 손상)",
+    "author": "백범선",
+    "date": "2023-12-19 15:03:13",
+    "views": "299"
+  },
+  {
+    "board_no": "12430",
+    "no": 1938,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "4톤급(9시리즈) 미션 에어브리더 넘침 및 경사지 내리막 전진주행시 오일 쏠림 방지를 위한 Service KIT 작업방법",
+    "author": "백범선",
+    "date": "2023-12-19 13:28:51",
+    "views": "354"
+  },
+  {
+    "board_no": "12429",
+    "no": 1937,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "D30S(E)-9 차량의 인칭 리턴불량건",
+    "author": "김정수",
+    "date": "2023-12-18 10:17:57",
+    "views": "235"
+  },
+  {
+    "board_no": "12428",
+    "no": 1936,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "전동 2톤급 NS LFP 배터리 충전기 무반응 현상 점검 관련 서비스 정보",
+    "author": "박관신",
+    "date": "2023-12-14 17:22:11",
+    "views": "255"
+  },
+  {
+    "board_no": "12427",
+    "no": 1935,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "G2 스캔 엔진 진단툴 구성품  품번 정보",
+    "author": "박관신",
+    "date": "2023-12-14 14:48:56",
+    "views": "225"
+  },
+  {
+    "board_no": "12426",
+    "no": 1934,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "엔진 4톤급 SE-9 브레이크 패달 답력 개선 마스터 실린더 교환 방법 ( 400322-00074 → 400322-00083)",
+    "author": "박관신",
+    "date": "2023-12-13 16:34:48",
+    "views": "208"
+  },
+  {
+    "board_no": "12425",
+    "no": 1933,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "엔진 2톤급 S-9  브레이크 패달 답력 개선 마스터 실린더  교환 방법 ( 400322-00074 → 400322-00078)",
+    "author": "박관신",
+    "date": "2023-12-12 10:10:42",
+    "views": "178"
+  },
+  {
+    "board_no": "12424",
+    "no": 1932,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "2/4톤급 LFP 배터리 전원 불가시 점검 관련 서비스 정보",
+    "author": "박관신",
+    "date": "2023-12-06 17:01:44",
+    "views": "195"
+  },
+  {
+    "board_no": "12423",
+    "no": 1931,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "2/4톤급 LFP 배터리 충전기 계기판  교체 관련 서비스 정보",
+    "author": "박관신",
+    "date": "2023-12-06 16:38:32",
+    "views": "165"
+  },
+  {
+    "board_no": "12422",
+    "no": 1930,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "동절기 디젤연료(경유) 품질기준 정보 공유",
+    "author": "김정수",
+    "date": "2023-11-30 08:34:41",
+    "views": "140"
+  },
+  {
+    "board_no": "12418",
+    "no": 1926,
+    "category": "일반",
+    "ref_no": "SV23-0035",
+    "title": "[FS] [D70S~DV250S-9] FS Quick Fix Display software release",
+    "author": "김진우",
+    "date": "2023-11-28 09:17:30",
+    "views": "261"
+  },
+  {
+    "board_no": "12417",
+    "no": 1925,
+    "category": "서비스정보",
+    "ref_no": "SV23-0034",
+    "title": "9시리즈 7톤급 마스트 인터락 램프 점등 관련 건",
+    "author": "홍상현",
+    "date": "2023-11-09 12:13:04",
+    "views": "453"
+  },
+  {
+    "board_no": "12416",
+    "no": 1924,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 2.4.3 및 BT(X)-7 Plus 펌웨어 배포",
+    "author": "최우혁",
+    "date": "2023-11-08 17:31:44",
+    "views": "80"
+  },
+  {
+    "board_no": "12403",
+    "no": 1911,
+    "category": "기술정보",
+    "ref_no": "SV23-0033",
+    "title": "9시리즈 자이로 센서(Gyro Sensor) 초기화 매뉴얼",
+    "author": "김진우",
+    "date": "2023-11-03 08:38:42",
+    "views": "344"
+  },
+  {
+    "board_no": "12402",
+    "no": 1910,
+    "category": "서비스정보",
+    "ref_no": "SV23-0032",
+    "title": "진단툴 및 소프트웨어 정보 (23.11.03)",
+    "author": "김진우",
+    "date": "2023-11-03 08:32:36",
+    "views": "199"
+  },
+  {
+    "board_no": "12375",
+    "no": 1909,
+    "category": "개선정보",
+    "ref_no": "",
+    "title": "엔진식 지게차 브레이크 압력 스위치  관련 정보 공유건",
+    "author": "김정수",
+    "date": "2023-10-27 09:51:00",
+    "views": "258"
+  },
+  {
+    "board_no": "12374",
+    "no": 1908,
+    "category": "기술정보",
+    "ref_no": "SV23-0031",
+    "title": "[FS] [D70S~DV250S-9] VCU software(V11.1_230907_Quick Fix) release.",
+    "author": "김진우",
+    "date": "2023-10-19 15:45:42",
+    "views": "433"
+  },
+  {
+    "board_no": "12371",
+    "no": 1907,
+    "category": "기타",
+    "ref_no": "SV23-0030",
+    "title": "지게차 기종명 약자 공유",
+    "author": "홍상현",
+    "date": "2023-10-12 16:01:43",
+    "views": "175"
+  },
+  {
+    "board_no": "12334",
+    "no": 1905,
+    "category": "개선정보",
+    "ref_no": "",
+    "title": "신기종 (S-9) 3톤급 엔진식 에어컨 응축수 호스 꺽임과다(눌림) 개선건",
+    "author": "박관신",
+    "date": "2023-09-27 09:00:57",
+    "views": "230"
+  },
+  {
+    "board_no": "12331",
+    "no": 1904,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview B15T/B20X-7 B45X-7 Plus F/S firmware 배포",
+    "author": "최우혁",
+    "date": "2023-09-25 17:27:58",
+    "views": "80"
+  },
+  {
+    "board_no": "12318",
+    "no": 1901,
+    "category": "일반",
+    "ref_no": "SV23-0029",
+    "title": "9시리즈 엔진 4톤급 TCU Firmware 배포(v159c)",
+    "author": "김진우",
+    "date": "2023-09-19 08:43:52",
+    "views": "293"
+  },
+  {
+    "board_no": "12306",
+    "no": 1898,
+    "category": "서비스정보",
+    "ref_no": "SV23-0028",
+    "title": "VCU 진단프로그램 업데이트 공지(V1.06)",
+    "author": "김진우",
+    "date": "2023-09-14 11:32:18",
+    "views": "403"
+  },
+  {
+    "board_no": "12287",
+    "no": 1896,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview BR16/BR25JW, BR16J-9 firmware 배포",
+    "author": "최우혁",
+    "date": "2023-09-04 19:09:54",
+    "views": "105"
+  },
+  {
+    "board_no": "12282",
+    "no": 1894,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "엔진식 2~4톤급  에어컨( 휴즈+홀더+배선 구성) 하네스  서비스용 품번 공지",
+    "author": "박관신",
+    "date": "2023-09-01 17:50:34",
+    "views": "435"
+  },
+  {
+    "board_no": "12246",
+    "no": 1892,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "차세대 4.5톤급 지게차 Starter Motor(300516-00132C) 이상으로 시동 불능 필드 사례 정보공유 드립니다.",
+    "author": "김정수",
+    "date": "2023-08-24 09:58:18",
+    "views": "300"
+  },
+  {
+    "board_no": "12243",
+    "no": 1891,
+    "category": "기술정보",
+    "ref_no": "SV23-0027",
+    "title": "D25/45S-9 소형차량 VCU software release (V4.1)",
+    "author": "김진우",
+    "date": "2023-08-23 13:44:24",
+    "views": "284"
+  },
+  {
+    "board_no": "12220",
+    "no": 1885,
+    "category": "기술정보",
+    "ref_no": "SV23-0026",
+    "title": "[FS] D70S~DV250S-9 FS VCU Software 배포 (V11.0_230725)",
+    "author": "김진우",
+    "date": "2023-08-16 16:24:47",
+    "views": "272"
+  },
+  {
+    "board_no": "12218",
+    "no": 1884,
+    "category": "서비스정보",
+    "ref_no": "SV23-0025",
+    "title": "[동영상 제공] 9시리즈 엔진 차량 VCU S/W 업데이트 방법 공유",
+    "author": "김진우",
+    "date": "2023-08-16 15:57:43",
+    "views": "786"
+  },
+  {
+    "board_no": "12214",
+    "no": 1882,
+    "category": "기술정보",
+    "ref_no": "SV23-0024",
+    "title": "9시리즈 엔진 4톤급 TCU Firmware 배포(v158c)",
+    "author": "김진우",
+    "date": "2023-08-08 11:03:32",
+    "views": "247"
+  },
+  {
+    "board_no": "12213",
+    "no": 1881,
+    "category": "서비스정보",
+    "ref_no": "SV23-0023",
+    "title": "[동영상 제공] 9시리즈 엔진 4톤급 미션 TCU Firmware 업데이트 방법 공유",
+    "author": "김진우",
+    "date": "2023-08-08 11:02:03",
+    "views": "323"
+  },
+  {
+    "board_no": "12212",
+    "no": 1880,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "엔진 7톤급 이상 차량에에 공조기(에어컨,히터) 메모리 기능",
+    "author": "박관신",
+    "date": "2023-08-03 15:16:38",
+    "views": "282"
+  },
+  {
+    "board_no": "12211",
+    "no": 1879,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "D35/50SE-9 계기판에 \"0-0 Timeout Error of CAN\" 에러건 점검 사항",
+    "author": "박관신",
+    "date": "2023-08-03 14:55:08",
+    "views": "393"
+  },
+  {
+    "board_no": "12210",
+    "no": 1878,
+    "category": "일반",
+    "ref_no": "",
+    "title": "엔진식2~4톤급 S(E)-9 모델에 계기판 VCU 고장코드",
+    "author": "박관신",
+    "date": "2023-08-03 14:38:59",
+    "views": "746"
+  },
+  {
+    "board_no": "12209",
+    "no": 1877,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "엔진식 S(E)-9 모델에 정션박스 내부에 조립되는 휴즈 및 릴레이 품번",
+    "author": "박관신",
+    "date": "2023-08-03 10:52:56",
+    "views": "215"
+  },
+  {
+    "board_no": "12208",
+    "no": 1876,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "에어컨 고압 저압 압력 점검을 통한 유형별 진단 조치요령",
+    "author": "박관신",
+    "date": "2023-08-02 16:25:37",
+    "views": "328"
+  },
+  {
+    "board_no": "12207",
+    "no": 1875,
+    "category": "일반",
+    "ref_no": "",
+    "title": "에어컨 진공 및 냉매 주입 작업방법 (25.07.15 업데이트)",
+    "author": "박관신",
+    "date": "2023-08-02 14:38:15",
+    "views": "340"
+  },
+  {
+    "board_no": "12202",
+    "no": 1874,
+    "category": "개선정보",
+    "ref_no": "",
+    "title": "BR  브레이크 근접 스위치 개선건",
+    "author": "박관신",
+    "date": "2023-08-01 17:10:28",
+    "views": "143"
+  },
+  {
+    "board_no": "12191",
+    "no": 1871,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview B20/25/30/35NS firmware 배포",
+    "author": "최우혁",
+    "date": "2023-07-28 11:58:03",
+    "views": "135"
+  },
+  {
+    "board_no": "12181",
+    "no": 1869,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "D35/50S(E)-9 차량 장비 사용중 서키트 브레이커(CIRCUIT BREAKER) 차단 관련 정보 공유 드립니다.(추가 재 공지)",
+    "author": "김정수",
+    "date": "2023-07-19 09:04:49",
+    "views": "305"
+  },
+  {
+    "board_no": "12180",
+    "no": 1868,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "차세대 2톤급 지게차 주차브레이크 해제 불가에 따른 전후진 불능(VCU 전원 Reset 방법)",
+    "author": "김정수",
+    "date": "2023-07-18 10:08:55",
+    "views": "330"
+  },
+  {
+    "board_no": "12178",
+    "no": 1867,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "D70EV(S)-7톤 지게차 Key off시 시동 안 꺼짐 및 충전 경고등 점등건 필드 사례 정보공유",
+    "author": "김정수",
+    "date": "2023-07-12 17:46:07",
+    "views": "290"
+  },
+  {
+    "board_no": "12172",
+    "no": 1866,
+    "category": "일반",
+    "ref_no": "",
+    "title": "전동 F-controller LED 에러코드 확인 방법",
+    "author": "최우혁",
+    "date": "2023-07-10 17:04:32",
+    "views": "190"
+  },
+  {
+    "board_no": "12170",
+    "no": 1864,
+    "category": "기술정보",
+    "ref_no": "SV23-0022",
+    "title": "[FS] D70S~DV250S-9 FS VCU Software 배포 (Ver 10.8)",
+    "author": "김진우",
+    "date": "2023-07-10 09:09:38",
+    "views": "196"
+  },
+  {
+    "board_no": "12167",
+    "no": 1861,
+    "category": "서비스정보",
+    "ref_no": "SV23-0021",
+    "title": "9시리즈 엔진 16톤급 이상 HSA(Hill Start Assist) 기능 공유",
+    "author": "홍상현",
+    "date": "2023-07-07 14:30:46",
+    "views": "111"
+  },
+  {
+    "board_no": "12165",
+    "no": 1859,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 2.4.2 배포 및 B32S-7 / B45X-7 firmware 배포",
+    "author": "최우혁",
+    "date": "2023-07-03 19:02:05",
+    "views": "80"
+  },
+  {
+    "board_no": "12164",
+    "no": 1858,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "D35/50S(E)-9 장비 사용 중 서키트 브레이커(CIRCUIT BREAKER) 차단 관련건",
+    "author": "김정수",
+    "date": "2023-06-20 11:37:32",
+    "views": "254"
+  },
+  {
+    "board_no": "12149",
+    "no": 1857,
+    "category": "서비스정보",
+    "ref_no": "SV23-0020",
+    "title": "9시리즈 4톤급 TCU 초기화 방법 공유",
+    "author": "홍상현",
+    "date": "2023-06-16 09:52:53",
+    "views": "286"
+  },
+  {
+    "board_no": "12148",
+    "no": 1856,
+    "category": "서비스정보",
+    "ref_no": "SV23-0019",
+    "title": "9시리즈 엔진 2,4톤급 에어컨 부품 품번 공유",
+    "author": "홍상현",
+    "date": "2023-06-07 16:09:41",
+    "views": "517"
+  },
+  {
+    "board_no": "12147",
+    "no": 1855,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 신규 Firmware 배포 (BOP15S-9)",
+    "author": "최우혁",
+    "date": "2023-06-05 16:44:55",
+    "views": "58"
+  },
+  {
+    "board_no": "12144",
+    "no": 1853,
+    "category": "일반",
+    "ref_no": "SV23-0018",
+    "title": "9시리즈 엔진 기종 VCU 품번 공유",
+    "author": "홍상현",
+    "date": "2023-06-01 09:42:01",
+    "views": "196"
+  },
+  {
+    "board_no": "12141",
+    "no": 1850,
+    "category": "일반",
+    "ref_no": "",
+    "title": "[매뉴얼 개정] 7톤급 이상 정비지침서 HVAC 회로도 추가",
+    "author": "김진우",
+    "date": "2023-05-26 11:56:57",
+    "views": "172"
+  },
+  {
+    "board_no": "12140",
+    "no": 1849,
+    "category": "서비스정보",
+    "ref_no": "SV23-0017",
+    "title": "D25SE-9 기종 VCU Firmware 배포 (Ver 10.3)",
+    "author": "김진우",
+    "date": "2023-05-26 10:55:49",
+    "views": "209"
+  },
+  {
+    "board_no": "12139",
+    "no": 1848,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 신규 Firmware 배포 (Functional Safety BX-7 모델)",
+    "author": "최우혁",
+    "date": "2023-05-18 15:40:02",
+    "views": "66"
+  },
+  {
+    "board_no": "12135",
+    "no": 1844,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 신규 Firmware 배포 (B20SU-9)",
+    "author": "최우혁",
+    "date": "2023-04-28 16:49:48",
+    "views": "93"
+  },
+  {
+    "board_no": "12132",
+    "no": 1841,
+    "category": "서비스정보",
+    "ref_no": "SV23-0016",
+    "title": "DL06 Stage 5 엔진 신규 Map 배포 (Ver.06)",
+    "author": "김진우",
+    "date": "2023-04-27 15:20:23",
+    "views": "159"
+  },
+  {
+    "board_no": "12131",
+    "no": 1840,
+    "category": "일반",
+    "ref_no": "SV23-0015",
+    "title": "DL06, DL08 Stage 5 엔진 Map 업데이트 방법 공유",
+    "author": "김진우",
+    "date": "2023-04-27 14:54:55",
+    "views": "122"
+  },
+  {
+    "board_no": "12130",
+    "no": 1839,
+    "category": "서비스정보",
+    "ref_no": "SV23-0014",
+    "title": "9시리즈 7톤급 이상 기종 Weight Scale 값 오류 관련 조치 방법 공유",
+    "author": "홍상현",
+    "date": "2023-04-27 09:04:52",
+    "views": "200"
+  },
+  {
+    "board_no": "12109",
+    "no": 1834,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 2.4.1 배포 및 Functional safety Firmware 배포",
+    "author": "최우혁",
+    "date": "2023-04-18 15:16:21",
+    "views": "119"
+  },
+  {
+    "board_no": "12108",
+    "no": 1833,
+    "category": "서비스정보",
+    "ref_no": "SV23-0013",
+    "title": "9시리즈 Auto Throttle up 기능 On, Off 메뉴 추가 방법 공유 (계기판 업데이트 포함)",
+    "author": "홍상현",
+    "date": "2023-04-13 15:08:35",
+    "views": "305"
+  },
+  {
+    "board_no": "12107",
+    "no": 1832,
+    "category": "서비스정보",
+    "ref_no": "SV23-0012",
+    "title": "기종별 에어컨 냉매 주입량정보 공유",
+    "author": "정지민",
+    "date": "2023-04-11 15:30:17",
+    "views": "334"
+  },
+  {
+    "board_no": "12106",
+    "no": 1831,
+    "category": "서비스정보",
+    "ref_no": "SV23-0011",
+    "title": "9시리즈 엔진 계기판에서 기종 변경 방법 공유",
+    "author": "홍상현",
+    "date": "2023-04-10 14:49:16",
+    "views": "235"
+  },
+  {
+    "board_no": "12103",
+    "no": 1828,
+    "category": "일반",
+    "ref_no": "",
+    "title": "VCU 펌웨어 및 프로그램 공지 (3/30)",
+    "author": "최우혁",
+    "date": "2023-03-30 14:09:58",
+    "views": "322"
+  },
+  {
+    "board_no": "12102",
+    "no": 1827,
+    "category": "서비스정보",
+    "ref_no": "SV23-0010",
+    "title": "우창 시트 스위치 교체 작업 매뉴얼 (301405-00178)",
+    "author": "정지민",
+    "date": "2023-03-09 17:05:04",
+    "views": "261"
+  },
+  {
+    "board_no": "12100",
+    "no": 1825,
+    "category": "서비스정보",
+    "ref_no": "SV23-0009",
+    "title": "9시리즈 엔진 4톤급 미션 TCU Firmware 업데이트 방법 공유 (에러코드 B7 등 TCU Firmware 에러 조치용)",
+    "author": "홍상현",
+    "date": "2023-03-07 09:40:35",
+    "views": "386"
+  },
+  {
+    "board_no": "12098",
+    "no": 1823,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "엔진 4.5톤급(D35/40/45/50SE-9) 차량의 미션 온도 센서(301317-00323) 관련 내용",
+    "author": "김정수",
+    "date": "2023-03-02 10:59:47",
+    "views": "422"
+  },
+  {
+    "board_no": "12090",
+    "no": 1822,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "지게차 FFT(3단) 리프트 실린더 쿠션 기능",
+    "author": "김정수",
+    "date": "2023-02-24 16:43:36",
+    "views": "195"
+  },
+  {
+    "board_no": "12089",
+    "no": 1821,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Functional Safety 기능 소개 및 대상기종 (B15/20T(X)-7, B25X-7, B45X-7, BR16/20JW-9, D70S-9 ~ DV300S-9)",
+    "author": "최우혁",
+    "date": "2023-02-24 09:36:49",
+    "views": "211"
+  },
+  {
+    "board_no": "12087",
+    "no": 1819,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview B45X-7 신규 Firmware 배포",
+    "author": "최우혁",
+    "date": "2023-02-16 16:28:09",
+    "views": "88"
+  },
+  {
+    "board_no": "12082",
+    "no": 1814,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview 신규 소프트웨어 배포 (Ver. 2.4.0)",
+    "author": "최우혁",
+    "date": "2023-02-09 11:34:57",
+    "views": "130"
+  },
+  {
+    "board_no": "12081",
+    "no": 1813,
+    "category": "서비스정보",
+    "ref_no": "SV23-0008",
+    "title": "9시리즈 엔진 DPF 강제 재생 조건 및 Ash Cleaning 주기, DPF 재생 성공 조건 공유",
+    "author": "홍상현",
+    "date": "2023-02-08 17:08:26",
+    "views": "473"
+  },
+  {
+    "board_no": "12080",
+    "no": 1812,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview B20TX-7 ,B35X-7  Firmware 배포",
+    "author": "최우혁",
+    "date": "2023-02-08 16:15:04",
+    "views": "48"
+  },
+  {
+    "board_no": "12078",
+    "no": 1810,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "D24/D34 Tier-4 인젝터 MDP 드리프트 Fault 관련건 공지 합니다.(Stage-5 미 해당)",
+    "author": "김정수",
+    "date": "2023-02-08 10:29:00",
+    "views": "231"
+  },
+  {
+    "board_no": "12077",
+    "no": 1809,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "D35/50SE-9 Fan V Belt 유동(흔들림) 관련 정보",
+    "author": "김정수",
+    "date": "2023-02-08 09:21:55",
+    "views": "187"
+  },
+  {
+    "board_no": "12075",
+    "no": 1807,
+    "category": "일반",
+    "ref_no": "SV23-0007",
+    "title": "9시리즈 엔진 7톤급 ECU, 샤시 하네스 커넥터 설명 및 전기회로 읽는 법 공유",
+    "author": "홍상현",
+    "date": "2023-01-31 17:24:33",
+    "views": "227"
+  },
+  {
+    "board_no": "12073",
+    "no": 1805,
+    "category": "일반",
+    "ref_no": "SV23-0006",
+    "title": "9시리즈 계기판 에러코드 확인 방법 공유",
+    "author": "홍상현",
+    "date": "2023-01-27 08:53:15",
+    "views": "467"
+  },
+  {
+    "board_no": "12071",
+    "no": 1803,
+    "category": "서비스정보",
+    "ref_no": "SV23-0005",
+    "title": "9시리즈 엔진 DL06,08 에러 P108E 점검 방법 공유",
+    "author": "홍상현",
+    "date": "2023-01-25 08:35:52",
+    "views": "177"
+  },
+  {
+    "board_no": "12069",
+    "no": 1802,
+    "category": "일반",
+    "ref_no": "",
+    "title": "9 series 디스플레이 펌웨어 배포",
+    "author": "최우혁",
+    "date": "2023-01-18 17:44:07",
+    "views": "248"
+  },
+  {
+    "board_no": "12063",
+    "no": 1797,
+    "category": "기타",
+    "ref_no": "SV23-0004",
+    "title": "9시리즈 엔진 7톤급 이상 후진 시 후방카메라 화면 ON/OFF 방법 공유",
+    "author": "홍상현",
+    "date": "2023-01-12 09:14:08",
+    "views": "139"
+  },
+  {
+    "board_no": "12053",
+    "no": 1796,
+    "category": "기술정보",
+    "ref_no": "SV23-0003",
+    "title": "9시리즈 엔진 2~4톤급 히터 Ass'y 상단 커버 분해 방법 공유 건",
+    "author": "홍상현",
+    "date": "2023-01-10 10:34:17",
+    "views": "169"
+  },
+  {
+    "board_no": "12050",
+    "no": 1793,
+    "category": "일반",
+    "ref_no": "SV23-0002",
+    "title": "9시리즈 엔진 4톤급 외부 사이드미러 품번 공유 건",
+    "author": "홍상현",
+    "date": "2023-01-06 08:47:57",
+    "views": "131"
+  },
+  {
+    "board_no": "12048",
+    "no": 1791,
+    "category": "서비스정보",
+    "ref_no": "SV23-0001",
+    "title": "내수 전동차량 배터리/충전기 품질보증기간 공유",
+    "author": "정지민",
+    "date": "2023-01-03 17:10:06",
+    "views": "334"
+  },
+  {
+    "board_no": "12046",
+    "no": 1789,
+    "category": "서비스정보",
+    "ref_no": "SV22-0028",
+    "title": "NS 차량 시트스위치 교체 작업 가이드",
+    "author": "정지민",
+    "date": "2022-12-29 14:22:42",
+    "views": "222"
+  },
+  {
+    "board_no": "12045",
+    "no": 1788,
+    "category": "일반",
+    "ref_no": "SV22-0027",
+    "title": "9시리즈 엔진7톤 이상 캐빈 틸팅 불가 관련",
+    "author": "홍상현",
+    "date": "2022-12-28 09:39:25",
+    "views": "307"
+  },
+  {
+    "board_no": "12044",
+    "no": 1787,
+    "category": "서비스정보",
+    "ref_no": "SV22-0026",
+    "title": "9시리즈 엔진7톤급 배터리 성능 저하에 따른 시동 불능 건",
+    "author": "홍상현",
+    "date": "2022-12-28 09:21:43",
+    "views": "208"
+  },
+  {
+    "board_no": "12029",
+    "no": 1781,
+    "category": "개선정보",
+    "ref_no": "",
+    "title": "신기종 (S-9)중형 엔진식 지게차 옵션 램프 브라켓 개선건",
+    "author": "박관신",
+    "date": "2022-12-23 11:56:15",
+    "views": "112"
+  },
+  {
+    "board_no": "12028",
+    "no": 1780,
+    "category": "개선정보",
+    "ref_no": "",
+    "title": "신기종 (S-9)중/대형 엔진식 지게차 시트 열선 작동 스위치 램프 미점등  개선건",
+    "author": "박관신",
+    "date": "2022-12-23 11:42:40",
+    "views": "139"
+  },
+  {
+    "board_no": "12026",
+    "no": 1778,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview BTX-7 및 B25/35NS 신규 Firmware 배포",
+    "author": "최우혁",
+    "date": "2022-12-22 17:25:27",
+    "views": "67"
+  },
+  {
+    "board_no": "12025",
+    "no": 1777,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "D20/30S(E)-9 전후진 주행 불능 점검 방범",
+    "author": "박관신",
+    "date": "2022-12-22 15:35:09",
+    "views": "395"
+  },
+  {
+    "board_no": "12024",
+    "no": 1776,
+    "category": "일반",
+    "ref_no": "",
+    "title": "엔진식 Stage-5 DPF 재생  사유 및  방법",
+    "author": "박관신",
+    "date": "2022-12-22 15:05:31",
+    "views": "346"
+  },
+  {
+    "board_no": "12023",
+    "no": 1775,
+    "category": "일반",
+    "ref_no": "",
+    "title": "전동지게차 납 배터리  MSDS(물질안전보건자료) 자료",
+    "author": "박관신",
+    "date": "2022-12-21 13:02:45",
+    "views": "109"
+  },
+  {
+    "board_no": "12012",
+    "no": 1773,
+    "category": "일반",
+    "ref_no": "",
+    "title": "B15NS, B25NS, B35NS 리튬 배터리 히팅 조건",
+    "author": "최우혁",
+    "date": "2022-12-14 09:19:36",
+    "views": "306"
+  },
+  {
+    "board_no": "12011",
+    "no": 1772,
+    "category": "일반",
+    "ref_no": "",
+    "title": "전동기종 에러코드 커티스 LED 에러코드 매칭 테이블(BS-7기준)",
+    "author": "최우혁",
+    "date": "2022-12-13 11:32:38",
+    "views": "526"
+  },
+  {
+    "board_no": "12008",
+    "no": 1771,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "동절기 경유 왁싱 현상 및 연료의 수분 결빙으로 연료 공급문제로 시동불능건 관련 내용입니다.",
+    "author": "김정수",
+    "date": "2022-12-05 11:23:01",
+    "views": "139"
+  },
+  {
+    "board_no": "12007",
+    "no": 1770,
+    "category": "일반",
+    "ref_no": "",
+    "title": "동절기 엔진식 지게차 관리 요령",
+    "author": "박관신",
+    "date": "2022-12-01 17:59:53",
+    "views": "128"
+  },
+  {
+    "board_no": "12006",
+    "no": 1769,
+    "category": "일반",
+    "ref_no": "SV22-0025",
+    "title": "차량 번호판 변경 관련 서비스 품번  공지",
+    "author": "박관신",
+    "date": "2022-12-01 17:52:46",
+    "views": "87"
+  },
+  {
+    "board_no": "12005",
+    "no": 1768,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "전동 NXE 1톤 어테치 호스 스웨징용 커플링 품번",
+    "author": "박관신",
+    "date": "2022-11-25 15:34:00",
+    "views": "79"
+  },
+  {
+    "board_no": "12004",
+    "no": 1767,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "지게차 오일에 대한 MSDS(물질안전보건자료) 자료",
+    "author": "김정수",
+    "date": "2022-11-21 13:41:17",
+    "views": "100"
+  },
+  {
+    "board_no": "12003",
+    "no": 1766,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "D35/50SE-9 차량의 미션 에어 브리더로 오일 넘침건",
+    "author": "김정수",
+    "date": "2022-11-21 13:33:06",
+    "views": "233"
+  },
+  {
+    "board_no": "12001",
+    "no": 1764,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[매뉴얼 개정] D34 Tier4_SM1011",
+    "author": "배정웅",
+    "date": "2022-11-14 09:35:07",
+    "views": "106"
+  },
+  {
+    "board_no": "12000",
+    "no": 1763,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[매뉴얼 개정] D34 Stage 5_SM1060",
+    "author": "배정웅",
+    "date": "2022-11-11 18:03:37",
+    "views": "61"
+  },
+  {
+    "board_no": "11999",
+    "no": 1762,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[매뉴얼 개정] D24 Stage 5_SM1058",
+    "author": "배정웅",
+    "date": "2022-11-11 18:02:21",
+    "views": "51"
+  },
+  {
+    "board_no": "11998",
+    "no": 1761,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[매뉴얼 개정] D24 Tier4_SM1012",
+    "author": "배정웅",
+    "date": "2022-11-11 18:00:55",
+    "views": "44"
+  },
+  {
+    "board_no": "11993",
+    "no": 1756,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[매뉴얼 개정] D60,70,80,90S-9_SM1071",
+    "author": "배정웅",
+    "date": "2022-11-11 14:54:23",
+    "views": "58"
+  },
+  {
+    "board_no": "11977",
+    "no": 1752,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[매뉴얼 개정] 차량 정비지침서_D34 Stage V_SM1060-01",
+    "author": "배정웅",
+    "date": "2022-10-27 10:20:44",
+    "views": "138"
+  },
+  {
+    "board_no": "11976",
+    "no": 1751,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[매뉴얼 개정] 차량 정비지침서_D24 Stage V_SM1058-01",
+    "author": "배정웅",
+    "date": "2022-10-27 10:13:05",
+    "views": "95"
+  },
+  {
+    "board_no": "11973",
+    "no": 1748,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "D50/70S(EV)-9, D100/180S-9, DV180/300S-9 차량(케빈)의 자이로 센서 조립성 문제건",
+    "author": "김정수",
+    "date": "2022-10-25 11:27:13",
+    "views": "186"
+  },
+  {
+    "board_no": "11972",
+    "no": 1747,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "D50/80S(EV)-9 , D100/180S-9, DV180/300S-9 파이롯 밸브의 연결 호스 분리 방법",
+    "author": "김정수",
+    "date": "2022-10-25 11:23:27",
+    "views": "129"
+  },
+  {
+    "board_no": "11971",
+    "no": 1746,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview BR16/25JW-9 신규 Firmware 배포",
+    "author": "최우혁",
+    "date": "2022-10-21 17:03:58",
+    "views": "60"
+  },
+  {
+    "board_no": "11968",
+    "no": 1743,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview Firmware 정리 (25.11.05)",
+    "author": "최우혁",
+    "date": "2022-10-12 11:42:36",
+    "views": "805"
+  },
+  {
+    "board_no": "11967",
+    "no": 1742,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "D20/33SE-9 전/후진불능 점검 방법(전후진레버/주차브레이크 정상)",
+    "author": "김정수",
+    "date": "2022-10-11 13:42:55",
+    "views": "402"
+  },
+  {
+    "board_no": "11966",
+    "no": 1741,
+    "category": "서비스정보",
+    "ref_no": "SV22-0024",
+    "title": "9시리즈 엔진 7톤 이상 기종 TCU, ECU 통신 이상 관련 CAN 통신 Line 확인 방법 공유",
+    "author": "홍상현",
+    "date": "2022-10-07 13:22:47",
+    "views": "404"
+  },
+  {
+    "board_no": "11964",
+    "no": 1739,
+    "category": "일반",
+    "ref_no": "",
+    "title": "진단툴 및 소프트웨어 정보 (22.10.05)",
+    "author": "최우혁",
+    "date": "2022-10-05 14:49:46",
+    "views": "174"
+  },
+  {
+    "board_no": "11963",
+    "no": 1738,
+    "category": "일반",
+    "ref_no": "",
+    "title": "전동지게차 Pre-selector (높이 설정 방법) 사용법",
+    "author": "최우혁",
+    "date": "2022-10-04 14:07:38",
+    "views": "159"
+  },
+  {
+    "board_no": "11962",
+    "no": 1737,
+    "category": "일반",
+    "ref_no": "",
+    "title": "리튬이온 배터리(인셀) 에러코드 및 점검사항 [예 : 03 에러코드]",
+    "author": "최우혁",
+    "date": "2022-09-30 13:31:17",
+    "views": "222"
+  },
+  {
+    "board_no": "11958",
+    "no": 1735,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "엔진2톤/4톤/7톤 S-7 차량의 브레이크 압력 스위치(A214040) 조립부에서 오일 누유건",
+    "author": "김정수",
+    "date": "2022-09-26 15:21:57",
+    "views": "126"
+  },
+  {
+    "board_no": "11957",
+    "no": 1734,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "D60/70/80S(E)-9 차량의 MCV(메인컨트롤밸브)에서 리프트 실린더쪽으로 연결되는 호스+엘보우 풀림 누유건",
+    "author": "김정수",
+    "date": "2022-09-26 12:03:40",
+    "views": "103"
+  },
+  {
+    "board_no": "11956",
+    "no": 1733,
+    "category": "일반",
+    "ref_no": "",
+    "title": "9시리즈 엔진7톤 이상 기종 카스테레오 사용 설명서",
+    "author": "박관신",
+    "date": "2022-09-20 08:29:40",
+    "views": "110"
+  },
+  {
+    "board_no": "11955",
+    "no": 1732,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "Stage-5 DM02(엔진2톤급)/DM03(엔진3.5톤급 및 엔진7톤급) 엔진 인젝터 신규 IQA코드 입력방법",
+    "author": "김정수",
+    "date": "2022-09-16 16:52:23",
+    "views": "163"
+  },
+  {
+    "board_no": "11954",
+    "no": 1731,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "D70S-7(9) SCR 차량의 DEF Tank Temperature sensor(계기판 3031-4) 에러 관련건",
+    "author": "김정수",
+    "date": "2022-09-16 14:25:25",
+    "views": "290"
+  },
+  {
+    "board_no": "11953",
+    "no": 1730,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "D60/70/80S(E)-9 차량의 MCV에서 리프트 실린더쪽으로 연결되는 호스+엘보우 풀림 누유건",
+    "author": "김정수",
+    "date": "2022-09-16 09:50:23",
+    "views": "74"
+  },
+  {
+    "board_no": "11951",
+    "no": 1729,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview  BR18/25S-9 신규 Firmware 배포",
+    "author": "최우혁",
+    "date": "2022-09-14 15:40:15",
+    "views": "103"
+  },
+  {
+    "board_no": "11933",
+    "no": 1727,
+    "category": "서비스정보",
+    "ref_no": "SV22-0023",
+    "title": "신기종 Stage V (2~8톤급) 엔진 커버 하위 서비스 품번.",
+    "author": "박관신",
+    "date": "2022-09-07 09:43:15",
+    "views": "112"
+  },
+  {
+    "board_no": "11932",
+    "no": 1726,
+    "category": "일반",
+    "ref_no": "SV22-0022",
+    "title": "9시리즈 엔진7톤 이상 기종 VCU S/W업데이트 중 에러 발생 시 조치 방법",
+    "author": "홍상현",
+    "date": "2022-09-06 17:10:46",
+    "views": "333"
+  },
+  {
+    "board_no": "11930",
+    "no": 1724,
+    "category": "일반",
+    "ref_no": "",
+    "title": "커티스 S/SE 컨트롤러 호환성 정보 리스트 (23.02.24)",
+    "author": "최우혁",
+    "date": "2022-09-06 14:36:47",
+    "views": "267"
+  },
+  {
+    "board_no": "11929",
+    "no": 1723,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "DM02/03 ECU MAP파일 및 진단툴 정보 및 버전",
+    "author": "배정웅",
+    "date": "2022-09-06 11:49:09",
+    "views": "276"
+  },
+  {
+    "board_no": "11927",
+    "no": 1721,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "D20/45S-9 VCU 펌웨어 및 소프트웨어 정보 및 버전 공지",
+    "author": "배정웅",
+    "date": "2022-09-06 10:20:46",
+    "views": "334"
+  },
+  {
+    "board_no": "11926",
+    "no": 1720,
+    "category": "일반",
+    "ref_no": "",
+    "title": "TCU 펌웨어 및 진단툴 배포",
+    "author": "배정웅",
+    "date": "2022-09-06 09:43:44",
+    "views": "173"
+  },
+  {
+    "board_no": "11923",
+    "no": 1718,
+    "category": "일반",
+    "ref_no": "",
+    "title": "계기판 아날로그 게이지  개선 (Tier-4 차량 )",
+    "author": "박관신",
+    "date": "2022-08-18 12:20:33",
+    "views": "169"
+  },
+  {
+    "board_no": "11922",
+    "no": 1717,
+    "category": "일반",
+    "ref_no": "SV22-0021",
+    "title": "신기종 (S-9)중/대형 엔진식 지게차 키 번호별 관련 부품 품번",
+    "author": "박관신",
+    "date": "2022-08-16 15:23:01",
+    "views": "220"
+  },
+  {
+    "board_no": "11921",
+    "no": 1716,
+    "category": "일반",
+    "ref_no": "SV22-0020",
+    "title": "9시리즈 엔진4톤급 캐빈 이음 조치 방법",
+    "author": "홍상현",
+    "date": "2022-08-12 08:57:56",
+    "views": "205"
+  },
+  {
+    "board_no": "11903",
+    "no": 1713,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "D35/50S(E)-9 수동모드 전진2단 주행 시 1단 속도로 주행건",
+    "author": "김정수",
+    "date": "2022-08-11 09:18:36",
+    "views": "211"
+  },
+  {
+    "board_no": "11901",
+    "no": 1711,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "D35/50S(E)-9 차량의 제동시 이음건 관련 점검/조치 방법",
+    "author": "김정수",
+    "date": "2022-08-11 09:13:14",
+    "views": "187"
+  },
+  {
+    "board_no": "11898",
+    "no": 1709,
+    "category": "일반",
+    "ref_no": "",
+    "title": "B15/18NS, B20NSC OEM 에러 정리",
+    "author": "최우혁",
+    "date": "2022-08-08 10:06:57",
+    "views": "458"
+  },
+  {
+    "board_no": "11895",
+    "no": 1707,
+    "category": "일반",
+    "ref_no": "SV22-0019",
+    "title": "SCR 도징 모듈 요소수 Crystallization(결정화)에 의한 막힘 세척 방법",
+    "author": "홍상현",
+    "date": "2022-07-22 15:43:43",
+    "views": "217"
+  },
+  {
+    "board_no": "11878",
+    "no": 1702,
+    "category": "서비스정보",
+    "ref_no": "SV22-0018",
+    "title": "전동지게차 배터리 및 충전기 보증기간",
+    "author": "홍상현",
+    "date": "2022-06-24 10:25:10",
+    "views": "405"
+  },
+  {
+    "board_no": "11877",
+    "no": 1701,
+    "category": "서비스정보",
+    "ref_no": "SV22-0017",
+    "title": "대원시트 신형 상세 품번정보 (110946-00651)",
+    "author": "정지민",
+    "date": "2022-06-22 16:14:49",
+    "views": "226"
+  },
+  {
+    "board_no": "11876",
+    "no": 1700,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview BRSP-7P 신규 Firmware 배포",
+    "author": "최우혁",
+    "date": "2022-06-10 17:06:15",
+    "views": "104"
+  },
+  {
+    "board_no": "11874",
+    "no": 1698,
+    "category": "일반",
+    "ref_no": "",
+    "title": "DPF 재생 관련 고객용 스티커 배포",
+    "author": "최우혁",
+    "date": "2022-06-09 15:40:09",
+    "views": "151"
+  },
+  {
+    "board_no": "11873",
+    "no": 1697,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "D35/45S-9 차량 사용중 간헐적으로 연료차압센서 에러",
+    "author": "김정수",
+    "date": "2022-06-03 14:59:04",
+    "views": "326"
+  },
+  {
+    "board_no": "11872",
+    "no": 1696,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "D60/80S-9 차속제한 기능 관련건",
+    "author": "김정수",
+    "date": "2022-06-03 14:53:29",
+    "views": "190"
+  },
+  {
+    "board_no": "11871",
+    "no": 1695,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview BT/BX-7 Plus 신규 Firmware 배포",
+    "author": "최우혁",
+    "date": "2022-05-26 16:39:33",
+    "views": "85"
+  },
+  {
+    "board_no": "11869",
+    "no": 1693,
+    "category": "서비스정보",
+    "ref_no": "SV22-0016",
+    "title": "GCT 엔진 MIL LAMP 진단 방법",
+    "author": "홍상현",
+    "date": "2022-05-25 16:30:39",
+    "views": "120"
+  },
+  {
+    "board_no": "11868",
+    "no": 1692,
+    "category": "기술정보",
+    "ref_no": "SV22-0015",
+    "title": "D160S-7 Tier-4 U0054 ( Timeout error of CAN Module C )에러 발생건",
+    "author": "김정수",
+    "date": "2022-05-24 08:50:55",
+    "views": "129"
+  },
+  {
+    "board_no": "11867",
+    "no": 1691,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "D35/45S-9 전/후진 2단만 주행(전/후진 1단 주행불능)",
+    "author": "김정수",
+    "date": "2022-05-24 08:18:55",
+    "views": "258"
+  },
+  {
+    "board_no": "11865",
+    "no": 1690,
+    "category": "서비스정보",
+    "ref_no": "SV22-0014",
+    "title": "9 시리즈 DPF 재생 관리 설명 (Soot량 관리)",
+    "author": "홍상현",
+    "date": "2022-05-20 12:20:03",
+    "views": "365"
+  },
+  {
+    "board_no": "11864",
+    "no": 1689,
+    "category": "서비스정보",
+    "ref_no": "SV22-0013",
+    "title": "9 시리즈 엔진 7톤 이상 중대형 진단툴 Cable 품번 및 설명",
+    "author": "홍상현",
+    "date": "2022-05-17 13:43:18",
+    "views": "319"
+  },
+  {
+    "board_no": "11863",
+    "no": 1688,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "D20/45S-9 VCU 프로그램 및 케이블 정보",
+    "author": "김정수",
+    "date": "2022-05-17 10:47:10",
+    "views": "425"
+  },
+  {
+    "board_no": "11861",
+    "no": 1686,
+    "category": "서비스정보",
+    "ref_no": "SV22-0012",
+    "title": "엔진 2톤급 S-9 주차브레이크 해제 조건",
+    "author": "홍상현",
+    "date": "2022-05-04 16:48:57",
+    "views": "301"
+  },
+  {
+    "board_no": "11858",
+    "no": 1683,
+    "category": "서비스정보",
+    "ref_no": "SV22-0011",
+    "title": "Fork 길이에 따른 Fork Cap 길이 규정 안내",
+    "author": "홍상현",
+    "date": "2022-04-20 17:08:07",
+    "views": "124"
+  },
+  {
+    "board_no": "11857",
+    "no": 1682,
+    "category": "서비스정보",
+    "ref_no": "SV22-0010",
+    "title": "엔진 2톤급 S-9 미션 성능 저하 하자 조치 건",
+    "author": "홍상현",
+    "date": "2022-04-18 14:55:06",
+    "views": "283"
+  },
+  {
+    "board_no": "11856",
+    "no": 1681,
+    "category": "일반",
+    "ref_no": "SV22-0009",
+    "title": "G2 Stage 5 엔진 MAP 업데이트",
+    "author": "배정웅",
+    "date": "2022-04-14 14:08:28",
+    "views": "373"
+  },
+  {
+    "board_no": "11848",
+    "no": 1679,
+    "category": "일반",
+    "ref_no": "SV22-0008",
+    "title": "엔진 2톤급 S-9 주행 레버 변경 안내",
+    "author": "홍상현",
+    "date": "2022-04-08 08:54:52",
+    "views": "174"
+  },
+  {
+    "board_no": "11831",
+    "no": 1676,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Easyview BT/BX-7 신규 Firmware 배포",
+    "author": "최우혁",
+    "date": "2022-03-11 16:19:15",
+    "views": "121"
+  },
+  {
+    "board_no": "11830",
+    "no": 1675,
+    "category": "일반",
+    "ref_no": "",
+    "title": "B25/35NS 리튬배터리 충전기 오류발생시 점검사항",
+    "author": "최우혁",
+    "date": "2022-03-11 10:44:11",
+    "views": "523"
+  },
+  {
+    "board_no": "11826",
+    "no": 1672,
+    "category": "일반",
+    "ref_no": "SV22-0007",
+    "title": "D(G)35/45S(E)-7 전후진 레버 변경건",
+    "author": "김정수",
+    "date": "2022-03-03 10:59:33",
+    "views": "206"
+  },
+  {
+    "board_no": "11825",
+    "no": 1671,
+    "category": "일반",
+    "ref_no": "SV22-0006",
+    "title": "엔진 2톤 MCV MTG Bolt 조립 관련 주의 사항",
+    "author": "홍상현",
+    "date": "2022-02-22 16:02:26",
+    "views": "154"
+  },
+  {
+    "board_no": "11824",
+    "no": 1670,
+    "category": "서비스정보",
+    "ref_no": "SV22-0005",
+    "title": "D50/70S(E)-5(7) 간헐적으로 “WL” 에러 점등건",
+    "author": "김정수",
+    "date": "2022-02-22 14:29:37",
+    "views": "194"
+  },
+  {
+    "board_no": "11822",
+    "no": 1668,
+    "category": "일반",
+    "ref_no": "SV22-0004",
+    "title": "Easyview 2.3.2 배포 및 BT/BX-7, B25SE-7,BC15S-5 신규 Firmware",
+    "author": "최우혁",
+    "date": "2022-02-22 13:41:36",
+    "views": "95"
+  },
+  {
+    "board_no": "11821",
+    "no": 1667,
+    "category": "서비스정보",
+    "ref_no": "SV22-0003",
+    "title": "엔진 2톤급 냉각수 누수 _ 사전점검 및 조치 요청건",
+    "author": "김정수",
+    "date": "2022-02-11 09:45:53",
+    "views": "190"
+  },
+  {
+    "board_no": "11819",
+    "no": 1665,
+    "category": "일반",
+    "ref_no": "SV22-0002",
+    "title": "NXE1톤급(B15/18NS,B20NSC) 리튬인산철 배터리 신규 진단툴 소개 (히팅기능 적용된 배터리용)",
+    "author": "최우혁",
+    "date": "2022-02-10 16:28:35",
+    "views": "370"
+  },
+  {
+    "board_no": "11791",
+    "no": 1663,
+    "category": "일반",
+    "ref_no": "SV22-0001",
+    "title": "B20/25NS, B30/35NS 파킹해제 스위치 추가 및 진단커넥터 위치변경",
+    "author": "최우혁",
+    "date": "2022-01-25 16:10:42",
+    "views": "362"
+  },
+  {
+    "board_no": "11785",
+    "no": 1657,
+    "category": "일반",
+    "ref_no": "SV21-0047",
+    "title": "요소수 및 냉각수 색소 변경 알림",
+    "author": "홍상현",
+    "date": "2021-12-16 17:31:38",
+    "views": "195"
+  },
+  {
+    "board_no": "11784",
+    "no": 1656,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "엔진식 지게차 관리 요령_요소수",
+    "author": "김정수",
+    "date": "2021-12-16 16:53:59",
+    "views": "235"
+  },
+  {
+    "board_no": "11783",
+    "no": 1655,
+    "category": "기타",
+    "ref_no": "",
+    "title": "QR App 출동서비스/보증내클레임 부품 입력 방법",
+    "author": "홍상현",
+    "date": "2021-12-16 15:39:39",
+    "views": "94"
+  },
+  {
+    "board_no": "11782",
+    "no": 1654,
+    "category": "서비스정보",
+    "ref_no": "SV21-0046",
+    "title": "전동 NXE 2톤급 리튬 배터리 충전기 CAN 통신 이상 점검 방법",
+    "author": "박관신",
+    "date": "2021-12-16 15:33:56",
+    "views": "287"
+  },
+  {
+    "board_no": "11781",
+    "no": 1653,
+    "category": "서비스정보",
+    "ref_no": "SV21-0045",
+    "title": "전동 NXE1톤급 리튬 배터리 분해 조립 방법",
+    "author": "박관신",
+    "date": "2021-12-16 11:26:06",
+    "views": "219"
+  },
+  {
+    "board_no": "11780",
+    "no": 1652,
+    "category": "서비스정보",
+    "ref_no": "SV21-0044",
+    "title": "전기종 경광등 서비스 품번",
+    "author": "박관신",
+    "date": "2021-12-15 16:40:48",
+    "views": "107"
+  },
+  {
+    "board_no": "11779",
+    "no": 1651,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "엔진식 지게차 관리 요령_작동유 관리",
+    "author": "김정수",
+    "date": "2021-12-15 11:36:30",
+    "views": "141"
+  },
+  {
+    "board_no": "11778",
+    "no": 1650,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "엔진식 지게차 관리 요령_미션오일",
+    "author": "김정수",
+    "date": "2021-12-15 11:32:45",
+    "views": "159"
+  },
+  {
+    "board_no": "11777",
+    "no": 1649,
+    "category": "일반",
+    "ref_no": "",
+    "title": "썬라이트 배터리 증류수 자동보액장치(AFS) 품번 공지",
+    "author": "김정수",
+    "date": "2021-12-15 11:13:30",
+    "views": "218"
+  },
+  {
+    "board_no": "11776",
+    "no": 1648,
+    "category": "서비스정보",
+    "ref_no": "SV21-0043",
+    "title": "전동 NXE 2톤급  리튬 배터리, BMS컨트롤러, 충전기 서비스 품번",
+    "author": "박관신",
+    "date": "2021-12-15 09:25:13",
+    "views": "227"
+  },
+  {
+    "board_no": "11775",
+    "no": 1647,
+    "category": "일반",
+    "ref_no": "SV21-0042",
+    "title": "QR 코드 부착 후 QR App차량 등록 절차",
+    "author": "박관신",
+    "date": "2021-12-14 17:44:30",
+    "views": "55"
+  },
+  {
+    "board_no": "11774",
+    "no": 1646,
+    "category": "개선정보",
+    "ref_no": "SV21-0041",
+    "title": "7톤 Fork Shaft 설변건 공유",
+    "author": "정지민",
+    "date": "2021-12-14 16:21:04",
+    "views": "77"
+  },
+  {
+    "board_no": "11773",
+    "no": 1645,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "[신기종] 신기종 Stage V 엔진 교육자료 (1편_Stage V 배기규제)",
+    "author": "배정웅",
+    "date": "2021-12-14 14:02:09",
+    "views": "174"
+  },
+  {
+    "board_no": "11770",
+    "no": 1643,
+    "category": "일반",
+    "ref_no": "SV21-0040",
+    "title": "LPM15N/LPM20N 배터리 타입 변경 건",
+    "author": "최우혁",
+    "date": "2021-12-03 11:47:11",
+    "views": "248"
+  },
+  {
+    "board_no": "11753",
+    "no": 1626,
+    "category": "일반",
+    "ref_no": "SV21-0039",
+    "title": "인천산 전동기종 차량 S/W 번호 확인 방법",
+    "author": "최우혁",
+    "date": "2021-12-02 13:34:12",
+    "views": "134"
+  },
+  {
+    "board_no": "11750",
+    "no": 1623,
+    "category": "일반",
+    "ref_no": "SV21-0038",
+    "title": "Easyview BOP15S-9, BTX-7 신규 펌웨어 배포",
+    "author": "최우혁",
+    "date": "2021-12-01 15:06:52",
+    "views": "72"
+  },
+  {
+    "board_no": "11693",
+    "no": 1622,
+    "category": "서비스정보",
+    "ref_no": "SV21-0037",
+    "title": "엔진식 중대형 번호키 관련 서비스 품번",
+    "author": "박관신",
+    "date": "2021-11-24 17:42:03",
+    "views": "170"
+  },
+  {
+    "board_no": "11401",
+    "no": 1621,
+    "category": "서비스정보",
+    "ref_no": "SV21-0025",
+    "title": "동절기 엔진식 지게차 관리 요령",
+    "author": "김정수",
+    "date": "2021-11-22 10:26:07",
+    "views": "177"
+  },
+  {
+    "board_no": "7177",
+    "no": 1618,
+    "category": "일반",
+    "ref_no": "SV21-0036",
+    "title": "Easyview 2.3.0 배포 및 B25S-7 신규 Firmware",
+    "author": "최우혁",
+    "date": "2021-11-03 13:32:31",
+    "views": "173"
+  },
+  {
+    "board_no": "7176",
+    "no": 1617,
+    "category": "일반",
+    "ref_no": "SV21-0035",
+    "title": "G2 Scan StageV 신규 버전 배포_211027",
+    "author": "배정웅",
+    "date": "2021-10-27 16:07:53",
+    "views": "248"
+  },
+  {
+    "board_no": "7172",
+    "no": 1614,
+    "category": "서비스정보",
+    "ref_no": "SV21-0034",
+    "title": "전동식 차량 자동 겸용 충전기 개발 품번 공지",
+    "author": "박관신",
+    "date": "2021-10-22 14:13:04",
+    "views": "139"
+  },
+  {
+    "board_no": "7170",
+    "no": 1612,
+    "category": "일반",
+    "ref_no": "SV21-0033",
+    "title": "Easyview 펌웨어 배포 (BR16/25JW-9)",
+    "author": "최우혁",
+    "date": "2021-10-19 10:44:43",
+    "views": "38"
+  },
+  {
+    "board_no": "7152",
+    "no": 1610,
+    "category": "서비스정보",
+    "ref_no": "SV21-0032",
+    "title": "엔진식 차량 라디에터 및 쿨러 서비스 품번",
+    "author": "박관신",
+    "date": "2021-10-12 12:11:23",
+    "views": "154"
+  },
+  {
+    "board_no": "7151",
+    "no": 1609,
+    "category": "일반",
+    "ref_no": "SV21-0031",
+    "title": "배터리 타입별/전압별 전압-SOC 정리",
+    "author": "최우혁",
+    "date": "2021-10-05 16:21:48",
+    "views": "383"
+  },
+  {
+    "board_no": "7149",
+    "no": 1607,
+    "category": "일반",
+    "ref_no": "SV21-0030",
+    "title": "B15N 및 B15/18NS, B20NSC 리튬 충전기 고장진단자료",
+    "author": "최우혁",
+    "date": "2021-10-01 15:11:23",
+    "views": "570"
+  },
+  {
+    "board_no": "7148",
+    "no": 1606,
+    "category": "일반",
+    "ref_no": "SV21-0029",
+    "title": "Easyview 펌웨어 배포 (BT/X-7 Plus, B25/35NS)",
+    "author": "최우혁",
+    "date": "2021-09-30 16:44:12",
+    "views": "108"
+  },
+  {
+    "board_no": "7143",
+    "no": 1603,
+    "category": "일반",
+    "ref_no": "SV21-0028",
+    "title": "Easyview 펌웨어 배포 (BRJW-9, BT/X-7 Plus)",
+    "author": "최우혁",
+    "date": "2021-09-15 09:05:35",
+    "views": "78"
+  },
+  {
+    "board_no": "7140",
+    "no": 1601,
+    "category": "일반",
+    "ref_no": "SV21-0024",
+    "title": "G2(D24/34 EG) Start Motor 이상으로 시동불능건",
+    "author": "김정수",
+    "date": "2021-09-13 16:59:51",
+    "views": "273"
+  },
+  {
+    "board_no": "7137",
+    "no": 1600,
+    "category": "일반",
+    "ref_no": "SV21-0026",
+    "title": "NXE 1톤급 리튬충전기 전류 조정 방법",
+    "author": "최우혁",
+    "date": "2021-09-09 16:37:14",
+    "views": "255"
+  },
+  {
+    "board_no": "7136",
+    "no": 1599,
+    "category": "일반",
+    "ref_no": "SV21-0025",
+    "title": "NXE 2톤급 (B20/25/30/35NS) 리튬/납 배터리 설정 확인 방법",
+    "author": "최우혁",
+    "date": "2021-09-07 12:14:42",
+    "views": "294"
+  },
+  {
+    "board_no": "7132",
+    "no": 1595,
+    "category": "일반",
+    "ref_no": "SV21-0024",
+    "title": "신규 대원시트 Hood 오픈 시 주의 사항 - 오버헤드가드",
+    "author": "홍상현",
+    "date": "2021-08-27 15:30:38",
+    "views": "271"
+  },
+  {
+    "board_no": "7131",
+    "no": 1594,
+    "category": "일반",
+    "ref_no": "SV21-0023",
+    "title": "마스트체인 절손문제를 방지하기 위한 체인관리 요청 및 관련 품번 공유",
+    "author": "정지민",
+    "date": "2021-08-27 15:06:12",
+    "views": "112"
+  },
+  {
+    "board_no": "7130",
+    "no": 1593,
+    "category": "일반",
+    "ref_no": "SV21-0022",
+    "title": "Easyview 펌웨어 배포  (프리미엄 Class3)",
+    "author": "최우혁",
+    "date": "2021-08-24 09:15:31",
+    "views": "125"
+  },
+  {
+    "board_no": "7111",
+    "no": 1588,
+    "category": "일반",
+    "ref_no": "SV21-0021",
+    "title": "Easyview 펌웨어 배포 (BT/X-7 Plus, B25/35NS)",
+    "author": "최우혁",
+    "date": "2021-08-13 14:26:24",
+    "views": "150"
+  },
+  {
+    "board_no": "7109",
+    "no": 1586,
+    "category": "개선정보",
+    "ref_no": "SV21-0020",
+    "title": "대원강업 신규 시트 적용건",
+    "author": "김정수",
+    "date": "2021-08-11 15:51:42",
+    "views": "253"
+  },
+  {
+    "board_no": "7078",
+    "no": 1573,
+    "category": "개선정보",
+    "ref_no": "SV21-0019",
+    "title": "미니휴즈 품번공유",
+    "author": "정지민",
+    "date": "2021-06-28 16:52:43",
+    "views": "171"
+  },
+  {
+    "board_no": "7077",
+    "no": 1572,
+    "category": "서비스정보",
+    "ref_no": "SV21-0018",
+    "title": "D24, D34 엔진 프리필터 (이중 연료필터) 품번 공유",
+    "author": "홍상현",
+    "date": "2021-06-25 16:40:30",
+    "views": "207"
+  },
+  {
+    "board_no": "7073",
+    "no": 1570,
+    "category": "서비스정보",
+    "ref_no": "SV21-0017",
+    "title": "D34 엔진 MAF 센서 관련 에러코드 및 하자 점검 내용 공유",
+    "author": "홍상현",
+    "date": "2021-06-22 09:53:53",
+    "views": "292"
+  },
+  {
+    "board_no": "7072",
+    "no": 1569,
+    "category": "일반",
+    "ref_no": "SV21-0016",
+    "title": "Easyview 펌웨어 배포 (BR18/25S-9,B18S-7, B32S-7,B45X-7)",
+    "author": "최우혁",
+    "date": "2021-06-14 17:30:13",
+    "views": "142"
+  },
+  {
+    "board_no": "7053",
+    "no": 1564,
+    "category": "기술정보",
+    "ref_no": "SV21-0015",
+    "title": "LPM15,20N, BSR13,15NR 시리즈 속도 제한 방법",
+    "author": "홍상현",
+    "date": "2021-05-25 16:34:06",
+    "views": "212"
+  },
+  {
+    "board_no": "7050",
+    "no": 1561,
+    "category": "일반",
+    "ref_no": "SV21-0014",
+    "title": "Easyview 펌웨어 배포 (BR18/25S-9,BC32S-7,B20T-7)",
+    "author": "최우혁",
+    "date": "2021-05-12 19:07:42",
+    "views": "164"
+  },
+  {
+    "board_no": "7045",
+    "no": 1557,
+    "category": "일반",
+    "ref_no": "SV21-0013",
+    "title": "리튬 배터리 고객 인도 후, 즉시 충전기설치 및 배터리 충전 요청",
+    "author": "최우혁",
+    "date": "2021-05-06 12:01:14",
+    "views": "355"
+  },
+  {
+    "board_no": "7028",
+    "no": 1555,
+    "category": "일반",
+    "ref_no": "SV21-0012",
+    "title": "전동식 지게차 조종자격 시행시기 연장 및 유경험자 특례안내",
+    "author": "정지민",
+    "date": "2021-04-20 15:46:49",
+    "views": "153"
+  },
+  {
+    "board_no": "7027",
+    "no": 1554,
+    "category": "일반",
+    "ref_no": "SV21-0011",
+    "title": "B20/25/30/35NS 리튬배터리 충전기 충전 전류 조정방법 (차단기 내려가면서 충전 불가 시)",
+    "author": "최우혁",
+    "date": "2021-04-20 15:29:22",
+    "views": "426"
+  },
+  {
+    "board_no": "7024",
+    "no": 1551,
+    "category": "일반",
+    "ref_no": "SV21-0010",
+    "title": "Easyview 펌웨어 배포 (BOP15S-9,B45X-7)",
+    "author": "최우혁",
+    "date": "2021-04-13 18:07:54",
+    "views": "105"
+  },
+  {
+    "board_no": "7022",
+    "no": 1549,
+    "category": "서비스정보",
+    "ref_no": "SV21-0009",
+    "title": "전동 썬라이트 배터리 서비스 품번",
+    "author": "박관신",
+    "date": "2021-04-13 16:42:36",
+    "views": "275"
+  },
+  {
+    "board_no": "7020",
+    "no": 1548,
+    "category": "일반",
+    "ref_no": "SV21-0008",
+    "title": "B15/18NS, B20NSC 진단툴 모니터 및 파라미터 매뉴 (v.1.0)",
+    "author": "최우혁",
+    "date": "2021-04-02 09:53:22",
+    "views": "450"
+  },
+  {
+    "board_no": "7018",
+    "no": 1546,
+    "category": "일반",
+    "ref_no": "SV21-0007",
+    "title": "지게차 보수용 락카 스프레이 사양 및 품번",
+    "author": "박관신",
+    "date": "2021-03-30 10:50:51",
+    "views": "184"
+  },
+  {
+    "board_no": "7014",
+    "no": 1544,
+    "category": "일반",
+    "ref_no": "SV21-0006",
+    "title": "B20/25/30/35NS 전자파킹 해제 불가 조치 및 서비스 브레이크 성능 조정방법",
+    "author": "최우혁",
+    "date": "2021-03-23 10:28:36",
+    "views": "682"
+  },
+  {
+    "board_no": "7012",
+    "no": 1543,
+    "category": "일반",
+    "ref_no": "SV21-0005",
+    "title": "Easyview 펌웨어 배포 (BOP15S-9 간헐적 L1에러 발생)",
+    "author": "최우혁",
+    "date": "2021-03-22 09:42:54",
+    "views": "64"
+  },
+  {
+    "board_no": "6986",
+    "no": 1540,
+    "category": "일반",
+    "ref_no": "SV21-0004",
+    "title": "Easyview 신규 소프트웨어 공지 (Ver.2.2.0) & NXE 기종 파라미터 에러 수정",
+    "author": "최우혁",
+    "date": "2021-02-22 16:28:36",
+    "views": "177"
+  },
+  {
+    "board_no": "6981",
+    "no": 1537,
+    "category": "기술정보",
+    "ref_no": "SV21-0003",
+    "title": "진단 Tool CAN Connector 위치",
+    "author": "정지민",
+    "date": "2021-02-15 14:10:02",
+    "views": "258"
+  },
+  {
+    "board_no": "6980",
+    "no": 1536,
+    "category": "일반",
+    "ref_no": "SV21-0002",
+    "title": "지게차 안전 관련 부품 품번 공유",
+    "author": "홍상현",
+    "date": "2021-02-15 08:27:56",
+    "views": "246"
+  },
+  {
+    "board_no": "6978",
+    "no": 1534,
+    "category": "기술정보",
+    "ref_no": "SV21-0001",
+    "title": "엔진식 지게차 온도센서 작동방법",
+    "author": "정지민",
+    "date": "2021-02-05 11:41:18",
+    "views": "276"
+  },
+  {
+    "board_no": "6975",
+    "no": 1531,
+    "category": "일반",
+    "ref_no": "SV20-0057",
+    "title": "B20/25NS, B30/35NS 리튬인산철(LFP,Eneroc) 배터리/충전기 진단툴 업데이트 소프트웨어 배포",
+    "author": "최우혁",
+    "date": "2021-01-27 10:50:55",
+    "views": "467"
+  },
+  {
+    "board_no": "6970",
+    "no": 1527,
+    "category": "일반",
+    "ref_no": "SV20-0056",
+    "title": "Easyview 펌웨어 배포 (BT/X-7 EFB 오류개선)",
+    "author": "최우혁",
+    "date": "2021-01-18 15:13:13",
+    "views": "134"
+  },
+  {
+    "board_no": "6969",
+    "no": 1526,
+    "category": "일반",
+    "ref_no": "SV20-0055",
+    "title": "ZAPI Can Console 진단툴 프로그램",
+    "author": "최우혁",
+    "date": "2021-01-18 14:46:56",
+    "views": "207"
+  },
+  {
+    "board_no": "6968",
+    "no": 1525,
+    "category": "일반",
+    "ref_no": "SV20-0054",
+    "title": "B15,18NS & B20NSC 리튬배터리 BMS 업데이트 소프트웨어 배포.",
+    "author": "최우혁",
+    "date": "2021-01-18 11:33:43",
+    "views": "430"
+  },
+  {
+    "board_no": "6964",
+    "no": 1521,
+    "category": "기술정보",
+    "ref_no": "SV20-0053",
+    "title": "BR18SP-7 Mast Hose 눌림으로 Hose 파손건",
+    "author": "김정수",
+    "date": "2020-12-28 17:26:01",
+    "views": "124"
+  },
+  {
+    "board_no": "6962",
+    "no": 1520,
+    "category": "기술정보",
+    "ref_no": "SV20-0052",
+    "title": "LPM15,20N 리튬이온 배터리 전압 측정 방법",
+    "author": "홍상현",
+    "date": "2020-12-22 17:10:38",
+    "views": "286"
+  },
+  {
+    "board_no": "6950",
+    "no": 1518,
+    "category": "일반",
+    "ref_no": "SV20-0051",
+    "title": "Strobe(경광등) 수분 유입 개선 사항 공유",
+    "author": "홍상현",
+    "date": "2020-12-14 17:09:17",
+    "views": "136"
+  },
+  {
+    "board_no": "6949",
+    "no": 1517,
+    "category": "서비스정보",
+    "ref_no": "SV20-0050",
+    "title": "전동 NXE (2,3톤) 펌웨어 업데이트 시 주의 사항",
+    "author": "박관신",
+    "date": "2020-12-10 18:05:48",
+    "views": "221"
+  },
+  {
+    "board_no": "6944",
+    "no": 1513,
+    "category": "일반",
+    "ref_no": "SV20-0049",
+    "title": "NXE (2,3톤) 롤백 개선 펌웨어 업데이트 방법",
+    "author": "최우혁",
+    "date": "2020-12-09 10:29:32",
+    "views": "206"
+  },
+  {
+    "board_no": "6943",
+    "no": 1512,
+    "category": "일반",
+    "ref_no": "SV20-0048",
+    "title": "Easyview 펌웨어 배포 (BNS 리튬 추가 및 롤백 개선)",
+    "author": "최우혁",
+    "date": "2020-12-09 10:07:27",
+    "views": "184"
+  },
+  {
+    "board_no": "6942",
+    "no": 1511,
+    "category": "일반",
+    "ref_no": "SV20-0047",
+    "title": "B25NS 리튬 배터리 충전기 작동방법",
+    "author": "김정수",
+    "date": "2020-12-09 09:15:06",
+    "views": "403"
+  },
+  {
+    "board_no": "6941",
+    "no": 1510,
+    "category": "개선정보",
+    "ref_no": "SV20-0046",
+    "title": "4톤 D34 엔진차량 Fuel Filter Mtg Bracket 개선사항 공유",
+    "author": "정지민",
+    "date": "2020-12-08 14:12:40",
+    "views": "114"
+  },
+  {
+    "board_no": "6940",
+    "no": 1509,
+    "category": "서비스정보",
+    "ref_no": "SV20-0045",
+    "title": "‘21년 국가기술자격시험 일정",
+    "author": "정지민",
+    "date": "2020-12-08 10:15:13",
+    "views": "142"
+  },
+  {
+    "board_no": "6934",
+    "no": 1506,
+    "category": "서비스정보",
+    "ref_no": "SV20-0044",
+    "title": "장비이관 요청 메일 발송 시 필수정보 안내",
+    "author": "정지민",
+    "date": "2020-11-27 16:22:38",
+    "views": "83"
+  },
+  {
+    "board_no": "6933",
+    "no": 1505,
+    "category": "일반",
+    "ref_no": "SV20-0043",
+    "title": "Easyview 신규 소프트웨어 공지 (Ver.2.1.0) & BT/X EFB 추가",
+    "author": "최우혁",
+    "date": "2020-11-26 10:50:32",
+    "views": "130"
+  },
+  {
+    "board_no": "6931",
+    "no": 1503,
+    "category": "서비스정보",
+    "ref_no": "SV20-0042",
+    "title": "지게차 오일 테이블",
+    "author": "김정수",
+    "date": "2020-11-18 15:27:44",
+    "views": "258"
+  },
+  {
+    "board_no": "6930",
+    "no": 1502,
+    "category": "개선정보",
+    "ref_no": "SV20-0041",
+    "title": "엔진 4톤급 신진정밀(국산) Main Control Valve 적용건",
+    "author": "김정수",
+    "date": "2020-11-16 15:45:39",
+    "views": "304"
+  },
+  {
+    "board_no": "6922",
+    "no": 1501,
+    "category": "서비스정보",
+    "ref_no": "SV20-0040",
+    "title": "[공지]지게차 안전교육 이수 관련건",
+    "author": "김정수",
+    "date": "2020-11-02 16:02:40",
+    "views": "165"
+  },
+  {
+    "board_no": "6908",
+    "no": 1499,
+    "category": "기타",
+    "ref_no": "SV20-0039",
+    "title": "딜러 포탈 일부 화면 비활성화  조치 방법",
+    "author": "박관신",
+    "date": "2020-10-14 08:37:54",
+    "views": "108"
+  },
+  {
+    "board_no": "6906",
+    "no": 1497,
+    "category": "일반",
+    "ref_no": "SV20-0039",
+    "title": "Easyview 펌웨어 배포 (BNS, BRSP-7 & BT/BX/BC-7)",
+    "author": "최우혁",
+    "date": "2020-09-28 09:26:36",
+    "views": "164"
+  },
+  {
+    "board_no": "6899",
+    "no": 1495,
+    "category": "개선정보",
+    "ref_no": "SV20-0038",
+    "title": "엔진 4톤급 드라이브 액슬 플레너터리 하우징 샤프트 변경",
+    "author": "박관신",
+    "date": "2020-09-21 13:56:36",
+    "views": "161"
+  },
+  {
+    "board_no": "6896",
+    "no": 1493,
+    "category": "서비스정보",
+    "ref_no": "SV20-0037",
+    "title": "G2 엔진 (D24/D34) 연료 파이프 교환 작업방법",
+    "author": "박관신",
+    "date": "2020-09-15 13:01:13",
+    "views": "278"
+  },
+  {
+    "board_no": "6892",
+    "no": 1489,
+    "category": "서비스정보",
+    "ref_no": "SV20-0036",
+    "title": "엔진 4톤 New OPC 디스플레이 소프트 웨어 업데이트 방법",
+    "author": "박관신",
+    "date": "2020-09-02 09:09:07",
+    "views": "461"
+  },
+  {
+    "board_no": "6891",
+    "no": 1488,
+    "category": "일반",
+    "ref_no": "SV20-0035",
+    "title": "필드 정비 중  안전사항 준수.",
+    "author": "박관신",
+    "date": "2020-08-28 08:23:58",
+    "views": "238"
+  },
+  {
+    "board_no": "6871",
+    "no": 1483,
+    "category": "서비스정보",
+    "ref_no": "SV20-0034",
+    "title": "전기종 캐빈 내장재 고정용 화스너 품번",
+    "author": "박관신",
+    "date": "2020-07-31 15:42:15",
+    "views": "226"
+  },
+  {
+    "board_no": "6870",
+    "no": 1482,
+    "category": "일반",
+    "ref_no": "SV20-0033",
+    "title": "물류장비 Class3 제품 카달로그",
+    "author": "박관신",
+    "date": "2020-07-31 11:17:36",
+    "views": "126"
+  },
+  {
+    "board_no": "6868",
+    "no": 1481,
+    "category": "일반",
+    "ref_no": "SV20-0032",
+    "title": "Easyview 펌웨어 배포 (B20SU-9)",
+    "author": "최우혁",
+    "date": "2020-07-29 10:36:58",
+    "views": "73"
+  },
+  {
+    "board_no": "6866",
+    "no": 1479,
+    "category": "개선정보",
+    "ref_no": "SV20-0031",
+    "title": "전동 차량 DC-DC Converter 개선 사항 공유",
+    "author": "홍상현",
+    "date": "2020-07-28 09:29:42",
+    "views": "169"
+  },
+  {
+    "board_no": "6860",
+    "no": 1474,
+    "category": "일반",
+    "ref_no": "SV20-0030",
+    "title": "[소프트웨어 공지] DDT_SCR (DL06/ DL08)진단프로그램 업데이트 요청 건",
+    "author": "최우혁",
+    "date": "2020-07-10 14:51:59",
+    "views": "150"
+  },
+  {
+    "board_no": "6844",
+    "no": 1469,
+    "category": "개선정보",
+    "ref_no": "SV20-0028",
+    "title": "전동 4톤급 앵글센서 손상건 개선",
+    "author": "박관신",
+    "date": "2020-07-03 16:50:34",
+    "views": "144"
+  },
+  {
+    "board_no": "6843",
+    "no": 1468,
+    "category": "개선정보",
+    "ref_no": "SV20-0029",
+    "title": "엔진 4톤, 7톤 드라이브 액슬 유성핀 밀림 현상 개선 사항 공유",
+    "author": "홍상현",
+    "date": "2020-07-03 14:44:47",
+    "views": "147"
+  },
+  {
+    "board_no": "6842",
+    "no": 1467,
+    "category": "개선정보",
+    "ref_no": "SV20-0027",
+    "title": "전동 4톤급 캐리지 롤러 베어링 조정 방법 및 사이드 롤러 핀 유격 개선",
+    "author": "박관신",
+    "date": "2020-07-03 11:38:23",
+    "views": "161"
+  },
+  {
+    "board_no": "6840",
+    "no": 1465,
+    "category": "일반",
+    "ref_no": "SV20-0027",
+    "title": "Easyview 펌웨어 배포 (BOP15S-9)",
+    "author": "최우혁",
+    "date": "2020-07-02 15:26:31",
+    "views": "61"
+  },
+  {
+    "board_no": "6836",
+    "no": 1461,
+    "category": "서비스정보",
+    "ref_no": "SV20-0026",
+    "title": "엔진 7톤급(81Kw급) 주행 속도 및 기어 단수 제한 방법",
+    "author": "박관신",
+    "date": "2020-06-23 08:24:06",
+    "views": "289"
+  },
+  {
+    "board_no": "6835",
+    "no": 1460,
+    "category": "서비스정보",
+    "ref_no": "SV20-0025",
+    "title": "엔진 7톤급(55Kw급) 주행 속도 및 기어 단수 제한 방법",
+    "author": "박관신",
+    "date": "2020-06-22 18:07:36",
+    "views": "213"
+  },
+  {
+    "board_no": "6834",
+    "no": 1459,
+    "category": "기술정보",
+    "ref_no": "SV20-0024",
+    "title": "엔진 4톤급 주행시 롤링건 발생 점검",
+    "author": "박관신",
+    "date": "2020-06-22 14:45:55",
+    "views": "202"
+  },
+  {
+    "board_no": "6833",
+    "no": 1458,
+    "category": "서비스정보",
+    "ref_no": "SV20-0023",
+    "title": "전동 2톤급 계기판 점등 불능 및 주행,유압 불능 점검 방법",
+    "author": "박관신",
+    "date": "2020-06-22 14:38:27",
+    "views": "305"
+  },
+  {
+    "board_no": "6832",
+    "no": 1457,
+    "category": "서비스정보",
+    "ref_no": "SV20-0022",
+    "title": "전동 4톤급 L9, C7 에러 관련 조치 작업 방법.",
+    "author": "박관신",
+    "date": "2020-06-19 15:28:17",
+    "views": "212"
+  },
+  {
+    "board_no": "6831",
+    "no": 1456,
+    "category": "개선정보",
+    "ref_no": "SV20-0021",
+    "title": "엔진식 5 ~8톤급 스티어링 액슬 킹핀 및 링크 볼트 윤활 개선.",
+    "author": "박관신",
+    "date": "2020-06-19 15:05:35",
+    "views": "108"
+  },
+  {
+    "board_no": "6830",
+    "no": 1455,
+    "category": "개선정보",
+    "ref_no": "SV20-0020",
+    "title": "엔진식 2 ~3.3톤급 컨트롤밸브 레바 걸림 관련 레바 필름 개선.",
+    "author": "박관신",
+    "date": "2020-06-19 14:58:11",
+    "views": "112"
+  },
+  {
+    "board_no": "6829",
+    "no": 1454,
+    "category": "서비스정보",
+    "ref_no": "SV20-0019",
+    "title": "엔진 4.5톤 엔진 오일 증가 및 백색매연 발생건",
+    "author": "김정수",
+    "date": "2020-06-11 08:52:13",
+    "views": "272"
+  },
+  {
+    "board_no": "6810",
+    "no": 1450,
+    "category": "서비스정보",
+    "ref_no": "SV20-0018",
+    "title": "엔진 2톤급 유온 상승시 리프트 상승 속도 느림건",
+    "author": "김정수",
+    "date": "2020-05-19 09:45:22",
+    "views": "273"
+  },
+  {
+    "board_no": "6809",
+    "no": 1449,
+    "category": "서비스정보",
+    "ref_no": "SVC20-0017",
+    "title": "엔진 7톤급 지게차 핸들 무거움 및 가속시 핸들 동작건",
+    "author": "김정수",
+    "date": "2020-05-19 08:45:51",
+    "views": "304"
+  },
+  {
+    "board_no": "6801",
+    "no": 1445,
+    "category": "기술정보",
+    "ref_no": "SV20-0016",
+    "title": "DL06 엔진 Injector Harness O-Ring 수축으로 인한 엔진 누유 하자 및 개선 사항 공유",
+    "author": "홍상현",
+    "date": "2020-04-22 17:43:52",
+    "views": "131"
+  },
+  {
+    "board_no": "6800",
+    "no": 1444,
+    "category": "일반",
+    "ref_no": "SV20-0015",
+    "title": "Easyview 펌웨어 배포 (BR18SP-7P,BOP15S-9)",
+    "author": "최우혁",
+    "date": "2020-04-20 17:52:42",
+    "views": "110"
+  },
+  {
+    "board_no": "6796",
+    "no": 1440,
+    "category": "일반",
+    "ref_no": "SV20-0014",
+    "title": "Easyview 신규 소프트웨어 공지 (Ver.2.0.9)",
+    "author": "최우혁",
+    "date": "2020-04-10 17:50:27",
+    "views": "137"
+  },
+  {
+    "board_no": "6795",
+    "no": 1439,
+    "category": "개선정보",
+    "ref_no": "SV20-0013",
+    "title": "세방전지 축전지 원터치캡 사양 변경",
+    "author": "홍상현",
+    "date": "2020-04-08 17:08:17",
+    "views": "180"
+  },
+  {
+    "board_no": "6656",
+    "no": 1435,
+    "category": "일반",
+    "ref_no": "SV20-0011",
+    "title": "Easyview 펌웨어 배포 (B20SU-9, BR18SP-7P,BOP15S-9)",
+    "author": "최우혁",
+    "date": "2020-03-13 15:02:25",
+    "views": "111"
+  },
+  {
+    "board_no": "6649",
+    "no": 1431,
+    "category": "서비스정보",
+    "ref_no": "SV20-0007",
+    "title": "DV300S-7 신기종 주요항목 제원 공지",
+    "author": "권중혁",
+    "date": "2020-03-02 16:55:15",
+    "views": "118"
+  },
+  {
+    "board_no": "6645",
+    "no": 1427,
+    "category": "기술정보",
+    "ref_no": "SV20-0010",
+    "title": "B15N Anti-Roll Back 기능 조절 (내리막 미끄러짐 방지 기능)",
+    "author": "홍상현",
+    "date": "2020-02-24 16:08:53",
+    "views": "273"
+  },
+  {
+    "board_no": "6644",
+    "no": 1426,
+    "category": "서비스정보",
+    "ref_no": "SV20-0009",
+    "title": "산업안전보건법 변경에 따른 전동지게차 운전 자격 관련건",
+    "author": "김정수",
+    "date": "2020-02-18 14:48:24",
+    "views": "193"
+  },
+  {
+    "board_no": "6640",
+    "no": 1423,
+    "category": "일반",
+    "ref_no": "SV20-0008",
+    "title": "물류장비 Class3 서비스 정보 (20.02.11)",
+    "author": "최우혁",
+    "date": "2020-02-11 10:46:03",
+    "views": "556"
+  },
+  {
+    "board_no": "6638",
+    "no": 1422,
+    "category": "개선정보",
+    "ref_no": "SV20-0006",
+    "title": "DEF Pump 와 캐빈틸팅,Power Pack쪽에 연결되는 Fuse 용량부족 개선",
+    "author": "권중혁",
+    "date": "2020-02-11 09:08:54",
+    "views": "169"
+  },
+  {
+    "board_no": "6636",
+    "no": 1420,
+    "category": "일반",
+    "ref_no": "SV20-0006",
+    "title": "[소프트웨어 공지] G2 SCAN ECU 진단프로그램 업데이트 요청 건",
+    "author": "최우혁",
+    "date": "2020-02-07 08:57:48",
+    "views": "401"
+  },
+  {
+    "board_no": "6626",
+    "no": 1418,
+    "category": "서비스정보",
+    "ref_no": "SV20-0005",
+    "title": "2020년 Yearly 모델 변경 부분  적용 공지",
+    "author": "권중혁",
+    "date": "2020-02-03 09:06:04",
+    "views": "120"
+  },
+  {
+    "board_no": "6622",
+    "no": 1415,
+    "category": "서비스정보",
+    "ref_no": "SV20-0004",
+    "title": "선라이트 밧데리 증류수 보액장치 적용",
+    "author": "권중혁",
+    "date": "2020-01-30 15:58:42",
+    "views": "272"
+  },
+  {
+    "board_no": "6604",
+    "no": 1414,
+    "category": "서비스정보",
+    "ref_no": "SV20-00003",
+    "title": "2톤급 조향핸들 무거움 조치 방법",
+    "author": "권중혁",
+    "date": "2020-01-20 16:59:00",
+    "views": "395"
+  },
+  {
+    "board_no": "6601",
+    "no": 1411,
+    "category": "기술정보",
+    "ref_no": "SV20-0002",
+    "title": "LPM20N 브레이크 제동 세기 설정 조정 방법",
+    "author": "홍상현",
+    "date": "2020-01-14 16:44:46",
+    "views": "202"
+  },
+  {
+    "board_no": "6598",
+    "no": 1410,
+    "category": "기술정보",
+    "ref_no": "SV20-0001",
+    "title": "B25SE-7 Battery 전압 Drop으로 '17' 에러 발생으로 차량 Down 개선",
+    "author": "홍상현",
+    "date": "2020-01-03 14:35:40",
+    "views": "354"
+  },
+  {
+    "board_no": "6593",
+    "no": 1406,
+    "category": "개선정보",
+    "ref_no": "SV19-0040",
+    "title": "2톤급 SE 모델 컨트롤밸브 작동중 끼임 개선",
+    "author": "권중혁",
+    "date": "2019-12-17 09:29:46",
+    "views": "277"
+  },
+  {
+    "board_no": "6589",
+    "no": 1402,
+    "category": "서비스정보",
+    "ref_no": "SV19-0039",
+    "title": "D45S-7 ASC 추가 장착에 따른 필요부품 및 실체도 공지",
+    "author": "권중혁",
+    "date": "2019-12-16 14:50:11",
+    "views": "228"
+  },
+  {
+    "board_no": "6588",
+    "no": 1401,
+    "category": "서비스정보",
+    "ref_no": "SV19-0038",
+    "title": "B15N 밧데리 미 충전시 점검 및 조치사례",
+    "author": "권중혁",
+    "date": "2019-12-16 14:47:29",
+    "views": "352"
+  },
+  {
+    "board_no": "6587",
+    "no": 1400,
+    "category": "일반",
+    "ref_no": "SV19-0038",
+    "title": "Easyview 펌웨어 배포 (B20SU-9 신규)",
+    "author": "최우혁",
+    "date": "2019-12-16 11:59:56",
+    "views": "118"
+  },
+  {
+    "board_no": "6548",
+    "no": 1392,
+    "category": "개선정보",
+    "ref_no": "SV19-37",
+    "title": "BRS-9 방향 전환시 흔들림 개선",
+    "author": "권중혁",
+    "date": "2019-11-11 15:49:20",
+    "views": "235"
+  },
+  {
+    "board_no": "6546",
+    "no": 1390,
+    "category": "서비스정보",
+    "ref_no": "SV19-0036",
+    "title": "B15N LIB(리튬인산철배터리) 펌웨어 업데이트 방법",
+    "author": "홍상현",
+    "date": "2019-11-06 16:06:57",
+    "views": "280"
+  },
+  {
+    "board_no": "6543",
+    "no": 1388,
+    "category": "일반",
+    "ref_no": "SV19-0035",
+    "title": "전동기종_소프트웨어번호",
+    "author": "최우혁",
+    "date": "2019-11-01 08:14:37",
+    "views": "202"
+  },
+  {
+    "board_no": "6541",
+    "no": 1386,
+    "category": "개선정보",
+    "ref_no": "SV19-0034",
+    "title": "1.5톤급 Side Roller 빠짐 및 장착성 개선",
+    "author": "권중혁",
+    "date": "2019-10-31 11:00:18",
+    "views": "117"
+  },
+  {
+    "board_no": "6523",
+    "no": 1377,
+    "category": "서비스정보",
+    "ref_no": "SV19-0032",
+    "title": "B15N 에러코드 4.7 조치 방법",
+    "author": "홍상현",
+    "date": "2019-10-01 15:17:51",
+    "views": "266"
+  },
+  {
+    "board_no": "6522",
+    "no": 1376,
+    "category": "서비스정보",
+    "ref_no": "SV19-0033",
+    "title": "NFC 카드 리더 설정 및 해지 방법",
+    "author": "박관신",
+    "date": "2019-10-01 14:58:17",
+    "views": "195"
+  },
+  {
+    "board_no": "6519",
+    "no": 1375,
+    "category": "서비스정보",
+    "ref_no": "SV19-0031",
+    "title": "BRS-9 브레이크 간극 조정방법",
+    "author": "권중혁",
+    "date": "2019-09-30 10:43:02",
+    "views": "282"
+  },
+  {
+    "board_no": "6518",
+    "no": 1374,
+    "category": "일반",
+    "ref_no": "SV19-0030",
+    "title": "두산 엔진 진단툴 구성 단품 서비스 품번",
+    "author": "박관신",
+    "date": "2019-09-27 17:36:09",
+    "views": "240"
+  },
+  {
+    "board_no": "6513",
+    "no": 1373,
+    "category": "서비스정보",
+    "ref_no": "SV19-0029",
+    "title": "엔진 2톤급 리프트 실린더 회전 방지 작업방법",
+    "author": "박관신",
+    "date": "2019-09-26 15:59:46",
+    "views": "170"
+  },
+  {
+    "board_no": "6509",
+    "no": 1371,
+    "category": "개선정보",
+    "ref_no": "SV19-0028",
+    "title": "엔진 16톤급 스티어링 액슬 조향 링크 핀 윤활 개선",
+    "author": "박관신",
+    "date": "2019-09-19 16:29:32",
+    "views": "104"
+  },
+  {
+    "board_no": "6508",
+    "no": 1370,
+    "category": "서비스정보",
+    "ref_no": "SV19-0027",
+    "title": "전동 앵글센서 수분 유입 관련 부품 변경",
+    "author": "박관신",
+    "date": "2019-09-19 15:15:02",
+    "views": "179"
+  },
+  {
+    "board_no": "6507",
+    "no": 1369,
+    "category": "개선정보",
+    "ref_no": "SV19-0026",
+    "title": "NEW OPC 엔진식 차량 후드 스트라이커 절손 개선",
+    "author": "박관신",
+    "date": "2019-09-19 14:34:40",
+    "views": "104"
+  },
+  {
+    "board_no": "6503",
+    "no": 1368,
+    "category": "서비스정보",
+    "ref_no": "SV19-0025",
+    "title": "엔진 대형/초대형 지게차 엔진(DL06/08) 진단 프로그램 업데이트 방법",
+    "author": "김정수",
+    "date": "2019-09-16 19:44:31",
+    "views": "148"
+  },
+  {
+    "board_no": "6499",
+    "no": 1366,
+    "category": "일반",
+    "ref_no": "SV19-0025",
+    "title": "Easyview 펌웨어 배포 (BRS-9)",
+    "author": "최우혁",
+    "date": "2019-09-06 13:38:54",
+    "views": "159"
+  },
+  {
+    "board_no": "6497",
+    "no": 1364,
+    "category": "서비스정보",
+    "ref_no": "SV-0024",
+    "title": "전동지게차 두산 Sunlight 밧데리 Cell 교환 방법",
+    "author": "권중혁",
+    "date": "2019-09-03 16:50:53",
+    "views": "214"
+  },
+  {
+    "board_no": "6481",
+    "no": 1355,
+    "category": "개선정보",
+    "ref_no": "SV19-0023",
+    "title": "2_4톤급 캐빈 도어 래치 고정 (+) 나사볼트 풀림 개선",
+    "author": "권중혁",
+    "date": "2019-08-20 15:02:25",
+    "views": "120"
+  },
+  {
+    "board_no": "6470",
+    "no": 1349,
+    "category": "개선정보",
+    "ref_no": "SV19-0022",
+    "title": "4톤급 Wiper Arm 변형 개선 정보 공유",
+    "author": "권중혁",
+    "date": "2019-07-25 13:10:26",
+    "views": "135"
+  },
+  {
+    "board_no": "6465",
+    "no": 1347,
+    "category": "서비스정보",
+    "ref_no": "SV19-0021",
+    "title": "4톤급 간헐적으로 발생되는 후처리 장치 에러 발생 진단",
+    "author": "권중혁",
+    "date": "2019-07-23 17:32:50",
+    "views": "293"
+  },
+  {
+    "board_no": "6464",
+    "no": 1346,
+    "category": "개선정보",
+    "ref_no": "SV19-0020",
+    "title": "7톤급 스피드센서 누유 개선건",
+    "author": "권중혁",
+    "date": "2019-07-18 10:29:45",
+    "views": "157"
+  },
+  {
+    "board_no": "6462",
+    "no": 1344,
+    "category": "서비스정보",
+    "ref_no": "SV19-0019",
+    "title": "16톤급 엔진 오일 과다소모건 진단",
+    "author": "권중혁",
+    "date": "2019-07-10 15:44:34",
+    "views": "111"
+  },
+  {
+    "board_no": "6456",
+    "no": 1343,
+    "category": "서비스정보",
+    "ref_no": "SV19-0018",
+    "title": "엔진 출력 제한 발생(전 기어단수)",
+    "author": "권중혁",
+    "date": "2019-07-03 14:58:17",
+    "views": "259"
+  },
+  {
+    "board_no": "6429",
+    "no": 1341,
+    "category": "서비스정보",
+    "ref_no": "SV19-0015",
+    "title": "P00BC 에러코드 원인 및 조치방법 공지",
+    "author": "권중혁",
+    "date": "2019-06-19 16:14:54",
+    "views": "302"
+  },
+  {
+    "board_no": "6427",
+    "no": 1340,
+    "category": "서비스정보",
+    "ref_no": "SV19-0016",
+    "title": "[소프트웨어 공지] DDT_SCR (DL06/ DL08)진단프로그램 업데이트 요청 건",
+    "author": "배정웅",
+    "date": "2019-06-13 17:48:18",
+    "views": "135"
+  },
+  {
+    "board_no": "6423",
+    "no": 1338,
+    "category": "서비스정보",
+    "ref_no": "SV19-0017",
+    "title": "[소프트웨어 공지] G2 SCAN ECU, DCU 진단프로그램 업데이트 요청 건",
+    "author": "배정웅",
+    "date": "2019-06-13 15:46:53",
+    "views": "216"
+  },
+  {
+    "board_no": "6408",
+    "no": 1336,
+    "category": "서비스정보",
+    "ref_no": "SV19-0014",
+    "title": "BM TECH 충전기 내부 Board의 IC(Micro processor) 교환 방법",
+    "author": "권중혁",
+    "date": "2019-05-31 15:44:56",
+    "views": "231"
+  },
+  {
+    "board_no": "6401",
+    "no": 1335,
+    "category": "개선정보",
+    "ref_no": "SV19-0012",
+    "title": "7톤급_10톤급 Alternator 개선정보 공지",
+    "author": "권중혁",
+    "date": "2019-05-29 10:03:49",
+    "views": "122"
+  },
+  {
+    "board_no": "6379",
+    "no": 1331,
+    "category": "서비스정보",
+    "ref_no": "SV19-0010",
+    "title": "중/대형 엔진식 지게차 키 번호별 관련 부품 품번",
+    "author": "박관신",
+    "date": "2019-05-08 16:21:47",
+    "views": "127"
+  },
+  {
+    "board_no": "6377",
+    "no": 1330,
+    "category": "개선정보",
+    "ref_no": "SV19-0013",
+    "title": "4톤급 Wiper Arm 절손개선",
+    "author": "권중혁",
+    "date": "2019-04-29 15:42:44",
+    "views": "116"
+  },
+  {
+    "board_no": "6366",
+    "no": 1327,
+    "category": "서비스정보",
+    "ref_no": "SV19-0009",
+    "title": "기종&엔진별 압축 압력 값 및 서비스용 압축압력 KIT 품번",
+    "author": "박관신",
+    "date": "2019-04-05 11:39:48",
+    "views": "249"
+  },
+  {
+    "board_no": "6365",
+    "no": 1326,
+    "category": "서비스정보",
+    "ref_no": "SV19-0008",
+    "title": "AMA 시트 등받이 고정 불능 조치 방법",
+    "author": "박관신",
+    "date": "2019-04-04 15:06:06",
+    "views": "177"
+  },
+  {
+    "board_no": "6364",
+    "no": 1325,
+    "category": "개선정보",
+    "ref_no": "SVC19-0007",
+    "title": "4톤급 1CYL' TYPE Sheave 개선",
+    "author": "권중혁",
+    "date": "2019-04-02 15:09:48",
+    "views": "175"
+  },
+  {
+    "board_no": "6359",
+    "no": 1322,
+    "category": "기타",
+    "ref_no": "SV19-0007",
+    "title": "신규 충전기 매뉴얼 배포(BMM시리즈)",
+    "author": "최우혁",
+    "date": "2019-03-14 11:18:12",
+    "views": "253"
+  },
+  {
+    "board_no": "6348",
+    "no": 1317,
+    "category": "서비스정보",
+    "ref_no": "SV19-0006",
+    "title": "8톤급 Low Idle 헌팅 조치",
+    "author": "권중혁",
+    "date": "2019-02-26 15:15:29",
+    "views": "198"
+  },
+  {
+    "board_no": "6346",
+    "no": 1315,
+    "category": "개선정보",
+    "ref_no": "SV19-0005",
+    "title": "7톤급 헤드램프 수분침투 방지 개선",
+    "author": "권중혁",
+    "date": "2019-02-25 10:33:21",
+    "views": "82"
+  },
+  {
+    "board_no": "6345",
+    "no": 1314,
+    "category": "개선정보",
+    "ref_no": "SV19-0004",
+    "title": "4톤급 조향액슬 마운트러버 강도 개선",
+    "author": "권중혁",
+    "date": "2019-02-22 15:46:44",
+    "views": "132"
+  },
+  {
+    "board_no": "6344",
+    "no": 1313,
+    "category": "개선정보",
+    "ref_no": "SV19-0003",
+    "title": "2톤급 밋션 & 액슬 품질 개선 공지",
+    "author": "권중혁",
+    "date": "2019-02-22 13:47:12",
+    "views": "154"
+  },
+  {
+    "board_no": "6342",
+    "no": 1312,
+    "category": "서비스정보",
+    "ref_no": "SV19-0002",
+    "title": "D120S-7 악셀 가속시 에러코드 점등(P0102)",
+    "author": "권중혁",
+    "date": "2019-02-21 09:44:15",
+    "views": "118"
+  },
+  {
+    "board_no": "6338",
+    "no": 1309,
+    "category": "개선정보",
+    "ref_no": "SV19-0001",
+    "title": "7톤급 D34 TIER-4 엔진 시동 꺼짐 개선 ECU 맵 개선",
+    "author": "홍상현",
+    "date": "2019-02-12 14:48:33",
+    "views": "378"
+  },
+  {
+    "board_no": "6323",
+    "no": 1305,
+    "category": "서비스정보",
+    "ref_no": "SV18-0041",
+    "title": "D34 엔진 도징모듈 결정화로 막힘건 조치방법",
+    "author": "박관신",
+    "date": "2018-12-31 19:33:39",
+    "views": "382"
+  },
+  {
+    "board_no": "6322",
+    "no": 1304,
+    "category": "서비스정보",
+    "ref_no": "SV18-0040",
+    "title": "4톤 New Opc 썬루프 서비스 키트 작업 방법",
+    "author": "박관신",
+    "date": "2018-12-31 15:34:20",
+    "views": "158"
+  },
+  {
+    "board_no": "6321",
+    "no": 1303,
+    "category": "서비스정보",
+    "ref_no": "SV18-0039",
+    "title": "D24/D34 엔진 스타트 모터 품번 변경",
+    "author": "박관신",
+    "date": "2018-12-31 13:37:16",
+    "views": "155"
+  },
+  {
+    "board_no": "6319",
+    "no": 1302,
+    "category": "서비스정보",
+    "ref_no": "SV18-0038",
+    "title": "3톤급 New Opc 전자 파킹 스위치 변경에 따른 서비스 키트 작업방법",
+    "author": "박관신",
+    "date": "2018-12-27 18:11:47",
+    "views": "229"
+  },
+  {
+    "board_no": "6318",
+    "no": 1301,
+    "category": "서비스정보",
+    "ref_no": "SV18-0037",
+    "title": "경광등 하위 서비스 단품 정보",
+    "author": "박관신",
+    "date": "2018-12-27 17:01:33",
+    "views": "118"
+  },
+  {
+    "board_no": "6287",
+    "no": 1291,
+    "category": "개선정보",
+    "ref_no": "SV18-0036",
+    "title": "엔진 7톤급 지게차 전면 LED Lamp 수분 유입건 개선",
+    "author": "김정수",
+    "date": "2018-11-08 09:09:20",
+    "views": "176"
+  },
+  {
+    "board_no": "6279",
+    "no": 1286,
+    "category": "서비스정보",
+    "ref_no": "SV18-0035",
+    "title": "브레이크 페달 작동시 진동 및 소음 과다",
+    "author": "권중혁",
+    "date": "2018-10-25 17:53:41",
+    "views": "262"
+  },
+  {
+    "board_no": "6278",
+    "no": 1285,
+    "category": "기술정보",
+    "ref_no": "SV18-0033",
+    "title": "DI 전자 엔진 ECU 품번 정리",
+    "author": "김정수",
+    "date": "2018-10-18 15:46:15",
+    "views": "295"
+  },
+  {
+    "board_no": "6266",
+    "no": 1283,
+    "category": "개선정보",
+    "ref_no": "SV18-0032",
+    "title": "호스 연결 조임부 누수/누유 개선",
+    "author": "권중혁",
+    "date": "2018-10-12 14:23:31",
+    "views": "224"
+  },
+  {
+    "board_no": "3276",
+    "no": 1282,
+    "category": "일반",
+    "ref_no": "SV18-0031",
+    "title": "엔진 2톤 T/M Speed Sensor 미션 오일 누유건",
+    "author": "김정수",
+    "date": "2018-10-05 19:22:45",
+    "views": "172"
+  },
+  {
+    "board_no": "3268",
+    "no": 1280,
+    "category": "일반",
+    "ref_no": "SV18-0032",
+    "title": "Easyview 신규 소프트웨어 공지  (Ver.2.0.5)",
+    "author": "최우혁",
+    "date": "2018-09-18 18:48:17",
+    "views": "184"
+  },
+  {
+    "board_no": "3265",
+    "no": 1277,
+    "category": "개선정보",
+    "ref_no": "SV18-30",
+    "title": "캐빈내 파노라믹 미러 개선 정보 공유",
+    "author": "권중혁",
+    "date": "2018-08-31 11:06:07",
+    "views": "140"
+  },
+  {
+    "board_no": "3258",
+    "no": 1272,
+    "category": "일반",
+    "ref_no": "SV18-0030",
+    "title": "리튬이온 배터리 진단툴 및 프로그램",
+    "author": "최우혁",
+    "date": "2018-07-26 16:27:24",
+    "views": "287"
+  },
+  {
+    "board_no": "3254",
+    "no": 1270,
+    "category": "서비스정보",
+    "ref_no": "SV18-0029",
+    "title": "필드 하자 사례",
+    "author": "권중혁",
+    "date": "2018-07-13 11:57:56",
+    "views": "371"
+  },
+  {
+    "board_no": "3253",
+    "no": 1269,
+    "category": "서비스정보",
+    "ref_no": "SV18-0028",
+    "title": "D24/34/DL06/DL08 Tier-3, Tier-4  엔진 ECU 및 DCU  맵 설치 서비스용 품번",
+    "author": "박관신",
+    "date": "2018-07-11 11:29:24",
+    "views": "464"
+  },
+  {
+    "board_no": "3249",
+    "no": 1265,
+    "category": "기술정보",
+    "ref_no": "SV18-0027",
+    "title": "엔진 2톤급(대성나찌 MCV장착) 리프트 하강 불량건",
+    "author": "김정수",
+    "date": "2018-06-29 14:07:10",
+    "views": "366"
+  },
+  {
+    "board_no": "3247",
+    "no": 1263,
+    "category": "서비스정보",
+    "ref_no": "SV18-0026",
+    "title": "10톤급 (-7) 캐빈 내부 버튼 스위치 주요 기능 설명",
+    "author": "권중혁",
+    "date": "2018-06-25 16:12:18",
+    "views": "181"
+  },
+  {
+    "board_no": "3246",
+    "no": 1262,
+    "category": "일반",
+    "ref_no": "SV18-0025",
+    "title": "엔진 4톤급 OVHG 차량 유압 공진음 개선 Dummy Hose 적용건",
+    "author": "김정수",
+    "date": "2018-06-22 09:19:05",
+    "views": "163"
+  },
+  {
+    "board_no": "3241",
+    "no": 1258,
+    "category": "기술정보",
+    "ref_no": "SV18-0024",
+    "title": "엔진 4톤급(New OPC) 지게차 경사지 주행 불가 점검 및 조치 방법",
+    "author": "김정수",
+    "date": "2018-06-15 10:10:12",
+    "views": "292"
+  },
+  {
+    "board_no": "3231",
+    "no": 1251,
+    "category": "기타",
+    "ref_no": "SV18-0023",
+    "title": "GHS MSDS 자료 확인 방법",
+    "author": "김정수",
+    "date": "2018-05-15 21:05:23",
+    "views": "147"
+  },
+  {
+    "board_no": "3230",
+    "no": 1250,
+    "category": "서비스정보",
+    "ref_no": "SV18-0022",
+    "title": "D34엔진 타이밍 기어 휠 오 조립으로 시동불능",
+    "author": "김정수",
+    "date": "2018-05-15 20:54:13",
+    "views": "262"
+  },
+  {
+    "board_no": "3229",
+    "no": 1249,
+    "category": "서비스정보",
+    "ref_no": "SV18-0021",
+    "title": "7톤급 시동불능 필드 조치 사례 공지",
+    "author": "권중혁",
+    "date": "2018-05-10 16:51:59",
+    "views": "414"
+  },
+  {
+    "board_no": "3226",
+    "no": 1247,
+    "category": "서비스정보",
+    "ref_no": "SV18-0020",
+    "title": "MMC엔진 시동불능-DTC 686, 1634, 1674 조치 방법",
+    "author": "최재혁",
+    "date": "2018-04-18 11:40:35",
+    "views": "240"
+  },
+  {
+    "board_no": "3218",
+    "no": 1240,
+    "category": "일반",
+    "ref_no": "SV18-0019",
+    "title": "Easyview 신규 소프트웨어 공지 (BS-7)",
+    "author": "최우혁",
+    "date": "2018-04-02 10:33:58",
+    "views": "157"
+  },
+  {
+    "board_no": "3217",
+    "no": 1239,
+    "category": "일반",
+    "ref_no": "SV18-0018",
+    "title": "리튬이온 배터리 서비스 매뉴얼 배포",
+    "author": "최우혁",
+    "date": "2018-04-02 09:57:16",
+    "views": "218"
+  },
+  {
+    "board_no": "3216",
+    "no": 1238,
+    "category": "기술정보",
+    "ref_no": "SV18-16",
+    "title": "7톤급 엔진 시동불능 현상 및 조치 방법",
+    "author": "권중혁",
+    "date": "2018-03-28 14:31:46",
+    "views": "390"
+  },
+  {
+    "board_no": "3214",
+    "no": 1236,
+    "category": "일반",
+    "ref_no": "SV18-0017",
+    "title": "커티스 컨트롤러 커넥터 제거 전용툴",
+    "author": "최우혁",
+    "date": "2018-03-19 19:27:31",
+    "views": "253"
+  },
+  {
+    "board_no": "3213",
+    "no": 1235,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "두산 TIER-4 엔진 최신 맵파일",
+    "author": "최재혁",
+    "date": "2018-03-15 14:39:22",
+    "views": "511"
+  },
+  {
+    "board_no": "3206",
+    "no": 1231,
+    "category": "서비스정보",
+    "ref_no": "SV18-0016",
+    "title": "Easyview 신규 소프트웨어 공지 (BR18/25S-7 Plus)",
+    "author": "최우혁",
+    "date": "2018-03-09 13:33:27",
+    "views": "126"
+  },
+  {
+    "board_no": "3198",
+    "no": 1226,
+    "category": "개선정보",
+    "ref_no": "SV18-0015",
+    "title": "엔진 4톤 New OPC 플로어 플레이트 그룹 페달 조립성 개선",
+    "author": "김봉수",
+    "date": "2018-02-08 19:40:40",
+    "views": "173"
+  },
+  {
+    "board_no": "3196",
+    "no": 1224,
+    "category": "개선정보",
+    "ref_no": "SV18-0014",
+    "title": "BC25S-7 유압필터 브라켓 변경",
+    "author": "김봉수",
+    "date": "2018-02-08 10:52:38",
+    "views": "124"
+  },
+  {
+    "board_no": "3195",
+    "no": 1223,
+    "category": "일반",
+    "ref_no": "SV18-0013",
+    "title": "BRS-7 퓨즈박스 라벨 적용",
+    "author": "김봉수",
+    "date": "2018-02-08 10:09:54",
+    "views": "117"
+  },
+  {
+    "board_no": "3192",
+    "no": 1221,
+    "category": "개선정보",
+    "ref_no": "SV18-0011",
+    "title": "전동2톤 리어엑슬 너클 락킹 타입 변경",
+    "author": "김봉수",
+    "date": "2018-02-05 09:43:04",
+    "views": "127"
+  },
+  {
+    "board_no": "3191",
+    "no": 1220,
+    "category": "개선정보",
+    "ref_no": "SV18-0010",
+    "title": "BT/BX-7 시인성 개선 Display",
+    "author": "김봉수",
+    "date": "2018-02-02 09:16:19",
+    "views": "88"
+  },
+  {
+    "board_no": "3188",
+    "no": 1218,
+    "category": "개선정보",
+    "ref_no": "SV18-0009",
+    "title": "전동지게차 히터 키 off시 전원 차단 안됨건 개선",
+    "author": "권중혁",
+    "date": "2018-01-29 16:05:21",
+    "views": "165"
+  },
+  {
+    "board_no": "3184",
+    "no": 1216,
+    "category": "개선정보",
+    "ref_no": "SV18-0008",
+    "title": "엔진 2톤급 NEW OPC 차량 에어컨 퓨즈 소손 개선 적용",
+    "author": "김봉수",
+    "date": "2018-01-25 17:12:03",
+    "views": "286"
+  },
+  {
+    "board_no": "3183",
+    "no": 1215,
+    "category": "개선정보",
+    "ref_no": "SV18-0007",
+    "title": "어태치 호스 외관 고정방법 개선",
+    "author": "권중혁",
+    "date": "2018-01-23 12:36:35",
+    "views": "148"
+  },
+  {
+    "board_no": "3180",
+    "no": 1213,
+    "category": "기술정보",
+    "ref_no": "SV18-0006",
+    "title": "LP 차량 관리 방법",
+    "author": "권중혁",
+    "date": "2018-01-19 09:50:12",
+    "views": "127"
+  },
+  {
+    "board_no": "3175",
+    "no": 1209,
+    "category": "일반",
+    "ref_no": "SV18-0005",
+    "title": "전동차량 Cabin 회로도",
+    "author": "김봉수",
+    "date": "2018-01-10 09:45:28",
+    "views": "131"
+  },
+  {
+    "board_no": "3174",
+    "no": 1208,
+    "category": "개선정보",
+    "ref_no": "SV18-0004",
+    "title": "후방카메라 모니터 MTG 브라켓 구조 변경(샤프트)",
+    "author": "김봉수",
+    "date": "2018-01-08 10:07:08",
+    "views": "98"
+  },
+  {
+    "board_no": "3173",
+    "no": 1207,
+    "category": "기술정보",
+    "ref_no": "SV18-0003",
+    "title": "2톤급 엔진 Check 램프 점등 (P1650 에러발생) 조치",
+    "author": "권중혁",
+    "date": "2018-01-08 09:34:04",
+    "views": "258"
+  },
+  {
+    "board_no": "3167",
+    "no": 1203,
+    "category": "일반",
+    "ref_no": "SV18-0002",
+    "title": "엔진 4톤급 NEW OPC 차량 일체형 FLOOR MAT 적용",
+    "author": "김봉수",
+    "date": "2018-01-03 11:24:06",
+    "views": "130"
+  },
+  {
+    "board_no": "3166",
+    "no": 1202,
+    "category": "기술정보",
+    "ref_no": "SV18-0001",
+    "title": "ELT EVAPORATOR 단종에 따른 SIROCO EVA 적용",
+    "author": "김봉수",
+    "date": "2018-01-03 11:01:20",
+    "views": "134"
+  },
+  {
+    "board_no": "3165",
+    "no": 1201,
+    "category": "서비스정보",
+    "ref_no": "SV17-0097",
+    "title": "4톤급 NEW OPC 다이오드 , 휴즈, 접지, 릴레이  위치",
+    "author": "박관신",
+    "date": "2017-12-30 14:59:44",
+    "views": "300"
+  },
+  {
+    "board_no": "3164",
+    "no": 1200,
+    "category": "서비스정보",
+    "ref_no": "SV17-0096",
+    "title": "시동 시스템 점검방법",
+    "author": "박관신",
+    "date": "2017-12-30 13:45:11",
+    "views": "245"
+  },
+  {
+    "board_no": "3149",
+    "no": 1196,
+    "category": "일반",
+    "ref_no": "SV17-0099",
+    "title": "[긴급공지] Easyview 신규 펌웨어 배포 (B15/18/20T-7, B16/18/20X-7)",
+    "author": "최우혁",
+    "date": "2017-12-27 09:59:52",
+    "views": "132"
+  },
+  {
+    "board_no": "3146",
+    "no": 1194,
+    "category": "서비스정보",
+    "ref_no": "SV17-0095",
+    "title": "4톤급 오토 쉬프트 콘트롤러 점검방법",
+    "author": "박관신",
+    "date": "2017-12-21 16:31:45",
+    "views": "275"
+  },
+  {
+    "board_no": "3145",
+    "no": 1193,
+    "category": "서비스정보",
+    "ref_no": "SV17-0094",
+    "title": "캐빈 틸팅 수동 작동방법",
+    "author": "박관신",
+    "date": "2017-12-21 16:27:03",
+    "views": "169"
+  },
+  {
+    "board_no": "3143",
+    "no": 1192,
+    "category": "기술정보",
+    "ref_no": "SV17-0086",
+    "title": "초대형 ZF 밋션 압력 측정위치 및 규정압력",
+    "author": "권중혁",
+    "date": "2017-12-12 11:01:50",
+    "views": "193"
+  },
+  {
+    "board_no": "3142",
+    "no": 1191,
+    "category": "일반",
+    "ref_no": "SV17-0085",
+    "title": "초대형급 DANA 미션 압력 측정위치 및 규정압력",
+    "author": "권중혁",
+    "date": "2017-12-12 10:59:29",
+    "views": "102"
+  },
+  {
+    "board_no": "3141",
+    "no": 1190,
+    "category": "기술정보",
+    "ref_no": "SV17-0084",
+    "title": "10톤급 미션 압력 측정위치 및 규정 압력",
+    "author": "권중혁",
+    "date": "2017-12-12 10:57:21",
+    "views": "86"
+  },
+  {
+    "board_no": "3140",
+    "no": 1189,
+    "category": "개선정보",
+    "ref_no": "SV17-0087",
+    "title": "2톤급 시야성 마스트 적용 현황 공지",
+    "author": "권중혁",
+    "date": "2017-12-12 10:51:50",
+    "views": "71"
+  },
+  {
+    "board_no": "3139",
+    "no": 1188,
+    "category": "서비스정보",
+    "ref_no": "SV17-0093",
+    "title": "7톤급 파워 소켓(12V) 점검 방법",
+    "author": "박관신",
+    "date": "2017-12-12 09:15:46",
+    "views": "129"
+  },
+  {
+    "board_no": "3138",
+    "no": 1187,
+    "category": "서비스정보",
+    "ref_no": "SV17-0092",
+    "title": "7톤급 연료 히터 점검 방법",
+    "author": "박관신",
+    "date": "2017-12-12 09:13:05",
+    "views": "185"
+  },
+  {
+    "board_no": "3137",
+    "no": 1186,
+    "category": "서비스정보",
+    "ref_no": "SV17-0091",
+    "title": "7톤급 미션 오일 온도 게이지 점검 방법",
+    "author": "박관신",
+    "date": "2017-12-12 09:01:21",
+    "views": "172"
+  },
+  {
+    "board_no": "3136",
+    "no": 1185,
+    "category": "서비스정보",
+    "ref_no": "SV17-0090",
+    "title": "7톤급 연료 게이지 점검 방법",
+    "author": "박관신",
+    "date": "2017-12-12 08:56:31",
+    "views": "171"
+  },
+  {
+    "board_no": "3135",
+    "no": 1184,
+    "category": "서비스정보",
+    "ref_no": "SV17-0089",
+    "title": "7톤급 냉각수 온도 게이지 점검방법",
+    "author": "박관신",
+    "date": "2017-12-12 08:54:59",
+    "views": "141"
+  },
+  {
+    "board_no": "3134",
+    "no": 1183,
+    "category": "서비스정보",
+    "ref_no": "SV17-0088",
+    "title": "7톤급 마스트 인터록 점검 방법",
+    "author": "박관신",
+    "date": "2017-12-12 08:53:09",
+    "views": "199"
+  },
+  {
+    "board_no": "3133",
+    "no": 1182,
+    "category": "일반",
+    "ref_no": "SV17-0083",
+    "title": "7톤급 미션 압력 측정 위치 및 규정 압력",
+    "author": "권중혁",
+    "date": "2017-12-11 20:00:05",
+    "views": "168"
+  },
+  {
+    "board_no": "3132",
+    "no": 1181,
+    "category": "기술정보",
+    "ref_no": "SV17-0082",
+    "title": "4톤급 미션 압력 측정 위치 및 규정압력",
+    "author": "권중혁",
+    "date": "2017-12-11 18:51:04",
+    "views": "140"
+  },
+  {
+    "board_no": "3128",
+    "no": 1179,
+    "category": "서비스정보",
+    "ref_no": "SV17-0099",
+    "title": "후방 카메라 사용자 매뉴얼",
+    "author": "박관신",
+    "date": "2017-12-07 13:13:23",
+    "views": "138"
+  },
+  {
+    "board_no": "3127",
+    "no": 1178,
+    "category": "서비스정보",
+    "ref_no": "SV17-0081",
+    "title": "파킹 콘트롤러 점검 방법",
+    "author": "박관신",
+    "date": "2017-12-07 08:22:45",
+    "views": "242"
+  },
+  {
+    "board_no": "3126",
+    "no": 1177,
+    "category": "서비스정보",
+    "ref_no": "SV17-0080",
+    "title": "리이 와이퍼 시스템 점검 방법",
+    "author": "박관신",
+    "date": "2017-12-07 08:21:05",
+    "views": "124"
+  },
+  {
+    "board_no": "3125",
+    "no": 1176,
+    "category": "서비스정보",
+    "ref_no": "SV17-0079",
+    "title": "와이퍼 모터 점검 방법",
+    "author": "박관신",
+    "date": "2017-12-07 08:19:27",
+    "views": "195"
+  },
+  {
+    "board_no": "3124",
+    "no": 1175,
+    "category": "서비스정보",
+    "ref_no": "SV17-0078",
+    "title": "캐빈 틸팅 파워팩 점검방법",
+    "author": "박관신",
+    "date": "2017-12-06 11:11:32",
+    "views": "190"
+  },
+  {
+    "board_no": "3123",
+    "no": 1174,
+    "category": "서비스정보",
+    "ref_no": "SV17-0077",
+    "title": "이퀼라이져 (DC/DC Converter) 점검방법",
+    "author": "박관신",
+    "date": "2017-12-06 11:09:59",
+    "views": "288"
+  },
+  {
+    "board_no": "3122",
+    "no": 1173,
+    "category": "서비스정보",
+    "ref_no": "SV17-0076",
+    "title": "악셀레이터 패달 점검방법",
+    "author": "박관신",
+    "date": "2017-12-06 11:06:20",
+    "views": "176"
+  },
+  {
+    "board_no": "3121",
+    "no": 1172,
+    "category": "서비스정보",
+    "ref_no": "SV17-0075",
+    "title": "에어 히터 점검 방법",
+    "author": "박관신",
+    "date": "2017-12-06 10:47:29",
+    "views": "196"
+  },
+  {
+    "board_no": "3120",
+    "no": 1171,
+    "category": "서비스정보",
+    "ref_no": "SV17-0074",
+    "title": "인칭 센서 점검 방법",
+    "author": "박관신",
+    "date": "2017-12-06 10:43:33",
+    "views": "290"
+  },
+  {
+    "board_no": "3119",
+    "no": 1170,
+    "category": "서비스정보",
+    "ref_no": "SV17-0073",
+    "title": "ZF T/M Speed Sensor 점검 방법",
+    "author": "박관신",
+    "date": "2017-12-06 10:39:21",
+    "views": "212"
+  },
+  {
+    "board_no": "3118",
+    "no": 1169,
+    "category": "서비스정보",
+    "ref_no": "SV17-0072",
+    "title": "ZF T/M 비례제어 밸브 점검방법",
+    "author": "박관신",
+    "date": "2017-12-06 10:35:07",
+    "views": "193"
+  },
+  {
+    "board_no": "3116",
+    "no": 1168,
+    "category": "기술정보",
+    "ref_no": "SV17-0071",
+    "title": "2톤급 밋션 압력측정 위치 및 규정압력",
+    "author": "권중혁",
+    "date": "2017-12-04 16:01:32",
+    "views": "175"
+  },
+  {
+    "board_no": "3110",
+    "no": 1162,
+    "category": "일반",
+    "ref_no": "SV17-0072",
+    "title": "Easyview 1.1.3 배포. (윈도우 XP 마지막 호환 버전)",
+    "author": "최우혁",
+    "date": "2017-11-28 19:25:01",
+    "views": "101"
+  },
+  {
+    "board_no": "3109",
+    "no": 1161,
+    "category": "일반",
+    "ref_no": "SV17-0071",
+    "title": "Easyview 신규 소프트웨어 공지 (BR18/25S-7 Plus)",
+    "author": "최우혁",
+    "date": "2017-11-28 19:18:12",
+    "views": "67"
+  },
+  {
+    "board_no": "3105",
+    "no": 1157,
+    "category": "기술정보",
+    "ref_no": "SV17-0070",
+    "title": "전기종 미션 진단 방법 기술 회보",
+    "author": "권중혁",
+    "date": "2017-11-20 16:41:20",
+    "views": "268"
+  },
+  {
+    "board_no": "3099",
+    "no": 1154,
+    "category": "개선정보",
+    "ref_no": "SV17-0069",
+    "title": "대형지게차 T/M Dipstic 가스켓부 누유 개선",
+    "author": "권중혁",
+    "date": "2017-11-14 13:37:50",
+    "views": "87"
+  },
+  {
+    "board_no": "3098",
+    "no": 1153,
+    "category": "서비스정보",
+    "ref_no": "SV17-0068",
+    "title": "2톤급 OPC TIER-4 다이오드 위치 및 접지 위치",
+    "author": "권중혁",
+    "date": "2017-11-13 12:55:10",
+    "views": "188"
+  },
+  {
+    "board_no": "3097",
+    "no": 1152,
+    "category": "기술정보",
+    "ref_no": "SV17-0067",
+    "title": "대형 전기회로 점검 방법(LCD Disp, Weight Scale)",
+    "author": "권중혁",
+    "date": "2017-11-09 14:17:08",
+    "views": "134"
+  },
+  {
+    "board_no": "3096",
+    "no": 1151,
+    "category": "기술정보",
+    "ref_no": "SV17-0066",
+    "title": "대형기종 Seat Switch, Belt, Heat 점검 방법",
+    "author": "권중혁",
+    "date": "2017-11-09 13:45:17",
+    "views": "120"
+  },
+  {
+    "board_no": "3095",
+    "no": 1150,
+    "category": "기술정보",
+    "ref_no": "SV17-0065",
+    "title": "OSS 콘트롤러 점검 방법",
+    "author": "권중혁",
+    "date": "2017-11-09 13:33:12",
+    "views": "290"
+  },
+  {
+    "board_no": "3094",
+    "no": 1149,
+    "category": "기술정보",
+    "ref_no": "SV17-0064",
+    "title": "G2 엔진 IMV 밸브 이상 점검 방법",
+    "author": "권중혁",
+    "date": "2017-11-08 14:28:36",
+    "views": "280"
+  },
+  {
+    "board_no": "3093",
+    "no": 1148,
+    "category": "기술정보",
+    "ref_no": "SV17-0063",
+    "title": "G2 엔진 크랭크센서 점검 방법",
+    "author": "권중혁",
+    "date": "2017-11-08 14:01:10",
+    "views": "159"
+  },
+  {
+    "board_no": "3092",
+    "no": 1147,
+    "category": "기술정보",
+    "ref_no": "SV17-0062",
+    "title": "G2 엔진 캠센서 점검 방법",
+    "author": "권중혁",
+    "date": "2017-11-08 13:30:50",
+    "views": "168"
+  },
+  {
+    "board_no": "3091",
+    "no": 1146,
+    "category": "기술정보",
+    "ref_no": "SV17-00061",
+    "title": "엔진식 지게차 밧데리 방전량 측정방법",
+    "author": "권중혁",
+    "date": "2017-11-08 11:29:26",
+    "views": "285"
+  },
+  {
+    "board_no": "3068",
+    "no": 1137,
+    "category": "기술정보",
+    "ref_no": "SV17-0060",
+    "title": "3톤급 조향호스 와 오일팬 간섭건 개선",
+    "author": "권중혁",
+    "date": "2017-10-19 08:34:07",
+    "views": "116"
+  },
+  {
+    "board_no": "3045",
+    "no": 1126,
+    "category": "일반",
+    "ref_no": "SV17-0059",
+    "title": "[기술정보] 4.5톤 New OPC 7인치 디스플레이 기능 설명",
+    "author": "김정수",
+    "date": "2017-09-21 14:06:43",
+    "views": "418"
+  },
+  {
+    "board_no": "3042",
+    "no": 1124,
+    "category": "일반",
+    "ref_no": "SV17-0058",
+    "title": "[매뉴얼 개정] 엔진 2톤급 지게차 전자 파킹 시스템",
+    "author": "김정수",
+    "date": "2017-09-20 09:15:04",
+    "views": "301"
+  },
+  {
+    "board_no": "3034",
+    "no": 1118,
+    "category": "일반",
+    "ref_no": "SV17-0057",
+    "title": "[기술정보] LPG 지게차 연료탱크 보관 및 누기점검 방법",
+    "author": "김정수",
+    "date": "2017-09-08 17:26:08",
+    "views": "116"
+  },
+  {
+    "board_no": "3033",
+    "no": 1117,
+    "category": "일반",
+    "ref_no": "SV17-0056",
+    "title": "[기술정보] G2 엔진 고압펌프 하자 조치 방법",
+    "author": "김정수",
+    "date": "2017-09-08 17:15:16",
+    "views": "366"
+  },
+  {
+    "board_no": "3030",
+    "no": 1114,
+    "category": "일반",
+    "ref_no": "SV17-0098",
+    "title": "Easyview 신규 소프트웨어 공지 (BT/BX-7 1톤급)",
+    "author": "최우혁",
+    "date": "2017-09-05 09:31:03",
+    "views": "80"
+  },
+  {
+    "board_no": "3024",
+    "no": 1111,
+    "category": "일반",
+    "ref_no": "SV17-0055",
+    "title": "[개선정보] D34 엔진 T-MAP 센서 적용건",
+    "author": "김정수",
+    "date": "2017-09-01 08:16:51",
+    "views": "323"
+  },
+  {
+    "board_no": "3020",
+    "no": 1109,
+    "category": "서비스정보",
+    "ref_no": "SV17-0054",
+    "title": "Relay(301202-00199) 제품 스티커(라벨) 품번 표기 오류",
+    "author": "김봉수",
+    "date": "2017-08-24 11:19:00",
+    "views": "137"
+  },
+  {
+    "board_no": "3016",
+    "no": 1107,
+    "category": "일반",
+    "ref_no": "SV17-0051",
+    "title": "EPS Controller 품질개선",
+    "author": "김봉수",
+    "date": "2017-08-17 08:06:16",
+    "views": "279"
+  },
+  {
+    "board_no": "3007",
+    "no": 1100,
+    "category": "일반",
+    "ref_no": "SV17-0053",
+    "title": "[기술정보] 7톤급 미션 (ZF_3WG94) 오일 과열  점검 진단방법",
+    "author": "김정수",
+    "date": "2017-08-02 14:42:25",
+    "views": "304"
+  },
+  {
+    "board_no": "3005",
+    "no": 1098,
+    "category": "서비스정보",
+    "ref_no": "SV07-0052",
+    "title": "Easyview 신규 소프트웨어 공지 (BT/BX-7 1톤급)",
+    "author": "최우혁",
+    "date": "2017-08-01 16:02:49",
+    "views": "70"
+  },
+  {
+    "board_no": "3003",
+    "no": 1096,
+    "category": "기술정보",
+    "ref_no": "SV17-0050",
+    "title": "[기술정보] 7톤급 장거리 주행시 냉각수 과열 점검 및 조치 방법",
+    "author": "",
+    "date": "2017-08-01 11:35:55",
+    "views": "254"
+  },
+  {
+    "board_no": "3002",
+    "no": 1095,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[매뉴얼 개정] 차량 정비지침서_SM1014-02_D45S(SE)-7 TIER-4",
+    "author": "최재혁",
+    "date": "2017-07-31 11:24:51",
+    "views": "124"
+  },
+  {
+    "board_no": "3001",
+    "no": 1094,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[신규 매뉴얼] 차량 정비지침서_SM1031-00_D70S(EV)-7 PLUS TIER-4",
+    "author": "최재혁",
+    "date": "2017-07-31 11:15:01",
+    "views": "138"
+  },
+  {
+    "board_no": "2709",
+    "no": 1092,
+    "category": "기술정보",
+    "ref_no": "SV17-0048",
+    "title": "[기술정보] 7톤급 미션 (ZF_3WG94) 중립에서 후진 주행건",
+    "author": "김정수",
+    "date": "2017-07-20 15:26:29",
+    "views": "267"
+  },
+  {
+    "board_no": "2669",
+    "no": 1091,
+    "category": "기술정보",
+    "ref_no": "SV17-0049",
+    "title": "[기술정보] 에어컨 시스템 교육자료 공지",
+    "author": "김정수",
+    "date": "2017-07-20 13:26:31",
+    "views": "411"
+  },
+  {
+    "board_no": "2666",
+    "no": 1088,
+    "category": "기술정보",
+    "ref_no": "SV17-0047",
+    "title": "BT/BX-7 (1톤) EM 브레이크 MTG Bolt 길이 변경 (20mm 에서 16mm)",
+    "author": "김봉수",
+    "date": "2017-07-18 15:07:52",
+    "views": "100"
+  },
+  {
+    "board_no": "2425",
+    "no": 1086,
+    "category": "일반",
+    "ref_no": "SV17-0046",
+    "title": "[기술정보] G2(D24/34 EG) 엔진 연료 관리를 통한 인젝터 하자 예방법 및 진단 방법",
+    "author": "김정수",
+    "date": "2017-07-07 15:23:56",
+    "views": "338"
+  },
+  {
+    "board_no": "2323",
+    "no": 1075,
+    "category": "서비스정보",
+    "ref_no": "SV17-0045",
+    "title": "하자사례 - 스트로브 나사볼트로 인한 리어램프 배선 손상",
+    "author": "김봉수",
+    "date": "2017-06-09 08:41:07",
+    "views": "164"
+  },
+  {
+    "board_no": "2315",
+    "no": 1074,
+    "category": "일반",
+    "ref_no": "IV17-0044",
+    "title": "2, 3톤 Mast Bearing 변경 (소, 중, 대 Bearing 간 사이즈 차이를 1mm에서 0.5mm로 변경)",
+    "author": "김봉수",
+    "date": "2017-06-07 10:56:18",
+    "views": "101"
+  },
+  {
+    "board_no": "2314",
+    "no": 1073,
+    "category": "일반",
+    "ref_no": "IV17-0043",
+    "title": "BT/BX-7 1톤 모델 드라이브 엑슬 오일 주입 기준량 변경 (1.1 에서 1.0 리터)",
+    "author": "김봉수",
+    "date": "2017-06-07 10:10:00",
+    "views": "70"
+  },
+  {
+    "board_no": "2311",
+    "no": 1071,
+    "category": "개선정보",
+    "ref_no": "IV17-0042",
+    "title": "7톤급 롤러타입 포크무버의 포크 핀 고정 Bolt 파손",
+    "author": "김봉수",
+    "date": "2017-05-30 18:48:48",
+    "views": "132"
+  },
+  {
+    "board_no": "2304",
+    "no": 1066,
+    "category": "일반",
+    "ref_no": "IV17-0041",
+    "title": "BR 전동차량용 일본 고베 배터리 옵션 도입",
+    "author": "김봉수",
+    "date": "2017-05-19 17:38:31",
+    "views": "122"
+  },
+  {
+    "board_no": "2303",
+    "no": 1065,
+    "category": "일반",
+    "ref_no": "IV17-0040",
+    "title": "엔진차량 OSS 컨트롤러로 인한 차량 이상 동작시 조치 방법 (03)",
+    "author": "김봉수",
+    "date": "2017-05-18 10:21:45",
+    "views": "537"
+  },
+  {
+    "board_no": "2302",
+    "no": 1064,
+    "category": "일반",
+    "ref_no": "SV17-0039",
+    "title": "전동2톤 주행모터 누유(엑슬) 개선",
+    "author": "김봉수",
+    "date": "2017-05-17 10:59:11",
+    "views": "127"
+  },
+  {
+    "board_no": "2300",
+    "no": 1063,
+    "category": "일반",
+    "ref_no": "SV17-0038",
+    "title": "16톤급 Tier-4 엔진 냉각수 아답터 개선 정보",
+    "author": "권중혁",
+    "date": "2017-05-10 16:43:01",
+    "views": "97"
+  },
+  {
+    "board_no": "2298",
+    "no": 1062,
+    "category": "개선정보",
+    "ref_no": "SV17-0037",
+    "title": "LED 램프 개선",
+    "author": "김봉수",
+    "date": "2017-05-04 17:24:15",
+    "views": "168"
+  },
+  {
+    "board_no": "2296",
+    "no": 1060,
+    "category": "개선정보",
+    "ref_no": "SV17-0036",
+    "title": "[개선정보] ZF 3WG94 T/M Bypass V/V 오일 누유 관련건",
+    "author": "김정수",
+    "date": "2017-04-28 14:03:02",
+    "views": "154"
+  },
+  {
+    "board_no": "2295",
+    "no": 1059,
+    "category": "기술정보",
+    "ref_no": "SV17-0035",
+    "title": "[기술정보] 4.5톤 에어컨 메인 휴즈 위치 정보",
+    "author": "김정수",
+    "date": "2017-04-28 13:46:08",
+    "views": "318"
+  },
+  {
+    "board_no": "2294",
+    "no": 1058,
+    "category": "서비스정보",
+    "ref_no": "SV17-0034",
+    "title": "전동 2톤 전동 번호판 식별성 개선",
+    "author": "김봉수",
+    "date": "2017-04-26 17:51:39",
+    "views": "88"
+  },
+  {
+    "board_no": "2293",
+    "no": 1057,
+    "category": "서비스정보",
+    "ref_no": "SV17-0033",
+    "title": "전동 1톤 전동차량 독일 호페케 배터리 옵션 도입",
+    "author": "김봉수",
+    "date": "2017-04-26 17:23:33",
+    "views": "90"
+  },
+  {
+    "board_no": "1917",
+    "no": 1053,
+    "category": "개선정보",
+    "ref_no": "SV17-0032",
+    "title": "[개선정보] D24 엔진 T-MAP 센서 적용건",
+    "author": "김정수",
+    "date": "2017-04-18 12:54:46",
+    "views": "234"
+  },
+  {
+    "board_no": "1912",
+    "no": 1051,
+    "category": "일반",
+    "ref_no": "SV17-0031",
+    "title": "[기술정보] G-Scan 저장된 엔진 데이터(GSR->엑셀) 변환 방법",
+    "author": "김정수",
+    "date": "2017-04-12 15:59:50",
+    "views": "141"
+  },
+  {
+    "board_no": "1907",
+    "no": 1050,
+    "category": "일반",
+    "ref_no": "SV17-0030",
+    "title": "[기술정보] ZF T/M 간헐적 3E 에러 점등 점검 및 조치 방법",
+    "author": "김정수",
+    "date": "2017-04-06 10:09:24",
+    "views": "287"
+  },
+  {
+    "board_no": "1906",
+    "no": 1049,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "누유 확인 방법",
+    "author": "김봉수",
+    "date": "2017-04-05 09:34:53",
+    "views": "165"
+  },
+  {
+    "board_no": "1890",
+    "no": 1040,
+    "category": "서비스정보",
+    "ref_no": "SV17-0029",
+    "title": "12/24V (30A) 다이오드 이원화 적용",
+    "author": "김봉수",
+    "date": "2017-03-16 11:18:19",
+    "views": "218"
+  },
+  {
+    "board_no": "1889",
+    "no": 1039,
+    "category": "개선정보",
+    "ref_no": "SV17-0028",
+    "title": "전동 1, 2톤 후방카메라 옵션 리어도어 개선",
+    "author": "김봉수",
+    "date": "2017-03-16 10:06:42",
+    "views": "106"
+  },
+  {
+    "board_no": "1795",
+    "no": 1029,
+    "category": "개선정보",
+    "ref_no": "SV17-0025",
+    "title": "[개선정보] 엔진 2톤 및 4톤 틸트 실린더 상/하 분리형 호스 정보 관련 기술정보",
+    "author": "김정수",
+    "date": "2017-02-22 16:19:47",
+    "views": "190"
+  },
+  {
+    "board_no": "1791",
+    "no": 1025,
+    "category": "서비스정보",
+    "ref_no": "IV17-0026",
+    "title": "B15S-5, B25S-5 후방카메라 옵션 케이블 방수 사양(IP68) 컨넥터 적용",
+    "author": "김봉수",
+    "date": "2017-02-21 08:38:03",
+    "views": "90"
+  },
+  {
+    "board_no": "1790",
+    "no": 1024,
+    "category": "서비스정보",
+    "ref_no": "IV17-0023",
+    "title": "BC25S-5 모델 EM 브레이크 MTG 볼트 변경",
+    "author": "김봉수",
+    "date": "2017-02-20 17:23:09",
+    "views": "95"
+  },
+  {
+    "board_no": "1789",
+    "no": 1023,
+    "category": "개선정보",
+    "ref_no": "SV17-0024",
+    "title": "[개선정보] G25S-5 MMC 엔진 섬모스타터 하우징부 오일 누수 개선",
+    "author": "김정수",
+    "date": "2017-02-20 17:19:27",
+    "views": "88"
+  },
+  {
+    "board_no": "1785",
+    "no": 1021,
+    "category": "서비스정보",
+    "ref_no": "IV17-0022",
+    "title": "옵션 에어 컴퓨레셔 회로도",
+    "author": "김봉수",
+    "date": "2017-02-16 11:41:28",
+    "views": "185"
+  },
+  {
+    "board_no": "1784",
+    "no": 1020,
+    "category": "서비스정보",
+    "ref_no": "IV17-0021",
+    "title": "하네스에 삽입된 저항 품번 리스트",
+    "author": "김봉수",
+    "date": "2017-02-15 13:55:23",
+    "views": "238"
+  },
+  {
+    "board_no": "1783",
+    "no": 1019,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "2톤 후방카메라 고정로드 절손건 조치 방법",
+    "author": "권중혁",
+    "date": "2017-02-15 11:12:09",
+    "views": "108"
+  },
+  {
+    "board_no": "1775",
+    "no": 1017,
+    "category": "기술정보",
+    "ref_no": "IV17-0020",
+    "title": "B25S-5 모델 컨트롤러룸 정비성 개선을 위한 리어도어 변경",
+    "author": "김봉수",
+    "date": "2017-02-13 10:21:17",
+    "views": "78"
+  },
+  {
+    "board_no": "1773",
+    "no": 1016,
+    "category": "개선정보",
+    "ref_no": "SV17-0019",
+    "title": "D34  Tier-4  엔진 ECU 및 DCU 맵 배포",
+    "author": "박관신",
+    "date": "2017-02-10 09:58:21",
+    "views": "520"
+  },
+  {
+    "board_no": "1771",
+    "no": 1014,
+    "category": "기술정보",
+    "ref_no": "SV17-0018",
+    "title": "[기술정보] D25S-7 New OPC 차량 Instrument 속도제한 기능 추가",
+    "author": "김정수",
+    "date": "2017-02-08 11:41:24",
+    "views": "446"
+  },
+  {
+    "board_no": "1767",
+    "no": 1012,
+    "category": "서비스정보",
+    "ref_no": "IV17-0017",
+    "title": "D70S-7 포크무브 실린더 장착용 브라켓 용접 위치 정보",
+    "author": "김봉수",
+    "date": "2017-02-03 11:34:49",
+    "views": "142"
+  },
+  {
+    "board_no": "1766",
+    "no": 1011,
+    "category": "서비스정보",
+    "ref_no": "SV17-0016",
+    "title": "엔진식 4톤급 FFT 4250 2실린더 A/S 전용 어테치 호스  품번",
+    "author": "박관신",
+    "date": "2017-02-02 13:05:26",
+    "views": "121"
+  },
+  {
+    "board_no": "1762",
+    "no": 1008,
+    "category": "기술정보",
+    "ref_no": "SV17-0015",
+    "title": "[기술정보] 전동1톤 콘트롤밸브 내부 이상으로 틸트 전/후경 이상 동작 점검/조치 방법",
+    "author": "김정수",
+    "date": "2017-01-25 17:25:20",
+    "views": "161"
+  },
+  {
+    "board_no": "1761",
+    "no": 1007,
+    "category": "기술정보",
+    "ref_no": "IV17-0014",
+    "title": "BT/BX-7 1톤 모델 신규 펌웨어 배포",
+    "author": "김봉수",
+    "date": "2017-01-25 09:54:50",
+    "views": "87"
+  },
+  {
+    "board_no": "1760",
+    "no": 1006,
+    "category": "기술정보",
+    "ref_no": "IV17-0013",
+    "title": "EasyView 1.1.2 신규 버전 배포",
+    "author": "김봉수",
+    "date": "2017-01-25 09:10:01",
+    "views": "110"
+  },
+  {
+    "board_no": "1758",
+    "no": 1004,
+    "category": "서비스정보",
+    "ref_no": "SV17-0012",
+    "title": "엔진식 지게차 스톨 알피엠",
+    "author": "박관신",
+    "date": "2017-01-24 12:31:48",
+    "views": "286"
+  },
+  {
+    "board_no": "1757",
+    "no": 1003,
+    "category": "일반",
+    "ref_no": "SV17-0011",
+    "title": "대형기종의 카메라 및 케이블 개선",
+    "author": "권중혁",
+    "date": "2017-01-24 11:13:21",
+    "views": "75"
+  },
+  {
+    "board_no": "1755",
+    "no": 1002,
+    "category": "일반",
+    "ref_no": "SV17-0010",
+    "title": "16톤급 라디에터 고정 볼트 풀림 건 개선",
+    "author": "권중혁",
+    "date": "2017-01-19 11:48:43",
+    "views": "66"
+  },
+  {
+    "board_no": "1752",
+    "no": 999,
+    "category": "서비스정보",
+    "ref_no": "IV17-0009",
+    "title": "전기 노이즈에 의한 간헐적인 오동작 대응 방법",
+    "author": "김봉수",
+    "date": "2017-01-17 13:09:14",
+    "views": "317"
+  },
+  {
+    "board_no": "1751",
+    "no": 998,
+    "category": "기술정보",
+    "ref_no": "IV17-0007",
+    "title": "B25S(E)-5 모델의 후드 조립성 개선을 위해 CTWT 변경",
+    "author": "김봉수",
+    "date": "2017-01-17 10:33:30",
+    "views": "70"
+  },
+  {
+    "board_no": "1747",
+    "no": 997,
+    "category": "일반",
+    "ref_no": "SV17-0004",
+    "title": "[개선정보] D180S-7 & DV180/250S-(7)12 Remote TM Cooler Fan Motor개선",
+    "author": "김정수",
+    "date": "2017-01-16 16:19:57",
+    "views": "89"
+  },
+  {
+    "board_no": "1746",
+    "no": 996,
+    "category": "기술정보",
+    "ref_no": "SV17-0002",
+    "title": "[기술정보] D25S(E)-7 Fishey type(옵션) 차량 실린더 정보",
+    "author": "김정수",
+    "date": "2017-01-16 11:30:37",
+    "views": "95"
+  },
+  {
+    "board_no": "1744",
+    "no": 995,
+    "category": "개선정보",
+    "ref_no": "SV17-0003",
+    "title": "부품 변경 정보",
+    "author": "권중혁",
+    "date": "2017-01-13 13:34:39",
+    "views": "106"
+  },
+  {
+    "board_no": "1743",
+    "no": 994,
+    "category": "기술정보",
+    "ref_no": "IV17-0006",
+    "title": "B25S-5 모델, 운전석 바닥 매트 변경 (B25SE-5 용 바닥 매트 적용)",
+    "author": "김봉수",
+    "date": "2017-01-12 18:00:24",
+    "views": "56"
+  },
+  {
+    "board_no": "1741",
+    "no": 993,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "4톤급 어테치 호스 FFT 2실린더 4250mm A/S전용 호스 품번",
+    "author": "박관신",
+    "date": "2017-01-06 16:03:45",
+    "views": "92"
+  },
+  {
+    "board_no": "1732",
+    "no": 986,
+    "category": "기타",
+    "ref_no": "",
+    "title": "K-Vaiser 프로그램 - Curtis 점검툴 드라이버",
+    "author": "김봉수",
+    "date": "2017-01-02 16:07:11",
+    "views": "102"
+  },
+  {
+    "board_no": "1730",
+    "no": 984,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "D34 엔진 Tier-4 후처리장치 (녹스센서, DCU, 픽업 유니트, SCR 제어조건) 하자 데이터 분석 사례",
+    "author": "박관신",
+    "date": "2017-01-02 15:18:16",
+    "views": "370"
+  },
+  {
+    "board_no": "1729",
+    "no": 983,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "D34 엔진 Tier-4 후처리장치 (온도센서) 하자관련 데이터 분석 사례",
+    "author": "박관신",
+    "date": "2017-01-02 15:15:09",
+    "views": "271"
+  },
+  {
+    "board_no": "1728",
+    "no": 982,
+    "category": "개선정보",
+    "ref_no": "",
+    "title": "[개선정보] D25S(E)-7 & G25S-5 머플러튜브 개선",
+    "author": "김정수",
+    "date": "2017-01-02 14:30:48",
+    "views": "50"
+  },
+  {
+    "board_no": "1727",
+    "no": 981,
+    "category": "일반",
+    "ref_no": "",
+    "title": "BT/BX-7 1톤, 방수 개선 주행모터 적용",
+    "author": "김봉수",
+    "date": "2017-01-02 14:16:47",
+    "views": "59"
+  },
+  {
+    "board_no": "1726",
+    "no": 980,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "B18S-5 모델 스티어 엑슬(Steer Axle) 변경 (B20X-7 용 스티어엑슬 적용)",
+    "author": "김봉수",
+    "date": "2017-01-02 10:12:44",
+    "views": "65"
+  },
+  {
+    "board_no": "1721",
+    "no": 977,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "D34 엔진 Tier-4 후처리장치 (도징모듈) 하자관련 데이터 분석 사례",
+    "author": "박관신",
+    "date": "2016-12-26 20:16:26",
+    "views": "205"
+  },
+  {
+    "board_no": "1720",
+    "no": 976,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "D34 엔진 Tier-4 후처리장치 (서플라이모듈) 하자관련 데이터 분석 사례",
+    "author": "박관신",
+    "date": "2016-12-26 20:12:49",
+    "views": "207"
+  },
+  {
+    "board_no": "1713",
+    "no": 971,
+    "category": "일반",
+    "ref_no": "",
+    "title": "[기술정보] G2 진단 Tool 데이터 찾기 및 데이터 항목 설정 방법",
+    "author": "김정수",
+    "date": "2016-11-21 18:53:59",
+    "views": "177"
+  },
+  {
+    "board_no": "1712",
+    "no": 970,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) BT/BX-7 교육용 회로도",
+    "author": "김봉수",
+    "date": "2016-11-19 07:26:11",
+    "views": "108"
+  },
+  {
+    "board_no": "1711",
+    "no": 969,
+    "category": "일반",
+    "ref_no": "",
+    "title": "[기술정보] G2 데이터 분석을 위한 엑셀 활용법",
+    "author": "김정수",
+    "date": "2016-11-18 10:05:28",
+    "views": "143"
+  },
+  {
+    "board_no": "1709",
+    "no": 967,
+    "category": "일반",
+    "ref_no": "",
+    "title": "(서비스정보) 동영상자료 - B25SE-5 H7 하자 조치사례",
+    "author": "김봉수",
+    "date": "2016-11-11 15:13:17",
+    "views": "221"
+  },
+  {
+    "board_no": "1708",
+    "no": 966,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "[기술정보] 솔리드 타이어 취급 요령",
+    "author": "김정수",
+    "date": "2016-11-10 12:29:11",
+    "views": "144"
+  },
+  {
+    "board_no": "1707",
+    "no": 965,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) D45S(E)-7 주행속도 제한 방법",
+    "author": "김봉수",
+    "date": "2016-11-10 08:41:40",
+    "views": "399"
+  },
+  {
+    "board_no": "1704",
+    "no": 962,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) 동영상자료 - SME 컨트롤러 차량진동 현상 조치사례",
+    "author": "김봉수",
+    "date": "2016-11-04 14:40:50",
+    "views": "148"
+  },
+  {
+    "board_no": "1703",
+    "no": 961,
+    "category": "일반",
+    "ref_no": "",
+    "title": "[기술정보] 디젤 2톤급 지게차 미션 과열시 점검 방법",
+    "author": "김정수",
+    "date": "2016-11-03 19:12:38",
+    "views": "255"
+  },
+  {
+    "board_no": "1702",
+    "no": 960,
+    "category": "일반",
+    "ref_no": "",
+    "title": "[기술정보] 엔진식 지게차 압축압력 점검 방법",
+    "author": "김정수",
+    "date": "2016-11-03 16:31:11",
+    "views": "273"
+  },
+  {
+    "board_no": "1701",
+    "no": 959,
+    "category": "일반",
+    "ref_no": "",
+    "title": "[기술정보] D34 T4 Key 1단 엔진 체크 경고등 점등 관련건",
+    "author": "",
+    "date": "2016-11-03 15:47:06",
+    "views": "196"
+  },
+  {
+    "board_no": "1696",
+    "no": 955,
+    "category": "개선정보",
+    "ref_no": "",
+    "title": "D34 Tier-4 엔진 ECU MAP 배포",
+    "author": "박관신",
+    "date": "2016-10-27 20:15:02",
+    "views": "471"
+  },
+  {
+    "board_no": "1694",
+    "no": 953,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(기술정보) EasyView 화면 및 파라미터 교육자료",
+    "author": "김봉수",
+    "date": "2016-10-19 17:47:11",
+    "views": "154"
+  },
+  {
+    "board_no": "1693",
+    "no": 952,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) 동영상자료 - 서비스포탈 ; 제9장 전자매뉴얼",
+    "author": "김봉수",
+    "date": "2016-10-15 12:00:41",
+    "views": "53"
+  },
+  {
+    "board_no": "1692",
+    "no": 951,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) BT/BX-7 신형 전/후진 스위치 불편 고객 대응책",
+    "author": "김봉수",
+    "date": "2016-10-12 15:39:23",
+    "views": "125"
+  },
+  {
+    "board_no": "1688",
+    "no": 947,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) 동영상자료 - B16X-7 파라미터 설정 서비스 사례",
+    "author": "김봉수",
+    "date": "2016-10-07 07:30:16",
+    "views": "65"
+  },
+  {
+    "board_no": "1686",
+    "no": 946,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) 동영상자료 - 서비스포탈 ; 제8장 점검툴(Diagnostic Software)",
+    "author": "김봉수",
+    "date": "2016-10-04 15:51:40",
+    "views": "66"
+  },
+  {
+    "board_no": "1685",
+    "no": 945,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) 동영상자료 - 서비스포탈 ; 제7장 취급 설명서",
+    "author": "김봉수",
+    "date": "2016-10-03 21:03:35",
+    "views": "37"
+  },
+  {
+    "board_no": "1684",
+    "no": 944,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) 동영상자료 - 서비스포탈 ; 제6장 정비 지침서",
+    "author": "김봉수",
+    "date": "2016-10-02 22:24:06",
+    "views": "38"
+  },
+  {
+    "board_no": "1683",
+    "no": 943,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) 동영상자료 - 서비스포탈 ; 제5장 묻고 답하기",
+    "author": "김봉수",
+    "date": "2016-10-02 19:50:21",
+    "views": "29"
+  },
+  {
+    "board_no": "1682",
+    "no": 942,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) 동영상자료 - 서비스포탈 ; 제4장 기술회보",
+    "author": "김봉수",
+    "date": "2016-10-02 10:57:36",
+    "views": "41"
+  },
+  {
+    "board_no": "1681",
+    "no": 941,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[신규 매뉴얼] 차량 정비지침서_SM1024_G70S-7",
+    "author": "최재혁",
+    "date": "2016-10-01 00:23:13",
+    "views": "137"
+  },
+  {
+    "board_no": "1679",
+    "no": 939,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) 동영상자료 - BR20S-7 경사로 주행중 FC 에러로 다운되는 현상 조치 사례",
+    "author": "김봉수",
+    "date": "2016-09-30 18:49:12",
+    "views": "99"
+  },
+  {
+    "board_no": "1677",
+    "no": 937,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) 동영상자료 - BR20S-7 전진주행시 울컥거리는 현상 조치 사례",
+    "author": "김봉수",
+    "date": "2016-09-29 23:45:19",
+    "views": "111"
+  },
+  {
+    "board_no": "1671",
+    "no": 931,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) 동영상자료 - 서비스포탈 ; 제3장 공지사항",
+    "author": "김봉수",
+    "date": "2016-09-27 09:16:48",
+    "views": "35"
+  },
+  {
+    "board_no": "1670",
+    "no": 930,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) D25S-7 Tier 4 (G2, D24) 에어콘 회로도",
+    "author": "김봉수",
+    "date": "2016-09-27 08:55:42",
+    "views": "156"
+  },
+  {
+    "board_no": "1669",
+    "no": 929,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) 동영상자료 - 서비스포탈 ; 제2장 메인화면",
+    "author": "김봉수",
+    "date": "2016-09-24 21:48:43",
+    "views": "35"
+  },
+  {
+    "board_no": "1668",
+    "no": 928,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "[기술정보] 4WG211  ZF T/M 유압/전기 시스템 도면 공지",
+    "author": "김정수",
+    "date": "2016-09-23 08:10:25",
+    "views": "118"
+  },
+  {
+    "board_no": "1666",
+    "no": 926,
+    "category": "일반",
+    "ref_no": "",
+    "title": "(서비스정보) 동영상자료 - 서비스포탈 ; 제1장 로그인",
+    "author": "김봉수",
+    "date": "2016-09-21 15:19:49",
+    "views": "38"
+  },
+  {
+    "board_no": "1665",
+    "no": 925,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) 엔진차량 OSS 컨트롤러로 인한 차량 이상 동작시 조치 방법",
+    "author": "김봉수",
+    "date": "2016-09-20 10:59:47",
+    "views": "349"
+  },
+  {
+    "board_no": "1661",
+    "no": 924,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스 정보) 동영상자료 - B25S-5 Curtis 차량 리프트 상승 이상 현상 필드 조치 사례",
+    "author": "김봉수",
+    "date": "2016-09-09 15:21:55",
+    "views": "144"
+  },
+  {
+    "board_no": "1660",
+    "no": 923,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) D70S-7 T4 81kW 회로도",
+    "author": "김봉수",
+    "date": "2016-09-09 11:37:00",
+    "views": "93"
+  },
+  {
+    "board_no": "1656",
+    "no": 921,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) 엔진차량 OSS 컨트롤러 하자로 유압동작이 안될 경우 조치 방법",
+    "author": "김봉수",
+    "date": "2016-09-02 09:13:30",
+    "views": "273"
+  },
+  {
+    "board_no": "1655",
+    "no": 920,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) 콘넥터 방수용 절연 그리스 사용 안내",
+    "author": "김봉수",
+    "date": "2016-08-31 15:28:27",
+    "views": "143"
+  },
+  {
+    "board_no": "1654",
+    "no": 919,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) D25S-7 Tier 4 (G2, D24) 전장 회로도",
+    "author": "김봉수",
+    "date": "2016-08-31 11:44:10",
+    "views": "144"
+  },
+  {
+    "board_no": "1653",
+    "no": 918,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) D70EV-7 55kW 전장 회로도",
+    "author": "김봉수",
+    "date": "2016-08-31 10:50:34",
+    "views": "86"
+  },
+  {
+    "board_no": "1652",
+    "no": 917,
+    "category": "개선정보",
+    "ref_no": "",
+    "title": "(개선정보) 중, 대형차량 LED 리어 콤비 램프 품질 개선",
+    "author": "김봉수",
+    "date": "2016-08-30 10:26:41",
+    "views": "121"
+  },
+  {
+    "board_no": "1651",
+    "no": 916,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[소프트 웨어 공지] G2 SCAN ECU 진단 프로그램 업데이트 요청",
+    "author": "박관신",
+    "date": "2016-08-29 08:22:17",
+    "views": "335"
+  },
+  {
+    "board_no": "1646",
+    "no": 912,
+    "category": "일반",
+    "ref_no": "",
+    "title": "(서비스 정보) EasyView 1.1.1 설치 파일 및 BC-7 펌웨어",
+    "author": "최우혁",
+    "date": "2016-08-24 10:30:07",
+    "views": "105"
+  },
+  {
+    "board_no": "1642",
+    "no": 908,
+    "category": "개선정보",
+    "ref_no": "",
+    "title": "(개선정보) 유압 호스 압착(스웨이징, Swaging) 공정 개선",
+    "author": "김봉수",
+    "date": "2016-08-23 12:39:49",
+    "views": "90"
+  },
+  {
+    "board_no": "1637",
+    "no": 904,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "[기술정보] 2톤 T3/T4 차량 속도 제한",
+    "author": "김정수",
+    "date": "2016-08-16 11:39:11",
+    "views": "533"
+  },
+  {
+    "board_no": "1636",
+    "no": 903,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) Curtis 컨트롤러 온도 특성",
+    "author": "김봉수",
+    "date": "2016-08-16 10:13:14",
+    "views": "99"
+  },
+  {
+    "board_no": "1627",
+    "no": 894,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "[기술정보_중요] DCU MAP 업데이트 실시전 u-VIM 최신 firmware(V2.223) 확인 후 MAP 업데이트 요청!",
+    "author": "김정수",
+    "date": "2016-08-12 15:56:13",
+    "views": "284"
+  },
+  {
+    "board_no": "1626",
+    "no": 893,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) EM 브레이크 하자차량 수리 시 주의사항",
+    "author": "김봉수",
+    "date": "2016-08-12 15:02:34",
+    "views": "242"
+  },
+  {
+    "board_no": "1624",
+    "no": 891,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[서비스정보] 7시리즈 모델 전용 Maintenance KIT",
+    "author": "김정수",
+    "date": "2016-08-11 15:54:11",
+    "views": "110"
+  },
+  {
+    "board_no": "1354",
+    "no": 621,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) BRS-7 차량 HH 오류 관련 서비스 정보",
+    "author": "김봉수",
+    "date": "2016-08-08 13:00:51",
+    "views": "108"
+  },
+  {
+    "board_no": "1353",
+    "no": 620,
+    "category": "일반",
+    "ref_no": "",
+    "title": "[기술정보] 16톤 T4 Weight Scale 세팅 방법",
+    "author": "김정수",
+    "date": "2016-08-08 10:27:56",
+    "views": "130"
+  },
+  {
+    "board_no": "1300",
+    "no": 567,
+    "category": "개선정보",
+    "ref_no": "",
+    "title": "(개선정보) DC 컨버터 개선품 적용",
+    "author": "김봉수",
+    "date": "2016-07-28 07:45:09",
+    "views": "150"
+  },
+  {
+    "board_no": "1297",
+    "no": 565,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "[기술정보] 2톤 MCV Unload V/V 및 Lift Lock V/V 오링",
+    "author": "김정수",
+    "date": "2016-07-26 17:53:16",
+    "views": "125"
+  },
+  {
+    "board_no": "1286",
+    "no": 556,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(기술정보) Curtis 콘트롤러 전동차량의 78 에러(좌측 주행모터 온도 센서 이상) 고장진단 방법",
+    "author": "김봉수",
+    "date": "2016-07-21 15:48:25",
+    "views": "90"
+  },
+  {
+    "board_no": "1283",
+    "no": 553,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "[기술정보] D70EV-7 시동 OFF시 계기판 44,45에러 점등건",
+    "author": "김정수",
+    "date": "2016-07-21 10:23:18",
+    "views": "181"
+  },
+  {
+    "board_no": "1281",
+    "no": 551,
+    "category": "일반",
+    "ref_no": "",
+    "title": "4톤급/7톤급 제동시 이음 조치 방법 공지",
+    "author": "권중혁",
+    "date": "2016-07-20 18:54:04",
+    "views": "222"
+  },
+  {
+    "board_no": "1279",
+    "no": 549,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[서비스정보] D50/70S(EV)-7 T4 미션(ZF) 오일 딥스틱 튜브 변경건",
+    "author": "김정수",
+    "date": "2016-07-18 14:55:59",
+    "views": "85"
+  },
+  {
+    "board_no": "1275",
+    "no": 545,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "[기술정보]2톤~4.5톤 웨이트 스케일 설명서",
+    "author": "김정수",
+    "date": "2016-07-12 11:50:18",
+    "views": "191"
+  },
+  {
+    "board_no": "1274",
+    "no": 544,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[서비스정보] BT/BX-7 차량 L9 오류 관련 서비스 정보 (4/13 등록한 회보 개정 발간)",
+    "author": "김봉수",
+    "date": "2016-07-11 15:26:40",
+    "views": "103"
+  },
+  {
+    "board_no": "1273",
+    "no": 543,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "전자엔진 문제 발생시 _ 진단프로그램(G2 SCAN,DDT SCR) 및 엔진MAP 최신 버젼으로 업 그레이드건",
+    "author": "",
+    "date": "2016-07-11 13:59:22",
+    "views": "169"
+  },
+  {
+    "board_no": "1270",
+    "no": 541,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "DL06/08(Tier-4) 앤진 고장진단 코드집",
+    "author": "김정수",
+    "date": "2016-07-06 13:27:40",
+    "views": "189"
+  },
+  {
+    "board_no": "1269",
+    "no": 540,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "디젤엔진 Tier-4 엔진 MAP 배포",
+    "author": "박관신",
+    "date": "2016-07-05 11:08:11",
+    "views": "396"
+  },
+  {
+    "board_no": "1268",
+    "no": 539,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "DL06/08 Tier-4 엔진 RPM별 ECU 데이터",
+    "author": "김정수",
+    "date": "2016-07-05 09:51:06",
+    "views": "123"
+  },
+  {
+    "board_no": "1262",
+    "no": 533,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) 정상적인 충전 완료 후 BDI 8칸 표시",
+    "author": "김봉수",
+    "date": "2016-06-29 09:37:32",
+    "views": "225"
+  },
+  {
+    "board_no": "1261",
+    "no": 532,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Tier-4 엔진 DCU RPM별 기본 데이터",
+    "author": "김정수",
+    "date": "2016-06-28 13:57:01",
+    "views": "169"
+  },
+  {
+    "board_no": "1260",
+    "no": 531,
+    "category": "일반",
+    "ref_no": "",
+    "title": "Tier-4 엔진 ECU RPM별 기본 데이터",
+    "author": "김정수",
+    "date": "2016-06-28 13:38:25",
+    "views": "143"
+  },
+  {
+    "board_no": "1258",
+    "no": 529,
+    "category": "개선정보",
+    "ref_no": "",
+    "title": "(개선정보) BR 2톤 브레이크 디스크 간섭 개선정보",
+    "author": "김봉수",
+    "date": "2016-06-14 13:45:01",
+    "views": "110"
+  },
+  {
+    "board_no": "1257",
+    "no": 528,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(기술정보) Curtis 콘트롤러 전동차량의 H5(좌측 드라이브 모터 회로 단선) 에러 고장진단 방법",
+    "author": "김봉수",
+    "date": "2016-06-14 08:54:52",
+    "views": "102"
+  },
+  {
+    "board_no": "1252",
+    "no": 523,
+    "category": "일반",
+    "ref_no": "",
+    "title": "(기술정보) 전동지게차 인도점검시 고객 취급설명 회보(중요)",
+    "author": "권중혁",
+    "date": "2016-06-10 10:42:41",
+    "views": "155"
+  },
+  {
+    "board_no": "1237",
+    "no": 508,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(기술정보) Curtis 콘트롤러 전동차량의 67 에러(좌측 주행 컨트롤러 과열) 고장진단 방법",
+    "author": "김봉수",
+    "date": "2016-06-07 16:57:01",
+    "views": "62"
+  },
+  {
+    "board_no": "1234",
+    "no": 505,
+    "category": "일반",
+    "ref_no": "",
+    "title": "(서비스 정보) EasyView 1.0.9 설치 파일 및 펌웨어",
+    "author": "최우혁",
+    "date": "2016-06-02 14:28:43",
+    "views": "127"
+  },
+  {
+    "board_no": "1230",
+    "no": 502,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) 커넥터 점프선 서비스 부품 등록 (전기 Noise 대응 방법)",
+    "author": "김봉수",
+    "date": "2016-05-10 09:00:21",
+    "views": "284"
+  },
+  {
+    "board_no": "1219",
+    "no": 491,
+    "category": "일반",
+    "ref_no": "",
+    "title": "(기술정보) Curtis 콘트롤러 전동차량의 F7(좌측 주행모터 모터 전류 센싱 이상) 에러 고장진단 방법",
+    "author": "김봉수",
+    "date": "2016-05-07 10:54:53",
+    "views": "50"
+  },
+  {
+    "board_no": "1206",
+    "no": 479,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "[기술정보] 디젤엔진기본 시스템 교육자료",
+    "author": "김정수",
+    "date": "2016-04-26 14:05:36",
+    "views": "217"
+  },
+  {
+    "board_no": "1205",
+    "no": 478,
+    "category": "일반",
+    "ref_no": "",
+    "title": "[기술정보] 전기기본 교육 교재",
+    "author": "최우혁",
+    "date": "2016-04-26 13:48:17",
+    "views": "172"
+  },
+  {
+    "board_no": "1202",
+    "no": 475,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(기술정보) Curtis 콘트롤러 전동차량의 E5 에러(좌측 주행 모터 과열) 고장진단 방법",
+    "author": "김봉수",
+    "date": "2016-04-24 06:36:45",
+    "views": "51"
+  },
+  {
+    "board_no": "1199",
+    "no": 472,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(기술정보) Curtis 콘트롤러 전동차량의 E2 에러(좌측 주행 컨트롤러 과열) 고장진단 방법",
+    "author": "김봉수",
+    "date": "2016-04-23 17:13:35",
+    "views": "61"
+  },
+  {
+    "board_no": "1192",
+    "no": 465,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[서비스정보] BT/BX-7 차량 L9 오류 관련 서비스 정보",
+    "author": "김봉수",
+    "date": "2016-04-13 09:28:04",
+    "views": "87"
+  },
+  {
+    "board_no": "1188",
+    "no": 462,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "[기술정보] 유압시스템 기본 교육 교재",
+    "author": "김정수",
+    "date": "2016-04-11 10:14:39",
+    "views": "125"
+  },
+  {
+    "board_no": "1186",
+    "no": 460,
+    "category": "개선정보",
+    "ref_no": "",
+    "title": "[개선정보] BT/BX-7 1톤 F/R 스위치 품질 개선",
+    "author": "김봉수",
+    "date": "2016-04-06 14:50:59",
+    "views": "36"
+  },
+  {
+    "board_no": "1182",
+    "no": 457,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "[기술정보] 디젤링현상",
+    "author": "김정수",
+    "date": "2016-03-30 14:46:23",
+    "views": "127"
+  },
+  {
+    "board_no": "1181",
+    "no": 456,
+    "category": "일반",
+    "ref_no": "",
+    "title": "(서비스정보) 2톤 MCV 신규 개발품 양산 적용 (한정 수량 ? 50ea) [수정]",
+    "author": "김봉수",
+    "date": "2016-03-23 15:03:53",
+    "views": "68"
+  },
+  {
+    "board_no": "1178",
+    "no": 455,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(기술정보) Curtis 전동차량 프로그램 파라미터 리스트",
+    "author": "김봉수",
+    "date": "2016-03-15 09:03:40",
+    "views": "120"
+  },
+  {
+    "board_no": "1174",
+    "no": 452,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(기술정보) 전동차량 E6(펌프모터 과열) 에러 고장진단 방법",
+    "author": "김봉수",
+    "date": "2016-03-07 10:19:48",
+    "views": "150"
+  },
+  {
+    "board_no": "1172",
+    "no": 450,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(기술정보) Curtis 컨트롤러 에러코드 리스트",
+    "author": "김봉수",
+    "date": "2016-03-03 13:26:21",
+    "views": "139"
+  },
+  {
+    "board_no": "1170",
+    "no": 448,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) 2톤 MCV 신규 개발품 양산 적용 (한정 수량 ? 50ea)",
+    "author": "김봉수",
+    "date": "2016-03-02 10:28:52",
+    "views": "39"
+  },
+  {
+    "board_no": "1163",
+    "no": 443,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스 정보) 동영상자료 ? Curtis 전동차량 콘트롤러 LED Error Code (에러 코드) 확인 방법",
+    "author": "김봉수",
+    "date": "2016-02-26 08:51:19",
+    "views": "83"
+  },
+  {
+    "board_no": "1161",
+    "no": 442,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) Easyview 신규 소프트웨어 공지 (BT/BX-7 1톤급)",
+    "author": "최우혁",
+    "date": "2016-02-24 16:13:12",
+    "views": "92"
+  },
+  {
+    "board_no": "1158",
+    "no": 439,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스 정보) 동영상자료 - Curtis 전동차량 미세 가속/감속 성능 조정 방법",
+    "author": "김봉수",
+    "date": "2016-02-23 08:13:48",
+    "views": "76"
+  },
+  {
+    "board_no": "1157",
+    "no": 438,
+    "category": "기타",
+    "ref_no": "",
+    "title": "(소프트웨어) 전동차량 PC 점검 툴(Eyeplus & EasyView) 실행 오류 조치 방법",
+    "author": "김봉수",
+    "date": "2016-02-19 10:51:21",
+    "views": "150"
+  },
+  {
+    "board_no": "1156",
+    "no": 437,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) 주행중 중립 전환 문제 조치 방법",
+    "author": "김봉수",
+    "date": "2016-02-19 08:17:50",
+    "views": "190"
+  },
+  {
+    "board_no": "1154",
+    "no": 435,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "GPES(전자파트북) 코드(Servic Code 및 대체 호환성 ) 정보자료",
+    "author": "박관신",
+    "date": "2016-02-17 09:57:51",
+    "views": "136"
+  },
+  {
+    "board_no": "1149",
+    "no": 431,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "2.5톤급 Tier-4 에어 크리너 단품 관련 서비스 정보 입니다.",
+    "author": "박관신",
+    "date": "2016-02-04 16:02:03",
+    "views": "110"
+  },
+  {
+    "board_no": "1148",
+    "no": 430,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) 동절기 밧데리 충전 오류 사례 공유 (80% 충전에서 ‘점검’ 램프 점등, 충전 차단 됨)",
+    "author": "김봉수",
+    "date": "2016-02-04 15:41:35",
+    "views": "135"
+  },
+  {
+    "board_no": "1146",
+    "no": 428,
+    "category": "일반",
+    "ref_no": "",
+    "title": "(서비스정보) BT/BX-7 기종 밧데리 잔량표시(BDI) 기준 변경에 따른 효과",
+    "author": "김봉수",
+    "date": "2016-02-04 14:16:51",
+    "views": "89"
+  },
+  {
+    "board_no": "1145",
+    "no": 427,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) B15S-5 (Curtis) 차량 정지 후 주행 하는 현상 조치 방법",
+    "author": "김봉수",
+    "date": "2016-02-04 08:54:23",
+    "views": "83"
+  },
+  {
+    "board_no": "1140",
+    "no": 423,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) BRS-7 차량에서 ‘SEAT SWITCH OPEN’ 에러 조치 방법",
+    "author": "김봉수",
+    "date": "2016-02-01 12:18:50",
+    "views": "100"
+  },
+  {
+    "board_no": "1139",
+    "no": 422,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) Easyview 신규  소프트웨어 공지 (BT/BX-7 1톤급)",
+    "author": "최우혁",
+    "date": "2016-01-28 07:35:20",
+    "views": "53"
+  },
+  {
+    "board_no": "1134",
+    "no": 417,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(기술정보) 대형 차량 아이들 업 스위치 변경",
+    "author": "김봉수",
+    "date": "2016-01-22 12:32:37",
+    "views": "66"
+  },
+  {
+    "board_no": "1133",
+    "no": 416,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스 정보) 커티스 전동차량 ‘CAN COMM FAULT’ 조치 방법",
+    "author": "김봉수",
+    "date": "2016-01-21 12:33:57",
+    "views": "233"
+  },
+  {
+    "board_no": "1132",
+    "no": 415,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "[서비스정보] 유사 디젤연료 식별 일회용 KIT 상품화 개발",
+    "author": "김정수",
+    "date": "2016-01-21 09:18:06",
+    "views": "50"
+  },
+  {
+    "board_no": "1125",
+    "no": 409,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(기술정보) 엔진 1, 2톤 Cabin(풀케빈, C형 케빈) 차량 후방 카메라 적용",
+    "author": "김봉수",
+    "date": "2016-01-11 09:58:09",
+    "views": "30"
+  },
+  {
+    "board_no": "1124",
+    "no": 408,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(기술정보) G2 4톤 T4 리어 에어컨 사양의 컨덴서 컨테이너 작업성 개선 (마운팅 브라켓 변경)",
+    "author": "김봉수",
+    "date": "2016-01-11 09:57:05",
+    "views": "65"
+  },
+  {
+    "board_no": "1123",
+    "no": 407,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(기술정보) BR 차량 디시 컨버터 변경 (180W 에서 300W 제품으로 변경 적용)",
+    "author": "김봉수",
+    "date": "2016-01-08 15:46:31",
+    "views": "38"
+  },
+  {
+    "board_no": "1122",
+    "no": 406,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(기술정보) BR 차량 그라운드 스트랩 장착 개선 변경",
+    "author": "김봉수",
+    "date": "2016-01-08 15:10:19",
+    "views": "39"
+  },
+  {
+    "board_no": "1121",
+    "no": 405,
+    "category": "일반",
+    "ref_no": "",
+    "title": "(서비스 정보) EasyView 1.0.6 설치 파일",
+    "author": "김봉수",
+    "date": "2016-01-08 08:34:35",
+    "views": "65"
+  },
+  {
+    "board_no": "1120",
+    "no": 404,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(기술정보) 전동 Cabin 차량 2016년 1월1일 이후 출하 차량부터 후방 카메라 표준 사양 적용",
+    "author": "김봉수",
+    "date": "2016-01-07 14:28:34",
+    "views": "28"
+  },
+  {
+    "board_no": "1119",
+    "no": 403,
+    "category": "개선정보",
+    "ref_no": "",
+    "title": "[서비스정보] 16톤 속도계 변경건",
+    "author": "김정수",
+    "date": "2016-01-06 07:58:40",
+    "views": "43"
+  },
+  {
+    "board_no": "1117",
+    "no": 402,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) Tier 4 엔진차량의 SCR 계기판 백화현상 조치 방법",
+    "author": "김봉수",
+    "date": "2016-01-04 08:36:24",
+    "views": "264"
+  },
+  {
+    "board_no": "1115",
+    "no": 401,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스 정보) 동영상 자료 ?SME 전동차량 주행 속도 조정 방법",
+    "author": "김봉수",
+    "date": "2015-12-20 21:38:09",
+    "views": "145"
+  },
+  {
+    "board_no": "1114",
+    "no": 400,
+    "category": "일반",
+    "ref_no": "",
+    "title": "[소프트웨어] B25SE-5 경제형 모델 Easyview 펌웨어 공지 및 차량 소개 자료",
+    "author": "최우혁",
+    "date": "2015-12-18 09:10:08",
+    "views": "69"
+  },
+  {
+    "board_no": "1108",
+    "no": 398,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) BR 차량 개선 EPS 콘트롤러 소프트웨어 버그 및 조치 방법",
+    "author": "김봉수",
+    "date": "2015-12-08 15:49:48",
+    "views": "143"
+  },
+  {
+    "board_no": "1102",
+    "no": 394,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(기술정보) BRS-7 개선 EPS Controller 적용 및 신규 기능 (2015.11.30 하자 사례 추가)",
+    "author": "김봉수",
+    "date": "2015-11-30 10:01:33",
+    "views": "139"
+  },
+  {
+    "board_no": "1100",
+    "no": 392,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(서비스정보) 경고 부저 (Warning Buzzer) 변경전 제품으로 원복",
+    "author": "김봉수",
+    "date": "2015-11-27 10:59:55",
+    "views": "47"
+  },
+  {
+    "board_no": "1098",
+    "no": 391,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "[기술정보] G2엔진 인젝터 하자 체크 방법 및 요청사항",
+    "author": "최우혁",
+    "date": "2015-11-23 15:51:12",
+    "views": "345"
+  },
+  {
+    "board_no": "1096",
+    "no": 389,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "[서비스 정보] 엔진 압축압력 측정기 상품화 개발건",
+    "author": "김정수",
+    "date": "2015-11-23 11:44:53",
+    "views": "95"
+  },
+  {
+    "board_no": "1095",
+    "no": 388,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) 경고 부저 (Warning Buzzer) 변경",
+    "author": "김봉수",
+    "date": "2015-11-19 12:30:55",
+    "views": "43"
+  },
+  {
+    "board_no": "1093",
+    "no": 387,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스정보) 신규 웨이트 스케일 옵션 정보 (로드셀)",
+    "author": "김봉수",
+    "date": "2015-11-17 16:08:27",
+    "views": "158"
+  },
+  {
+    "board_no": "1092",
+    "no": 386,
+    "category": "개선정보",
+    "ref_no": "933",
+    "title": "[소프트웨어] D34 Tier-4 DCU(SCR시스템) 개선 MAP (간헐적 요소수 품질 이상 P206B 에러 조치)",
+    "author": "박관신",
+    "date": "2015-11-17 13:17:15",
+    "views": "220"
+  },
+  {
+    "board_no": "1091",
+    "no": 385,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(기술정보) BRS-7 개선 EPS Controller 적용 및 신규 기능",
+    "author": "김봉수",
+    "date": "2015-11-17 10:49:33",
+    "views": "98"
+  },
+  {
+    "board_no": "1088",
+    "no": 382,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "uVIM으로 DCU MAP 업데이트중 통신 이상 발생관련 조치방법",
+    "author": "박관신",
+    "date": "2015-11-05 10:54:24",
+    "views": "201"
+  },
+  {
+    "board_no": "1087",
+    "no": 381,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(기술정보) 전동차량 충전기 변경 사항 ? 입력 전압 탭 설정 및 충전 시간",
+    "author": "김봉수",
+    "date": "2015-11-04 12:47:53",
+    "views": "104"
+  },
+  {
+    "board_no": "1086",
+    "no": 380,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(기술정보) D110/160/180S-7 Tier 4 접지, 다이오드 위치 정보",
+    "author": "김봉수",
+    "date": "2015-11-04 11:27:30",
+    "views": "61"
+  },
+  {
+    "board_no": "1085",
+    "no": 379,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(기술정보) D45S-7 Tier 4 55kw 접지, 다이오드 위치 정보",
+    "author": "김봉수",
+    "date": "2015-11-04 11:26:52",
+    "views": "76"
+  },
+  {
+    "board_no": "1084",
+    "no": 378,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(기술정보) D25S-7 Tier 4 47kw 접지, 다이오드 위치 정보",
+    "author": "김봉수",
+    "date": "2015-11-04 11:25:55",
+    "views": "54"
+  },
+  {
+    "board_no": "1081",
+    "no": 375,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "TIER-4 엔진에 요소수 농도 불량 주입으로 인한 에러 발생건 공유",
+    "author": "박관신",
+    "date": "2015-09-30 17:47:37",
+    "views": "211"
+  },
+  {
+    "board_no": "1078",
+    "no": 373,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "국내 딜러 서비스 업무 매뉴얼",
+    "author": "박관신",
+    "date": "2015-09-17 15:02:07",
+    "views": "51"
+  },
+  {
+    "board_no": "1059",
+    "no": 354,
+    "category": "서비스정보",
+    "ref_no": "",
+    "title": "(서비스 정보) 동영상 자료 ? 터틀 온 스피드 (Turtle On Speed)",
+    "author": "김봉수",
+    "date": "2015-09-14 08:03:54",
+    "views": "62"
+  },
+  {
+    "board_no": "1058",
+    "no": 353,
+    "category": "일반",
+    "ref_no": "",
+    "title": "(서비스 정보) 동영상 자료 - EasyView 기능 자료",
+    "author": "김봉수",
+    "date": "2015-09-11 15:19:00",
+    "views": "103"
+  },
+  {
+    "board_no": "1057",
+    "no": 352,
+    "category": "기술정보",
+    "ref_no": "",
+    "title": "(기술정보) 엔진차량(Tier 3) 접수, 다이오드 위치 정보",
+    "author": "김봉수",
+    "date": "2015-09-11 15:14:39",
+    "views": "98"
+  },
+  {
+    "board_no": "1046",
+    "no": 346,
+    "category": "일반",
+    "ref_no": "",
+    "title": "지게차 도난 방지용 KEY (옵션)",
+    "author": "",
+    "date": "2006-05-29 11:58:28",
+    "views": "295"
+  },
+  {
+    "board_no": "1045",
+    "no": 345,
+    "category": "일반",
+    "ref_no": "",
+    "title": "G5 T/M CONTROL V/V 변경 관련사항",
+    "author": "",
+    "date": "2006-05-08 14:12:56",
+    "views": "220"
+  },
+  {
+    "board_no": "1044",
+    "no": 344,
+    "category": "일반",
+    "ref_no": "",
+    "title": "3.5~7톤 메리또 드라이브 액슬 허브 오일씰 교환방법",
+    "author": "",
+    "date": "2006-04-24 14:29:47",
+    "views": "310"
+  },
+  {
+    "board_no": "1043",
+    "no": 343,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D(G)35S-2 PRI CYL CUSHION 기능 추가",
+    "author": "",
+    "date": "2006-01-25 17:44:28",
+    "views": "186"
+  },
+  {
+    "board_no": "1042",
+    "no": 342,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D(G)35/45S-2 드라이브 액슬 차동장치 변경건",
+    "author": "",
+    "date": "2005-07-22 09:10:02",
+    "views": "279"
+  },
+  {
+    "board_no": "1041",
+    "no": 341,
+    "category": "일반",
+    "ref_no": "",
+    "title": "G15/18S-2 , G20/30S-3 FUEL SYSTEM 변경건",
+    "author": "",
+    "date": "2005-07-15 09:43:05",
+    "views": "166"
+  },
+  {
+    "board_no": "1040",
+    "no": 340,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D50/70S 캐빈 후방 창문 변경",
+    "author": "",
+    "date": "2005-06-15 14:53:32",
+    "views": "188"
+  },
+  {
+    "board_no": "1039",
+    "no": 339,
+    "category": "일반",
+    "ref_no": "",
+    "title": "B20/30S-3 펌프 모터 브러쉬 커버 변경",
+    "author": "",
+    "date": "2005-04-15 11:47:54",
+    "views": "182"
+  },
+  {
+    "board_no": "1038",
+    "no": 338,
+    "category": "일반",
+    "ref_no": "",
+    "title": "B20/30S-3 전기도면(2005년)",
+    "author": "",
+    "date": "2005-03-31 14:05:15",
+    "views": "223"
+  },
+  {
+    "board_no": "1037",
+    "no": 337,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D(G)20/25/30S-3 외자에서 국산 브레이크 밸브로 교환방법",
+    "author": "",
+    "date": "2005-02-23 18:58:03",
+    "views": "314"
+  },
+  {
+    "board_no": "1036",
+    "no": 336,
+    "category": "일반",
+    "ref_no": "",
+    "title": "B20/30S-3.BC20/30S2/B13/15/18/20T-2,D(G)15/18S-2 브레이크 마스터 실린더 변경",
+    "author": "",
+    "date": "2005-02-23 16:55:57",
+    "views": "207"
+  },
+  {
+    "board_no": "1035",
+    "no": 335,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D35/45S-2 브레이크 부스터 개선(건식 브레이크 차량)",
+    "author": "",
+    "date": "2005-02-23 16:16:01",
+    "views": "162"
+  },
+  {
+    "board_no": "1034",
+    "no": 334,
+    "category": "일반",
+    "ref_no": "",
+    "title": "G35/45S-2 엔진 공기 흡입 라인 변경",
+    "author": "",
+    "date": "2005-02-23 16:01:45",
+    "views": "100"
+  },
+  {
+    "board_no": "1033",
+    "no": 333,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D(G)35/45S-2 컨트롤 밸브 압력 포트 위치변경",
+    "author": "",
+    "date": "2005-02-23 11:53:48",
+    "views": "180"
+  },
+  {
+    "board_no": "1032",
+    "no": 332,
+    "category": "일반",
+    "ref_no": "",
+    "title": "B(C)20/30S-2 컨트롤 밸브 국산화",
+    "author": "",
+    "date": "2005-02-23 11:36:40",
+    "views": "106"
+  },
+  {
+    "board_no": "1031",
+    "no": 331,
+    "category": "일반",
+    "ref_no": "",
+    "title": "B20/30S-2 브레이크 제동력 개선",
+    "author": "",
+    "date": "2005-02-23 11:18:18",
+    "views": "112"
+  },
+  {
+    "board_no": "1030",
+    "no": 330,
+    "category": "일반",
+    "ref_no": "",
+    "title": "B20/30S-3 전후진 콘텍터 변경",
+    "author": "",
+    "date": "2005-02-22 14:19:32",
+    "views": "134"
+  },
+  {
+    "board_no": "1029",
+    "no": 329,
+    "category": "일반",
+    "ref_no": "",
+    "title": "BR MODEL 및 D(G)1TON PRI CYL 변경건",
+    "author": "",
+    "date": "2005-02-22 14:01:39",
+    "views": "91"
+  },
+  {
+    "board_no": "1028",
+    "no": 328,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D100/150 HYD-PUMP 변경건",
+    "author": "",
+    "date": "2005-02-18 12:04:47",
+    "views": "223"
+  },
+  {
+    "board_no": "1027",
+    "no": 327,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D50/70S S_AXLE BOLT 품번 홍보",
+    "author": "",
+    "date": "2005-01-07 19:06:04",
+    "views": "105"
+  },
+  {
+    "board_no": "1026",
+    "no": 326,
+    "category": "일반",
+    "ref_no": "",
+    "title": "DH4020 TPS 조정방법",
+    "author": "",
+    "date": "2005-01-03 15:23:59",
+    "views": "103"
+  },
+  {
+    "board_no": "1025",
+    "no": 325,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D(G)20/30S-3 T/M 마운팅 와셔 변경",
+    "author": "",
+    "date": "2005-01-03 08:16:05",
+    "views": "87"
+  },
+  {
+    "board_no": "1024",
+    "no": 324,
+    "category": "일반",
+    "ref_no": "",
+    "title": "G20/30S-3 연료(가스) 교환시기 알람 및 램프기능 설치방법",
+    "author": "",
+    "date": "2004-12-27 19:11:13",
+    "views": "155"
+  },
+  {
+    "board_no": "1023",
+    "no": 323,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D50/70S FFT MAST 1차실린더 내부 부품 개선 변경",
+    "author": "",
+    "date": "2004-12-27 18:58:10",
+    "views": "88"
+  },
+  {
+    "board_no": "1022",
+    "no": 322,
+    "category": "일반",
+    "ref_no": "",
+    "title": "B(C)20/30S-2 컨트롤러 과열건 개선",
+    "author": "",
+    "date": "2004-12-27 18:14:07",
+    "views": "96"
+  },
+  {
+    "board_no": "1021",
+    "no": 321,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D50/70S 브레이크 부스터 개선(건식 브레이크 차량)",
+    "author": "",
+    "date": "2004-12-27 17:55:17",
+    "views": "90"
+  },
+  {
+    "board_no": "1020",
+    "no": 320,
+    "category": "일반",
+    "ref_no": "",
+    "title": "B15/18S 유압펌프 변경",
+    "author": "",
+    "date": "2004-12-27 17:47:33",
+    "views": "76"
+  },
+  {
+    "board_no": "1019",
+    "no": 319,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D50/70S P/S CYL(A135267) 내부 부품 변경",
+    "author": "",
+    "date": "2004-12-27 17:38:11",
+    "views": "74"
+  },
+  {
+    "board_no": "1018",
+    "no": 318,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D(G)20/30S-3  T/M 루부 펌프 및 볼트 변경",
+    "author": "",
+    "date": "2004-12-27 08:59:24",
+    "views": "74"
+  },
+  {
+    "board_no": "1017",
+    "no": 317,
+    "category": "일반",
+    "ref_no": "",
+    "title": "산업차량 제품 전기종 윤활유,냉각수 사양 및 용량",
+    "author": "",
+    "date": "2004-12-27 08:21:26",
+    "views": "265"
+  },
+  {
+    "board_no": "1016",
+    "no": 316,
+    "category": "일반",
+    "ref_no": "",
+    "title": "DH4020 실린더 SEAL KIT 정리",
+    "author": "",
+    "date": "2004-12-24 08:40:20",
+    "views": "69"
+  },
+  {
+    "board_no": "1015",
+    "no": 315,
+    "category": "일반",
+    "ref_no": "",
+    "title": "지게차 전 기종 유압 및 전기회로집",
+    "author": "",
+    "date": "2004-12-24 08:30:08",
+    "views": "284"
+  },
+  {
+    "board_no": "1014",
+    "no": 314,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D(G)20/30S-3 브레이크 밸브 에어빼기 방법",
+    "author": "",
+    "date": "2004-12-24 08:27:04",
+    "views": "197"
+  },
+  {
+    "board_no": "1013",
+    "no": 313,
+    "category": "일반",
+    "ref_no": "",
+    "title": "G20/30S-3 알터네이터 브라켓 변경",
+    "author": "",
+    "date": "2004-12-24 08:17:55",
+    "views": "65"
+  },
+  {
+    "board_no": "1012",
+    "no": 312,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D35/45S(M)-2 드라이브 액슬 업체변경",
+    "author": "",
+    "date": "2004-12-24 08:08:10",
+    "views": "80"
+  },
+  {
+    "board_no": "1011",
+    "no": 311,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D35/45S-2 라디에터 변경건",
+    "author": "",
+    "date": "2004-12-23 17:02:46",
+    "views": "76"
+  },
+  {
+    "board_no": "1010",
+    "no": 310,
+    "category": "일반",
+    "ref_no": "",
+    "title": "엔진식 지게차 엔진 SUFFIX 및 품번정리",
+    "author": "",
+    "date": "2004-12-23 16:59:25",
+    "views": "116"
+  },
+  {
+    "board_no": "1009",
+    "no": 309,
+    "category": "일반",
+    "ref_no": "",
+    "title": "DB58E/G AIR-CLEANER DUAL로 변경",
+    "author": "",
+    "date": "2004-12-23 16:47:53",
+    "views": "59"
+  },
+  {
+    "board_no": "1008",
+    "no": 308,
+    "category": "일반",
+    "ref_no": "",
+    "title": "ZF AUTO T/M AUTO S/W 및 INCHING S/W 내부 BULB 품번",
+    "author": "",
+    "date": "2004-12-23 16:24:34",
+    "views": "138"
+  },
+  {
+    "board_no": "1007",
+    "no": 307,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D50/60/70S 드라이브 액슬 이음개선(건식 브레이크 드라이브 액슬)",
+    "author": "",
+    "date": "2004-12-23 11:44:21",
+    "views": "103"
+  },
+  {
+    "board_no": "1006",
+    "no": 306,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D(G)35/40/45S(M)-2 REAR COVER 부품 변경",
+    "author": "",
+    "date": "2004-12-23 11:06:40",
+    "views": "58"
+  },
+  {
+    "board_no": "1005",
+    "no": 305,
+    "category": "일반",
+    "ref_no": "",
+    "title": "B20/25/30S-2  스티어링 유니트 압력스위치 TEE 변경",
+    "author": "",
+    "date": "2004-12-23 10:36:37",
+    "views": "91"
+  },
+  {
+    "board_no": "1004",
+    "no": 304,
+    "category": "일반",
+    "ref_no": "",
+    "title": "BR20/25S 악셀레이터 노브 및 그립 개선",
+    "author": "",
+    "date": "2004-12-23 10:28:24",
+    "views": "73"
+  },
+  {
+    "board_no": "1003",
+    "no": 303,
+    "category": "일반",
+    "ref_no": "",
+    "title": "G5 T/M OIL PUMP 개선",
+    "author": "",
+    "date": "2004-12-23 10:05:36",
+    "views": "72"
+  },
+  {
+    "board_no": "1002",
+    "no": 302,
+    "category": "일반",
+    "ref_no": "",
+    "title": "대원케빈 ＆ 신흥케빈 확인 방법",
+    "author": "",
+    "date": "2004-12-23 08:53:26",
+    "views": "142"
+  },
+  {
+    "board_no": "1001",
+    "no": 301,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D(G)35/45S(M)-2 머플러 변경건",
+    "author": "",
+    "date": "2004-12-22 18:10:15",
+    "views": "90"
+  },
+  {
+    "board_no": "1000",
+    "no": 300,
+    "category": "일반",
+    "ref_no": "",
+    "title": "B20/30S-3 압력스위치 장착건",
+    "author": "",
+    "date": "2004-12-22 16:53:29",
+    "views": "133"
+  },
+  {
+    "board_no": "999",
+    "no": 299,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D(G)35/45S-2 조향 WHEEL 변경건",
+    "author": "",
+    "date": "2004-12-22 16:43:33",
+    "views": "73"
+  },
+  {
+    "board_no": "998",
+    "no": 298,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D100/150 조향 WHEEL 변경",
+    "author": "",
+    "date": "2004-12-22 16:30:20",
+    "views": "73"
+  },
+  {
+    "board_no": "997",
+    "no": 297,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D20/30S-3 T/M 부품 변경",
+    "author": "",
+    "date": "2004-12-22 16:08:59",
+    "views": "117"
+  },
+  {
+    "board_no": "996",
+    "no": 296,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D(G)35/45S-2 T_M 설변건",
+    "author": "",
+    "date": "2004-12-21 16:13:14",
+    "views": "118"
+  },
+  {
+    "board_no": "995",
+    "no": 295,
+    "category": "일반",
+    "ref_no": "",
+    "title": "B20/30S-3 FAN-ALARM 기능 추가건",
+    "author": "",
+    "date": "2004-12-21 16:06:42",
+    "views": "106"
+  },
+  {
+    "board_no": "994",
+    "no": 294,
+    "category": "일반",
+    "ref_no": "",
+    "title": "D(G/B)20/30S-3 조향실린더 설변건",
+    "author": "",
+    "date": "2004-12-21 08:52:08",
+    "views": "112"
+  },
+  {
+    "board_no": "993",
+    "no": 293,
+    "category": "일반",
+    "ref_no": "",
+    "title": "G430 E/G 풀리 변경건",
+    "author": "",
+    "date": "2004-12-21 08:38:47",
+    "views": "112"
+  },
+  {
+    "board_no": "992",
+    "no": 292,
+    "category": "일반",
+    "ref_no": "",
+    "title": "전동지게차 전 기종 KEY S/W 변경건",
+    "author": "",
+    "date": "2004-12-20 18:37:14",
+    "views": "117"
+  },
+  {
+    "board_no": "991",
+    "no": 291,
+    "category": "일반",
+    "ref_no": "",
+    "title": "BRKAE V/V 설변건",
+    "author": "",
+    "date": "2004-12-20 17:38:44",
+    "views": "160"
+  },
+  {
+    "board_no": "990",
+    "no": 290,
+    "category": "일반",
+    "ref_no": "",
+    "title": "E/G ACC BKT 설변",
+    "author": "",
+    "date": "2004-12-18 07:56:40",
+    "views": "176"
+  },
+  {
+    "board_no": "405",
+    "no": 288,
+    "category": "개선정보",
+    "ref_no": "842",
+    "title": "BR20/25S-7 작동유 캡 변경",
+    "author": "박관신",
+    "date": "2015-07-29 18:09:08",
+    "views": "78"
+  },
+  {
+    "board_no": "404",
+    "no": 287,
+    "category": "기술정보",
+    "ref_no": "843",
+    "title": "AMA 시트 몸무게 조절 방법",
+    "author": "박관신",
+    "date": "2015-07-29 17:59:15",
+    "views": "165"
+  }
+]
