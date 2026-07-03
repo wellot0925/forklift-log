@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { ThemeProvider } from './hooks/useTheme.jsx'
 import { RecordsProvider } from './hooks/useRecords.jsx'
 import { TipsProvider } from './hooks/useTips.jsx'
+import { AdminSettingsProvider } from './hooks/useAdminSettings.jsx'
 import { ToastProvider } from './hooks/useToast.jsx'
 import { LightboxProvider } from './hooks/useLightbox.jsx'
 import TabBar from './components/TabBar.jsx'
@@ -53,13 +54,15 @@ export default function App() {
     <ThemeProvider>
       <RecordsProvider>
         <TipsProvider>
-          <ToastProvider>
-            <LightboxProvider>
-              <BrowserRouter>
-                <AppRoutes />
-              </BrowserRouter>
-            </LightboxProvider>
-          </ToastProvider>
+          <AdminSettingsProvider>
+            <ToastProvider>
+              <LightboxProvider>
+                <BrowserRouter>
+                  <AppRoutes />
+                </BrowserRouter>
+              </LightboxProvider>
+            </ToastProvider>
+          </AdminSettingsProvider>
         </TipsProvider>
       </RecordsProvider>
     </ThemeProvider>

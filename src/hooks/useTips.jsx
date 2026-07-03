@@ -1,9 +1,9 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react'
 import {
-  collection, doc, onSnapshot, setDoc, updateDoc, deleteDoc,
+  collection, doc, onSnapshot, setDoc, updateDoc, deleteDoc, getDoc,
   serverTimestamp, query, orderBy,
 } from 'firebase/firestore'
-import { ref, uploadString, getDownloadURL } from 'firebase/storage'
+import { ref, uploadString, getDownloadURL, listAll, deleteObject } from 'firebase/storage'
 import { db, storage } from '../firebase.js'
 
 const Ctx = createContext(null)
@@ -27,6 +27,22 @@ async function processPhotos(photos, tipId) {
     }
   }
   return results
+}
+
+async function deletePhotos(urls) {
+  await Promise.all(urls.map(async url => {
+    try { await deleteObject(ref(storage, url)) }
+    catch (err) { console.error('Storage photo delete error:', err) }
+  }))
+}
+
+async function deletePhotoFolder(basePath) {
+  try {
+    const { items } = await listAll(ref(storage, basePath))
+    await Promise.all(items.map(item => deleteObject(item)))
+  } catch (err) {
+    console.error('Storage folder delete error:', err)
+  }
 }
 
 function fromFirestore(d) {
@@ -62,8 +78,10 @@ export function TipsProvider({ children }) {
     const docRef = doc(collection(db, COL))
     const photoUrls = await processPhotos(data.photos ?? [], docRef.id)
     await setDoc(docRef, {
-      title:   data.title?.trim()   ?? '',
-      content: data.content?.trim() ?? '',
+      title:      data.title?.trim()   ?? '',
+      content:    data.content?.trim() ?? '',
+      author:     data.author?.trim()  ?? '',
+      modifiedBy: null,
       photoUrls,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
@@ -71,20 +89,27 @@ export function TipsProvider({ children }) {
     return { id: docRef.id }
   }, [])
 
+  // 수정: author 필드는 건드리지 않고 modifiedBy만 업데이트
   const update = useCallback(async (id, data) => {
     const docRef = doc(db, COL, id)
+    const prevSnap = await getDoc(docRef)
+    const prevPhotoUrls = prevSnap.exists() ? (prevSnap.data().photoUrls ?? []) : []
     const photoUrls = await processPhotos(data.photos ?? [], id)
     await updateDoc(docRef, {
-      title:   data.title?.trim()   ?? '',
-      content: data.content?.trim() ?? '',
+      title:      data.title?.trim()   ?? '',
+      content:    data.content?.trim() ?? '',
+      modifiedBy: data.author?.trim()  || null,
       photoUrls,
       updatedAt: serverTimestamp(),
     })
+    const removed = prevPhotoUrls.filter(u => !photoUrls.includes(u))
+    if (removed.length) await deletePhotos(removed)
     return { id }
   }, [])
 
-  const remove = useCallback((id) => {
-    deleteDoc(doc(db, COL, id))
+  const remove = useCallback(async (id) => {
+    await deleteDoc(doc(db, COL, id))
+    await deletePhotoFolder(`photos/tips/${id}`)
   }, [])
 
   return (

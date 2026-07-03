@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { useRecords } from '../hooks/useRecords.jsx'
 import { useTheme } from '../hooks/useTheme.jsx'
 import { useToast } from '../hooks/useToast.jsx'
-import { getAuthor, saveAuthor, getAdminPassword, setAdminPassword } from '../utils/storage.js'
+import { getAuthor, saveAuthor } from '../utils/storage.js'
+import { useAdminSettings } from '../hooks/useAdminSettings.jsx'
 import { printAllRecords } from '../utils/pdf.js'
 import Disclaimer from '../components/Disclaimer.jsx'
 import Spinner from '../components/Spinner.jsx'
@@ -11,6 +12,7 @@ export default function SettingsPage() {
   const { records } = useRecords()
   const { toggle, isDark } = useTheme()
   const { toast } = useToast()
+  const { password: adminPassword, changePassword } = useAdminSettings()
   const [authorName, setAuthorName] = useState(getAuthor)
   const [printing, setPrinting] = useState(false)
   const [pwOpen, setPwOpen] = useState(false)
@@ -18,14 +20,23 @@ export default function SettingsPage() {
   const [newPw, setNewPw] = useState('')
   const [newPw2, setNewPw2] = useState('')
   const [pwErr, setPwErr] = useState('')
+  const [pwSaving, setPwSaving] = useState(false)
 
-  const handlePwChange = () => {
-    if (curPw !== getAdminPassword()) { setPwErr('현재 비밀번호가 틀렸습니다.'); return }
+  const handlePwChange = async () => {
+    if (curPw !== adminPassword) { setPwErr('현재 비밀번호가 틀렸습니다.'); return }
     if (newPw.length < 4) { setPwErr('새 비밀번호는 4자리 이상이어야 합니다.'); return }
     if (newPw !== newPw2) { setPwErr('새 비밀번호가 일치하지 않습니다.'); return }
-    setAdminPassword(newPw)
-    toast('비밀번호가 변경되었습니다.', 'success')
-    setPwOpen(false); setCurPw(''); setNewPw(''); setNewPw2(''); setPwErr('')
+    setPwSaving(true)
+    try {
+      await changePassword(newPw)
+      toast('비밀번호가 변경되었습니다.', 'success')
+      setPwOpen(false); setCurPw(''); setNewPw(''); setNewPw2(''); setPwErr('')
+    } catch (err) {
+      console.error('Admin password change error:', err)
+      setPwErr('비밀번호 변경에 실패했습니다. 네트워크를 확인해주세요.')
+    } finally {
+      setPwSaving(false)
+    }
   }
 
   const handlePrintAll = () => {
@@ -124,9 +135,10 @@ export default function SettingsPage() {
                 {pwErr && <p style={{ margin: 0, fontSize: 12, color: 'var(--danger)' }}>{pwErr}</p>}
                 <button
                   onClick={handlePwChange}
-                  className="btn-cta" style={{ marginTop: 4 }}
+                  disabled={pwSaving}
+                  className="btn-cta" style={{ marginTop: 4, opacity: pwSaving ? 0.6 : 1 }}
                 >
-                  비밀번호 변경
+                  {pwSaving ? <Spinner size="sm" white /> : '비밀번호 변경'}
                 </button>
               </div>
             )}

@@ -4,7 +4,7 @@ import { useTips } from '../hooks/useTips.jsx'
 import { useToast } from '../hooks/useToast.jsx'
 import { useLightbox } from '../hooks/useLightbox.jsx'
 import { printTip } from '../utils/pdf.js'
-import { getAdminPassword } from '../utils/storage.js'
+import { useAdminSettings } from '../hooks/useAdminSettings.jsx'
 import Header from '../components/Header.jsx'
 import Spinner from '../components/Spinner.jsx'
 import Disclaimer from '../components/Disclaimer.jsx'
@@ -15,11 +15,13 @@ export default function TipDetailPage() {
   const { tips, loading, remove } = useTips()
   const { toast } = useToast()
   const { open: openLightbox } = useLightbox()
+  const { password: adminPassword } = useAdminSettings()
 
   const [printing, setPrinting] = useState(false)
   const [deleteOpen, setDeleteOpen] = useState(false)
   const [delPw, setDelPw] = useState('')
   const [delPwError, setDelPwError] = useState(false)
+  const [deleting, setDeleting] = useState(false)
 
   const tip = tips.find(t => t.id === id)
 
@@ -41,18 +43,28 @@ export default function TipDetailPage() {
     try { printTip(tip) } finally { setTimeout(() => setPrinting(false), 1000) }
   }
 
-  const handleDelete = () => {
-    if (delPw !== getAdminPassword()) {
+  const handleDelete = async () => {
+    if (delPw !== adminPassword) {
       setDelPwError(true)
       return
     }
-    remove(id)
-    nav('/tips', { replace: true })
-    toast('팁이 삭제되었습니다.', 'info')
+    setDeleting(true)
+    try {
+      await remove(id)
+      nav('/tips', { replace: true })
+      toast('팁이 삭제되었습니다.', 'info')
+    } catch (err) {
+      console.error('Tip delete error:', err)
+      toast('삭제에 실패했습니다. 네트워크를 확인해주세요.', 'error')
+      setDeleting(false)
+    }
   }
 
   const created = new Date(tip.createdAt)
+  const updated = new Date(tip.updatedAt)
+  const hasEdited = Boolean(tip.modifiedBy)
   const dateStr = `${created.getFullYear()}.${pad(created.getMonth()+1)}.${pad(created.getDate())}`
+  const updatedStr = `${updated.getFullYear()}.${pad(updated.getMonth()+1)}.${pad(updated.getDate())}`
 
   return (
     <div className="detail-page page-sub">
@@ -65,8 +77,17 @@ export default function TipDetailPage() {
             <span style={{ fontSize: 22 }}>💡</span> 정비팁
           </span>
           <div className="detail-meta">
-            {tip.createdBy && (
-              <span style={{ fontWeight: 700, color: 'var(--primary)' }}>{tip.createdBy}</span>
+            {tip.author && (
+              <span style={{ fontWeight: 700, color: 'var(--primary)' }}>{tip.author}</span>
+            )}
+            {hasEdited && (
+              <span style={{ color: 'var(--text-placeholder)', fontSize: 11 }}>
+                수정:&nbsp;
+                {tip.modifiedBy && (
+                  <span style={{ fontWeight: 700, color: 'var(--text-secondary)' }}>{tip.modifiedBy} </span>
+                )}
+                {updatedStr}
+              </span>
             )}
             <span style={{ color: 'var(--text-secondary)', fontSize: 12 }}>{dateStr}</span>
           </div>
@@ -153,9 +174,10 @@ export default function TipDetailPage() {
                 </button>
                 <button
                   onClick={handleDelete}
-                  style={{ flex: 1, padding: '10px', borderRadius: 10, border: 'none', background: 'var(--danger)', color: '#fff', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}
+                  disabled={deleting}
+                  style={{ flex: 1, padding: '10px', borderRadius: 10, border: 'none', background: 'var(--danger)', color: '#fff', fontSize: 14, fontWeight: 600, cursor: deleting ? 'default' : 'pointer', opacity: deleting ? 0.6 : 1 }}
                 >
-                  삭제
+                  {deleting ? <Spinner size="sm" white /> : '삭제'}
                 </button>
               </div>
             </div>

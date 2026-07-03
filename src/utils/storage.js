@@ -32,11 +32,6 @@ export function addCustomModel(model) {
   localStorage.setItem(CUSTOM_MDL_KEY, JSON.stringify(list))
 }
 
-/* ─── 관리자 비밀번호 ─── */
-const ADMIN_PW_KEY = 'flift_admin_pw_v1'
-export function getAdminPassword() { return localStorage.getItem(ADMIN_PW_KEY) ?? '0925' }
-export function setAdminPassword(pw) { localStorage.setItem(ADMIN_PW_KEY, pw) }
-
 /* ─── 검색 히스토리 (페이지별 로컬 전용) ─── */
 const MAX_HISTORY = 8
 const histKey = ctx => `flift_search_hist_${ctx}_v1`

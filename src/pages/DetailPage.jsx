@@ -4,7 +4,7 @@ import { useRecords } from '../hooks/useRecords.jsx'
 import { useToast } from '../hooks/useToast.jsx'
 import { useLightbox } from '../hooks/useLightbox.jsx'
 import { printRecord } from '../utils/pdf.js'
-import { getAdminPassword } from '../utils/storage.js'
+import { useAdminSettings } from '../hooks/useAdminSettings.jsx'
 import Header from '../components/Header.jsx'
 import Spinner from '../components/Spinner.jsx'
 import Disclaimer from '../components/Disclaimer.jsx'
@@ -15,11 +15,13 @@ export default function DetailPage() {
   const { records, loading, remove } = useRecords()
   const { toast } = useToast()
   const { open: openLightbox } = useLightbox()
+  const { password: adminPassword } = useAdminSettings()
 
   const [printing, setPrinting] = useState(false)
   const [deleteOpen, setDeleteOpen] = useState(false)
   const [delPw, setDelPw] = useState('')
   const [delPwError, setDelPwError] = useState(false)
+  const [deleting, setDeleting] = useState(false)
 
   const record = records.find(r => r.id === id)
 
@@ -27,14 +29,21 @@ export default function DetailPage() {
     if (!loading && !record) nav('/', { replace: true })
   }, [loading, record, nav])
 
-  const handleDelete = () => {
-    if (delPw !== getAdminPassword()) {
+  const handleDelete = async () => {
+    if (delPw !== adminPassword) {
       setDelPwError(true)
       return
     }
-    remove(id)
-    nav('/', { replace: true })
-    toast('기록이 삭제되었습니다.', 'info')
+    setDeleting(true)
+    try {
+      await remove(id)
+      nav('/', { replace: true })
+      toast('기록이 삭제되었습니다.', 'info')
+    } catch (err) {
+      console.error('Record delete error:', err)
+      toast('삭제에 실패했습니다. 네트워크를 확인해주세요.', 'error')
+      setDeleting(false)
+    }
   }
 
   if (loading) {
@@ -157,9 +166,10 @@ export default function DetailPage() {
                 </button>
                 <button
                   onClick={handleDelete}
-                  style={{ flex: 1, padding: '10px', borderRadius: 10, border: 'none', background: 'var(--danger)', color: '#fff', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}
+                  disabled={deleting}
+                  style={{ flex: 1, padding: '10px', borderRadius: 10, border: 'none', background: 'var(--danger)', color: '#fff', fontSize: 14, fontWeight: 600, cursor: deleting ? 'default' : 'pointer', opacity: deleting ? 0.6 : 1 }}
                 >
-                  삭제
+                  {deleting ? <Spinner size="sm" white /> : '삭제'}
                 </button>
               </div>
             </div>
