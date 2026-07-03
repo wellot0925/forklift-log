@@ -3,47 +3,11 @@ import {
   collection, doc, onSnapshot, setDoc, updateDoc, deleteDoc, getDoc,
   serverTimestamp, query, orderBy,
 } from 'firebase/firestore'
-import { ref, uploadString, getDownloadURL, listAll, deleteObject } from 'firebase/storage'
-import { db, storage } from '../firebase.js'
+import { db } from '../firebase.js'
+import { processPhotos, deletePhotos, deletePhotoFolder } from '../utils/photoUpload.js'
 
 const Ctx = createContext(null)
 const COL = 'tips'
-
-async function uploadPhoto(dataUrl, path) {
-  const storageRef = ref(storage, path)
-  await uploadString(storageRef, dataUrl, 'data_url')
-  return getDownloadURL(storageRef)
-}
-
-async function processPhotos(photos, tipId) {
-  const results = []
-  for (let i = 0; i < photos.length; i++) {
-    const p = photos[i]
-    if (p.startsWith('data:')) {
-      const url = await uploadPhoto(p, `photos/tips/${tipId}/${i}_${Date.now()}`)
-      results.push(url)
-    } else {
-      results.push(p)
-    }
-  }
-  return results
-}
-
-async function deletePhotos(urls) {
-  await Promise.all(urls.map(async url => {
-    try { await deleteObject(ref(storage, url)) }
-    catch (err) { console.error('Storage photo delete error:', err) }
-  }))
-}
-
-async function deletePhotoFolder(basePath) {
-  try {
-    const { items } = await listAll(ref(storage, basePath))
-    await Promise.all(items.map(item => deleteObject(item)))
-  } catch (err) {
-    console.error('Storage folder delete error:', err)
-  }
-}
 
 function fromFirestore(d) {
   const data = d.data()
@@ -76,7 +40,7 @@ export function TipsProvider({ children }) {
 
   const add = useCallback(async (data) => {
     const docRef = doc(collection(db, COL))
-    const photoUrls = await processPhotos(data.photos ?? [], docRef.id)
+    const photoUrls = await processPhotos(data.photos ?? [], `photos/tips/${docRef.id}`)
     await setDoc(docRef, {
       title:      data.title?.trim()   ?? '',
       content:    data.content?.trim() ?? '',
@@ -94,7 +58,7 @@ export function TipsProvider({ children }) {
     const docRef = doc(db, COL, id)
     const prevSnap = await getDoc(docRef)
     const prevPhotoUrls = prevSnap.exists() ? (prevSnap.data().photoUrls ?? []) : []
-    const photoUrls = await processPhotos(data.photos ?? [], id)
+    const photoUrls = await processPhotos(data.photos ?? [], `photos/tips/${id}`)
     await updateDoc(docRef, {
       title:      data.title?.trim()   ?? '',
       content:    data.content?.trim() ?? '',

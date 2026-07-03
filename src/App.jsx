@@ -30,7 +30,7 @@ function AppRoutes() {
     <div className="app-wrapper">
       <ScrollToTop />
       <main className="main-content with-tabbar">
-        <Routes location={location} key={location.pathname}>
+        <Routes location={location}>
           <Route path="/"           element={<HomePage />} />
           <Route path="/records"    element={<RecordsPage />} />
           <Route path="/write"      element={<WritePage />} />

@@ -37,12 +37,17 @@ const MAX_HISTORY = 8
 const histKey = ctx => `flift_search_hist_${ctx}_v1`
 
 export function getSearchHistory(ctx) {
-  try { return JSON.parse(localStorage.getItem(histKey(ctx)) ?? '[]') } catch { return [] }
+  try {
+    const list = JSON.parse(localStorage.getItem(histKey(ctx)) ?? '[]')
+    // 과거 버전 데이터 등으로 8개를 초과해 저장돼 있어도 읽을 때 항상 최신 8개로 정리
+    return Array.isArray(list) ? list.slice(0, MAX_HISTORY) : []
+  } catch { return [] }
 }
 export function addSearchHistory(ctx, query) {
   const q = query.trim()
   if (q.length < 2) return
-  const list = getSearchHistory(ctx).filter(h => h !== q)
+  // 대소문자만 다른 검색어는 같은 항목으로 취급해 맨 앞으로 이동 (중복이 자리를 차지해 오래된 기록이 안 밀려나는 문제 방지)
+  const list = getSearchHistory(ctx).filter(h => h.toLowerCase() !== q.toLowerCase())
   list.unshift(q)
   localStorage.setItem(histKey(ctx), JSON.stringify(list.slice(0, MAX_HISTORY)))
 }
