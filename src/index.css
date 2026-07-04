@@ -72,6 +72,7 @@ img { max-width: 100%; display: block; }
   --header-h:       56px;
   --safe-b:         env(safe-area-inset-bottom, 0px);
   --safe-t:         env(safe-area-inset-top, 0px);
+  --update-banner-h: 40px;
 
   --r-sm:   8px;
   --r-md:   12px;
@@ -138,6 +139,10 @@ img { max-width: 100%; display: block; }
 .main-content.with-tabbar {
   height: 100dvh;
   padding-bottom: calc(var(--tab-h) + var(--safe-b));
+}
+
+.app-wrapper.has-update-banner .main-content {
+  padding-top: var(--update-banner-h);
 }
 
 /* =============================================

@@ -6,7 +6,9 @@ import { TipsProvider } from './hooks/useTips.jsx'
 import { AdminSettingsProvider } from './hooks/useAdminSettings.jsx'
 import { ToastProvider } from './hooks/useToast.jsx'
 import { LightboxProvider } from './hooks/useLightbox.jsx'
+import { useAppUpdate } from './hooks/useAppUpdate.jsx'
 import TabBar from './components/TabBar.jsx'
+import UpdateBanner from './components/UpdateBanner.jsx'
 import HomePage from './pages/HomePage.jsx'
 import RecordsPage from './pages/RecordsPage.jsx'
 import WritePage from './pages/WritePage.jsx'
@@ -25,9 +27,11 @@ function ScrollToTop() {
 
 function AppRoutes() {
   const location = useLocation()
+  const updateAvailable = useAppUpdate()
 
   return (
-    <div className="app-wrapper">
+    <div className={`app-wrapper${updateAvailable ? ' has-update-banner' : ''}`}>
+      {updateAvailable && <UpdateBanner />}
       <ScrollToTop />
       <main className="main-content with-tabbar">
         <Routes location={location}>
