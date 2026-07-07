@@ -1,6 +1,7 @@
 const VIEWED_KEY     = 'flift_viewed_models_v1'
 const AUTHOR_KEY     = 'flift_author_v1'
 const CUSTOM_MDL_KEY = 'flift_custom_models_v1'
+const SAVED_USERNAME_KEY = 'flift_saved_username_v1'
 
 /* ─── Recently Viewed Models (로컬 전용) ─── */
 const MAX_VIEWED = 6
@@ -17,6 +18,11 @@ export function addViewedModel(model) {
 /* ─── 닉네임 (로컬 전용) ─── */
 export function getAuthor() { return localStorage.getItem(AUTHOR_KEY) ?? '' }
 export function saveAuthor(name) { localStorage.setItem(AUTHOR_KEY, name.trim()) }
+
+/* ─── 로그인 아이디 저장 (로컬 전용, 비밀번호는 저장하지 않음) ─── */
+export function getSavedUsername() { return localStorage.getItem(SAVED_USERNAME_KEY) ?? '' }
+export function saveUsername(username) { localStorage.setItem(SAVED_USERNAME_KEY, username) }
+export function clearSavedUsername() { localStorage.removeItem(SAVED_USERNAME_KEY) }
 
 /* ─── Custom models (로컬 전용) ─── */
 export function getCustomModels() {

@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { useAuth } from '../hooks/useAuth.jsx'
+import { getSavedUsername, saveUsername, clearSavedUsername } from '../utils/storage.js'
 import Spinner from '../components/Spinner.jsx'
 
 export default function LoginPage({ onSwitchToSignup }) {
   const { login } = useAuth()
-  const [username, setUsername] = useState('')
+  const [username, setUsername] = useState(getSavedUsername)
   const [password, setPassword] = useState('')
+  const [rememberUsername, setRememberUsername] = useState(() => Boolean(getSavedUsername()))
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -19,6 +21,8 @@ export default function LoginPage({ onSwitchToSignup }) {
     setError('')
     try {
       await login(username, password)
+      if (rememberUsername) saveUsername(username.trim().toLowerCase())
+      else clearSavedUsername()
     } catch (err) {
       setError(err.message)
       setLoading(false)
@@ -50,6 +54,14 @@ export default function LoginPage({ onSwitchToSignup }) {
             value={password} onChange={e => { setPassword(e.target.value); setError('') }}
           />
         </div>
+        <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: 'var(--text-secondary)', marginBottom: 16, cursor: 'pointer' }}>
+          <input
+            type="checkbox" checked={rememberUsername}
+            onChange={e => setRememberUsername(e.target.checked)}
+            style={{ width: 16, height: 16, cursor: 'pointer' }}
+          />
+          아이디 저장
+        </label>
         {error && <p className="field-error" style={{ textAlign: 'center', marginBottom: 8 }}>{error}</p>}
         <button type="submit" className="btn-cta" disabled={loading} style={{ marginTop: 4 }}>
           {loading ? <Spinner size="sm" white /> : '로그인'}

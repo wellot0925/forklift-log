@@ -29,8 +29,8 @@ function authErrorMessage(err) {
   }
 }
 
-// Firestore users 컬렉션 기준 아이디 중복 여부 확인 (회원가입 전 사전 체크)
-async function isUsernameTaken(username) {
+// Firestore users 컬렉션 기준 아이디 중복 여부 확인 (회원가입 전 사전 체크, SignupPage 실시간 체크에서도 재사용)
+export async function isUsernameTaken(username) {
   const q = query(collection(db, 'users'), where('username', '==', username), limit(1))
   const snap = await getDocs(q)
   return !snap.empty
