@@ -153,7 +153,6 @@ export default function SettingsPage() {
               <div className="settings-item-icon icon-red"><LockIcon /></div>
               <div className="settings-item-content">
                 <div className="settings-item-title">삭제잠금 비밀번호</div>
-                <div className="settings-item-subtitle">삭제 기능 잠금 비밀번호</div>
               </div>
               <div className="settings-item-right">
                 <ChevronIcon style={{ transform: pwOpen ? 'rotate(90deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }} />
