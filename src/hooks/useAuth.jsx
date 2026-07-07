@@ -1,9 +1,12 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react'
 import {
   onAuthStateChanged, createUserWithEmailAndPassword,
-  signInWithEmailAndPassword, signOut, updateProfile,
+  signInWithEmailAndPassword, signOut, updateProfile, deleteUser,
 } from 'firebase/auth'
-import { doc, setDoc, onSnapshot, serverTimestamp } from 'firebase/firestore'
+import {
+  doc, setDoc, onSnapshot, serverTimestamp,
+  collection, query, where, limit, getDocs,
+} from 'firebase/firestore'
 import { auth, db } from '../firebase.js'
 
 const Ctx = createContext(null)
@@ -24,6 +27,13 @@ function authErrorMessage(err) {
     case 'auth/too-many-requests': return '너무 많이 시도했습니다. 잠시 후 다시 시도해주세요.'
     default: return '오류가 발생했습니다. 네트워크를 확인해주세요.'
   }
+}
+
+// Firestore users 컬렉션 기준 아이디 중복 여부 확인 (회원가입 전 사전 체크)
+async function isUsernameTaken(username) {
+  const q = query(collection(db, 'users'), where('username', '==', username), limit(1))
+  const snap = await getDocs(q)
+  return !snap.empty
 }
 
 export function AuthProvider({ children }) {
@@ -55,18 +65,48 @@ export function AuthProvider({ children }) {
   }, [user])
 
   const signup = useCallback(async (username, password, name) => {
+    const normalizedUsername = username.trim().toLowerCase()
+
+    // 1) Firestore users 컬렉션 기준 아이디 중복 사전 체크
+    let taken
     try {
-      const cred = await createUserWithEmailAndPassword(auth, toEmail(username), password)
+      taken = await isUsernameTaken(normalizedUsername)
+    } catch (err) {
+      console.error('Username availability check failed:', err)
+      throw new Error('아이디 확인 중 오류가 발생했습니다. 네트워크를 확인해주세요.')
+    }
+    if (taken) throw new Error('이미 사용 중인 아이디입니다.')
+
+    // 2) Auth 계정 생성
+    let cred
+    try {
+      cred = await createUserWithEmailAndPassword(auth, toEmail(normalizedUsername), password)
+    } catch (err) {
+      if (err.code === 'auth/email-already-in-use') {
+        // Firestore엔 없는데 Auth에만 존재 — 이전 가입 실패로 남은 유령 계정일 가능성이 높음
+        throw new Error('이 아이디는 시스템에 등록 이력이 있어 사용할 수 없습니다. 관리자에게 문의해주세요.')
+      }
+      throw new Error(authErrorMessage(err))
+    }
+
+    // 3) 프로필 저장 — 실패하면 방금 만든 Auth 계정을 롤백해서 유령 계정이 남지 않게 함
+    try {
       await updateProfile(cred.user, { displayName: name.trim() })
       await setDoc(doc(db, 'users', cred.user.uid), {
-        username: username.trim().toLowerCase(),
+        username: normalizedUsername,
         name: name.trim(),
         status: 'pending',
         role: 'user',
         createdAt: serverTimestamp(),
       })
     } catch (err) {
-      throw new Error(authErrorMessage(err))
+      console.error('Signup profile write failed, rolling back auth account:', err)
+      try {
+        await deleteUser(cred.user)
+      } catch (rollbackErr) {
+        console.error('Auth account rollback failed:', rollbackErr)
+      }
+      throw new Error('가입 처리 중 오류가 발생했습니다. 다시 시도해주세요.')
     }
   }, [])
 
