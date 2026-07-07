@@ -34,7 +34,16 @@ service cloud.firestore {
         && request.resource.data.role == 'user'
         && request.resource.data.username is string
         && request.resource.data.name is string;
-      allow update: if isAdmin();
+      // 관리자는 자유롭게 수정 가능. 그 외엔 거절(rejected)당한 본인이 로그인 시
+      // 재승인 요청을 위해 자기 문서를 pending으로만 되돌리는 것만 허용 (다른 필드 변경 불가)
+      allow update: if isAdmin() || (
+        isSignedIn() && request.auth.uid == userId &&
+        resource.data.status == 'rejected' &&
+        request.resource.data.status == 'pending' &&
+        request.resource.data.role == resource.data.role &&
+        request.resource.data.username == resource.data.username &&
+        request.resource.data.name == resource.data.name
+      );
       allow delete: if false;
     }
 

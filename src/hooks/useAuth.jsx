@@ -4,7 +4,7 @@ import {
   signInWithEmailAndPassword, signOut, updateProfile, deleteUser,
 } from 'firebase/auth'
 import {
-  doc, setDoc, onSnapshot, serverTimestamp,
+  doc, getDoc, setDoc, updateDoc, onSnapshot, serverTimestamp,
   collection, query, where, limit, getDocs,
 } from 'firebase/firestore'
 import { auth, db } from '../firebase.js'
@@ -111,10 +111,22 @@ export function AuthProvider({ children }) {
   }, [])
 
   const login = useCallback(async (username, password) => {
+    let cred
     try {
-      await signInWithEmailAndPassword(auth, toEmail(username), password)
+      cred = await signInWithEmailAndPassword(auth, toEmail(username), password)
     } catch (err) {
       throw new Error(authErrorMessage(err))
+    }
+
+    // 거절됐던 사용자가 다시 로그인하면 재승인 요청이 가도록 자동으로 대기 상태로 되돌림
+    try {
+      const snap = await getDoc(doc(db, 'users', cred.user.uid))
+      if (snap.exists() && snap.data().status === 'rejected') {
+        await updateDoc(doc(db, 'users', cred.user.uid), { status: 'pending' })
+      }
+    } catch (err) {
+      console.error('Re-request approval on login failed:', err)
+      // 로그인 자체는 이미 성공했으므로 여기서 실패해도 로그인 흐름은 막지 않음
     }
   }, [])
 
