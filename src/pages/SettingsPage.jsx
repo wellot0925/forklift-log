@@ -21,8 +21,8 @@ export default function SettingsPage() {
   const { toggle, isDark } = useTheme()
   const { toast } = useToast()
   const { password: adminPassword, changePassword } = useAdminSettings()
-  const { profile, logout } = useAuth()
-  const { isAdmin, pendingUsers, approvedUsers, approve, reject, promote } = useUsers()
+  const { user, profile, logout } = useAuth()
+  const { isAdmin, pendingUsers, approvedUsers, approve, reject, promote, revoke } = useUsers()
   const [authorName, setAuthorName] = useState(getAuthor)
   const [printing, setPrinting] = useState(false)
   const [pwOpen, setPwOpen] = useState(false)
@@ -61,6 +61,13 @@ export default function SettingsPage() {
     setUserActionId(uid)
     try { await promote(uid); toast('관리자로 지정했습니다.', 'success') }
     catch (err) { console.error('Promote error:', err); toast('관리자 지정에 실패했습니다.', 'error') }
+    finally { setUserActionId(null) }
+  }
+  const handleRevoke = async (uid, name) => {
+    if (!window.confirm(`${name}님의 승인을 취소하시겠습니까? 다시 승인 대기 상태로 전환됩니다.`)) return
+    setUserActionId(uid)
+    try { await revoke(uid); toast('승인을 취소했습니다.', 'info') }
+    catch (err) { console.error('Revoke error:', err); toast('승인 취소에 실패했습니다.', 'error') }
     finally { setUserActionId(null) }
   }
 
@@ -243,13 +250,20 @@ export default function SettingsPage() {
                     </div>
                     <div className="settings-item-subtitle">@{u.username}</div>
                   </div>
-                  {u.role !== 'admin' && (
-                    <div className="settings-item-right">
+                  {u.id !== user?.uid && (
+                    <div className="settings-item-right" style={{ gap: 6 }}>
+                      {u.role !== 'admin' && (
+                        <button
+                          style={{ ...miniBtn, background: 'var(--bg-input)', color: 'var(--text-primary)', opacity: userActionId === u.id ? 0.6 : 1 }}
+                          disabled={userActionId === u.id}
+                          onClick={() => handlePromote(u.id, u.name)}
+                        >관리자로 지정</button>
+                      )}
                       <button
-                        style={{ ...miniBtn, background: 'var(--bg-input)', color: 'var(--text-primary)', opacity: userActionId === u.id ? 0.6 : 1 }}
+                        style={{ ...miniBtn, background: 'var(--danger-dim)', color: 'var(--danger)', opacity: userActionId === u.id ? 0.6 : 1 }}
                         disabled={userActionId === u.id}
-                        onClick={() => handlePromote(u.id, u.name)}
-                      >관리자로 지정</button>
+                        onClick={() => handleRevoke(u.id, u.name)}
+                      >승인 취소</button>
                     </div>
                   )}
                 </div>

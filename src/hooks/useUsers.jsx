@@ -30,12 +30,14 @@ export function UsersProvider({ children }) {
   const approve = useCallback(uid => updateDoc(doc(db, 'users', uid), { status: 'approved' }), [])
   const reject  = useCallback(uid => updateDoc(doc(db, 'users', uid), { status: 'rejected' }), [])
   const promote = useCallback(uid => updateDoc(doc(db, 'users', uid), { role: 'admin' }), [])
+  // 승인 취소: 완전히 차단하는 rejected 대신 pending으로 되돌려 승인대기 목록에서 다시 검토 가능하게 함
+  const revoke  = useCallback(uid => updateDoc(doc(db, 'users', uid), { status: 'pending' }), [])
 
   const pendingUsers  = users.filter(u => u.status === 'pending')
   const approvedUsers = users.filter(u => u.status === 'approved')
 
   return (
-    <Ctx.Provider value={{ isAdmin, loading, pendingUsers, approvedUsers, approve, reject, promote }}>
+    <Ctx.Provider value={{ isAdmin, loading, pendingUsers, approvedUsers, approve, reject, promote, revoke }}>
       {children}
     </Ctx.Provider>
   )
