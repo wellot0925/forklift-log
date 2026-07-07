@@ -141,8 +141,8 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        {/* 관리자 */}
-        <p className="settings-group-title">관리자</p>
+        {/* 삭제잠금 비밀번호 (관리자 전용) */}
+        {isAdmin && (
         <div className="settings-group">
           <div
             className="settings-item"
@@ -152,7 +152,8 @@ export default function SettingsPage() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
               <div className="settings-item-icon icon-red"><LockIcon /></div>
               <div className="settings-item-content">
-                <div className="settings-item-title">삭제잠금 비밀번호</div>
+                <div className="settings-item-title">삭제잠금 비밀번호 변경</div>
+                <div className="settings-item-subtitle" style={{ color: 'var(--text-placeholder)' }}>초기 비밀번호 1122</div>
               </div>
               <div className="settings-item-right">
                 <ChevronIcon style={{ transform: pwOpen ? 'rotate(90deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }} />
@@ -192,6 +193,7 @@ export default function SettingsPage() {
             )}
           </div>
         </div>
+        )}
 
         {/* 승인 대기 (관리자 전용) */}
         {isAdmin && (
