@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { useAuth } from '../hooks/useAuth.jsx'
+import { useToast } from '../hooks/useToast.jsx'
 import { getSavedUsername, saveUsername, clearSavedUsername } from '../utils/storage.js'
 import Spinner from '../components/Spinner.jsx'
 
 export default function LoginPage({ onSwitchToSignup }) {
   const { login } = useAuth()
+  const { toast } = useToast()
   const [username, setUsername] = useState(getSavedUsername)
   const [password, setPassword] = useState('')
   const [rememberUsername, setRememberUsername] = useState(() => Boolean(getSavedUsername()))
@@ -20,9 +22,12 @@ export default function LoginPage({ onSwitchToSignup }) {
     setLoading(true)
     setError('')
     try {
-      await login(username, password)
+      const { reRequested } = await login(username, password)
       if (rememberUsername) saveUsername(username.trim().toLowerCase())
       else clearSavedUsername()
+      // 로그인 성공 즉시 화면이 승인대기로 전환되며 이 페이지가 언마운트될 수 있어
+      // 로컬 state가 아닌 토스트로 알림 (ToastProvider는 AuthGate 상위라 계속 살아있음)
+      if (reRequested) toast('재승인을 요청했습니다.', 'info')
     } catch (err) {
       setError(err.message)
       setLoading(false)
