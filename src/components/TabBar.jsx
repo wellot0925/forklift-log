@@ -77,11 +77,20 @@ export default function TabBar() {
             )
           }
 
+          const handleClick = () => {
+            setMenuOpen(false)
+            if (tab.path === '/' && pathname === '/') {
+              window.dispatchEvent(new Event('home-scroll-top'))
+            } else {
+              nav(tab.path)
+            }
+          }
+
           return (
             <button
               key={tab.path}
               className={`tab-item${active ? ' active' : ''}`}
-              onClick={() => { setMenuOpen(false); nav(tab.path) }}
+              onClick={handleClick}
               aria-label={tab.label}
             >
               {tab.path === '/settings' && pendingCount > 0 && (

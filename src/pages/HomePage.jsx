@@ -1,9 +1,10 @@
-import { useRef, useState, useCallback, useMemo } from 'react'
+import { useRef, useState, useCallback, useMemo, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useRecords } from '../hooks/useRecords.jsx'
 import { useTips } from '../hooks/useTips.jsx'
 import { useToast } from '../hooks/useToast.jsx'
 import { useViewedModels } from '../hooks/useViewedModels.jsx'
+import { useUsers } from '../hooks/useUsers.jsx'
 import { getSearchHistory, addSearchHistory, removeSearchHistory } from '../utils/storage.js'
 import RecordCard from '../components/RecordCard.jsx'
 import TipListCard from '../components/TipListCard.jsx'
@@ -29,6 +30,7 @@ export default function HomePage() {
   const { tips, loading: tipsLoading } = useTips()
   const { toast } = useToast()
   const { viewed, track } = useViewedModels()
+  const { isAdmin, pendingUsers } = useUsers()
 
   const [searchParams, setSearchParams] = useSearchParams()
   const query = searchParams.get('q') ?? ''
@@ -52,6 +54,13 @@ export default function HomePage() {
   /* pull-to-refresh */
   const scrollRef = useRef(null)
   const startYRef = useRef(0)
+
+  // 이미 홈 화면일 때 하단 탭바의 "홈"을 다시 누르면 스크롤을 맨 위로 (TabBar.jsx에서 발생시키는 이벤트)
+  useEffect(() => {
+    const handler = () => scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
+    window.addEventListener('home-scroll-top', handler)
+    return () => window.removeEventListener('home-scroll-top', handler)
+  }, [])
   const [pullDist, setPullDist] = useState(0)
   const [refreshing, setRefreshing] = useState(false)
 
@@ -224,6 +233,23 @@ export default function HomePage() {
             </div>
           )}
         </div>
+
+        {isAdmin && pendingUsers.length > 0 && (
+          <div
+            onClick={() => nav('/settings', { state: { scrollToPending: true } })}
+            style={{
+              margin: '0 16px 12px', padding: '14px 16px', borderRadius: 14,
+              background: 'var(--danger-dim)', border: '1px solid var(--danger)',
+              display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer',
+            }}
+          >
+            <BellIcon />
+            <span style={{ flex: 1, fontSize: 14, fontWeight: 700, color: 'var(--danger)' }}>
+              승인 대기 중인 회원이 {pendingUsers.length}명 있습니다
+            </span>
+            <ChevronRightSmallIcon />
+          </div>
+        )}
       </div>
 
       {/* Scrollable area */}
@@ -510,6 +536,16 @@ function ClockIcon() {
 function XIcon() {
   return <svg fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" width={12} height={12}>
     <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12"/>
+  </svg>
+}
+function BellIcon() {
+  return <svg fill="none" stroke="var(--danger)" strokeWidth={2} viewBox="0 0 24 24" width={20} height={20} style={{ flexShrink: 0 }}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+  </svg>
+}
+function ChevronRightSmallIcon() {
+  return <svg fill="none" stroke="var(--danger)" strokeWidth={2.2} viewBox="0 0 24 24" width={16} height={16} style={{ flexShrink: 0 }}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"/>
   </svg>
 }
 function ChevronLeftIcon() {

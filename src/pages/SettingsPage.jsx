@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { useLocation } from 'react-router-dom'
 import { useRecords } from '../hooks/useRecords.jsx'
 import { useTheme } from '../hooks/useTheme.jsx'
 import { useToast } from '../hooks/useToast.jsx'
@@ -31,6 +32,17 @@ export default function SettingsPage() {
   const [pwErr, setPwErr] = useState('')
   const [pwSaving, setPwSaving] = useState(false)
   const [userActionId, setUserActionId] = useState(null)
+  const location = useLocation()
+  const pendingSectionRef = useRef(null)
+
+  useEffect(() => {
+    if (location.state?.scrollToPending) {
+      const t = setTimeout(() => {
+        pendingSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 100)
+      return () => clearTimeout(t)
+    }
+  }, [location.state])
 
   const handleApprove = async uid => {
     setUserActionId(uid)
@@ -44,7 +56,8 @@ export default function SettingsPage() {
     catch (err) { console.error('Reject error:', err); toast('거절에 실패했습니다.', 'error') }
     finally { setUserActionId(null) }
   }
-  const handlePromote = async uid => {
+  const handlePromote = async (uid, name) => {
+    if (!window.confirm(`${name}님을 관리자로 지정하시겠습니까?`)) return
     setUserActionId(uid)
     try { await promote(uid); toast('관리자로 지정했습니다.', 'success') }
     catch (err) { console.error('Promote error:', err); toast('관리자 지정에 실패했습니다.', 'error') }
@@ -176,7 +189,7 @@ export default function SettingsPage() {
 
         {/* 승인 대기 (관리자 전용) */}
         {isAdmin && (
-          <>
+          <div ref={pendingSectionRef}>
             <p className="settings-group-title">
               승인 대기{pendingUsers.length > 0 ? ` (${pendingUsers.length})` : ''}
             </p>
@@ -235,14 +248,14 @@ export default function SettingsPage() {
                       <button
                         style={{ ...miniBtn, background: 'var(--bg-input)', color: 'var(--text-primary)', opacity: userActionId === u.id ? 0.6 : 1 }}
                         disabled={userActionId === u.id}
-                        onClick={() => handlePromote(u.id)}
+                        onClick={() => handlePromote(u.id, u.name)}
                       >관리자로 지정</button>
                     </div>
                   )}
                 </div>
               ))}
             </div>
-          </>
+          </div>
         )}
 
         {/* 백업 */}
