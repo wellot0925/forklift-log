@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { useUsers } from '../hooks/useUsers.jsx'
 
 const menuBtnStyle = {
   display: 'flex', alignItems: 'center', gap: 10,
@@ -22,6 +23,8 @@ export default function TabBar() {
   const nav = useNavigate()
   const { pathname } = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
+  const { isAdmin, pendingUsers } = useUsers()
+  const pendingCount = isAdmin ? pendingUsers.length : 0
 
   return (
     <>
@@ -81,6 +84,9 @@ export default function TabBar() {
               onClick={() => { setMenuOpen(false); nav(tab.path) }}
               aria-label={tab.label}
             >
+              {tab.path === '/settings' && pendingCount > 0 && (
+                <span className="tab-badge">승인요청 {pendingCount}건</span>
+              )}
               <span className="tab-icon">{tab.icon}</span>
               <span className="tab-label">{tab.label}</span>
             </button>

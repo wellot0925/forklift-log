@@ -4,15 +4,24 @@ import { useTheme } from '../hooks/useTheme.jsx'
 import { useToast } from '../hooks/useToast.jsx'
 import { getAuthor, saveAuthor } from '../utils/storage.js'
 import { useAdminSettings } from '../hooks/useAdminSettings.jsx'
+import { useAuth } from '../hooks/useAuth.jsx'
+import { useUsers } from '../hooks/useUsers.jsx'
 import { printAllRecords } from '../utils/pdf.js'
 import Disclaimer from '../components/Disclaimer.jsx'
 import Spinner from '../components/Spinner.jsx'
+
+const miniBtn = {
+  padding: '6px 12px', borderRadius: 8, border: 'none',
+  fontSize: 12, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap',
+}
 
 export default function SettingsPage() {
   const { records } = useRecords()
   const { toggle, isDark } = useTheme()
   const { toast } = useToast()
   const { password: adminPassword, changePassword } = useAdminSettings()
+  const { profile, logout } = useAuth()
+  const { isAdmin, pendingUsers, approvedUsers, approve, reject, promote } = useUsers()
   const [authorName, setAuthorName] = useState(getAuthor)
   const [printing, setPrinting] = useState(false)
   const [pwOpen, setPwOpen] = useState(false)
@@ -21,6 +30,26 @@ export default function SettingsPage() {
   const [newPw2, setNewPw2] = useState('')
   const [pwErr, setPwErr] = useState('')
   const [pwSaving, setPwSaving] = useState(false)
+  const [userActionId, setUserActionId] = useState(null)
+
+  const handleApprove = async uid => {
+    setUserActionId(uid)
+    try { await approve(uid); toast('가입을 승인했습니다.', 'success') }
+    catch (err) { console.error('Approve error:', err); toast('승인에 실패했습니다.', 'error') }
+    finally { setUserActionId(null) }
+  }
+  const handleReject = async uid => {
+    setUserActionId(uid)
+    try { await reject(uid); toast('가입을 거절했습니다.', 'info') }
+    catch (err) { console.error('Reject error:', err); toast('거절에 실패했습니다.', 'error') }
+    finally { setUserActionId(null) }
+  }
+  const handlePromote = async uid => {
+    setUserActionId(uid)
+    try { await promote(uid); toast('관리자로 지정했습니다.', 'success') }
+    catch (err) { console.error('Promote error:', err); toast('관리자 지정에 실패했습니다.', 'error') }
+    finally { setUserActionId(null) }
+  }
 
   const handlePwChange = async () => {
     if (curPw !== adminPassword) { setPwErr('현재 비밀번호가 틀렸습니다.'); return }
@@ -145,6 +174,77 @@ export default function SettingsPage() {
           </div>
         </div>
 
+        {/* 승인 대기 (관리자 전용) */}
+        {isAdmin && (
+          <>
+            <p className="settings-group-title">
+              승인 대기{pendingUsers.length > 0 ? ` (${pendingUsers.length})` : ''}
+            </p>
+            <div className="settings-group">
+              {pendingUsers.length === 0 ? (
+                <div className="settings-item" style={{ cursor: 'default' }}>
+                  <div className="settings-item-content">
+                    <div className="settings-item-subtitle">대기 중인 가입 신청이 없습니다.</div>
+                  </div>
+                </div>
+              ) : pendingUsers.map(u => (
+                <div key={u.id} className="settings-item" style={{ cursor: 'default' }}>
+                  <div className="settings-item-icon icon-purple"><PersonIcon /></div>
+                  <div className="settings-item-content">
+                    <div className="settings-item-title">{u.name}</div>
+                    <div className="settings-item-subtitle">@{u.username}</div>
+                  </div>
+                  <div className="settings-item-right" style={{ gap: 6 }}>
+                    <button
+                      style={{ ...miniBtn, background: 'var(--success)', color: '#fff', opacity: userActionId === u.id ? 0.6 : 1 }}
+                      disabled={userActionId === u.id}
+                      onClick={() => handleApprove(u.id)}
+                    >승인</button>
+                    <button
+                      style={{ ...miniBtn, background: 'var(--danger-dim)', color: 'var(--danger)', opacity: userActionId === u.id ? 0.6 : 1 }}
+                      disabled={userActionId === u.id}
+                      onClick={() => handleReject(u.id)}
+                    >거절</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <p className="settings-group-title">승인된 사용자</p>
+            <div className="settings-group">
+              {approvedUsers.length === 0 ? (
+                <div className="settings-item" style={{ cursor: 'default' }}>
+                  <div className="settings-item-content">
+                    <div className="settings-item-subtitle">승인된 사용자가 없습니다.</div>
+                  </div>
+                </div>
+              ) : approvedUsers.map(u => (
+                <div key={u.id} className="settings-item" style={{ cursor: 'default' }}>
+                  <div className={`settings-item-icon ${u.role === 'admin' ? 'icon-red' : 'icon-blue'}`}><PersonIcon /></div>
+                  <div className="settings-item-content">
+                    <div className="settings-item-title">
+                      {u.name}
+                      {u.role === 'admin' && (
+                        <span style={{ marginLeft: 6, fontSize: 11, fontWeight: 700, color: 'var(--danger)' }}>관리자</span>
+                      )}
+                    </div>
+                    <div className="settings-item-subtitle">@{u.username}</div>
+                  </div>
+                  {u.role !== 'admin' && (
+                    <div className="settings-item-right">
+                      <button
+                        style={{ ...miniBtn, background: 'var(--bg-input)', color: 'var(--text-primary)', opacity: userActionId === u.id ? 0.6 : 1 }}
+                        disabled={userActionId === u.id}
+                        onClick={() => handlePromote(u.id)}
+                      >관리자로 지정</button>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
         {/* 백업 */}
         <p className="settings-group-title">백업</p>
         <div className="settings-group">
@@ -178,6 +278,24 @@ export default function SettingsPage() {
             <div className="settings-item-content">
               <div className="settings-item-title">저장 방식</div>
               <div className="settings-item-subtitle">Firebase 실시간 동기화 (다기기 지원)</div>
+            </div>
+          </div>
+        </div>
+
+        {/* 계정 */}
+        <p className="settings-group-title">계정</p>
+        <div className="settings-group">
+          <div className="settings-item" style={{ cursor: 'default' }}>
+            <div className="settings-item-icon icon-gray"><PersonIcon /></div>
+            <div className="settings-item-content">
+              <div className="settings-item-title">{profile?.name}</div>
+              <div className="settings-item-subtitle">@{profile?.username}{isAdmin ? ' · 관리자' : ''}</div>
+            </div>
+          </div>
+          <div className="settings-item" onClick={logout}>
+            <div className="settings-item-icon icon-red"><LogoutIcon /></div>
+            <div className="settings-item-content">
+              <div className="settings-item-title">로그아웃</div>
             </div>
           </div>
         </div>
@@ -219,5 +337,10 @@ function CloudIcon() {
 function ChevronIcon()  {
   return <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" width={16} height={16}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M9 18l6-6-6-6"/>
+  </svg>
+}
+function LogoutIcon() {
+  return <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" width={18} height={18} color="white">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 5v1a3 3 0 01-3 3H6a3 3 0 01-3-3V6a3 3 0 013-3h4a3 3 0 013 3v1"/>
   </svg>
 }
