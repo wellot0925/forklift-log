@@ -34,15 +34,16 @@ service cloud.firestore {
         && request.resource.data.role == 'user'
         && request.resource.data.username is string
         && request.resource.data.name is string;
-      // 관리자는 자유롭게 수정 가능. 그 외엔 거절(rejected)당한 본인이 로그인 시
-      // 재승인 요청을 위해 자기 문서를 pending으로만 되돌리는 것만 허용 (다른 필드 변경 불가)
+      // 관리자는 자유롭게 수정 가능. 그 외엔 본인만, 그것도 아래 두 좁은 경우만 허용:
+      // ① 거절(rejected)당한 본인이 로그인 시 재승인 요청을 위해 status를 pending으로만 되돌림
+      // ② 비밀번호 찾기용 이메일 등록/자가치유 동기화 — email 필드만 바꿀 수 있음
       allow update: if isAdmin() || (
-        isSignedIn() && request.auth.uid == userId &&
-        resource.data.status == 'rejected' &&
-        request.resource.data.status == 'pending' &&
-        request.resource.data.role == resource.data.role &&
-        request.resource.data.username == resource.data.username &&
-        request.resource.data.name == resource.data.name
+        isSignedIn() && request.auth.uid == userId && (
+          (resource.data.status == 'rejected' &&
+            request.resource.data.status == 'pending' &&
+            request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status'])) ||
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['email'])
+        )
       );
       allow delete: if false;
     }

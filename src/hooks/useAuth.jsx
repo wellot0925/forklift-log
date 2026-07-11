@@ -2,6 +2,7 @@ import { createContext, useContext, useState, useEffect, useCallback } from 'rea
 import {
   onAuthStateChanged, createUserWithEmailAndPassword,
   signInWithEmailAndPassword, signOut, updateProfile, deleteUser,
+  EmailAuthProvider, reauthenticateWithCredential, updatePassword, verifyBeforeUpdateEmail,
 } from 'firebase/auth'
 import {
   doc, getDoc, setDoc, updateDoc, onSnapshot, serverTimestamp,
@@ -12,8 +13,9 @@ import { auth, db } from '../firebase.js'
 const Ctx = createContext(null)
 
 // Firebase Auth는 이메일 형식만 받으므로, 아이디를 내부용 가짜 이메일로 변환해서 사용
-const EMAIL_DOMAIN = 'forklift-log.internal'
+export const EMAIL_DOMAIN = 'forklift-log.internal'
 const toEmail = username => `${username.trim().toLowerCase()}@${EMAIL_DOMAIN}`
+const isFakeEmail = email => !email || email.endsWith(`@${EMAIL_DOMAIN}`)
 
 function authErrorMessage(err) {
   switch (err.code) {
@@ -43,10 +45,15 @@ export function AuthProvider({ children }) {
   const [profileLoading, setProfileLoading] = useState(false)
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, u => {
-      setUser(u)
+    const unsub = onAuthStateChanged(auth, async u => {
+      if (u) {
+        // verifyBeforeUpdateEmail은 인증 메일의 링크를 눌러야만 실제 이메일이 바뀐다.
+        // reload()로 다른 기기/탭에서 그 사이 인증을 마쳤는지 최신 상태를 반영한다.
+        await u.reload()
+      }
+      setUser(auth.currentUser)
       setAuthLoading(false)
-      if (!u) setProfile(null)
+      if (!auth.currentUser) setProfile(null)
     })
     return unsub
   }, [])
@@ -55,8 +62,15 @@ export function AuthProvider({ children }) {
     if (!user) return
     setProfileLoading(true)
     const unsub = onSnapshot(doc(db, 'users', user.uid), snap => {
-      setProfile(snap.exists() ? snap.data() : null)
+      const data = snap.exists() ? snap.data() : null
+      setProfile(data)
       setProfileLoading(false)
+      // 자가치유: 인증 메일 링크 클릭으로 실제 Auth 이메일이 바뀌었는데
+      // Firestore의 email 필드가 아직 그 값을 안 따라왔다면 동기화한다.
+      if (data && !isFakeEmail(user.email) && data.email !== user.email) {
+        updateDoc(doc(db, 'users', user.uid), { email: user.email })
+          .catch(err => console.error('Email self-heal sync failed:', err))
+      }
     }, err => {
       console.error('Firestore user profile error:', err)
       setProfileLoading(false)
@@ -111,9 +125,26 @@ export function AuthProvider({ children }) {
   }, [])
 
   const login = useCallback(async (username, password) => {
+    const normalizedUsername = username.trim().toLowerCase()
+
+    // 비밀번호 찾기용 실제 이메일을 등록+인증 완료한 계정은 Auth의 로그인 이메일 자체가
+    // 가짜 도메인에서 실제 이메일로 바뀌어 있으므로, 고정 변환 대신 Firestore에서 조회한다.
+    // 등록 이력이 없으면(대다수) 그대로 가짜 이메일로 폴백한다.
+    let email = toEmail(normalizedUsername)
+    try {
+      const q = query(collection(db, 'users'), where('username', '==', normalizedUsername), limit(1))
+      const snap = await getDocs(q)
+      if (!snap.empty) {
+        const data = snap.docs[0].data()
+        if (!isFakeEmail(data.email)) email = data.email
+      }
+    } catch (err) {
+      console.error('Email lookup for login failed, falling back to pseudo-email:', err)
+    }
+
     let cred
     try {
-      cred = await signInWithEmailAndPassword(auth, toEmail(username), password)
+      cred = await signInWithEmailAndPassword(auth, email, password)
     } catch (err) {
       throw new Error(authErrorMessage(err))
     }
@@ -135,10 +166,57 @@ export function AuthProvider({ children }) {
 
   const logout = useCallback(() => signOut(auth), [])
 
+  // 현재 비밀번호를 아는 상태에서 자유롭게 바꾸는 용도. Firebase는 민감한 Auth 작업 전
+  // 최근 로그인(재인증)을 요구하므로 먼저 재인증한다.
+  const changePassword = useCallback(async (currentPassword, newPassword) => {
+    const cred = EmailAuthProvider.credential(auth.currentUser.email, currentPassword)
+    try {
+      await reauthenticateWithCredential(auth.currentUser, cred)
+    } catch (err) {
+      if (err.code === 'auth/invalid-credential' || err.code === 'auth/wrong-password') {
+        throw new Error('현재 비밀번호가 일치하지 않습니다.')
+      }
+      throw new Error('인증에 실패했습니다. 다시 시도해주세요.')
+    }
+    try {
+      await updatePassword(auth.currentUser, newPassword)
+    } catch (err) {
+      if (err.code === 'auth/weak-password') throw new Error('비밀번호는 6자 이상이어야 합니다.')
+      throw new Error('비밀번호 변경에 실패했습니다.')
+    }
+  }, [])
+
+  // 비밀번호 찾기용 실제 이메일 등록. updateEmail을 바로 쓰면 Firebase의 이메일 열거 방지
+  // 정책 때문에 OPERATION_NOT_ALLOWED로 거부되므로, 인증 메일만 보내고 사용자가 그
+  // 링크를 눌러야 실제로 이메일이 바뀌는 verifyBeforeUpdateEmail을 사용한다.
+  // uid와 기존 Firestore 데이터는 그대로 유지된다(계정 삭제/재생성 불필요).
+  const registerRecoveryEmail = useCallback(async (currentPassword, newEmail) => {
+    const cred = EmailAuthProvider.credential(auth.currentUser.email, currentPassword)
+    try {
+      await reauthenticateWithCredential(auth.currentUser, cred)
+    } catch (err) {
+      if (err.code === 'auth/invalid-credential' || err.code === 'auth/wrong-password') {
+        throw new Error('현재 비밀번호가 일치하지 않습니다.')
+      }
+      throw new Error('인증에 실패했습니다. 다시 시도해주세요.')
+    }
+    try {
+      await verifyBeforeUpdateEmail(auth.currentUser, newEmail.trim())
+    } catch (err) {
+      if (err.code === 'auth/email-already-in-use') throw new Error('이미 사용 중인 이메일입니다.')
+      if (err.code === 'auth/invalid-email') throw new Error('올바른 이메일 형식이 아닙니다.')
+      throw new Error('이메일 등록에 실패했습니다.')
+    }
+  }, [])
+
   const loading = authLoading || (Boolean(user) && profileLoading && !profile)
+  const hasRecoveryEmail = Boolean(profile && !isFakeEmail(profile.email))
 
   return (
-    <Ctx.Provider value={{ user, profile, loading, signup, login, logout }}>
+    <Ctx.Provider value={{
+      user, profile, loading, signup, login, logout,
+      changePassword, registerRecoveryEmail, hasRecoveryEmail,
+    }}>
       {children}
     </Ctx.Provider>
   )

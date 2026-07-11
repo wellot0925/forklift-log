@@ -4,7 +4,7 @@ import { useToast } from '../hooks/useToast.jsx'
 import { getSavedUsername, saveUsername, clearSavedUsername } from '../utils/storage.js'
 import Spinner from '../components/Spinner.jsx'
 
-export default function LoginPage({ onSwitchToSignup }) {
+export default function LoginPage({ onSwitchToSignup, onForgotPassword }) {
   const { login } = useAuth()
   const { toast } = useToast()
   const [username, setUsername] = useState(getSavedUsername)
@@ -59,14 +59,22 @@ export default function LoginPage({ onSwitchToSignup }) {
             value={password} onChange={e => { setPassword(e.target.value); setError('') }}
           />
         </div>
-        <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: 'var(--text-secondary)', marginBottom: 16, cursor: 'pointer' }}>
-          <input
-            type="checkbox" checked={rememberUsername}
-            onChange={e => setRememberUsername(e.target.checked)}
-            style={{ width: 16, height: 16, cursor: 'pointer' }}
-          />
-          아이디 저장
-        </label>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+          <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: 'var(--text-secondary)', cursor: 'pointer' }}>
+            <input
+              type="checkbox" checked={rememberUsername}
+              onChange={e => setRememberUsername(e.target.checked)}
+              style={{ width: 16, height: 16, cursor: 'pointer' }}
+            />
+            아이디 저장
+          </label>
+          <button
+            type="button" onClick={onForgotPassword}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 13, color: 'var(--text-secondary)', textDecoration: 'underline' }}
+          >
+            비밀번호를 잊으셨나요?
+          </button>
+        </div>
         {error && <p className="field-error" style={{ textAlign: 'center', marginBottom: 8 }}>{error}</p>}
         <button type="submit" className="btn-cta" disabled={loading} style={{ marginTop: 4 }}>
           {loading ? <Spinner size="sm" white /> : '로그인'}

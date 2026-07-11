@@ -13,6 +13,7 @@ import TabBar from './components/TabBar.jsx'
 import UpdateBanner from './components/UpdateBanner.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import SignupPage from './pages/SignupPage.jsx'
+import ForgotPasswordPage from './pages/ForgotPasswordPage.jsx'
 import PendingApprovalPage from './pages/PendingApprovalPage.jsx'
 import Spinner from './components/Spinner.jsx'
 import HomePage from './pages/HomePage.jsx'
@@ -48,9 +49,14 @@ function AuthGate({ children }) {
   if (loading) return <FullScreenLoader />
 
   if (!user) {
-    return authView === 'login'
-      ? <LoginPage onSwitchToSignup={() => setAuthView('signup')} />
-      : <SignupPage onSwitchToLogin={() => setAuthView('login')} />
+    if (authView === 'signup') return <SignupPage onSwitchToLogin={() => setAuthView('login')} />
+    if (authView === 'forgot') return <ForgotPasswordPage onBack={() => setAuthView('login')} />
+    return (
+      <LoginPage
+        onSwitchToSignup={() => setAuthView('signup')}
+        onForgotPassword={() => setAuthView('forgot')}
+      />
+    )
   }
 
   if (!profile) return <FullScreenLoader />
