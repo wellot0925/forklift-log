@@ -179,27 +179,27 @@ export default function HomePage() {
       <div style={{ position: 'sticky', top: 0, zIndex: 100, background: 'var(--bg)' }}>
         <div className="home-header">
           <div
-            style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}
+            style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', minWidth: 0 }}
             onClick={() => { setQuery(''); scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' }) }}
           >
             <img src="/bobcat-icon.png.webp" alt="Bobcat 아이콘"
-              style={{ height: 44, width: 'auto', objectFit: 'contain', flexShrink: 0 }} />
-            <div>
-              <h1 className="home-title">나만의 정비수첩</h1>
-              <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 2 }}>용인중공업</p>
+              style={{ height: 38, width: 'auto', objectFit: 'contain', flexShrink: 0 }} />
+            <div style={{ minWidth: 0 }}>
+              <h1 className="home-title" style={{ whiteSpace: 'nowrap' }}>나만의 정비수첩</h1>
+              <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 2, whiteSpace: 'nowrap' }}>용인중공업</p>
             </div>
           </div>
           <button
             onClick={() => window.open('https://forklift-rental-manager.vercel.app', '_blank', 'noopener,noreferrer')}
             style={{
-              display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0,
-              padding: '10px 16px', borderRadius: 999,
+              display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0,
+              padding: '8px 12px', borderRadius: 999,
               background: 'var(--bg-card)', border: '2px solid var(--primary)',
-              color: 'var(--text-primary)', fontSize: 14, fontWeight: 700, cursor: 'pointer',
+              color: 'var(--text-primary)', fontSize: 13, fontWeight: 700, cursor: 'pointer',
             }}
           >
-            <img src="/rental-manager-icon.jpg" alt="" style={{ height: 28, width: 28, borderRadius: 7, flexShrink: 0, objectFit: 'cover' }} />
-            임대차관리 <ExternalLinkIcon />
+            <img src="/rental-manager-icon.jpg" alt="" style={{ height: 22, width: 22, borderRadius: 6, flexShrink: 0, objectFit: 'cover' }} />
+            지게차관리 <ExternalLinkIcon />
           </button>
         </div>
 
