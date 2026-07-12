@@ -192,12 +192,13 @@ export default function HomePage() {
           <button
             onClick={() => window.open('https://forklift-rental-manager.vercel.app', '_blank', 'noopener,noreferrer')}
             style={{
-              display: 'flex', alignItems: 'center', gap: 5, flexShrink: 0,
-              padding: '7px 12px', borderRadius: 999,
+              display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0,
+              padding: '10px 16px', borderRadius: 999,
               background: 'var(--bg-card)', border: '1px solid var(--border)',
-              color: 'var(--text-primary)', fontSize: 12, fontWeight: 700, cursor: 'pointer',
+              color: 'var(--text-primary)', fontSize: 14, fontWeight: 700, cursor: 'pointer',
             }}
           >
+            <img src="/rental-manager-icon.svg" alt="" style={{ height: 22, width: 22, flexShrink: 0 }} />
             임대차관리 <ExternalLinkIcon />
           </button>
         </div>
