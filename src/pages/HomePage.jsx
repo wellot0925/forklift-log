@@ -198,7 +198,7 @@ export default function HomePage() {
               color: 'var(--text-primary)', fontSize: 14, fontWeight: 700, cursor: 'pointer',
             }}
           >
-            <img src="/rental-manager-icon.svg" alt="" style={{ height: 22, width: 22, flexShrink: 0 }} />
+            <img src="/rental-manager-icon.jpg" alt="" style={{ height: 28, width: 28, borderRadius: 7, flexShrink: 0, objectFit: 'cover' }} />
             임대차관리 <ExternalLinkIcon />
           </button>
         </div>
