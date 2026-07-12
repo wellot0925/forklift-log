@@ -192,14 +192,14 @@ export default function HomePage() {
           <button
             onClick={() => window.open('https://forklift-rental-manager.vercel.app', '_blank', 'noopener,noreferrer')}
             style={{
-              display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0,
-              padding: '8px 12px', borderRadius: 14,
-              background: 'rgba(0,122,255,0.08)', border: '2px solid #007AFF',
-              color: '#007AFF', fontSize: 26, fontWeight: 800, letterSpacing: '-0.5px', cursor: 'pointer',
+              display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0,
+              padding: '10px 16px', borderRadius: 999,
+              background: 'var(--bg-card)', border: '1px solid var(--border)',
+              color: 'var(--text-primary)', fontSize: 14, fontWeight: 700, cursor: 'pointer',
             }}
           >
-            <img src="/rental-manager-icon.jpg" alt="" style={{ height: 30, width: 30, borderRadius: 7, flexShrink: 0, objectFit: 'cover' }} />
-            지게차관리
+            <img src="/rental-manager-icon.jpg" alt="" style={{ height: 28, width: 28, borderRadius: 7, flexShrink: 0, objectFit: 'cover' }} />
+            임대차관리 <ExternalLinkIcon />
           </button>
         </div>
 
@@ -548,6 +548,11 @@ function ClockIcon() {
 function XIcon() {
   return <svg fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24" width={12} height={12}>
     <path strokeLinecap="round" d="M6 18L18 6M6 6l12 12"/>
+  </svg>
+}
+function ExternalLinkIcon() {
+  return <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" width={13} height={13} style={{ flexShrink: 0 }}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
   </svg>
 }
 function BellIcon() {
