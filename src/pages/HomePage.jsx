@@ -194,7 +194,7 @@ export default function HomePage() {
             style={{
               display: 'flex', alignItems: 'center', gap: 8, flexShrink: 0,
               padding: '10px 16px', borderRadius: 999,
-              background: 'var(--bg-card)', border: '1px solid var(--border)',
+              background: 'var(--bg-card)', border: '2px solid var(--primary)',
               color: 'var(--text-primary)', fontSize: 14, fontWeight: 700, cursor: 'pointer',
             }}
           >
