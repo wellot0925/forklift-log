@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useAuth, isUsernameTaken } from '../hooks/useAuth.jsx'
+import { useAuth, isUsernameTaken, isEmailTaken } from '../hooks/useAuth.jsx'
 import { useToast } from '../hooks/useToast.jsx'
 import Spinner from '../components/Spinner.jsx'
 
@@ -7,6 +7,7 @@ export default function SignupPage({ onSwitchToLogin }) {
   const { signup } = useAuth()
   const { toast } = useToast()
   const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
   const [name, setName] = useState('')
@@ -14,6 +15,7 @@ export default function SignupPage({ onSwitchToLogin }) {
   const [loading, setLoading] = useState(false)
   // null | 'checking' | 'available' | 'taken'
   const [usernameCheck, setUsernameCheck] = useState(null)
+  const [emailCheck, setEmailCheck] = useState(null)
 
   const passwordMismatch = passwordConfirm.length > 0 && password !== passwordConfirm
 
@@ -30,10 +32,25 @@ export default function SignupPage({ onSwitchToLogin }) {
     }
   }
 
+  const handleEmailBlur = async () => {
+    const e = email.trim().toLowerCase()
+    if (!e.includes('@')) return
+    setEmailCheck('checking')
+    try {
+      const taken = await isEmailTaken(e)
+      setEmailCheck(taken ? 'taken' : 'available')
+    } catch (err) {
+      console.error('Email availability check failed:', err)
+      setEmailCheck(null)
+    }
+  }
+
   const handleSubmit = async e => {
     e.preventDefault()
     if (username.trim().length < 3) { setError('아이디는 3자 이상 입력해주세요.'); return }
     if (usernameCheck === 'taken') { setError('이미 사용 중인 아이디입니다.'); return }
+    if (!email.trim().includes('@')) { setError('올바른 이메일을 입력해주세요.'); return }
+    if (emailCheck === 'taken') { setError('이미 사용 중인 이메일입니다.'); return }
     if (password.length < 6) { setError('비밀번호는 6자 이상 입력해주세요.'); return }
     if (password !== passwordConfirm) { setError('비밀번호가 일치하지 않습니다.'); return }
     if (!name.trim()) { setError('이름을 입력해주세요.'); return }
@@ -41,7 +58,7 @@ export default function SignupPage({ onSwitchToLogin }) {
     setLoading(true)
     setError('')
     try {
-      await signup(username, password, name)
+      await signup(username, password, name, email)
       // 가입 성공 시 자동 로그인됨 — App의 인증 게이트가 승인대기 화면으로 자연스럽게 전환
     } catch (err) {
       // signup() 도중 Auth 계정이 생기는 순간 화면이 로딩 화면으로 전환되며 이 페이지가
@@ -81,6 +98,25 @@ export default function SignupPage({ onSwitchToLogin }) {
           )}
         </div>
         <div className="form-section">
+          <label className="form-label" htmlFor="signup-email">이메일</label>
+          <input
+            id="signup-email" className="form-input" type="email"
+            autoComplete="email" placeholder="비밀번호 찾기에 사용됩니다" required
+            value={email}
+            onChange={e => { setEmail(e.target.value); setEmailCheck(null); setError('') }}
+            onBlur={handleEmailBlur}
+          />
+          {emailCheck === 'checking' && (
+            <p style={{ fontSize: 12, color: 'var(--text-secondary)', marginTop: 5 }}>확인 중...</p>
+          )}
+          {emailCheck === 'taken' && (
+            <p className="field-error">이미 사용 중인 이메일입니다.</p>
+          )}
+          {emailCheck === 'available' && (
+            <p style={{ fontSize: 12, color: 'var(--success)', marginTop: 5, fontWeight: 600 }}>사용 가능한 이메일입니다.</p>
+          )}
+        </div>
+        <div className="form-section">
           <label className="form-label" htmlFor="signup-password">비밀번호</label>
           <input
             id="signup-password" className="form-input" type="password"
@@ -106,7 +142,7 @@ export default function SignupPage({ onSwitchToLogin }) {
           />
         </div>
         {error && <p className="field-error" style={{ textAlign: 'center', marginBottom: 8 }}>{error}</p>}
-        <button type="submit" className="btn-cta" disabled={loading || passwordMismatch || usernameCheck === 'taken'} style={{ marginTop: 4 }}>
+        <button type="submit" className="btn-cta" disabled={loading || passwordMismatch || usernameCheck === 'taken' || emailCheck === 'taken'} style={{ marginTop: 4 }}>
           {loading ? <Spinner size="sm" white /> : '가입하기'}
         </button>
       </form>

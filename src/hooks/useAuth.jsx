@@ -38,6 +38,13 @@ export async function isUsernameTaken(username) {
   return !snap.empty
 }
 
+// Firestore users 컬렉션 기준 이메일 중복 여부 확인 (신규 가입은 실제 이메일로 Auth 계정을 만들므로 사전 체크 필요)
+export async function isEmailTaken(email) {
+  const q = query(collection(db, 'users'), where('email', '==', email), limit(1))
+  const snap = await getDocs(q)
+  return !snap.empty
+}
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [profile, setProfile] = useState(null)
@@ -78,27 +85,33 @@ export function AuthProvider({ children }) {
     return unsub
   }, [user])
 
-  const signup = useCallback(async (username, password, name) => {
+  // 신규 가입은 처음부터 실제 이메일로 Auth 계정을 생성한다(가짜 이메일 미사용).
+  // 가짜 이메일 방식(toEmail)은 이전에 가입한 기존 계정의 로그인 폴백 용도로만 남아있다.
+  const signup = useCallback(async (username, password, name, email) => {
     const normalizedUsername = username.trim().toLowerCase()
+    const normalizedEmail = email.trim().toLowerCase()
 
-    // 1) Firestore users 컬렉션 기준 아이디 중복 사전 체크
-    let taken
+    // 1) Firestore users 컬렉션 기준 아이디/이메일 중복 사전 체크
+    let usernameTaken, emailTaken
     try {
-      taken = await isUsernameTaken(normalizedUsername)
+      [usernameTaken, emailTaken] = await Promise.all([
+        isUsernameTaken(normalizedUsername),
+        isEmailTaken(normalizedEmail),
+      ])
     } catch (err) {
-      console.error('Username availability check failed:', err)
-      throw new Error('아이디 확인 중 오류가 발생했습니다. 네트워크를 확인해주세요.')
+      console.error('Username/email availability check failed:', err)
+      throw new Error('아이디/이메일 확인 중 오류가 발생했습니다. 네트워크를 확인해주세요.')
     }
-    if (taken) throw new Error('이미 사용 중인 아이디입니다.')
+    if (usernameTaken) throw new Error('이미 사용 중인 아이디입니다.')
+    if (emailTaken) throw new Error('이미 사용 중인 이메일입니다.')
 
     // 2) Auth 계정 생성
     let cred
     try {
-      cred = await createUserWithEmailAndPassword(auth, toEmail(normalizedUsername), password)
+      cred = await createUserWithEmailAndPassword(auth, normalizedEmail, password)
     } catch (err) {
       if (err.code === 'auth/email-already-in-use') {
-        // Firestore엔 없는데 Auth에만 존재 — 이전 가입 실패로 남은 유령 계정일 가능성이 높음
-        throw new Error('이 아이디는 시스템에 등록 이력이 있어 사용할 수 없습니다. 관리자에게 문의해주세요.')
+        throw new Error('이미 사용 중인 이메일입니다.')
       }
       throw new Error(authErrorMessage(err))
     }
@@ -109,6 +122,7 @@ export function AuthProvider({ children }) {
       await setDoc(doc(db, 'users', cred.user.uid), {
         username: normalizedUsername,
         name: name.trim(),
+        email: normalizedEmail,
         status: 'pending',
         role: 'user',
         createdAt: serverTimestamp(),
@@ -124,22 +138,30 @@ export function AuthProvider({ children }) {
     }
   }, [])
 
-  const login = useCallback(async (username, password) => {
-    const normalizedUsername = username.trim().toLowerCase()
+  const login = useCallback(async (identifier, password) => {
+    const normalizedIdentifier = identifier.trim().toLowerCase()
 
-    // 비밀번호 찾기용 실제 이메일을 등록+인증 완료한 계정은 Auth의 로그인 이메일 자체가
-    // 가짜 도메인에서 실제 이메일로 바뀌어 있으므로, 고정 변환 대신 Firestore에서 조회한다.
-    // 등록 이력이 없으면(대다수) 그대로 가짜 이메일로 폴백한다.
-    let email = toEmail(normalizedUsername)
-    try {
-      const q = query(collection(db, 'users'), where('username', '==', normalizedUsername), limit(1))
-      const snap = await getDocs(q)
-      if (!snap.empty) {
-        const data = snap.docs[0].data()
-        if (!isFakeEmail(data.email)) email = data.email
+    let email
+    if (normalizedIdentifier.includes('@')) {
+      // 입력값이 이메일 형식이면 아이디 조회 없이 그대로 로그인 시도한다.
+      // Firestore의 email 필드가 실제 Auth 이메일과 어긋난 경우(자가치유 실패 등)의
+      // 복구 경로이기도 하다 — 이메일을 알면 Firestore 상태와 무관하게 로그인할 수 있다.
+      email = normalizedIdentifier
+    } else {
+      // 비밀번호 찾기용 실제 이메일을 등록+인증 완료한 계정은 Auth의 로그인 이메일 자체가
+      // 가짜 도메인에서 실제 이메일로 바뀌어 있으므로, 고정 변환 대신 Firestore에서 조회한다.
+      // 등록 이력이 없으면(대다수) 그대로 가짜 이메일로 폴백한다.
+      email = toEmail(normalizedIdentifier)
+      try {
+        const q = query(collection(db, 'users'), where('username', '==', normalizedIdentifier), limit(1))
+        const snap = await getDocs(q)
+        if (!snap.empty) {
+          const data = snap.docs[0].data()
+          if (!isFakeEmail(data.email)) email = data.email
+        }
+      } catch (err) {
+        console.error('Email lookup for login failed, falling back to pseudo-email:', err)
       }
-    } catch (err) {
-      console.error('Email lookup for login failed, falling back to pseudo-email:', err)
     }
 
     let cred
