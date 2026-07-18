@@ -3,6 +3,10 @@ import { useAuth, isUsernameTaken, isEmailTaken } from '../hooks/useAuth.jsx'
 import { useToast } from '../hooks/useToast.jsx'
 import Spinner from '../components/Spinner.jsx'
 
+// 로그인 로직이 "@"가 포함된 입력을 이메일로 취급하므로, 아이디에 "@" 등 특수문자가
+// 들어가면 그 계정은 아이디로 영원히 로그인할 수 없게 된다 — 영문 소문자/숫자만 허용.
+const USERNAME_REGEX = /^[a-z0-9]{3,20}$/
+
 export default function SignupPage({ onSwitchToLogin }) {
   const { signup } = useAuth()
   const { toast } = useToast()
@@ -18,10 +22,11 @@ export default function SignupPage({ onSwitchToLogin }) {
   const [emailCheck, setEmailCheck] = useState(null)
 
   const passwordMismatch = passwordConfirm.length > 0 && password !== passwordConfirm
+  const usernameFormatInvalid = username.length > 0 && !USERNAME_REGEX.test(username.trim().toLowerCase())
 
   const handleUsernameBlur = async () => {
     const u = username.trim().toLowerCase()
-    if (u.length < 3) return
+    if (!USERNAME_REGEX.test(u)) return
     setUsernameCheck('checking')
     try {
       const taken = await isUsernameTaken(u)
@@ -47,7 +52,10 @@ export default function SignupPage({ onSwitchToLogin }) {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    if (username.trim().length < 3) { setError('아이디는 3자 이상 입력해주세요.'); return }
+    if (!USERNAME_REGEX.test(username.trim().toLowerCase())) {
+      setError('아이디는 영문 소문자와 숫자만 사용할 수 있습니다 (3~20자).')
+      return
+    }
     if (usernameCheck === 'taken') { setError('이미 사용 중인 아이디입니다.'); return }
     if (!email.trim().includes('@')) { setError('올바른 이메일을 입력해주세요.'); return }
     if (emailCheck === 'taken') { setError('이미 사용 중인 이메일입니다.'); return }
@@ -82,19 +90,25 @@ export default function SignupPage({ onSwitchToLogin }) {
           <label className="form-label" htmlFor="signup-username">아이디</label>
           <input
             id="signup-username" className="form-input" type="text"
-            autoComplete="username" placeholder="3자 이상"
+            autoComplete="username" placeholder="영문 소문자, 숫자 3~20자"
             value={username}
             onChange={e => { setUsername(e.target.value); setUsernameCheck(null); setError('') }}
             onBlur={handleUsernameBlur}
           />
-          {usernameCheck === 'checking' && (
-            <p style={{ fontSize: 12, color: 'var(--text-secondary)', marginTop: 5 }}>확인 중...</p>
-          )}
-          {usernameCheck === 'taken' && (
-            <p className="field-error">이미 사용 중인 아이디입니다.</p>
-          )}
-          {usernameCheck === 'available' && (
-            <p style={{ fontSize: 12, color: 'var(--success)', marginTop: 5, fontWeight: 600 }}>사용 가능한 아이디입니다.</p>
+          {usernameFormatInvalid ? (
+            <p className="field-error">영문 소문자와 숫자만 사용할 수 있습니다 (3~20자).</p>
+          ) : (
+            <>
+              {usernameCheck === 'checking' && (
+                <p style={{ fontSize: 12, color: 'var(--text-secondary)', marginTop: 5 }}>확인 중...</p>
+              )}
+              {usernameCheck === 'taken' && (
+                <p className="field-error">이미 사용 중인 아이디입니다.</p>
+              )}
+              {usernameCheck === 'available' && (
+                <p style={{ fontSize: 12, color: 'var(--success)', marginTop: 5, fontWeight: 600 }}>사용 가능한 아이디입니다.</p>
+              )}
+            </>
           )}
         </div>
         <div className="form-section">
@@ -142,7 +156,7 @@ export default function SignupPage({ onSwitchToLogin }) {
           />
         </div>
         {error && <p className="field-error" style={{ textAlign: 'center', marginBottom: 8 }}>{error}</p>}
-        <button type="submit" className="btn-cta" disabled={loading || passwordMismatch || usernameCheck === 'taken' || emailCheck === 'taken'} style={{ marginTop: 4 }}>
+        <button type="submit" className="btn-cta" disabled={loading || passwordMismatch || usernameFormatInvalid || usernameCheck === 'taken' || emailCheck === 'taken'} style={{ marginTop: 4 }}>
           {loading ? <Spinner size="sm" white /> : '가입하기'}
         </button>
       </form>

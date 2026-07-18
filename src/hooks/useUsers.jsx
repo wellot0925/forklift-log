@@ -30,14 +30,17 @@ export function UsersProvider({ children }) {
   const approve = useCallback(uid => updateDoc(doc(db, 'users', uid), { status: 'approved' }), [])
   const reject  = useCallback(uid => updateDoc(doc(db, 'users', uid), { status: 'rejected' }), [])
   const promote = useCallback(uid => updateDoc(doc(db, 'users', uid), { role: 'admin' }), [])
-  // 승인 취소: 완전히 차단하는 rejected 대신 pending으로 되돌려 승인대기 목록에서 다시 검토 가능하게 함
-  const revoke  = useCallback(uid => updateDoc(doc(db, 'users', uid), { status: 'pending' }), [])
+  const demote  = useCallback(uid => updateDoc(doc(db, 'users', uid), { role: 'user' }), [])
+  // 승인 취소: 완전히 차단하는 rejected 대신 pending으로 되돌려 승인대기 목록에서 다시 검토
+  // 가능하게 함. role이 admin인 사람을 승인 취소할 때 관리자 권한이 대기 상태로 남지
+  // 않도록 role도 함께 user로 초기화한다.
+  const revoke  = useCallback(uid => updateDoc(doc(db, 'users', uid), { status: 'pending', role: 'user' }), [])
 
   const pendingUsers  = users.filter(u => u.status === 'pending')
   const approvedUsers = users.filter(u => u.status === 'approved')
 
   return (
-    <Ctx.Provider value={{ isAdmin, loading, pendingUsers, approvedUsers, approve, reject, promote, revoke }}>
+    <Ctx.Provider value={{ isAdmin, loading, pendingUsers, approvedUsers, approve, reject, promote, demote, revoke }}>
       {children}
     </Ctx.Provider>
   )

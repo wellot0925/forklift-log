@@ -5,6 +5,16 @@ import { auth, db } from '../firebase.js'
 import { EMAIL_DOMAIN } from '../hooks/useAuth.jsx'
 import Spinner from '../components/Spinner.jsx'
 
+// 아이디만 아는 사람이 남의 이메일 전체를 알아내지 못하도록 일부만 표시 (예: w***t@naver.com)
+function maskEmail(email) {
+  const atIndex = email.indexOf('@')
+  if (atIndex < 1) return email
+  const local = email.slice(0, atIndex)
+  const domain = email.slice(atIndex)
+  if (local.length <= 2) return `${local[0]}***${domain}`
+  return `${local[0]}***${local[local.length - 1]}${domain}`
+}
+
 export default function ForgotPasswordPage({ onBack }) {
   const [username, setUsername] = useState('')
   const [submitting, setSubmitting] = useState(false)
@@ -45,7 +55,7 @@ export default function ForgotPasswordPage({ onBack }) {
         <h1 className="auth-brand-title">비밀번호 재설정</h1>
         <p className="auth-brand-subtitle">
           {sentToEmail
-            ? `${sentToEmail}로 재설정 메일을 보냈습니다. 메일함에서 링크를 눌러 새 비밀번호를 설정해주세요.`
+            ? `${maskEmail(sentToEmail)}로 재설정 메일을 보냈습니다. 메일함에서 링크를 눌러 새 비밀번호를 설정해주세요.`
             : '가입 시 등록한 아이디를 입력하면, 등록된 이메일로 재설정 링크를 보내드립니다.'}
         </p>
       </div>

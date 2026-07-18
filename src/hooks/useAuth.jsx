@@ -5,7 +5,7 @@ import {
   EmailAuthProvider, reauthenticateWithCredential, updatePassword, verifyBeforeUpdateEmail,
 } from 'firebase/auth'
 import {
-  doc, getDoc, setDoc, updateDoc, onSnapshot, serverTimestamp,
+  doc, getDoc, setDoc, updateDoc, deleteField, onSnapshot, serverTimestamp,
   collection, query, where, limit, getDocs,
 } from 'firebase/firestore'
 import { auth, db } from '../firebase.js'
@@ -142,6 +142,7 @@ export function AuthProvider({ children }) {
     const normalizedIdentifier = identifier.trim().toLowerCase()
 
     let email
+    let lookupDoc = null
     if (normalizedIdentifier.includes('@')) {
       // 입력값이 이메일 형식이면 아이디 조회 없이 그대로 로그인 시도한다.
       // Firestore의 email 필드가 실제 Auth 이메일과 어긋난 경우(자가치유 실패 등)의
@@ -156,8 +157,8 @@ export function AuthProvider({ children }) {
         const q = query(collection(db, 'users'), where('username', '==', normalizedIdentifier), limit(1))
         const snap = await getDocs(q)
         if (!snap.empty) {
-          const data = snap.docs[0].data()
-          if (!isFakeEmail(data.email)) email = data.email
+          lookupDoc = { id: snap.docs[0].id, data: snap.docs[0].data() }
+          if (!isFakeEmail(lookupDoc.data.email)) email = lookupDoc.data.email
         }
       } catch (err) {
         console.error('Email lookup for login failed, falling back to pseudo-email:', err)
@@ -168,7 +169,27 @@ export function AuthProvider({ children }) {
     try {
       cred = await signInWithEmailAndPassword(auth, email, password)
     } catch (err) {
-      throw new Error(authErrorMessage(err))
+      // 1차 시도 실패 시, Firestore에 pendingEmail(인증 메일은 보냈지만 아직 확인 링크를
+      // 클릭했는지 이 세션은 알 수 없는 새 이메일)이 있으면 그걸로 2차 시도한다.
+      // verifyBeforeUpdateEmail 확정 시 Firebase가 기존 세션을 revoke해서 자가치유(email
+      // 필드 동기화)가 실행될 기회를 못 얻는 경우의 복구 경로 — pendingEmail은 인증 메일을
+      // 보내는 시점에 미리 기록해두므로 세션 revoke 여부와 무관하게 항상 조회 가능하다.
+      const pendingEmail = lookupDoc?.data?.pendingEmail
+      if (pendingEmail && (err.code === 'auth/user-not-found' || err.code === 'auth/invalid-credential')) {
+        try {
+          cred = await signInWithEmailAndPassword(auth, pendingEmail, password)
+        } catch {
+          throw new Error(authErrorMessage(err))
+        }
+        try {
+          await updateDoc(doc(db, 'users', lookupDoc.id), { email: pendingEmail, pendingEmail: deleteField() })
+        } catch (promoteErr) {
+          console.error('pendingEmail 승격 실패:', promoteErr)
+          // 로그인 자체는 성공했으므로 다음 로그인 때 다시 승격을 시도하면 되어 흐름을 막지 않음
+        }
+      } else {
+        throw new Error(authErrorMessage(err))
+      }
     }
 
     // 거절됐던 사용자가 다시 로그인하면 재승인 요청이 가도록 자동으로 대기 상태로 되돌림
@@ -222,9 +243,24 @@ export function AuthProvider({ children }) {
       }
       throw new Error('인증에 실패했습니다. 다시 시도해주세요.')
     }
+    const normalizedNewEmail = newEmail.trim()
+    const userRef = doc(db, 'users', auth.currentUser.uid)
+
+    // 인증 링크를 클릭하는 순간 Firebase가 기존 세션을 revoke할 수 있어, 그 세션에 의존하는
+    // 자가치유(onSnapshot 내 email 동기화)가 실행될 기회를 놓칠 수 있다. verifyBeforeUpdateEmail을
+    // 호출하기 전에 미리 pendingEmail로 기록해두면, 세션 revoke 여부와 무관하게 다음 로그인 시
+    // login()의 2차 시도 경로가 이 값을 찾아 로그인을 성공시키고 email로 승격할 수 있다.
     try {
-      await verifyBeforeUpdateEmail(auth.currentUser, newEmail.trim())
+      await updateDoc(userRef, { pendingEmail: normalizedNewEmail })
     } catch (err) {
+      console.error('pendingEmail 기록 실패:', err)
+      throw new Error('이메일 등록에 실패했습니다. 다시 시도해주세요.')
+    }
+
+    try {
+      await verifyBeforeUpdateEmail(auth.currentUser, normalizedNewEmail)
+    } catch (err) {
+      await updateDoc(userRef, { pendingEmail: deleteField() }).catch(() => {})
       if (err.code === 'auth/email-already-in-use') throw new Error('이미 사용 중인 이메일입니다.')
       if (err.code === 'auth/invalid-email') throw new Error('올바른 이메일 형식이 아닙니다.')
       throw new Error('이메일 등록에 실패했습니다.')

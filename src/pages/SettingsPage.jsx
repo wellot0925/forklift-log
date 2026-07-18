@@ -22,7 +22,7 @@ export default function SettingsPage() {
   const { toast } = useToast()
   const { password: adminPassword, changePassword: changeDeleteLockPassword } = useAdminSettings()
   const { user, profile, logout, changePassword: changeAccountPassword, registerRecoveryEmail, hasRecoveryEmail } = useAuth()
-  const { isAdmin, pendingUsers, approvedUsers, approve, reject, promote, revoke } = useUsers()
+  const { isAdmin, pendingUsers, approvedUsers, approve, reject, promote, demote, revoke } = useUsers()
   const [authorName, setAuthorName] = useState(getAuthor)
   const [printing, setPrinting] = useState(false)
   const [pwOpen, setPwOpen] = useState(false)
@@ -75,6 +75,13 @@ export default function SettingsPage() {
     setUserActionId(uid)
     try { await promote(uid); toast('관리자로 지정했습니다.', 'success') }
     catch (err) { console.error('Promote error:', err); toast('관리자 지정에 실패했습니다.', 'error') }
+    finally { setUserActionId(null) }
+  }
+  const handleDemote = async (uid, name) => {
+    if (!window.confirm(`${name}님의 관리자 권한을 해제하시겠습니까?`)) return
+    setUserActionId(uid)
+    try { await demote(uid); toast('관리자 권한을 해제했습니다.', 'info') }
+    catch (err) { console.error('Demote error:', err); toast('관리자 해제에 실패했습니다.', 'error') }
     finally { setUserActionId(null) }
   }
   const handleRevoke = async (uid, name) => {
@@ -196,7 +203,7 @@ export default function SettingsPage() {
               <div className="settings-item-icon icon-red"><LockIcon /></div>
               <div className="settings-item-content">
                 <div className="settings-item-title">삭제잠금 비밀번호 변경</div>
-                <div className="settings-item-subtitle" style={{ color: 'var(--text-placeholder)' }}>초기 비밀번호 1122</div>
+                <div className="settings-item-subtitle" style={{ color: 'var(--text-placeholder)' }}>작업일지 삭제 시 사용하는 비밀번호</div>
               </div>
               <div className="settings-item-right">
                 <ChevronIcon style={{ transform: pwOpen ? 'rotate(90deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }} />
@@ -296,12 +303,18 @@ export default function SettingsPage() {
                   </div>
                   {u.id !== user?.uid && (
                     <div className="settings-item-right" style={{ gap: 6 }}>
-                      {u.role !== 'admin' && (
+                      {u.role !== 'admin' ? (
                         <button
                           style={{ ...miniBtn, background: 'var(--bg-input)', color: 'var(--text-primary)', opacity: userActionId === u.id ? 0.6 : 1 }}
                           disabled={userActionId === u.id}
                           onClick={() => handlePromote(u.id, u.name)}
                         >관리자로 지정</button>
+                      ) : (
+                        <button
+                          style={{ ...miniBtn, background: 'var(--bg-input)', color: 'var(--text-primary)', opacity: userActionId === u.id ? 0.6 : 1 }}
+                          disabled={userActionId === u.id}
+                          onClick={() => handleDemote(u.id, u.name)}
+                        >관리자 해제</button>
                       )}
                       <button
                         style={{ ...miniBtn, background: 'var(--danger-dim)', color: 'var(--danger)', opacity: userActionId === u.id ? 0.6 : 1 }}

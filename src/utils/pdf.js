@@ -5,15 +5,28 @@ const fmtDate = iso => {
   return `${d.getFullYear()}.${pad(d.getMonth() + 1)}.${pad(d.getDate())}`
 }
 
+// 사용자가 입력한 텍스트를 innerHTML 성격의 문자열에 그대로 꽂아 넣으면 <script> 등이
+// 실행될 수 있어(인쇄 미리보기 창은 이 앱과 같은 오리진에서 열림), 모든 사용자 입력
+// 필드에 적용해 HTML 특수문자를 이스케이프한다.
+function escapeHtml(str) {
+  if (str == null) return ''
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
 function buildRecordBlock(r) {
   const photos = r.photoUrls ?? r.photos ?? []
   const photoHtml = photos.length > 0
-    ? `<div class="photos">${photos.map(src => `<img src="${src}" alt="사진">`).join('')}</div>`
+    ? `<div class="photos">${photos.map(src => `<img src="${escapeHtml(src)}" alt="사진">`).join('')}</div>`
     : ''
 
   const parts = []
-  if (r.author) parts.push(`작성: ${r.author} ${fmtDate(r.createdAt)}`)
-  if (r.modifiedBy) parts.push(`수정: ${r.modifiedBy} ${fmtDate(r.updatedAt)}`)
+  if (r.author) parts.push(`작성: ${escapeHtml(r.author)} ${fmtDate(r.createdAt)}`)
+  if (r.modifiedBy) parts.push(`수정: ${escapeHtml(r.modifiedBy)} ${fmtDate(r.updatedAt)}`)
   const metaLine = parts.length > 0
     ? `<div class="meta">${parts.join('&nbsp;&nbsp;/&nbsp;&nbsp;')}</div>`
     : ''
@@ -21,13 +34,13 @@ function buildRecordBlock(r) {
   return `
     <div class="record">
       <div class="record-header">
-        <span class="model">${r.model || ''}</span>
+        <span class="model">${escapeHtml(r.model)}</span>
         ${r.unresolved ? '<span class="unresolved-badge">미해결</span>' : ''}
       </div>
       ${metaLine}
-      <div class="section"><span class="label">증상</span><div class="text">${r.symptoms || ''}</div></div>
-      ${r.cause    ? `<div class="section"><span class="label">원인</span><div class="text">${r.cause}</div></div>` : ''}
-      ${r.solution ? `<div class="section solved"><span class="label">해결방법</span><div class="text">${r.solution}</div></div>` : ''}
+      <div class="section"><span class="label">증상</span><div class="text">${escapeHtml(r.symptoms)}</div></div>
+      ${r.cause    ? `<div class="section"><span class="label">원인</span><div class="text">${escapeHtml(r.cause)}</div></div>` : ''}
+      ${r.solution ? `<div class="section solved"><span class="label">해결방법</span><div class="text">${escapeHtml(r.solution)}</div></div>` : ''}
       ${photoHtml}
     </div>`
 }
@@ -35,13 +48,13 @@ function buildRecordBlock(r) {
 function buildTipBlock(t) {
   const photos = t.photoUrls ?? t.photos ?? []
   const photoHtml = photos.length > 0
-    ? `<div class="photos">${photos.map(src => `<img src="${src}" alt="사진">`).join('')}</div>`
+    ? `<div class="photos">${photos.map(src => `<img src="${escapeHtml(src)}" alt="사진">`).join('')}</div>`
     : ''
   return `
     <div class="record">
-      ${t.title ? `<div class="record-header"><span class="model">${t.title}</span></div>` : ''}
+      ${t.title ? `<div class="record-header"><span class="model">${escapeHtml(t.title)}</span></div>` : ''}
       <div class="meta">${fmtDate(t.createdAt)}</div>
-      ${t.content ? `<div class="section"><div class="text" style="white-space:pre-wrap">${t.content}</div></div>` : ''}
+      ${t.content ? `<div class="section"><div class="text" style="white-space:pre-wrap">${escapeHtml(t.content)}</div></div>` : ''}
       ${photoHtml}
     </div>`
 }
@@ -88,9 +101,27 @@ function openPrintWindow(pageTitle, titleLine, bodyHtml) {
   ${bodyHtml}
   <div class="footer">용인중공업 · 나만의 정비수첩 · 본 내용은 참고용 자료입니다</div>
   <script>
-    // 폰트 로드 후 인쇄 (최대 3초 대기)
-    var t = setTimeout(function(){ window.print() }, 2800)
-    document.fonts.ready.then(function(){ clearTimeout(t); window.print() })
+    // 폰트와 이미지(사진 첨부) 로드를 기다린 뒤 인쇄한다. 사진이 아직 안 뜬 채로 인쇄되면
+    // 빈 이미지로 출력되는 문제를 막기 위함 — 이미지 로드는 최대 10초, 전체는 안전장치로
+    // 최대 13초까지만 기다리고 그 이후엔 무조건 인쇄를 진행한다.
+    var printed = false
+    function doPrint() { if (!printed) { printed = true; window.print() } }
+    function waitImages(timeoutMs) {
+      var pending = Array.prototype.filter.call(document.images, function(img) { return !img.complete })
+      if (pending.length === 0) return Promise.resolve()
+      var loaded = pending.map(function(img) {
+        return new Promise(function(resolve) {
+          img.addEventListener('load', resolve)
+          img.addEventListener('error', resolve)
+        })
+      })
+      return Promise.race([
+        Promise.all(loaded),
+        new Promise(function(resolve) { setTimeout(resolve, timeoutMs) }),
+      ])
+    }
+    document.fonts.ready.then(function() { waitImages(10000).then(doPrint) })
+    setTimeout(doPrint, 13000)
   </script>
 </body>
 </html>`
@@ -106,8 +137,8 @@ function openPrintWindow(pageTitle, titleLine, bodyHtml) {
 
 export function printRecord(record) {
   openPrintWindow(
-    `작업일지 - ${record.model}`,
-    `${record.model} 작업일지 · ${fmtDate(record.createdAt)}`,
+    `작업일지 - ${escapeHtml(record.model)}`,
+    `${escapeHtml(record.model)} 작업일지 · ${fmtDate(record.createdAt)}`,
     buildRecordBlock(record),
   )
 }
@@ -123,7 +154,7 @@ export function printAllRecords(records) {
 
 export function printTip(tip) {
   openPrintWindow(
-    `정비팁 - ${tip.title || fmtDate(tip.createdAt)}`,
+    `정비팁 - ${escapeHtml(tip.title) || fmtDate(tip.createdAt)}`,
     `정비팁 · ${fmtDate(tip.createdAt)}`,
     buildTipBlock(tip),
   )
