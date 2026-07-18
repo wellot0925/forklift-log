@@ -46,6 +46,12 @@ function AuthGate({ children }) {
   const { user, profile, loading } = useAuth()
   const [authView, setAuthView] = useState('login')
 
+  // 로그아웃(또는 세션 만료 등으로 로그인 상태가 사라짐)하면, 로그아웃 전에
+  // 회원가입/비밀번호 찾기 화면을 보고 있었더라도 항상 로그인 화면으로 되돌아온다.
+  useEffect(() => {
+    if (!loading && !user) setAuthView('login')
+  }, [user, loading])
+
   if (loading) return <FullScreenLoader />
 
   if (!user) {
