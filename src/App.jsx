@@ -24,6 +24,7 @@ import TipPage from './pages/TipPage.jsx'
 import TipDetailPage from './pages/TipDetailPage.jsx'
 import TipWritePage from './pages/TipWritePage.jsx'
 import SettingsPage from './pages/SettingsPage.jsx'
+import MyInfoPage from './pages/MyInfoPage.jsx'
 import BulletinPage from './pages/BulletinPage.jsx'
 
 function ScrollToTop() {
@@ -93,6 +94,7 @@ function AppRoutes() {
           <Route path="/tip/:id"    element={<TipDetailPage />} />
           <Route path="/bulletins"  element={<BulletinPage />} />
           <Route path="/settings"   element={<SettingsPage />} />
+          <Route path="/my-info"    element={<MyInfoPage />} />
         </Routes>
       </main>
       <TabBar />

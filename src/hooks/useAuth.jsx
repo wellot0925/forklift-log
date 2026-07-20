@@ -209,6 +209,20 @@ export function AuthProvider({ children }) {
 
   const logout = useCallback(() => signOut(auth), [])
 
+  // 가입 시 입력한 이름을 나중에 바꾸는 용도. Auth의 displayName과 Firestore의 name 필드를
+  // 함께 갱신해야 관리자 승인 목록 등 Firestore 기반 화면에 옛 이름이 남지 않는다.
+  const changeName = useCallback(async newName => {
+    const trimmed = newName.trim()
+    if (!trimmed) throw new Error('이름을 입력해주세요.')
+    try {
+      await updateProfile(auth.currentUser, { displayName: trimmed })
+      await updateDoc(doc(db, 'users', auth.currentUser.uid), { name: trimmed })
+    } catch (err) {
+      console.error('이름 변경 실패:', err)
+      throw new Error('이름 변경에 실패했습니다. 다시 시도해주세요.')
+    }
+  }, [])
+
   // 현재 비밀번호를 아는 상태에서 자유롭게 바꾸는 용도. Firebase는 민감한 Auth 작업 전
   // 최근 로그인(재인증)을 요구하므로 먼저 재인증한다.
   const changePassword = useCallback(async (currentPassword, newPassword) => {
@@ -273,7 +287,7 @@ export function AuthProvider({ children }) {
   return (
     <Ctx.Provider value={{
       user, profile, loading, signup, login, logout,
-      changePassword, registerRecoveryEmail, hasRecoveryEmail,
+      changeName, changePassword, registerRecoveryEmail, hasRecoveryEmail,
     }}>
       {children}
     </Ctx.Provider>

@@ -36,15 +36,16 @@ service cloud.firestore {
         && request.resource.data.name is string;
       // 관리자는 자유롭게 수정 가능. 그 외엔 본인만, 그것도 아래 두 좁은 경우만 허용:
       // ① 거절(rejected)당한 본인이 로그인 시 재승인 요청을 위해 status를 pending으로만 되돌림
-      // ② 비밀번호 찾기용 이메일 등록/자가치유 동기화/pendingEmail 승격 — email, pendingEmail
-      //    필드만 바꿀 수 있음 (registerRecoveryEmail의 pendingEmail 기록과, login()의 2차
-      //    시도 성공 시 pendingEmail -> email 승격이 이 규칙으로 커버됨)
+      // ② 비밀번호 찾기용 이메일 등록/자가치유 동기화/pendingEmail 승격/이름 변경 — email,
+      //    pendingEmail, name 필드만 바꿀 수 있음 (registerRecoveryEmail의 pendingEmail 기록,
+      //    login()의 2차 시도 성공 시 pendingEmail -> email 승격, changeName의 name 갱신이
+      //    이 규칙으로 커버됨)
       allow update: if isAdmin() || (
         isSignedIn() && request.auth.uid == userId && (
           (resource.data.status == 'rejected' &&
             request.resource.data.status == 'pending' &&
             request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status'])) ||
-          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['email', 'pendingEmail'])
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['email', 'pendingEmail', 'name'])
         )
       );
       allow delete: if false;

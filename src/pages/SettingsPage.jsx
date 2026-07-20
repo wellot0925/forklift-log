@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useRecords } from '../hooks/useRecords.jsx'
 import { useTheme } from '../hooks/useTheme.jsx'
 import { useToast } from '../hooks/useToast.jsx'
@@ -17,11 +17,12 @@ const miniBtn = {
 }
 
 export default function SettingsPage() {
+  const nav = useNavigate()
   const { records } = useRecords()
   const { toggle, isDark } = useTheme()
   const { toast } = useToast()
   const { password: adminPassword, changePassword: changeDeleteLockPassword } = useAdminSettings()
-  const { user, profile, logout, changePassword: changeAccountPassword, registerRecoveryEmail, hasRecoveryEmail } = useAuth()
+  const { user, profile, logout, changePassword: changeAccountPassword } = useAuth()
   const { isAdmin, pendingUsers, approvedUsers, approve, reject, promote, demote, revoke } = useUsers()
   const [authorName, setAuthorName] = useState(getAuthor)
   const [printing, setPrinting] = useState(false)
@@ -41,13 +42,6 @@ export default function SettingsPage() {
   const [acctNewPw2, setAcctNewPw2] = useState('')
   const [acctPwErr, setAcctPwErr] = useState('')
   const [acctPwSaving, setAcctPwSaving] = useState(false)
-
-  const [emailOpen, setEmailOpen] = useState(false)
-  const [emailCurPw, setEmailCurPw] = useState('')
-  const [emailNew, setEmailNew] = useState('')
-  const [emailErr, setEmailErr] = useState('')
-  const [emailSaving, setEmailSaving] = useState(false)
-  const [emailSent, setEmailSent] = useState('')
 
   useEffect(() => {
     if (location.state?.scrollToPending) {
@@ -121,20 +115,6 @@ export default function SettingsPage() {
       setAcctPwErr(err.message)
     } finally {
       setAcctPwSaving(false)
-    }
-  }
-
-  const handleRegisterEmail = async () => {
-    if (!emailNew.trim()) { setEmailErr('이메일을 입력해주세요.'); return }
-    setEmailSaving(true)
-    try {
-      await registerRecoveryEmail(emailCurPw, emailNew.trim())
-      setEmailSent(emailNew.trim())
-      toast('인증 메일을 보냈습니다.', 'success')
-    } catch (err) {
-      setEmailErr(err.message)
-    } finally {
-      setEmailSaving(false)
     }
   }
 
@@ -376,6 +356,18 @@ export default function SettingsPage() {
               <div className="settings-item-subtitle">@{profile?.username}{isAdmin ? ' · 관리자' : ''}</div>
             </div>
           </div>
+          {/* 내 정보 수정 */}
+          <div className="settings-item" onClick={() => nav('/my-info')}>
+            <div className="settings-item-icon icon-blue"><PersonIcon /></div>
+            <div className="settings-item-content">
+              <div className="settings-item-title">내 정보 수정</div>
+              <div className="settings-item-subtitle">이름, 이메일 변경</div>
+            </div>
+            <div className="settings-item-right">
+              <ChevronIcon />
+            </div>
+          </div>
+
           {/* 계정 비밀번호 변경 */}
           <div
             className="settings-item"
@@ -425,60 +417,6 @@ export default function SettingsPage() {
             )}
           </div>
 
-          {/* 비밀번호 찾기용 이메일 등록 */}
-          <div
-            className="settings-item"
-            style={{ cursor: 'pointer', flexDirection: 'column', alignItems: 'stretch', gap: 0 }}
-            onClick={() => { setEmailOpen(o => !o); setEmailErr('') }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-              <div className="settings-item-icon icon-blue"><MailIcon /></div>
-              <div className="settings-item-content">
-                <div className="settings-item-title">비밀번호 찾기용 이메일</div>
-                <div className="settings-item-subtitle">
-                  {hasRecoveryEmail ? `등록됨: ${profile.email}` : '등록된 이메일이 없습니다'}
-                </div>
-              </div>
-              <div className="settings-item-right">
-                <ChevronIcon style={{ transform: emailOpen ? 'rotate(90deg)' : 'rotate(0deg)', transition: 'transform 0.2s' }} />
-              </div>
-            </div>
-            {emailOpen && (
-              <div style={{ marginTop: 14, marginLeft: 50, display: 'flex', flexDirection: 'column', gap: 8 }}
-                onClick={e => e.stopPropagation()}>
-                {emailSent ? (
-                  <p style={{ margin: 0, fontSize: 13, color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                    {emailSent}로 인증 메일을 보냈습니다. 메일함에서 링크를 확인해주세요. 인증을 완료하면 다음 로그인부터 자동으로 반영됩니다.
-                  </p>
-                ) : (
-                  <>
-                    <input
-                      type="password" placeholder="현재 비밀번호"
-                      value={emailCurPw} autoFocus
-                      onChange={e => { setEmailCurPw(e.target.value); setEmailErr('') }}
-                      className="form-input" style={{ margin: 0 }}
-                    />
-                    <input
-                      type="email" placeholder="실제 이메일"
-                      value={emailNew}
-                      onChange={e => { setEmailNew(e.target.value); setEmailErr('') }}
-                      onKeyDown={e => e.key === 'Enter' && handleRegisterEmail()}
-                      className="form-input" style={{ margin: 0 }}
-                    />
-                    {emailErr && <p style={{ margin: 0, fontSize: 12, color: 'var(--danger)' }}>{emailErr}</p>}
-                    <button
-                      onClick={handleRegisterEmail}
-                      disabled={emailSaving}
-                      className="btn-cta" style={{ marginTop: 4, opacity: emailSaving ? 0.6 : 1 }}
-                    >
-                      {emailSaving ? <Spinner size="sm" white /> : '인증 메일 보내기'}
-                    </button>
-                  </>
-                )}
-              </div>
-            )}
-          </div>
-
           <div className="settings-item" onClick={logout}>
             <div className="settings-item-icon icon-red"><LogoutIcon /></div>
             <div className="settings-item-content">
@@ -524,11 +462,6 @@ function CloudIcon() {
 function ChevronIcon()  {
   return <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" width={16} height={16}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M9 18l6-6-6-6"/>
-  </svg>
-}
-function MailIcon() {
-  return <svg fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" width={18} height={18} color="white">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
   </svg>
 }
 function LogoutIcon() {
