@@ -40,7 +40,7 @@ export function RecordsProvider({ children }) {
 
   const add = useCallback(async (data) => {
     const docRef = doc(collection(db, COL))
-    const photoUrls = await processPhotos(data.photos ?? [], `photos/records/${docRef.id}`)
+    const { photoUrls, failedCount } = await processPhotos(data.photos ?? [], `photos/records/${docRef.id}`)
     await setDoc(docRef, {
       model:      data.model?.trim()    ?? '',
       symptoms:   data.symptoms?.trim() ?? '',
@@ -53,7 +53,7 @@ export function RecordsProvider({ children }) {
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     })
-    return { id: docRef.id }
+    return { id: docRef.id, failedPhotoCount: failedCount }
   }, [])
 
   // 수정: author 필드는 건드리지 않고 modifiedBy만 업데이트
@@ -61,7 +61,7 @@ export function RecordsProvider({ children }) {
     const docRef = doc(db, COL, id)
     const prevSnap = await getDoc(docRef)
     const prevPhotoUrls = prevSnap.exists() ? (prevSnap.data().photoUrls ?? []) : []
-    const photoUrls = await processPhotos(data.photos ?? [], `photos/records/${id}`)
+    const { photoUrls, failedCount } = await processPhotos(data.photos ?? [], `photos/records/${id}`)
     await updateDoc(docRef, {
       model:      data.model?.trim()    ?? '',
       symptoms:   data.symptoms?.trim() ?? '',
@@ -74,7 +74,7 @@ export function RecordsProvider({ children }) {
     })
     const removed = prevPhotoUrls.filter(u => !photoUrls.includes(u))
     if (removed.length) await deletePhotos(removed)
-    return { id }
+    return { id, failedPhotoCount: failedCount }
   }, [])
 
   const remove = useCallback(async (id) => {

@@ -40,7 +40,7 @@ export function TipsProvider({ children }) {
 
   const add = useCallback(async (data) => {
     const docRef = doc(collection(db, COL))
-    const photoUrls = await processPhotos(data.photos ?? [], `photos/tips/${docRef.id}`)
+    const { photoUrls, failedCount } = await processPhotos(data.photos ?? [], `photos/tips/${docRef.id}`)
     await setDoc(docRef, {
       title:      data.title?.trim()   ?? '',
       content:    data.content?.trim() ?? '',
@@ -50,7 +50,7 @@ export function TipsProvider({ children }) {
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     })
-    return { id: docRef.id }
+    return { id: docRef.id, failedPhotoCount: failedCount }
   }, [])
 
   // 수정: author 필드는 건드리지 않고 modifiedBy만 업데이트
@@ -58,7 +58,7 @@ export function TipsProvider({ children }) {
     const docRef = doc(db, COL, id)
     const prevSnap = await getDoc(docRef)
     const prevPhotoUrls = prevSnap.exists() ? (prevSnap.data().photoUrls ?? []) : []
-    const photoUrls = await processPhotos(data.photos ?? [], `photos/tips/${id}`)
+    const { photoUrls, failedCount } = await processPhotos(data.photos ?? [], `photos/tips/${id}`)
     await updateDoc(docRef, {
       title:      data.title?.trim()   ?? '',
       content:    data.content?.trim() ?? '',
@@ -68,7 +68,7 @@ export function TipsProvider({ children }) {
     })
     const removed = prevPhotoUrls.filter(u => !photoUrls.includes(u))
     if (removed.length) await deletePhotos(removed)
-    return { id }
+    return { id, failedPhotoCount: failedCount }
   }, [])
 
   const remove = useCallback(async (id) => {

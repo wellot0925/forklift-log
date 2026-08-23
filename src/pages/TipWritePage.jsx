@@ -37,16 +37,25 @@ export default function TipWritePage() {
     if (form.author.trim()) saveAuthor(form.author)
     try {
       if (isEdit) {
-        await update(id, form)
-        toast('팁이 수정되었습니다.', 'success')
+        const r = await update(id, form)
+        if (r.failedPhotoCount) {
+          toast(`팁은 수정됐지만 사진 ${r.failedPhotoCount}장은 업로드에 실패했습니다. 나중에 다시 첨부해주세요.`, 'info', 4500)
+        } else {
+          toast('팁이 수정되었습니다.', 'success')
+        }
         nav(`/tip/${id}`, { replace: true })
       } else {
         const r = await add(form)
-        toast('팁이 저장되었습니다! 💡', 'success')
+        if (r.failedPhotoCount) {
+          toast(`팁은 저장됐지만 사진 ${r.failedPhotoCount}장은 업로드에 실패했습니다. 나중에 다시 첨부해주세요.`, 'info', 4500)
+        } else {
+          toast('팁이 저장되었습니다! 💡', 'success')
+        }
         nav(`/tip/${r.id}`, { replace: true })
       }
-    } catch {
-      toast('저장에 실패했습니다. 네트워크를 확인해주세요.', 'error')
+    } catch (err) {
+      console.error('Tip save error:', err)
+      toast(`저장에 실패했습니다${err?.code ? ` (${err.code})` : ''}. 다시 시도해주세요.`, 'error')
       setSaving(false)
     }
   }
