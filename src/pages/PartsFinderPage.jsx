@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import Header from '../components/Header.jsx'
 import Spinner from '../components/Spinner.jsx'
 import { buildGpesSearchUrl, GPES_HOME_URL } from '../utils/gpes.js'
-import { loadModelCategories, searchCategoryItems, getModelCoverage } from '../utils/categoryMap.js'
+import { loadModelCategories, searchCategoryItems, getModelCoverage, normalizeModelName } from '../utils/categoryMap.js'
 import { ALL_MODELS } from '../data/models.js'
 
 function openGpesSearch(keyword) {
@@ -168,7 +168,14 @@ function CategoryBrowseCard() {
   const selectModel = (modelName, coverage) => {
     setKeyword('')
     if (coverage?.status === 'category') {
-      setSelected({ modelName, hasMap: true, modelSfx: coverage.modelSfx })
+      // 같은 카테고리 지도 파일을 공유하는, 이 앱 카탈로그에 실제 있는 다른 모델들만 골라서
+      // 안내에 쓴다 (파일명에 섞인 "PLUS"/"ENTRY" 같은 접미사 토큰이나 GPES 코드는 제외).
+      // 표시는 파일명 원본 토큰이 아니라 이 앱의 하이픈 포함 정식 모델명으로 통일한다.
+      const siblings = (coverage.siblingModels ?? [])
+        .filter(n => normalizeModelName(n) !== normalizeModelName(modelName))
+        .map(n => ALL_MODELS.find(m => normalizeModelName(m) === normalizeModelName(n)))
+        .filter(Boolean)
+      setSelected({ modelName, hasMap: true, modelSfx: coverage.modelSfx, siblings })
     } else {
       setSelected({ modelName, hasMap: false })
     }
@@ -182,18 +189,27 @@ function CategoryBrowseCard() {
       desc="정확한 부품명을 모를 때, 모델별 부품 구조도에서 항목을 찾아 그 이름으로 검색합니다."
     >
       {selected ? (
-        <button
-          type="button"
-          onClick={() => { setSelected(null); setQuery('') }}
-          style={{
-            display: 'inline-flex', alignItems: 'center', gap: 6,
-            padding: '7px 12px', borderRadius: 20, marginBottom: 12,
-            background: 'var(--primary)', color: '#fff', border: 'none',
-            fontSize: 13, fontWeight: 700, cursor: 'pointer',
-          }}
-        >
-          {selected.modelName} <span style={{ opacity: 0.85, fontWeight: 500 }}>변경</span>
-        </button>
+        <>
+          <button
+            type="button"
+            onClick={() => { setSelected(null); setQuery('') }}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 6,
+              padding: '7px 12px', borderRadius: 20, marginBottom: 8,
+              background: 'var(--primary)', color: '#fff', border: 'none',
+              fontSize: 13, fontWeight: 700, cursor: 'pointer',
+            }}
+          >
+            {selected.modelName} <span style={{ opacity: 0.85, fontWeight: 500 }}>변경</span>
+          </button>
+
+          {selected.hasMap && selected.siblings?.length > 0 && (
+            <p style={{ margin: '0 0 12px', fontSize: 12.5, color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+              이 부품 지도는 <b>{selected.modelName}</b>와 <b>{selected.siblings.join(', ')}</b>가 같은 파츠북을
+              공유해서, 검색 결과에 이 모델들의 항목이 함께 나올 수 있어요.
+            </p>
+          )}
+        </>
       ) : (
         <>
           <input

@@ -129,13 +129,19 @@ function getCoverageMap() {
 }
 
 // forklift-parts-finder의 getModelCoverage와 같은 방식(ERP 쪽만 이 앱엔 없음).
-// 반환값: { status: "category"|"none", modelSfx? }
+// 반환값: { status: "category"|"none", modelSfx?, siblingModels? }
+// siblingModels: 이 modelSfx(=구글드라이브 파일 하나)를 같이 쓰는 파일명 원본 토큰들.
+// 두산 파츠북이 기계적으로 거의 동일한 형제 모델(톤수/스펙만 다름)을 한 "전체구조.json"
+// 파일 하나로 묶어서 제공하기 때문에, 한 파일 안의 카테고리 항목은 그 형제 모델들이
+// 전부 공유한다 — 검색 결과에 "다른 모델" 항목처럼 보이는 게 이 때문이며 버그가 아니다.
 export async function getModelCoverage(modelName) {
   const norm = normalizeModelName(modelName)
   if (!norm) return { status: 'none' }
   const map = await getCoverageMap()
   const modelSfx = map.get(norm)
-  if (modelSfx) return { status: 'category', modelSfx }
+  if (modelSfx) {
+    return { status: 'category', modelSfx, siblingModels: categoryMapFiles[modelSfx]?.modelNames ?? [] }
+  }
   return { status: 'none' }
 }
 
