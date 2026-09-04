@@ -144,6 +144,51 @@ function ModelBadgeList({ models, coverageMap, coverageLoading, onSelect }) {
   )
 }
 
+// 도면번호/도면명/그룹명을 크게 보여주는 상세 카드. GPES 이름검색(PART_NM)은 모델과 무관하게
+// 전체 카탈로그를 다 뒤지는 구조라, 이미 모델을 선택한 상태에서 그리로 보내면 오히려 혼란스럽다.
+// 그래서 여기서는 지도 JSON에 이미 있는 정보(OPTN_ID/OPTN_DESCRIPTION/CV_DESCRIPTION)를
+// 앱 안에서 바로 보여주고, GPES 검색은 사용자가 그 번호로 직접 하도록 안내만 한다.
+function ItemDetailCard({ item, onBack }) {
+  return (
+    <div style={{
+      border: '1px solid var(--border)', borderRadius: 12, padding: 14,
+      background: 'var(--bg-secondary, #f2f2f2)',
+    }}>
+      <button
+        type="button" onClick={onBack}
+        style={{
+          background: 'none', border: 'none', padding: 0, marginBottom: 10,
+          color: 'var(--primary)', fontSize: 13, fontWeight: 700, cursor: 'pointer',
+        }}
+      >
+        ← 검색 결과로
+      </button>
+
+      <DetailRow label="도면번호" value={item.optnId} big />
+      <DetailRow label="도면명" value={item.ko || '-'} />
+      <DetailRow label="카테고리" value={item.en || '-'} />
+
+      <p style={{
+        margin: '12px 0 0', fontSize: 13, color: '#6b4e00', lineHeight: 1.5,
+        background: '#fff8e1', border: '1px solid #ffe0a3', borderRadius: 10, padding: '10px 12px',
+      }}>
+        이 번호로 GPES에서 직접 찾아보세요.
+      </p>
+    </div>
+  )
+}
+
+function DetailRow({ label, value, big }) {
+  return (
+    <div style={{ marginBottom: 8 }}>
+      <p style={{ margin: '0 0 2px', fontSize: 12, color: 'var(--text-secondary)', fontWeight: 600 }}>{label}</p>
+      <p style={{ margin: 0, fontSize: big ? 20 : 15, fontWeight: 700, color: 'var(--text-primary)', wordBreak: 'break-all' }}>
+        {value}
+      </p>
+    </div>
+  )
+}
+
 function CategoryBrowseCard() {
   const [selected, setSelected] = useState(null) // { modelName, hasMap, modelSfx? } | null
   const { query, setQuery, needle, matches, coverageMap, coverageLoading, coverageError } = useModelCoverageSearch()
@@ -152,6 +197,7 @@ function CategoryBrowseCard() {
   const [itemsLoading, setItemsLoading] = useState(false)
   const [itemsError, setItemsError] = useState('')
   const [keyword, setKeyword] = useState('')
+  const [detail, setDetail] = useState(null) // 클릭한 검색 결과 항목 | null
 
   useEffect(() => {
     if (!selected?.hasMap) { setItems(null); setItemsError(''); return }
@@ -167,6 +213,7 @@ function CategoryBrowseCard() {
 
   const selectModel = (modelName, coverage) => {
     setKeyword('')
+    setDetail(null)
     if (coverage?.status === 'category') {
       // 같은 카테고리 지도 파일을 공유하는, 이 앱 카탈로그에 실제 있는 다른 모델들만 골라서
       // 안내에 쓴다 (파일명에 섞인 "PLUS"/"ENTRY" 같은 접미사 토큰이나 GPES 코드는 제외).
@@ -192,7 +239,7 @@ function CategoryBrowseCard() {
         <>
           <button
             type="button"
-            onClick={() => { setSelected(null); setQuery('') }}
+            onClick={() => { setSelected(null); setQuery(''); setDetail(null) }}
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 6,
               padding: '7px 12px', borderRadius: 20, marginBottom: 8,
@@ -252,40 +299,44 @@ function CategoryBrowseCard() {
       {itemsError && <p className="error-text" style={{ fontSize: 13 }}>{itemsError}</p>}
 
       {selected?.hasMap && items && (
-        <>
-          <label className="form-label" htmlFor="parts-keyword" style={{ marginTop: 8, display: 'block' }}>
-            키워드 ({selected.modelName})
-          </label>
-          <input
-            id="parts-keyword" className="form-input" type="text"
-            placeholder="예: fork, 포크, 체인"
-            value={keyword} onChange={e => setKeyword(e.target.value)}
-          />
-          <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 6 }}>
-            {keyword.trim() === '' && (
-              <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>검색어를 입력하세요.</p>
-            )}
-            {keyword.trim() !== '' && results.length === 0 && (
-              <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>일치하는 항목이 없습니다.</p>
-            )}
-            {results.map((r, idx) => (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => openGpesSearch(r.ko || r.en)}
-                style={{
-                  display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8,
-                  width: '100%', textAlign: 'left', padding: '10px 12px', borderRadius: 10,
-                  background: 'var(--bg-secondary, #f2f2f2)', border: '1px solid var(--border)',
-                  color: 'var(--text-primary)', fontSize: 13.5, fontWeight: 600, cursor: 'pointer',
-                }}
-              >
-                <span>{r.en ? `${r.ko} (${r.en})` : r.ko}</span>
-                <span style={{ flexShrink: 0, fontSize: 12, fontWeight: 700, color: 'var(--primary)' }}>GPES에서 검색 →</span>
-              </button>
-            ))}
-          </div>
-        </>
+        detail ? (
+          <ItemDetailCard item={detail} onBack={() => setDetail(null)} />
+        ) : (
+          <>
+            <label className="form-label" htmlFor="parts-keyword" style={{ marginTop: 8, display: 'block' }}>
+              키워드 ({selected.modelName})
+            </label>
+            <input
+              id="parts-keyword" className="form-input" type="text"
+              placeholder="예: fork, 포크, 체인"
+              value={keyword} onChange={e => setKeyword(e.target.value)}
+            />
+            <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 6 }}>
+              {keyword.trim() === '' && (
+                <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>검색어를 입력하세요.</p>
+              )}
+              {keyword.trim() !== '' && results.length === 0 && (
+                <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>일치하는 항목이 없습니다.</p>
+              )}
+              {results.map((r, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => setDetail(r)}
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8,
+                    width: '100%', textAlign: 'left', padding: '10px 12px', borderRadius: 10,
+                    background: 'var(--bg-secondary, #f2f2f2)', border: '1px solid var(--border)',
+                    color: 'var(--text-primary)', fontSize: 13.5, fontWeight: 600, cursor: 'pointer',
+                  }}
+                >
+                  <span>{r.en ? `${r.ko} (${r.en})` : r.ko}</span>
+                  <span style={{ flexShrink: 0, fontSize: 12, fontWeight: 700, color: 'var(--primary)' }}>상세 보기 →</span>
+                </button>
+              ))}
+            </div>
+          </>
+        )
       )}
     </Card>
   )
