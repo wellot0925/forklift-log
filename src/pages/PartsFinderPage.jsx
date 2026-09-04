@@ -1,8 +1,9 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect } from 'react'
 import Header from '../components/Header.jsx'
 import Spinner from '../components/Spinner.jsx'
 import { buildGpesSearchUrl, GPES_HOME_URL } from '../utils/gpes.js'
-import { ensureCategoryFilesLoaded, loadModelCategories, searchCategoryItems } from '../utils/categoryMap.js'
+import { loadModelCategories, searchCategoryItems, getModelCoverage } from '../utils/categoryMap.js'
+import { ALL_MODELS } from '../data/models.js'
 
 function openGpesSearch(keyword) {
   const k = keyword.trim()
@@ -81,11 +82,71 @@ function QuickSearchCard() {
   )
 }
 
+// 모델명 검색 + 카테고리 지도 보유 여부(coverage) 조회를 묶은 훅.
+// forklift-parts-finder의 useQuickModelSearch와 같은 방식(구글드라이브 폴더 대조는
+// getModelCoverage 안에서 이뤄짐 — utils/categoryMap.js 참고).
+function useModelCoverageSearch() {
+  const [query, setQuery] = useState('')
+  const [coverageMap, setCoverageMap] = useState(new Map())
+  const [coverageLoading, setCoverageLoading] = useState(false)
+  const [coverageError, setCoverageError] = useState('')
+
+  const needle = query.trim().toLowerCase()
+  const matches = needle ? ALL_MODELS.filter(m => m.toLowerCase().includes(needle)) : []
+
+  useEffect(() => {
+    if (matches.length === 0) { setCoverageMap(new Map()); setCoverageError(''); return }
+    let cancelled = false
+    setCoverageLoading(true)
+    setCoverageError('')
+    Promise.all(matches.map(async m => [m, await getModelCoverage(m)]))
+      .then(entries => { if (!cancelled) setCoverageMap(new Map(entries)) })
+      .catch(err => { if (!cancelled) setCoverageError(err.message || '카테고리 지도 보유 현황을 확인하지 못했습니다.') })
+      .finally(() => { if (!cancelled) setCoverageLoading(false) })
+    return () => { cancelled = true }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [needle])
+
+  return { query, setQuery, needle, matches, coverageMap, coverageLoading, coverageError }
+}
+
+// 지도 있음(파란색)/없음(회색) 배지 목록. forklift-parts-finder의 .model-badge-btn과 같은 색상.
+function ModelBadgeList({ models, coverageMap, coverageLoading, onSelect }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 8 }}>
+      {models.map(m => {
+        const coverage = coverageMap.get(m)
+        const resolved = Boolean(coverage) && !coverageLoading
+        const hasMap = coverage?.status === 'category'
+        return (
+          <button
+            key={m}
+            type="button"
+            onClick={() => onSelect(m, coverage)}
+            disabled={!resolved}
+            style={{
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 10,
+              width: '100%', textAlign: 'left', padding: '12px 14px', borderRadius: 10,
+              border: 'none', cursor: resolved ? 'pointer' : 'default',
+              background: !resolved ? 'var(--bg-secondary, #f2f2f2)' : hasMap ? '#1a237e' : '#eef0f3',
+              color: !resolved ? 'var(--text-secondary)' : hasMap ? '#fff' : '#9aa1ac',
+              fontSize: 14, fontWeight: 700,
+            }}
+          >
+            <span>{m}</span>
+            <span style={{ flexShrink: 0, fontSize: 12, fontWeight: 700, whiteSpace: 'nowrap' }}>
+              {!resolved ? '확인 중...' : hasMap ? '✓ 지도 있음' : '— 지도 없음'}
+            </span>
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
 function CategoryBrowseCard() {
-  const [modelList, setModelList] = useState(null) // [{ modelSfx, modelNames }] | null(로딩중)
-  const [listError, setListError] = useState('')
-  const [modelSearch, setModelSearch] = useState('')
-  const [selected, setSelected] = useState(null) // { modelSfx, displayName } | null
+  const [selected, setSelected] = useState(null) // { modelName, hasMap, modelSfx? } | null
+  const { query, setQuery, needle, matches, coverageMap, coverageLoading, coverageError } = useModelCoverageSearch()
 
   const [items, setItems] = useState(null)
   const [itemsLoading, setItemsLoading] = useState(false)
@@ -93,15 +154,7 @@ function CategoryBrowseCard() {
   const [keyword, setKeyword] = useState('')
 
   useEffect(() => {
-    let cancelled = false
-    ensureCategoryFilesLoaded()
-      .then(list => { if (!cancelled) setModelList(list) })
-      .catch(err => { if (!cancelled) setListError(err.message || '모델 목록을 가져오지 못했습니다.') })
-    return () => { cancelled = true }
-  }, [])
-
-  useEffect(() => {
-    if (!selected) { setItems(null); setItemsError(''); return }
+    if (!selected?.hasMap) { setItems(null); setItemsError(''); return }
     let cancelled = false
     setItemsLoading(true)
     setItemsError('')
@@ -110,13 +163,16 @@ function CategoryBrowseCard() {
       .catch(err => { if (!cancelled) setItemsError(err.message || '카테고리 지도를 불러오지 못했습니다.') })
       .finally(() => { if (!cancelled) setItemsLoading(false) })
     return () => { cancelled = true }
-  }, [selected?.modelSfx])
+  }, [selected?.hasMap, selected?.modelSfx])
 
-  const needle = modelSearch.trim().toLowerCase()
-  const filteredModels = useMemo(() => {
-    if (!modelList || !needle) return []
-    return modelList.filter(m => m.modelNames.some(n => n.toLowerCase().includes(needle))).slice(0, 30)
-  }, [modelList, needle])
+  const selectModel = (modelName, coverage) => {
+    setKeyword('')
+    if (coverage?.status === 'category') {
+      setSelected({ modelName, hasMap: true, modelSfx: coverage.modelSfx })
+    } else {
+      setSelected({ modelName, hasMap: false })
+    }
+  }
 
   const results = items ? searchCategoryItems(items, keyword) : []
 
@@ -125,12 +181,10 @@ function CategoryBrowseCard() {
       title="모델별 카테고리에서 찾기"
       desc="정확한 부품명을 모를 때, 모델별 부품 구조도에서 항목을 찾아 그 이름으로 검색합니다."
     >
-      {listError && <p className="error-text" style={{ fontSize: 13 }}>{listError}</p>}
-
       {selected ? (
         <button
           type="button"
-          onClick={() => { setSelected(null); setKeyword('') }}
+          onClick={() => { setSelected(null); setQuery('') }}
           style={{
             display: 'inline-flex', alignItems: 'center', gap: 6,
             padding: '7px 12px', borderRadius: 20, marginBottom: 12,
@@ -138,39 +192,40 @@ function CategoryBrowseCard() {
             fontSize: 13, fontWeight: 700, cursor: 'pointer',
           }}
         >
-          {selected.displayName} <span style={{ opacity: 0.85, fontWeight: 500 }}>변경</span>
+          {selected.modelName} <span style={{ opacity: 0.85, fontWeight: 500 }}>변경</span>
         </button>
       ) : (
         <>
           <input
-            className="form-input" type="text" style={{ marginBottom: 8 }}
-            placeholder={modelList === null ? '모델 목록 불러오는 중...' : '모델명으로 검색 (예: D30, br20)'}
-            value={modelSearch} onChange={e => setModelSearch(e.target.value)}
-            disabled={modelList === null}
+            className="form-input" type="text" style={{ marginBottom: 4 }}
+            placeholder="모델명으로 검색 (예: D30, br20, 20)"
+            value={query} onChange={e => setQuery(e.target.value)}
           />
           {needle && (
-            filteredModels.length === 0 ? (
-              <p style={{ fontSize: 13, color: 'var(--text-secondary)' }}>일치하는 모델이 없습니다.</p>
+            matches.length === 0 ? (
+              <p style={{ fontSize: 13, color: 'var(--text-secondary)', marginTop: 8 }}>일치하는 모델이 없습니다.</p>
             ) : (
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 4 }}>
-                {filteredModels.map(m => (
-                  <button
-                    key={m.modelSfx}
-                    type="button"
-                    onClick={() => setSelected({ modelSfx: m.modelSfx, displayName: m.modelNames[0] })}
-                    style={{
-                      padding: '7px 12px', borderRadius: 20,
-                      background: 'var(--bg-secondary, #f2f2f2)', border: '1px solid var(--border)',
-                      color: 'var(--text-primary)', fontSize: 13, fontWeight: 600, cursor: 'pointer',
-                    }}
-                  >
-                    {m.modelNames[0]}
-                  </button>
-                ))}
-              </div>
+              <>
+                {coverageError && <p className="error-text" style={{ fontSize: 13, marginTop: 8 }}>{coverageError}</p>}
+                <ModelBadgeList
+                  models={matches}
+                  coverageMap={coverageMap}
+                  coverageLoading={coverageLoading}
+                  onSelect={selectModel}
+                />
+              </>
             )
           )}
         </>
+      )}
+
+      {selected && !selected.hasMap && (
+        <p style={{
+          margin: '4px 0 0', fontSize: 13, color: '#6b4e00', lineHeight: 1.5,
+          background: '#fff8e1', border: '1px solid #ffe0a3', borderRadius: 10, padding: '10px 12px',
+        }}>
+          "{selected.modelName}" 모델은 아직 카테고리 지도가 없어요. 위쪽 "키워드로 바로 검색"으로 GPES에서 직접 찾아보세요.
+        </p>
       )}
 
       {itemsLoading && (
@@ -180,10 +235,10 @@ function CategoryBrowseCard() {
       )}
       {itemsError && <p className="error-text" style={{ fontSize: 13 }}>{itemsError}</p>}
 
-      {selected && items && (
+      {selected?.hasMap && items && (
         <>
           <label className="form-label" htmlFor="parts-keyword" style={{ marginTop: 8, display: 'block' }}>
-            키워드 ({selected.displayName})
+            키워드 ({selected.modelName})
           </label>
           <input
             id="parts-keyword" className="form-input" type="text"

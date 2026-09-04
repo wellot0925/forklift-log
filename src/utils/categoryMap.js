@@ -103,6 +103,42 @@ export async function loadModelCategories(modelSfx) {
   return data
 }
 
+// 모델명 표기 차이(하이픈 유무, 대소문자 등: "D30SE-7" vs "D30SE7")를 무시하고 비교하기 위한
+// 정규화. forklift-parts-finder의 src/model-match-utils.js와 동일한 로직.
+export function normalizeModelName(name) {
+  return (name || '').toUpperCase().replace(/[^A-Z0-9]/g, '')
+}
+
+// 정규화된 모델명 -> modelSfx. 구글드라이브 폴더 파일들의 modelNames를 전부 합친 것.
+let coverageMapPromise = null
+
+async function buildCoverageMap() {
+  const list = await ensureCategoryFilesLoaded()
+  const map = new Map()
+  for (const { modelSfx, modelNames } of list) {
+    for (const name of modelNames) {
+      map.set(normalizeModelName(name), modelSfx)
+    }
+  }
+  return map
+}
+
+function getCoverageMap() {
+  if (!coverageMapPromise) coverageMapPromise = buildCoverageMap()
+  return coverageMapPromise
+}
+
+// forklift-parts-finder의 getModelCoverage와 같은 방식(ERP 쪽만 이 앱엔 없음).
+// 반환값: { status: "category"|"none", modelSfx? }
+export async function getModelCoverage(modelName) {
+  const norm = normalizeModelName(modelName)
+  if (!norm) return { status: 'none' }
+  const map = await getCoverageMap()
+  const modelSfx = map.get(norm)
+  if (modelSfx) return { status: 'category', modelSfx }
+  return { status: 'none' }
+}
+
 export function searchCategoryItems(items, keyword) {
   const needle = keyword.trim().toLowerCase()
   if (!needle) return []
