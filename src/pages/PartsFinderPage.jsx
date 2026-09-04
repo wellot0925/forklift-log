@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import Header from '../components/Header.jsx'
 import Spinner from '../components/Spinner.jsx'
-import { buildGpesSearchUrl, GPES_HOME_URL } from '../utils/gpes.js'
+import { useToast } from '../hooks/useToast.jsx'
+import { buildGpesSearchUrl, buildGpesPartNoUrl, GPES_HOME_URL } from '../utils/gpes.js'
 import { loadModelCategories, searchCategoryItems, getModelCoverage, normalizeModelName } from '../utils/categoryMap.js'
 import { ALL_MODELS } from '../data/models.js'
 
@@ -9,6 +10,15 @@ function openGpesSearch(keyword) {
   const k = keyword.trim()
   if (!k) return
   window.open(buildGpesSearchUrl(k), '_blank', 'noopener,noreferrer')
+}
+
+async function copyToClipboard(text) {
+  try {
+    await navigator.clipboard.writeText(text)
+    return true
+  } catch {
+    return false
+  }
 }
 
 export default function PartsFinderPage() {
@@ -147,8 +157,10 @@ function ModelBadgeList({ models, coverageMap, coverageLoading, onSelect }) {
 // 도면번호/도면명/그룹명을 크게 보여주는 상세 카드. GPES 이름검색(PART_NM)은 모델과 무관하게
 // 전체 카탈로그를 다 뒤지는 구조라, 이미 모델을 선택한 상태에서 그리로 보내면 오히려 혼란스럽다.
 // 그래서 여기서는 지도 JSON에 이미 있는 정보(OPTN_ID/OPTN_DESCRIPTION/CV_DESCRIPTION)를
-// 앱 안에서 바로 보여주고, GPES 검색은 사용자가 그 번호로 직접 하도록 안내만 한다.
-function ItemDetailCard({ item, onBack }) {
+// 앱 안에서 바로 보여주고, GPES는 모델 코드(p_model_sfx)까지 채운 도면번호(PART_NO) 검색
+// 딥링크로 보낸다 — 버튼 클릭 시 도면번호를 클립보드에도 같이 복사해서, 딥링크가 모델
+// 범위까지 완벽히 좁혀주지 않더라도 그 자리에서 바로 붙여넣기만 하면 되게 한다.
+function ItemDetailCard({ item, onBack, onCopy, onOpenGpes }) {
   return (
     <div style={{
       border: '1px solid var(--border)', borderRadius: 12, padding: 14,
@@ -164,16 +176,31 @@ function ItemDetailCard({ item, onBack }) {
         ← 검색 결과로
       </button>
 
-      <DetailRow label="도면번호" value={item.optnId} big />
+      <button
+        type="button"
+        onClick={() => onCopy(item.optnId)}
+        title="탭하면 도면번호가 복사됩니다"
+        style={{
+          display: 'block', width: '100%', textAlign: 'left', marginBottom: 8,
+          background: 'none', border: 'none', padding: 0, cursor: 'pointer',
+        }}
+      >
+        <DetailRow label="도면번호 (탭하면 복사)" value={item.optnId} big />
+      </button>
       <DetailRow label="도면명" value={item.ko || '-'} />
       <DetailRow label="카테고리" value={item.en || '-'} />
 
-      <p style={{
-        margin: '12px 0 0', fontSize: 13, color: '#6b4e00', lineHeight: 1.5,
-        background: '#fff8e1', border: '1px solid #ffe0a3', borderRadius: 10, padding: '10px 12px',
-      }}>
-        이 번호로 GPES에서 직접 찾아보세요.
-      </p>
+      <button
+        type="button"
+        onClick={() => onOpenGpes(item)}
+        style={{
+          display: 'block', width: '100%', textAlign: 'center', marginTop: 12,
+          padding: '11px 14px', borderRadius: 10, border: 'none',
+          background: 'var(--primary)', color: '#fff', fontSize: 14, fontWeight: 700, cursor: 'pointer',
+        }}
+      >
+        GPES에서 찾아보세요 →
+      </button>
     </div>
   )
 }
@@ -190,6 +217,7 @@ function DetailRow({ label, value, big }) {
 }
 
 function CategoryBrowseCard() {
+  const { toast } = useToast()
   const [selected, setSelected] = useState(null) // { modelName, hasMap, modelSfx? } | null
   const { query, setQuery, needle, matches, coverageMap, coverageLoading, coverageError } = useModelCoverageSearch()
 
@@ -229,6 +257,17 @@ function CategoryBrowseCard() {
   }
 
   const results = items ? searchCategoryItems(items, keyword) : []
+
+  const handleCopyOptnId = async optnId => {
+    const ok = await copyToClipboard(optnId)
+    toast(ok ? '도면번호가 복사되었습니다.' : '복사에 실패했습니다. 직접 선택해서 복사해주세요.', ok ? 'success' : 'error')
+  }
+
+  const handleOpenGpes = async item => {
+    await copyToClipboard(item.optnId) // 딥링크가 모델 범위까지 못 좁히더라도 바로 붙여넣을 수 있게
+    toast('도면번호가 복사됐어요. 안 채워져 있으면 검색창에 붙여넣으세요.', 'success')
+    window.open(buildGpesPartNoUrl({ partNo: item.optnId, modelSfx: selected?.modelSfx }), '_blank', 'noopener,noreferrer')
+  }
 
   return (
     <Card
@@ -300,7 +339,12 @@ function CategoryBrowseCard() {
 
       {selected?.hasMap && items && (
         detail ? (
-          <ItemDetailCard item={detail} onBack={() => setDetail(null)} />
+          <ItemDetailCard
+            item={detail}
+            onBack={() => setDetail(null)}
+            onCopy={handleCopyOptnId}
+            onOpenGpes={handleOpenGpes}
+          />
         ) : (
           <>
             <label className="form-label" htmlFor="parts-keyword" style={{ marginTop: 8, display: 'block' }}>
