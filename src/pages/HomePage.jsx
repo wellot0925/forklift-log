@@ -19,7 +19,7 @@ const SHORTCUTS = [
   { label: '기술회보',   nav: '/bulletins' },
   { label: '정비지침서', url: 'https://drive.google.com/drive/folders/14qYrUCZ-QiUkXJHbBENarjer8ZeEPGro?usp=drive_link' },
   { label: '챕터별정리', sublabel: '정비지침서', url: 'https://drive.google.com/drive/folders/1WtoX7z6wvFROOEJoSZWw5CfmTFSfcNUB?usp=drive_link' },
-  { label: '부품목록',   url: 'https://drive.google.com/drive/folders/14in1UfkFOWpauZ4HgrJO0Jwf-jyvOAin?usp=drive_link' },
+  { label: '부품찾기',   nav: '/parts-finder' },
 ]
 
 const PULL_THRESHOLD = 64

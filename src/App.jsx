@@ -26,6 +26,7 @@ import TipWritePage from './pages/TipWritePage.jsx'
 import SettingsPage from './pages/SettingsPage.jsx'
 import MyInfoPage from './pages/MyInfoPage.jsx'
 import BulletinPage from './pages/BulletinPage.jsx'
+import PartsFinderPage from './pages/PartsFinderPage.jsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -93,6 +94,7 @@ function AppRoutes() {
           <Route path="/tip/write/:id" element={<TipWritePage />} />
           <Route path="/tip/:id"    element={<TipDetailPage />} />
           <Route path="/bulletins"  element={<BulletinPage />} />
+          <Route path="/parts-finder" element={<PartsFinderPage />} />
           <Route path="/settings"   element={<SettingsPage />} />
           <Route path="/my-info"    element={<MyInfoPage />} />
         </Routes>

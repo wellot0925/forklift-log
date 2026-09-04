@@ -23,4 +23,10 @@ export default defineConfig({
   define: {
     __APP_VERSION__: JSON.stringify(APP_VERSION),
   },
+  server: {
+    // 로컬 개발 중 /api/* 요청을 scripts/dev-api-server.mjs(`npm run dev:api`)로 전달
+    proxy: {
+      "/api": "http://localhost:3001",
+    },
+  },
 })
