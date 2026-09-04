@@ -4,34 +4,20 @@
 const GPES_BASE = "https://gpes.doosan-iv.com"
 export const GPES_HOME_URL = `${GPES_BASE}/`
 
-// p_searchMode=PART_NM(품명 검색)만 쓰는 단순 딥링크. forklift-parts-finder처럼 모델별
-// partsBookNo/serialNo까지 지정하는 PART_NO 검색이 아니라, 키워드 하나로 바로 GPES 전체
-// 품명 검색을 여는 방식이라 모델 선택 없이도 쓸 수 있다. 다만 이 모드는 선택한 모델과
-// 무관하게 전체 카탈로그를 다 뒤져서 결과가 섞이므로, 모델을 이미 선택한 화면에서는
-// 아래 buildGpesPartNoUrl을 쓴다.
+// 모델 선택 후 나오는 상세 카드의 "GPES 열기" 버튼이 여는 GPES 메인 화면.
+// 이전엔 p_model_sfx 등 URL 파라미터로 모델/도면번호를 미리 채운 상태로 진입을 시도했지만,
+// 실사용 확인 결과 GPES가 그 파라미터들을 무시하고 그냥 메인화면만 띄우는 것으로 확인됨
+// (딥링크 자체가 안 먹힘) — 그래서 이 방식은 포기하고, 대신 도면번호를 클립보드에 복사해서
+// 사용자가 GPES 메인화면 우측 상단 Part No 검색창에 직접 붙여넣게 안내하는 방식으로 바꿈.
+export const GPES_MAIN_URL = `${GPES_BASE}/ivepcnew/main/distribution_vw.jsp`
+
+// p_searchMode=PART_NM(품명 검색) 딥링크. "키워드로 바로 검색"(모델 미선택) 전용 —
+// 모델과 무관하게 GPES 전체 카탈로그를 검색하는 용도라 여기선 그대로 둔다.
 export function buildGpesSearchUrl(keyword) {
   const params = new URLSearchParams({
     p_popupFlag: 'Y',
     p_searchMode: 'PART_NM',
     p_searchText: keyword || '',
-  })
-  return `${GPES_BASE}/ivepcnew/basicinfo/parts_number_name_popup.jsp?${params.toString()}`
-}
-
-// p_searchMode=PART_NO(도면번호 검색) + p_model_sfx(모델 코드)를 지정하는 딥링크.
-// forklift-parts-finder의 buildGpesSearchUrl과 같은 엔드포인트/파라미터 구조(그 앱에서
-// 이미 실사용 검증된 방식)를 그대로 가져온 것 — 다만 이 앱의 카테고리 지도 JSON에는
-// _source_info가 없어서 partsBookNo/serialNo는 못 채우고 빈 값으로 둔다(GPES 쪽에서
-// 필수 파라미터가 아니라 선택 파라미터라, 모델 코드만으로도 그 모델 범위로 좁혀질
-// 것으로 기대하지만 실제 화면에서 직접 확인은 필요함).
-export function buildGpesPartNoUrl({ partNo, modelSfx }) {
-  const params = new URLSearchParams({
-    p_popupFlag: 'Y',
-    p_partsbk_no: '',
-    p_searchMode: 'PART_NO',
-    p_searchText: partNo || '',
-    p_model_sfx: modelSfx || '',
-    p_serial_no: '',
   })
   return `${GPES_BASE}/ivepcnew/basicinfo/parts_number_name_popup.jsp?${params.toString()}`
 }

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import Header from '../components/Header.jsx'
 import Spinner from '../components/Spinner.jsx'
 import { useToast } from '../hooks/useToast.jsx'
-import { buildGpesSearchUrl, buildGpesPartNoUrl, GPES_HOME_URL } from '../utils/gpes.js'
+import { buildGpesSearchUrl, GPES_HOME_URL, GPES_MAIN_URL } from '../utils/gpes.js'
 import { loadModelCategories, searchCategoryItems, getModelCoverage, normalizeModelName } from '../utils/categoryMap.js'
 import { ALL_MODELS } from '../data/models.js'
 
@@ -156,10 +156,10 @@ function ModelBadgeList({ models, coverageMap, coverageLoading, onSelect }) {
 
 // 도면번호/도면명/그룹명을 크게 보여주는 상세 카드. GPES 이름검색(PART_NM)은 모델과 무관하게
 // 전체 카탈로그를 다 뒤지는 구조라, 이미 모델을 선택한 상태에서 그리로 보내면 오히려 혼란스럽다.
-// 그래서 여기서는 지도 JSON에 이미 있는 정보(OPTN_ID/OPTN_DESCRIPTION/CV_DESCRIPTION)를
-// 앱 안에서 바로 보여주고, GPES는 모델 코드(p_model_sfx)까지 채운 도면번호(PART_NO) 검색
-// 딥링크로 보낸다 — 버튼 클릭 시 도면번호를 클립보드에도 같이 복사해서, 딥링크가 모델
-// 범위까지 완벽히 좁혀주지 않더라도 그 자리에서 바로 붙여넣기만 하면 되게 한다.
+// URL 파라미터로 모델/도면번호를 미리 채운 상태로 GPES에 진입시키는 딥링크도 시도해봤지만,
+// 실사용 확인 결과 GPES가 그 파라미터들을 그냥 무시하고 메인화면만 띄우는 것으로 확인돼 포기함.
+// 그래서 지도 JSON에 이미 있는 정보(OPTN_ID/OPTN_DESCRIPTION/CV_DESCRIPTION)를 앱 안에서
+// 크게 보여주고, 도면번호를 클립보드에 복사해서 GPES 메인화면에 직접 붙여넣게 안내한다.
 function ItemDetailCard({ item, onBack, onCopy, onOpenGpes }) {
   return (
     <div style={{
@@ -190,16 +190,23 @@ function ItemDetailCard({ item, onBack, onCopy, onOpenGpes }) {
       <DetailRow label="도면명" value={item.ko || '-'} />
       <DetailRow label="카테고리" value={item.en || '-'} />
 
+      <p style={{
+        margin: '12px 0 0', fontSize: 13, color: '#6b4e00', lineHeight: 1.5,
+        background: '#fff8e1', border: '1px solid #ffe0a3', borderRadius: 10, padding: '10px 12px',
+      }}>
+        도면번호를 복사한 뒤, GPES 우측 상단 Part No 검색창에 붙여넣어 검색하세요.
+      </p>
+
       <button
         type="button"
-        onClick={() => onOpenGpes(item)}
+        onClick={onOpenGpes}
         style={{
-          display: 'block', width: '100%', textAlign: 'center', marginTop: 12,
+          display: 'block', width: '100%', textAlign: 'center', marginTop: 8,
           padding: '11px 14px', borderRadius: 10, border: 'none',
           background: 'var(--primary)', color: '#fff', fontSize: 14, fontWeight: 700, cursor: 'pointer',
         }}
       >
-        GPES에서 찾아보세요 →
+        GPES 열기 ↗
       </button>
     </div>
   )
@@ -260,13 +267,11 @@ function CategoryBrowseCard() {
 
   const handleCopyOptnId = async optnId => {
     const ok = await copyToClipboard(optnId)
-    toast(ok ? '도면번호가 복사되었습니다.' : '복사에 실패했습니다. 직접 선택해서 복사해주세요.', ok ? 'success' : 'error')
+    toast(ok ? '복사됨!' : '복사에 실패했습니다. 직접 선택해서 복사해주세요.', ok ? 'success' : 'error')
   }
 
-  const handleOpenGpes = async item => {
-    await copyToClipboard(item.optnId) // 딥링크가 모델 범위까지 못 좁히더라도 바로 붙여넣을 수 있게
-    toast('도면번호가 복사됐어요. 안 채워져 있으면 검색창에 붙여넣으세요.', 'success')
-    window.open(buildGpesPartNoUrl({ partNo: item.optnId, modelSfx: selected?.modelSfx }), '_blank', 'noopener,noreferrer')
+  const handleOpenGpes = () => {
+    window.open(GPES_MAIN_URL, '_blank', 'noopener,noreferrer')
   }
 
   return (
